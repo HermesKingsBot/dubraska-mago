@@ -84,10 +84,8 @@ export default function VideoBackground() {
     <div className="absolute inset-0 z-0 overflow-hidden">
       <video
         ref={videoRef}
-        className="absolute object-cover w-full h-full"
+        className="absolute inset-0 w-full h-full object-cover"
         style={{
-          top: "250px",
-          inset: "auto 0 0 0",
           opacity,
           willChange: "opacity",
         }}
@@ -96,7 +94,6 @@ export default function VideoBackground() {
         loop={false}
         playsInline
         preload="auto"
-        crossOrigin="anonymous"
       />
     </div>
   );

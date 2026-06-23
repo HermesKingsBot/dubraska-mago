@@ -13,7 +13,7 @@ export default function Home() {
         className="absolute inset-0 z-[1] pointer-events-none"
         style={{
           background:
-            "linear-gradient(to bottom, #050505 0%, rgba(5,5,5,0.6) 50%, #050505 100%)",
+            "linear-gradient(to bottom, #050505 0%, rgba(5,5,5,0.4) 30%, rgba(5,5,5,0.5) 60%, #050505 100%)",
         }}
       />
 
