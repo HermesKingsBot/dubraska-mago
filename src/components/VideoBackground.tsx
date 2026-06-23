@@ -81,7 +81,7 @@ export default function VideoBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden">
+    <div className="absolute inset-0 z-0 overflow-hidden w-full h-full">
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover"

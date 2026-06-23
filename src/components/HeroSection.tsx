@@ -6,7 +6,7 @@ const EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
 export default function HeroSection() {
   return (
-    <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 pb-40" style={{ paddingTop: "calc(8rem - 75px)" }}>
+    <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 min-h-screen" style={{ paddingTop: "8rem" }}>
       {/* Headline */}
       <motion.h1
         initial={{ opacity: 0, y: 30 }}

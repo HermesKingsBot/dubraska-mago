@@ -4,7 +4,7 @@ import HeroSection from "@/components/HeroSection";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-[#050505]">
+    <main className="relative h-screen w-full overflow-hidden bg-[#050505]">
       {/* Layer 0: Video Background */}
       <VideoBackground />
 
