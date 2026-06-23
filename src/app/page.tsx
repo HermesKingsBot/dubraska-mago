@@ -3,6 +3,11 @@ import NavigationBar from "@/components/NavigationBar";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import BestSellers from "@/components/BestSellers";
+import CategoriesSection from "@/components/CategoriesSection";
+import FeaturesSection from "@/components/FeaturesSection";
+import ColorGuideSection from "@/components/ColorGuideSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -27,12 +32,20 @@ export default function Home() {
       {/* ===== BEST SELLERS ===== */}
       <BestSellers />
 
-      {/* ===== FUTURE SECTIONS ===== */}
-      {/* Categories — coming next */}
-      {/* Features — coming next */}
-      {/* Color Guide — coming next */}
-      {/* Clientes Felices — coming next */}
-      {/* Footer — coming next */}
+      {/* ===== CATEGORIES ===== */}
+      <CategoriesSection />
+
+      {/* ===== FEATURES (Calidad) ===== */}
+      <FeaturesSection />
+
+      {/* ===== COLOR GUIDE ===== */}
+      <ColorGuideSection />
+
+      {/* ===== TESTIMONIOS ===== */}
+      <TestimonialsSection />
+
+      {/* ===== FOOTER ===== */}
+      <Footer />
     </div>
   );
 }

@@ -136,10 +136,8 @@ export default function BestSellers() {
       });
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        gsap.set(
-          [cardsRef.current?.querySelectorAll(".product-card")],
-          { opacity: 1, y: 0, scale: 1 }
-        );
+        const _pc = cardsRef.current?.querySelectorAll(".product-card");
+        if (_pc) gsap.set(_pc, { opacity: 1, y: 0, scale: 1 });
       });
 
       return () => mm.revert();
