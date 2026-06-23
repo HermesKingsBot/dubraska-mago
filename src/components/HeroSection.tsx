@@ -6,7 +6,7 @@ const EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
 export default function HeroSection() {
   return (
-    <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 min-h-screen" style={{ paddingTop: "8rem" }}>
+    <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 h-full" style={{ minHeight: "calc(100vh - 8rem)" }}>
       {/* Headline */}
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
@@ -33,17 +33,18 @@ export default function HeroSection() {
       </motion.p>
 
       {/* CTA Button */}
-      <motion.button
+      <motion.a
+        href="/colecciones"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.4, ease: EASE }}
         whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(212,175,55,0.4)" }}
         whileTap={{ scale: 0.98 }}
-        className="rounded-full px-14 py-5 text-base font-semibold tracking-wide mt-12 border-none cursor-pointer bg-[#D4AF37] text-[#050505]"
+        className="rounded-full px-14 py-5 text-base font-semibold tracking-wide mt-12 border-none cursor-pointer bg-[#D4AF37] text-[#050505] inline-block"
         style={{ fontFamily: "var(--font-inter)" }}
       >
-        Ver Colección
-      </motion.button>
+        Ver Catálogo
+      </motion.a>
 
       {/* Trust Badges */}
       <motion.div
@@ -52,7 +53,7 @@ export default function HeroSection() {
         transition={{ duration: 0.9, delay: 0.6, ease: EASE }}
         className="flex flex-wrap justify-center gap-6 mt-8"
       >
-        {["Envíos a toda 🇻🇪", "Aceptamos Cashea", "Mercado La Isla, Local 251"].map(
+        {["Envíos a toda Venezuela", "Aceptamos Cashea", "Mercado La Isla, Local 251"].map(
           (badge) => (
             <span
               key={badge}
@@ -63,6 +64,22 @@ export default function HeroSection() {
             </span>
           )
         )}
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.4 }}
+        transition={{ duration: 1, delay: 1.2, ease: EASE }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-5 h-8 rounded-full border border-white/20 flex items-start justify-center p-1"
+        >
+          <div className="w-1 h-2 rounded-full bg-white/40" />
+        </motion.div>
       </motion.div>
     </section>
   );

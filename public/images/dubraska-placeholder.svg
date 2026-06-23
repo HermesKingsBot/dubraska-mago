@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" fill="none">
+  <rect width="600" height="800" fill="#0A0A0A"/>
+  <rect x="30" y="30" width="540" height="740" rx="16" stroke="#D4AF37" stroke-width="0.5" stroke-opacity="0.2" fill="none"/>
+  <circle cx="300" cy="280" r="80" stroke="#D4AF37" stroke-width="0.5" stroke-opacity="0.15" fill="none"/>
+  <circle cx="300" cy="280" r="60" stroke="#D4AF37" stroke-width="0.5" stroke-opacity="0.1" fill="none"/>
+  <path d="M220 420 C220 380, 380 380, 380 420 L380 520 C380 560, 220 560, 220 520 Z" stroke="#D4AF37" stroke-width="0.5" stroke-opacity="0.12" fill="none"/>
+  <text x="300" y="620" text-anchor="middle" fill="#D4AF37" fill-opacity="0.25" font-family="Georgia, serif" font-size="28" letter-spacing="4">DUBRASKA</text>
+  <text x="300" y="655" text-anchor="middle" fill="#D4AF37" fill-opacity="0.15" font-family="Georgia, serif" font-size="14" letter-spacing="8">MAGO</text>
+  <line x1="200" y1="700" x2="400" y2="700" stroke="#D4AF37" stroke-width="0.5" stroke-opacity="0.1"/>
+</svg>
