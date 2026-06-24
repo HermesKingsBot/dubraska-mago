@@ -146,25 +146,25 @@ export default function BestSellers() {
   );
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#050505] py-32">
+    <section ref={sectionRef} className="relative w-full bg-[#050505] py-28 sm:py-36 md:py-44">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
-            className="bs-header text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-4"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="bs-header text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-5"
+            style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
           >
             Lo que todas quieren
           </p>
           <h2
-            className="bs-header text-4xl sm:text-5xl md:text-6xl text-white tracking-[-1px]"
+            className="bs-header text-4xl sm:text-5xl md:text-6xl text-white tracking-[-2px]"
             style={{ fontFamily: "var(--font-instrument-serif)" }}
           >
             Nuestras piezas favoritas
           </h2>
           <p
-            className="bs-header text-base sm:text-lg text-[#8A8A8A] mt-4 max-w-xl mx-auto"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="bs-header text-base sm:text-lg text-[#8A8A8A] mt-5 max-w-xl mx-auto"
+            style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
           >
             Las que se agotan primero. No te quedes sin la tuya.
           </p>
@@ -173,7 +173,7 @@ export default function BestSellers() {
         {/* Products Grid */}
         <div
           ref={cardsRef}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10"
         >
           {PRODUCTS.map((product) => (
             <div
@@ -258,13 +258,13 @@ export default function BestSellers() {
               <div className="mt-4 flex flex-col flex-1">
                 <h3
                   className="text-sm sm:text-base text-white font-medium leading-tight"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
                 >
                   {product.name}
                 </h3>
                 <p
-                  className="text-xs text-[#8A8A8A] mt-1"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  className="text-xs text-[#8A8A8A] mt-1.5"
+                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
                 >
                   {product.desc}
                 </p>

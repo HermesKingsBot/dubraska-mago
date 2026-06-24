@@ -118,10 +118,10 @@ export default function TestimonialsSection() {
   );
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#050505] py-32">
+    <section ref={sectionRef} className="relative w-full bg-[#050505] py-28 sm:py-36 md:py-44">
       <div className="max-w-6xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
             className="text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-4"
             style={{ fontFamily: "var(--font-inter)" }}
@@ -145,7 +145,7 @@ export default function TestimonialsSection() {
         {/* Testimonials Grid */}
         <div
           ref={cardsRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12"
         >
           {TESTIMONIALS.map((t, i) => (
             <div

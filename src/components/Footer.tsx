@@ -65,9 +65,9 @@ export default function Footer() {
 
   return (
     <footer ref={footerRef} className="relative w-full bg-[#050505] border-t border-[rgba(255,255,255,0.04)]">
-      <div className="max-w-7xl mx-auto px-6 pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-6 pt-24 sm:pt-32 pb-12">
         {/* Main footer grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 lg:gap-16">
           {/* Column 1 — Logo */}
           <div className="footer-col col-span-2 md:col-span-1">
             <a

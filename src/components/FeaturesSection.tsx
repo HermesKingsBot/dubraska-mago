@@ -134,26 +134,26 @@ export default function FeaturesSection() {
   );
 
   return (
-    <section ref={sectionRef} className="relative w-full py-32" style={{ background: "#0A0A0A" }}>
+    <section ref={sectionRef} className="relative w-full py-28 sm:py-36 md:py-44" style={{ background: "#0A0A0A" }}>
       <div className="max-w-5xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
-            className="text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-4"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-5"
+            style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
           >
             Calidad que se nota
           </p>
           <h2
-            className="text-4xl sm:text-5xl md:text-6xl text-white tracking-[-1px]"
+            className="text-4xl sm:text-5xl md:text-6xl text-white tracking-[-2px]"
             style={{ fontFamily: "var(--font-instrument-serif)" }}
           >
             Hechas para durar,{" "}
             <em className="text-[#D4AF37]">diseñadas para ti</em>
           </h2>
           <p
-            className="text-base sm:text-lg text-[#8A8A8A] mt-4 max-w-xl mx-auto"
-            style={{ fontFamily: "var(--font-inter)" }}
+            className="text-base sm:text-lg text-[#8A8A8A] mt-5 max-w-xl mx-auto"
+            style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
           >
             Materiales premium que cuidan tu piel y tu bolsillo.
           </p>
@@ -162,7 +162,7 @@ export default function FeaturesSection() {
         {/* Features Grid */}
         <div
           ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12"
         >
           {FEATURES.map((feature) => (
             <div
@@ -176,8 +176,8 @@ export default function FeaturesSection() {
 
               {/* Title */}
               <h3
-                className="text-base sm:text-lg text-white font-medium mb-2"
-                style={{ fontFamily: "var(--font-inter)" }}
+                className="text-base sm:text-lg text-white font-medium mb-3"
+                style={{ fontFamily: "var(--font-inter)", fontWeight: 600 }}
               >
                 {feature.title}
               </h3>
@@ -185,7 +185,7 @@ export default function FeaturesSection() {
               {/* Description */}
               <p
                 className="text-sm text-[#8A8A8A] leading-relaxed"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
               >
                 {feature.desc}
               </p>

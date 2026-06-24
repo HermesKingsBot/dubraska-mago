@@ -3,11 +3,11 @@
 import { motion } from "motion/react";
 
 const NAV_ITEMS = [
-  { label: "Inicio", active: true },
-  { label: "Colecciones", active: false },
-  { label: "Nosotros", active: false },
-  { label: "Preguntas Frecuentes", active: false },
-  { label: "Contacto", active: false },
+  { label: "Inicio", href: "/", active: true },
+  { label: "Colecciones", href: "/colecciones", active: false },
+  { label: "Nosotros", href: "/nosotros", active: false },
+  { label: "Preguntas Frecuentes", href: "/preguntas-frecuentes", active: false },
+  { label: "Contacto", href: "/contacto", active: false },
 ];
 
 export default function NavigationBar() {
@@ -16,7 +16,7 @@ export default function NavigationBar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center px-8 py-6 max-w-7xl mx-auto backdrop-blur-sm bg-[#050505]/20"
+      className="absolute top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-6 sm:px-8 sm:py-8 max-w-7xl mx-auto backdrop-blur-sm bg-[#050505]/20"
     >
       {/* Logo */}
       <a
@@ -32,7 +32,7 @@ export default function NavigationBar() {
         {NAV_ITEMS.map((item) => (
           <li key={item.label}>
             <a
-              href={item.active ? "/" : `/${item.label.toLowerCase().replace(/ /g, "-")}`}
+              href={item.href}
               className={`text-sm transition-colors duration-300 ${
                 item.active
                   ? "text-white"

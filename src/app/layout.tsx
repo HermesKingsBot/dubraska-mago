@@ -4,13 +4,14 @@ import "./globals.css";
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400"],
   variable: "--font-instrument-serif",
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
 });

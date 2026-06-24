@@ -6,13 +6,13 @@ const EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
 export default function HeroSection() {
   return (
-    <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 h-full" style={{ minHeight: "calc(100vh - 8rem)" }}>
+    <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24 sm:py-32 md:py-40 h-full" style={{ minHeight: "calc(100vh - 8rem)" }}>
       {/* Headline */}
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: EASE }}
-        className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl max-w-6xl font-normal leading-[1.0] tracking-[-1.5px] text-white"
+        className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl max-w-5xl font-normal leading-[1.05] tracking-[-2px] text-white"
         style={{ fontFamily: "var(--font-instrument-serif)" }}
       >
         Diseños que brillan más cuando{" "}
@@ -25,7 +25,7 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
         className="text-base sm:text-lg max-w-2xl mt-8 leading-relaxed text-[#8A8A8A]"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
       >
         Acero inoxidable bañado en oro 18K. Piezas mínimas, atemporales y
         hechas para tu día a día. Disfruta de pagos flexibles con Cashea y
