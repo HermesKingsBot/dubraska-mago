@@ -1,5 +1,4 @@
 import VideoBackground from "@/components/VideoBackground"
-import NavigationBar from "@/components/NavigationBar"
 import HeroSection from "@/components/HeroSection"
 import AboutSection from "@/components/AboutSection"
 import BestSellers from "@/components/BestSellers"
@@ -7,7 +6,6 @@ import CategoriesSection from "@/components/CategoriesSection"
 import FeaturesSection from "@/components/FeaturesSection"
 import ColorGuideSection from "@/components/ColorGuideSection"
 import TestimonialsSection from "@/components/TestimonialsSection"
-import Footer from "@/components/Footer"
 
 export default function Home() {
   return (
@@ -22,7 +20,6 @@ export default function Home() {
               "linear-gradient(to bottom, var(--color-bg) 0%, rgba(5,5,5,0.4) 30%, rgba(5,5,5,0.5) 60%, var(--color-bg) 100%)",
           }}
         />
-        <NavigationBar />
         <HeroSection />
       </section>
 
@@ -43,10 +40,6 @@ export default function Home() {
 
       {/* ===== TESTIMONIOS ===== */}
       <TestimonialsSection />
-
-      {/* ===== FOOTER ===== */}
-      <Footer />
-
     </div>
   )
 }

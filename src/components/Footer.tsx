@@ -8,19 +8,19 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const STORE_LINKS = [
-  { label: "Collares", href: "/colecciones/collares" },
-  { label: "Pulseras", href: "/colecciones/pulseras" },
-  { label: "Aretes", href: "/colecciones/aretes" },
-  { label: "Anillos", href: "/colecciones/anillos" },
-  { label: "Sets completos", href: "/colecciones/sets" },
-  { label: "Más vendidos", href: "/colecciones?filter=best-sellers" },
+  { label: "Collares", href: "/colecciones" },
+  { label: "Pulseras", href: "/colecciones" },
+  { label: "Aretes", href: "/colecciones" },
+  { label: "Anillos", href: "/colecciones" },
+  { label: "Sets completos", href: "/colecciones" },
+  { label: "Más vendidos", href: "/colecciones" },
 ]
 
 const INFO_LINKS = [
   { label: "Sobre mí", href: "/nosotros" },
-  { label: "Preguntas frecuentes", href: "/faq" },
+  { label: "Preguntas frecuentes", href: "/preguntas-frecuentes" },
   { label: "Envíos", href: "/envios" },
-  { label: "Cambios y devoluciones", href: "/devoluciones" },
+  { label: "Cambios y devoluciones", href: "/politicas-cambios-devoluciones" },
   { label: "Contacto", href: "/contacto" },
 ]
 
