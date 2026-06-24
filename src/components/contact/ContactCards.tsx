@@ -1,7 +1,5 @@
 "use client"
 
-import { forwardRef } from "react"
-
 const contactCards = [
   {
     platform: "Instagram",
@@ -52,7 +50,11 @@ const contactCards = [
   },
 ]
 
-const ContactCards = forwardRef<HTMLDivElement>(function ContactCards(props, ref) {
+interface ContactCardsProps {
+  ref?: React.Ref<HTMLDivElement>
+}
+
+function ContactCards({ ref }: ContactCardsProps): React.JSX.Element {
   return (
     <section ref={ref} className="px-6 pb-20 md:pb-28 max-w-6xl mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -63,9 +65,9 @@ const ContactCards = forwardRef<HTMLDivElement>(function ContactCards(props, ref
             href={card.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative block rounded-2xl border border-white/10 bg-[#0A0A0A] p-6 transition-all duration-300 hover:border-[#D4AF37]/50 hover:shadow-[0_0_30px_rgba(212,175,55,0.1)] opacity-0"
+            className="group relative block rounded-2xl border border-white/10 bg-[var(--color-dark-card)] p-6 transition-all duration-300 hover:border-[var(--color-gold)]/50 hover:shadow-[0_0_30px_oklch(0.72 0.16 85)] opacity-0"
           >
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 text-[#D4AF37] transition-colors duration-300 group-hover:bg-[#D4AF37]/10">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white/5 text-[var(--color-gold)] transition-colors duration-300 group-hover:bg-[var(--color-gold)]/10">
               {card.icon}
             </div>
             <h3
@@ -75,19 +77,19 @@ const ContactCards = forwardRef<HTMLDivElement>(function ContactCards(props, ref
               {card.platform}
             </h3>
             <p
-              className="text-sm text-[#D4AF37] mb-2"
+              className="text-sm text-[var(--color-gold)] mb-2"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               {card.handle}
             </p>
             <p
-              className="text-sm text-[#8A8A8A] mb-4"
+              className="text-sm text-[var(--color-muted)] mb-4"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               {card.description}
             </p>
             <span
-              className="inline-flex items-center gap-1 text-xs font-medium text-white/60 transition-colors duration-300 group-hover:text-[#D4AF37]"
+              className="inline-flex items-center gap-1 text-xs font-medium text-white/60 transition-colors duration-300 group-hover:text-[var(--color-gold)]"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Contactar
@@ -100,6 +102,6 @@ const ContactCards = forwardRef<HTMLDivElement>(function ContactCards(props, ref
       </div>
     </section>
   )
-})
+}
 
 export default ContactCards

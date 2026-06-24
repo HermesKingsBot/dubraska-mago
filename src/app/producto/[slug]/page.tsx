@@ -77,14 +77,14 @@ export default async function ProductPage({ params }: Props) {
           Producto no encontrado
         </h1>
         <p
-          className="text-[#8A8A8A] text-sm"
+          className="text-[var(--color-muted)] text-sm"
           style={{ fontFamily: "var(--font-inter)" }}
         >
           El producto que buscas no existe o fue removido.
         </p>
         <a
           href="/colecciones"
-          className="mt-4 px-6 py-3 rounded-lg bg-[#D4AF37] text-[#050505] text-sm font-medium hover:bg-[#c9a432] transition-colors"
+          className="mt-4 px-6 py-3 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:bg-[oklch(0.72_0.12_85)] transition-colors"
           style={{ fontFamily: "var(--font-inter)" }}
         >
           Ver catálogo

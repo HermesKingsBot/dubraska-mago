@@ -1,6 +1,5 @@
 "use client"
 
-import { ReactElement } from "react"
 import { LayoutColumns } from "@/types/product"
 
 interface LayoutToggleProps {
@@ -8,7 +7,7 @@ interface LayoutToggleProps {
   onChange: (layout: LayoutColumns) => void
 }
 
-const LAYOUTS: { value: LayoutColumns; icon: ReactElement; label: string }[] = [
+const LAYOUTS: { value: LayoutColumns; icon: React.JSX.Element; label: string }[] = [
   {
     value: 4,
     label: "4 columnas",
@@ -52,8 +51,8 @@ export default function LayoutToggle({ layout, onChange }: LayoutToggleProps) {
           title={l.label}
           className={`p-1.5 rounded transition-colors ${
             layout === l.value
-              ? "bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/30"
-              : "text-[#8A8A8A] hover:text-white border border-transparent"
+              ? "bg-[var(--color-gold)]/20 text-[var(--color-gold)] border border-[var(--color-gold)]/30"
+              : "text-[var(--color-muted)] hover:text-white border border-transparent"
           }`}
         >
           {l.icon}

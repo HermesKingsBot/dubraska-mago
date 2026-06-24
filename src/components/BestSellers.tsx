@@ -143,12 +143,11 @@ export default function BestSellers() {
   )
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#050505] py-28 sm:py-36 md:py-44">
+    <section ref={sectionRef} className="relative w-full bg-[var(--color-bg)] py-28 sm:py-36 md:py-44">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
         <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
-            className="bs-header text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-5"
+            className="bs-header text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
           >
             Lo que todas quieren
@@ -160,14 +159,13 @@ export default function BestSellers() {
             Nuestras piezas favoritas
           </h2>
           <p
-            className="bs-header text-base sm:text-lg text-[#8A8A8A] mt-5 max-w-xl mx-auto"
+            className="bs-header text-base sm:text-lg text-[var(--color-muted)] mt-5 max-w-xl mx-auto"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
           >
             Las que se agotan primero. No te quedes sin la tuya.
           </p>
         </div>
 
-        {/* Products Grid */}
         <div
           ref={cardsRef}
           className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10"
@@ -177,20 +175,17 @@ export default function BestSellers() {
               key={product.name}
               className="product-card group relative flex flex-col"
             >
-              {/* Image placeholder */}
-              <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-[#111]">
-                {/* Gradient placeholder */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#111] via-[#1a1a1a] to-[#111]" />
+              <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-[var(--color-dark-card)]">
+                <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-dark-card)] via-[var(--color-dark-accent)] to-[var(--color-dark-card)]" />
 
-                {/* Decorative product silhouette */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-20 h-20 rounded-full border border-[#D4AF37]/10 flex items-center justify-center group-hover:border-[#D4AF37]/25 transition-colors duration-500">
+                  <div className="w-20 h-20 rounded-full border border-[var(--color-gold)]/10 flex items-center justify-center group-hover:border-[var(--color-gold)]/25 transition-colors duration-500">
                     <svg
                       width="32"
                       height="32"
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke="#D4AF37"
+                      stroke="var(--color-gold)"
                       strokeWidth="0.6"
                       opacity="0.25"
                     >
@@ -216,19 +211,17 @@ export default function BestSellers() {
                   </div>
                 </div>
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-[#D4AF37]/0 group-hover:bg-[#D4AF37]/5 transition-colors duration-500" />
+                <div className="absolute inset-0 bg-[var(--color-gold)]/0 group-hover:bg-[var(--color-gold)]/5 transition-colors duration-500" />
 
-                {/* Badge */}
                 {product.badge && (
                   <div className="absolute top-3 left-3 z-10">
                     <span
                       className={`inline-block px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded ${
                         product.badge === "OFERTA"
-                          ? "bg-[#E5484D] text-white"
+                          ? "bg-[oklch(0.65_0.2_25)] text-white"
                           : product.badge === "NUEVO"
-                          ? "bg-white text-[#050505]"
-                          : "bg-[#D4AF37] text-[#050505]"
+                          ? "bg-white text-[var(--color-bg)]"
+                          : "bg-[var(--color-gold)] text-[var(--color-bg)]"
                       }`}
                       style={{ fontFamily: "var(--font-inter)" }}
                     >
@@ -237,21 +230,19 @@ export default function BestSellers() {
                   </div>
                 )}
 
-                {/* Color dot */}
                 <div className="absolute top-3 right-3 z-10">
                   <div
                     className={`w-3 h-3 rounded-full border border-white/20 ${
                       product.color === "dorado"
-                        ? "bg-[#D4AF37]"
+                        ? "bg-[var(--color-gold)]"
                         : product.color === "plateado"
-                        ? "bg-[#B0B0B0]"
-                        : "bg-[#E8B4B8]"
+                        ? "bg-[oklch(0.76_0_0)]"
+                        : "bg-[var(--color-rose)]"
                     }`}
                   />
                 </div>
               </div>
 
-              {/* Info */}
               <div className="mt-4 flex flex-col flex-1">
                 <h3
                   className="text-sm sm:text-base text-white font-medium leading-tight"
@@ -260,21 +251,21 @@ export default function BestSellers() {
                   {product.name}
                 </h3>
                 <p
-                  className="text-xs text-[#8A8A8A] mt-1.5"
+                  className="text-xs text-[var(--color-muted)] mt-1.5"
                   style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
                 >
                   {product.desc}
                 </p>
                 <div className="mt-2 flex items-baseline gap-2">
                   <span
-                    className="text-lg text-[#D4AF37]"
+                    className="text-lg text-[var(--color-gold)]"
                     style={{ fontFamily: "var(--font-instrument-serif)" }}
                   >
                     {product.price}
                   </span>
                   {product.oldPrice && (
                     <span
-                      className="text-xs text-[#8A8A8A] line-through"
+                      className="text-xs text-[var(--color-muted)] line-through"
                       style={{ fontFamily: "var(--font-inter)" }}
                     >
                       {product.oldPrice}
@@ -282,12 +273,11 @@ export default function BestSellers() {
                   )}
                 </div>
 
-                {/* WhatsApp CTA */}
                 <a
                   href={`https://wa.me/58XXXXXXXXXX?text=Hola%20Dubraska,%20me%20interesa%20${encodeURIComponent(product.name)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-3 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-[#D4AF37]/60 text-[#D4AF37] text-xs font-medium hover:bg-[#D4AF37] hover:text-[#050505] transition-all duration-300"
+                  className="mt-3 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-[var(--color-gold)]/60 text-[var(--color-gold)] text-xs font-medium hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -300,11 +290,10 @@ export default function BestSellers() {
           ))}
         </div>
 
-        {/* CTA */}
         <div className="bs-cta text-center mt-12">
           <a
             href="/colecciones"
-            className="inline-flex items-center gap-2 text-[#D4AF37] text-base font-medium hover:gap-3 transition-all duration-300"
+            className="inline-flex items-center gap-2 text-[var(--color-gold)] text-base font-medium hover:gap-3 transition-all duration-300"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Ver todo el catálogo

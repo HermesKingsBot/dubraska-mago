@@ -161,10 +161,10 @@ export default function CatalogClient({
           className="text-3xl sm:text-4xl md:text-5xl text-white mb-3"
           style={{ fontFamily: "var(--font-instrument-serif)" }}
         >
-          Nuestras <em className="text-[#D4AF37]">Colecciones</em>
+          Nuestras <em className="text-[var(--color-gold)]">Colecciones</em>
         </h1>
         <p
-          className="text-[#8A8A8A] text-sm sm:text-base"
+          className="text-[var(--color-muted)] text-sm sm:text-base"
           style={{ fontFamily: "var(--font-inter)" }}
         >
           {totalProducts} {totalProducts === 1 ? "producto" : "productos"} disponibles
@@ -179,7 +179,7 @@ export default function CatalogClient({
         <div className="flex items-center gap-3">
           <button
             onClick={() => setDrawerOpen(true)}
-            className="relative flex items-center gap-2 px-4 py-2.5 rounded-lg border border-white/10 bg-white/5 text-white text-sm hover:border-[#D4AF37]/50 transition-colors"
+            className="relative flex items-center gap-2 px-4 py-2.5 rounded-lg border border-white/10 bg-white/5 text-white text-sm hover:border-[var(--color-gold)]/50 transition-colors"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -187,7 +187,7 @@ export default function CatalogClient({
             </svg>
             Filtros
             {hasActiveFilters && (
-              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#D4AF37]" />
+              <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[var(--color-gold)]" />
             )}
           </button>
           <LayoutToggle layout={filters.layout} onChange={handleLayoutChange} />
@@ -197,7 +197,7 @@ export default function CatalogClient({
       {/* Active Filters */}
       {hasActiveFilters && (
         <div className="flex flex-wrap items-center gap-2 mb-6">
-          <span className="text-xs text-[#8A8A8A]" style={{ fontFamily: "var(--font-inter)" }}>
+          <span className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
             Filtros activos:
           </span>
           {filters.category.map((c) => (
@@ -208,7 +208,7 @@ export default function CatalogClient({
                   category: filters.category.filter((x) => x !== c),
                 })
               }
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs hover:bg-[#D4AF37]/20 transition-colors"
+              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-gold)]/10 text-[var(--color-gold)] text-xs hover:bg-[var(--color-gold)]/20 transition-colors"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               {c}
@@ -225,7 +225,7 @@ export default function CatalogClient({
                   color: filters.color.filter((x) => x !== c),
                 })
               }
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#E8B4B8]/10 text-[#E8B4B8] text-xs hover:bg-[#E8B4B8]/20 transition-colors"
+              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-rose)]/10 text-[var(--color-rose)] text-xs hover:bg-[var(--color-rose)]/20 transition-colors"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               {c}
@@ -237,7 +237,7 @@ export default function CatalogClient({
           {filters.ofertas && (
             <button
               onClick={() => handleFilterChange({ ofertas: false })}
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs hover:bg-[#D4AF37]/20 transition-colors"
+              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-gold)]/10 text-[var(--color-gold)] text-xs hover:bg-[var(--color-gold)]/20 transition-colors"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Ofertas
@@ -249,7 +249,7 @@ export default function CatalogClient({
           {filters.nuevos && (
             <button
               onClick={() => handleFilterChange({ nuevos: false })}
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs hover:bg-[#D4AF37]/20 transition-colors"
+              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-gold)]/10 text-[var(--color-gold)] text-xs hover:bg-[var(--color-gold)]/20 transition-colors"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Nuevos
@@ -261,7 +261,7 @@ export default function CatalogClient({
           {filters.limitados && (
             <button
               onClick={() => handleFilterChange({ limitados: false })}
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs hover:bg-[#D4AF37]/20 transition-colors"
+              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-gold)]/10 text-[var(--color-gold)] text-xs hover:bg-[var(--color-gold)]/20 transition-colors"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Limitados
@@ -272,7 +272,7 @@ export default function CatalogClient({
           )}
           <button
             onClick={clearFilters}
-            className="text-xs text-[#8A8A8A] hover:text-white transition-colors underline underline-offset-2"
+            className="text-xs text-[var(--color-muted)] hover:text-white transition-colors underline underline-offset-2"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Limpiar todo

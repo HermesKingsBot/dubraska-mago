@@ -15,10 +15,10 @@ const COLORS = [
     desc: "Perfecto si tu piel tiene tonos cálidos, morenos, canela o trigueños. El dorado resalta la calidez natural de tu piel y le da ese glow que todas queremos.",
     tip: "Si ves las venas de tu muñeca y se ven verdosas, ¡el dorado es tu color!",
     skinType: "Piel cálida, morena, trigueña",
-    borderColor: "border-[#D4AF37]",
-    bgAccent: "from-[#D4AF37]/15",
-    textAccent: "text-[#D4AF37]",
-    dotColor: "bg-[#D4AF37]",
+    borderColor: "border-[var(--color-gold)]",
+    bgAccent: "from-[var(--color-gold)]/15",
+    textAccent: "text-[var(--color-gold)]",
+    dotColor: "bg-[var(--color-gold)]",
     filter: "color=dorado",
   },
   {
@@ -27,10 +27,10 @@ const COLORS = [
     desc: "Ideal para pieles claras, rosadas o con subtonos fríos. El plateado da un look fresco y sofisticado que combina con todo.",
     tip: "Si las venas de tu muñeca se ven azuladas o moradas, el plateado te va a enamorar.",
     skinType: "Piel clara, rosada, subtono frío",
-    borderColor: "border-[#B0B0B0]",
-    bgAccent: "from-[#B0B0B0]/15",
-    textAccent: "text-[#B0B0B0]",
-    dotColor: "bg-[#B0B0B0]",
+    borderColor: "border-[oklch(0.76_0_0)]",
+    bgAccent: "from-[oklch(0.76_0_0)]/15",
+    textAccent: "text-[oklch(0.76_0_0)]",
+    dotColor: "bg-[oklch(0.76_0_0)]",
     filter: "color=plateado",
   },
   {
@@ -39,10 +39,10 @@ const COLORS = [
     desc: "El tono que mezcla lo mejor del dorado y el plateado. Se adapta a casi todos los tonos de piel y da un look delicado y moderno.",
     tip: "Perfecto si quieres algo diferente que igual combine con todo.",
     skinType: "Todos los tonos",
-    borderColor: "border-[#E8B4B8]",
-    bgAccent: "from-[#E8B4B8]/15",
-    textAccent: "text-[#E8B4B8]",
-    dotColor: "bg-[#E8B4B8]",
+    borderColor: "border-[var(--color-rose)]",
+    bgAccent: "from-[var(--color-rose)]/15",
+    textAccent: "text-[var(--color-rose)]",
+    dotColor: "bg-[var(--color-rose)]",
     filter: "color=rose",
   },
 ]
@@ -111,12 +111,11 @@ export default function ColorGuideSection() {
   )
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#050505] py-28 sm:py-36 md:py-44">
+    <section ref={sectionRef} className="relative w-full bg-[var(--color-bg)] py-28 sm:py-36 md:py-44">
       <div className="max-w-5xl mx-auto px-6">
-        {/* Header */}
         <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
-            className="text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-5"
+            className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
           >
             Encuentra tu match
@@ -128,14 +127,13 @@ export default function ColorGuideSection() {
             ¿Qué color va contigo?
           </h2>
           <p
-            className="text-base sm:text-lg text-[#8A8A8A] mt-5 max-w-xl mx-auto"
+            className="text-base sm:text-lg text-[var(--color-muted)] mt-5 max-w-xl mx-auto"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
           >
             Tu tono de piel tiene un compañero perfecto. Descúbrelo aquí.
           </p>
         </div>
 
-        {/* Color Cards */}
         <div
           ref={cardsRef}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12"
@@ -146,17 +144,14 @@ export default function ColorGuideSection() {
               href={`/colecciones?${color.filter}`}
               className={`color-card group relative rounded-2xl overflow-hidden border ${color.borderColor}/20 hover:${color.borderColor}/50 transition-all duration-500`}
             >
-              {/* Background */}
               <div className={`absolute inset-0 bg-gradient-to-b ${color.bgAccent} via-transparent to-transparent opacity-50`} />
 
               <div className="relative p-6 pt-8 pb-8 flex flex-col">
-                {/* Color dot */}
                 <div className="mb-6 flex items-center gap-3">
-                  <div className={`w-6 h-6 rounded-full ${color.dotColor} ring-2 ring-offset-2 ring-offset-[#050505] ${color.borderColor}/30`} />
+                  <div className={`w-6 h-6 rounded-full ${color.dotColor} ring-2 ring-offset-2 ring-offset-[var(--color-bg)] ${color.borderColor}/30`} />
                   <div className={`w-3 h-3 rounded-full ${color.dotColor} opacity-40`} />
                 </div>
 
-                {/* Name */}
                 <h3
                   className="text-3xl sm:text-4xl text-white mb-2"
                   style={{ fontFamily: "var(--font-instrument-serif)" }}
@@ -164,7 +159,6 @@ export default function ColorGuideSection() {
                   {color.name}
                 </h3>
 
-                {/* Tagline */}
                 <p
                   className={`text-sm ${color.textAccent} mb-5`}
                   style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
@@ -172,33 +166,29 @@ export default function ColorGuideSection() {
                   {color.tagline}
                 </p>
 
-                {/* Description */}
                 <p
-                  className="text-sm text-[#8A8A8A] leading-relaxed mb-5"
+                  className="text-sm text-[var(--color-muted)] leading-relaxed mb-5"
                   style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
                 >
                   {color.desc}
                 </p>
 
-                {/* Tip */}
                 <p
-                  className="text-xs text-[#B0B0B0] leading-relaxed mb-5 italic border-l-2 border-[rgba(212,175,55,0.15)] pl-3"
+                  className="text-xs text-[oklch(0.76_0_0)] leading-relaxed mb-5 italic border-l-2 border-[rgba(212,175,55,0.15)] pl-3"
                   style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
                 >
                   {color.tip}
                 </p>
 
-                {/* Skin type badge */}
                 <div className="mt-auto pt-4 border-t border-[rgba(255,255,255,0.04)]">
                   <p
-                    className="text-[10px] uppercase tracking-[2px] text-[#555]"
+                    className="text-[10px] uppercase tracking-[2px] text-[oklch(0.45_0_0)]"
                     style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
                   >
                     Piel ideal: {color.skinType}
                   </p>
                 </div>
 
-                {/* Arrow */}
                 <div className={`absolute top-6 right-6 w-8 h-8 rounded-full border ${color.borderColor}/20 flex items-center justify-center group-hover:${color.borderColor}/50 transition-colors duration-300`}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white/40 group-hover:text-white/70 transition-colors duration-300">
                     <path d="M5 12h14" />
@@ -210,7 +200,6 @@ export default function ColorGuideSection() {
           ))}
         </div>
 
-        {/* WhatsApp CTA */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -219,7 +208,7 @@ export default function ColorGuideSection() {
           className="text-center mt-12"
         >
           <p
-            className="text-[#8A8A8A] text-base mb-4"
+            className="text-[var(--color-muted)] text-base mb-4"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             ¿No sabes cuál es tu subtono? No te preocupes.
@@ -228,7 +217,7 @@ export default function ColorGuideSection() {
             href="https://wa.me/58XXXXXXXXXX?text=Hola%20Dubraska,%20%C2%BFme%20ayudas%20a%20elegir%20el%20color%20para%20mi%20tono%20de%20piel%3F"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-sm font-medium border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#050505] transition-all duration-300"
+            className="inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-sm font-medium border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">

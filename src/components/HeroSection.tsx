@@ -7,7 +7,6 @@ const EASE = [0.25, 0.46, 0.45, 0.94] as const
 export default function HeroSection() {
   return (
     <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24 sm:py-32 md:py-40 h-full" style={{ minHeight: "calc(100vh - 8rem)" }}>
-      {/* Headline */}
       <motion.h1
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -16,15 +15,14 @@ export default function HeroSection() {
         style={{ fontFamily: "var(--font-instrument-serif)" }}
       >
         Diseños que brillan más cuando{" "}
-        <em className="text-[#D4AF37]">TÚ</em> los llevas puestos.
+        <em className="text-[var(--color-gold)]">TÚ</em> los llevas puestos.
       </motion.h1>
 
-      {/* Description */}
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
-        className="text-base sm:text-lg max-w-2xl mt-8 leading-relaxed text-[#8A8A8A]"
+        className="text-base sm:text-lg max-w-2xl mt-8 leading-relaxed text-[var(--color-muted)]"
         style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
       >
         Acero inoxidable bañado en oro 18K. Piezas mínimas, atemporales y
@@ -32,7 +30,6 @@ export default function HeroSection() {
         recibe tu pedido en cualquier rincón de Venezuela.
       </motion.p>
 
-      {/* CTA Button */}
       <motion.a
         href="/colecciones"
         initial={{ opacity: 0, y: 20 }}
@@ -40,13 +37,12 @@ export default function HeroSection() {
         transition={{ duration: 0.9, delay: 0.4, ease: EASE }}
         whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(212,175,55,0.4)" }}
         whileTap={{ scale: 0.98 }}
-        className="rounded-full px-14 py-5 text-base font-semibold tracking-wide mt-12 border-none cursor-pointer bg-[#D4AF37] text-[#050505] inline-block"
+        className="rounded-full px-14 py-5 text-base font-semibold tracking-wide mt-12 border-none cursor-pointer bg-[var(--color-gold)] text-[var(--color-bg)] inline-block"
         style={{ fontFamily: "var(--font-inter)" }}
       >
         Ver Catálogo
       </motion.a>
 
-      {/* Trust Badges */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -57,7 +53,7 @@ export default function HeroSection() {
           (badge) => (
             <span
               key={badge}
-              className="text-xs text-[#8A8A8A]/60"
+              className="text-xs text-[var(--color-muted)]/60"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               {badge}
@@ -66,7 +62,6 @@ export default function HeroSection() {
         )}
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.4 }}

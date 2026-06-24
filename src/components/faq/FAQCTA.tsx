@@ -1,6 +1,6 @@
 "use client"
 
-import { forwardRef, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 
 function WhatsAppIcon() {
   return (
@@ -10,7 +10,11 @@ function WhatsAppIcon() {
   )
 }
 
-const FAQCTA = forwardRef<HTMLDivElement>(function FAQCTA(props, ref) {
+interface FAQCTAProps {
+  ref?: React.Ref<HTMLDivElement>
+}
+
+function FAQCTA({ ref }: FAQCTAProps): React.JSX.Element {
   const [particles, setParticles] = useState<
     { id: number; x: number; y: number; size: number; duration: number; delay: number }[]
   >([])
@@ -43,7 +47,7 @@ const FAQCTA = forwardRef<HTMLDivElement>(function FAQCTA(props, ref) {
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute rounded-full bg-[#D4AF37]/30 pointer-events-none"
+          className="absolute rounded-full bg-[var(--color-gold)]/30 pointer-events-none"
           style={{
             width: p.size,
             height: p.size,
@@ -86,7 +90,7 @@ const FAQCTA = forwardRef<HTMLDivElement>(function FAQCTA(props, ref) {
           <span
             style={{
               background:
-                "linear-gradient(135deg, #D4AF37 0%, #F5E6A3 50%, #D4AF37 100%)",
+                "linear-gradient(135deg, var(--color-gold) 0%, oklch(0.92 0.08 85) 50%, var(--color-gold) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -97,7 +101,7 @@ const FAQCTA = forwardRef<HTMLDivElement>(function FAQCTA(props, ref) {
           ?
         </h2>
         <p
-          className="text-base sm:text-lg text-[#8A8A8A] mb-10 max-w-xl mx-auto"
+          className="text-base sm:text-lg text-[var(--color-muted)] mb-10 max-w-xl mx-auto"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
         >
           Escríbenos por WhatsApp y te respondemos al instante
@@ -111,8 +115,8 @@ const FAQCTA = forwardRef<HTMLDivElement>(function FAQCTA(props, ref) {
           style={{
             fontFamily: "var(--font-inter)",
             background:
-              "linear-gradient(135deg, #D4AF37 0%, #B8941F 100%)",
-            color: "#050505",
+              "linear-gradient(135deg, var(--color-gold) 0%, oklch(0.72 0.12 85) 100%)",
+            color: "var(--color-bg)",
           }}
         >
           <WhatsAppIcon />
@@ -135,6 +139,6 @@ const FAQCTA = forwardRef<HTMLDivElement>(function FAQCTA(props, ref) {
       </div>
     </section>
   )
-})
+}
 
 export default FAQCTA

@@ -1,11 +1,13 @@
 "use client"
 
-import { forwardRef } from "react"
+interface ProcessTimelineProps {
+  ref?: React.Ref<HTMLDivElement>
+}
 
 const PROCESS_STEPS = [
   {
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M12 20h9" />
         <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
       </svg>
@@ -15,7 +17,7 @@ const PROCESS_STEPS = [
   },
   {
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
       </svg>
     ),
@@ -24,7 +26,7 @@ const PROCESS_STEPS = [
   },
   {
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
       </svg>
     ),
@@ -33,7 +35,7 @@ const PROCESS_STEPS = [
   },
   {
     icon: (
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="1" y="3" width="15" height="13" rx="2" />
         <path d="M16 8h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H6" />
         <circle cx="6" cy="19" r="2" />
@@ -45,7 +47,7 @@ const PROCESS_STEPS = [
   },
 ]
 
-const ProcessTimeline = forwardRef<HTMLDivElement>(function ProcessTimeline(props, ref) {
+function ProcessTimeline({ ref }: ProcessTimelineProps): React.JSX.Element {
   return (
     <section className="relative w-full py-24 sm:py-32 md:py-40 overflow-hidden">
       <div
@@ -58,7 +60,7 @@ const ProcessTimeline = forwardRef<HTMLDivElement>(function ProcessTimeline(prop
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16 sm:mb-20">
           <p
-            className="text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-5"
+            className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
           >
             Artesanía
@@ -67,9 +69,9 @@ const ProcessTimeline = forwardRef<HTMLDivElement>(function ProcessTimeline(prop
             className="text-4xl sm:text-5xl md:text-6xl text-white tracking-[-2px]"
             style={{ fontFamily: "var(--font-instrument-serif)" }}
           >
-            Nuestro <em className="text-[#D4AF37]">Proceso</em>
+            Nuestro <em className="text-[var(--color-gold)]">Proceso</em>
           </h2>
-          <div className="mt-6 mx-auto w-16 h-[1px] bg-[#D4AF37]/40" />
+          <div className="mt-6 mx-auto w-16 h-[1px] bg-[var(--color-gold)]/40" />
         </div>
 
         <div ref={ref} className="relative">
@@ -82,11 +84,11 @@ const ProcessTimeline = forwardRef<HTMLDivElement>(function ProcessTimeline(prop
                 data-process-step
                 className="relative flex flex-col items-center text-center opacity-0"
               >
-                <div className="relative z-10 mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[rgba(212,175,55,0.2)] bg-[#050505]">
+                <div className="relative z-10 mb-6 flex h-16 w-16 items-center justify-center rounded-full border border-[rgba(212,175,55,0.2)] bg-[var(--color-bg)]">
                   {step.icon}
                 </div>
                 <p
-                  className="text-xs text-[#D4AF37]/50 mb-2 uppercase tracking-[2px]"
+                  className="text-xs text-[var(--color-gold)]/50 mb-2 uppercase tracking-[2px]"
                   style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
                 >
                   Paso {i + 1}
@@ -98,7 +100,7 @@ const ProcessTimeline = forwardRef<HTMLDivElement>(function ProcessTimeline(prop
                   {step.title}
                 </h3>
                 <p
-                  className="text-sm text-[#8A8A8A] leading-relaxed max-w-xs"
+                  className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xs"
                   style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
                 >
                   {step.desc}
@@ -110,6 +112,6 @@ const ProcessTimeline = forwardRef<HTMLDivElement>(function ProcessTimeline(prop
       </div>
     </section>
   )
-})
+}
 
 export default ProcessTimeline

@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP)
 const FEATURES = [
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         <path d="m9 12 2 2 4-4" />
       </svg>
@@ -20,7 +20,7 @@ const FEATURES = [
   },
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2">
         <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
       </svg>
     ),
@@ -29,7 +29,7 @@ const FEATURES = [
   },
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2">
         <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
       </svg>
     ),
@@ -38,7 +38,7 @@ const FEATURES = [
   },
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2">
         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
       </svg>
     ),
@@ -47,7 +47,7 @@ const FEATURES = [
   },
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2">
         <rect x="1" y="3" width="15" height="13" rx="2" />
         <path d="M16 8h4a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H6" />
         <circle cx="6" cy="19" r="2" />
@@ -60,7 +60,7 @@ const FEATURES = [
   },
   {
     icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.2">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.2">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
         <circle cx="12" cy="7" r="4" />
         <path d="M12 11v2" />
@@ -134,12 +134,11 @@ export default function FeaturesSection() {
   )
 
   return (
-    <section ref={sectionRef} className="relative w-full py-28 sm:py-36 md:py-44" style={{ background: "#0A0A0A" }}>
+    <section ref={sectionRef} className="relative w-full py-28 sm:py-36 md:py-44" style={{ background: "oklch(0.05 0 0)" }}>
       <div className="max-w-5xl mx-auto px-6">
-        {/* Header */}
         <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
-            className="text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-5"
+            className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
           >
             Calidad que se nota
@@ -149,17 +148,16 @@ export default function FeaturesSection() {
             style={{ fontFamily: "var(--font-instrument-serif)" }}
           >
             Hechas para durar,{" "}
-            <em className="text-[#D4AF37]">diseñadas para ti</em>
+            <em className="text-[var(--color-gold)]">diseñadas para ti</em>
           </h2>
           <p
-            className="text-base sm:text-lg text-[#8A8A8A] mt-5 max-w-xl mx-auto"
+            className="text-base sm:text-lg text-[var(--color-muted)] mt-5 max-w-xl mx-auto"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
           >
             Materiales premium que cuidan tu piel y tu bolsillo.
           </p>
         </div>
 
-        {/* Features Grid */}
         <div
           ref={gridRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12"
@@ -167,14 +165,12 @@ export default function FeaturesSection() {
           {FEATURES.map((feature) => (
             <div
               key={feature.title}
-              className="feature-item group relative p-6 rounded-xl border border-[rgba(255,255,255,0.04)] bg-[#050505]/50 hover:border-[rgba(212,175,55,0.12)] transition-all duration-500"
+              className="feature-item group relative p-6 rounded-xl border border-[rgba(255,255,255,0.04)] bg-[var(--color-bg)]/50 hover:border-[rgba(212,175,55,0.12)] transition-all duration-500"
             >
-              {/* Icon */}
               <div className="mb-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
                 {feature.icon}
               </div>
 
-              {/* Title */}
               <h3
                 className="text-base sm:text-lg text-white font-medium mb-3"
                 style={{ fontFamily: "var(--font-inter)", fontWeight: 600 }}
@@ -182,16 +178,14 @@ export default function FeaturesSection() {
                 {feature.title}
               </h3>
 
-              {/* Description */}
               <p
-                className="text-sm text-[#8A8A8A] leading-relaxed"
+                className="text-sm text-[var(--color-muted)] leading-relaxed"
                 style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
               >
                 {feature.desc}
               </p>
 
-              {/* Subtle hover glow */}
-              <div className="absolute inset-0 rounded-xl bg-[#D4AF37]/0 group-hover:bg-[#D4AF37]/[0.02] transition-colors duration-500 -z-10" />
+              <div className="absolute inset-0 rounded-xl bg-[var(--color-gold)]/0 group-hover:bg-[var(--color-gold)]/[0.02] transition-colors duration-500 -z-10" />
             </div>
           ))}
         </div>

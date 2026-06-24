@@ -167,9 +167,9 @@ export default function ProductDetailClient({
   }, { scope: containerRef })
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#050505]">
+    <div ref={containerRef} className="min-h-screen bg-[var(--color-bg)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4">
-        <nav className="flex items-center gap-2 text-xs text-[#8A8A8A]" style={{ fontFamily: "var(--font-inter)" }}>
+        <nav className="flex items-center gap-2 text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
           <a href="/" className="hover:text-white transition-colors">Inicio</a>
           <span>/</span>
           <a href="/colecciones" className="hover:text-white transition-colors">Catálogo</a>

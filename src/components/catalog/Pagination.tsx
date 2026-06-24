@@ -42,20 +42,17 @@ export default function Pagination({
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-10 pt-6 border-t border-white/10">
-      {/* Results count */}
       <p
-        className="text-xs text-[#8A8A8A]"
+        className="text-xs text-[var(--color-muted)]"
         style={{ fontFamily: "var(--font-inter)" }}
       >
         Mostrando {start}–{end} de {total}
       </p>
 
-      {/* Page controls */}
       <div className="flex items-center gap-4">
-        {/* Per page selector */}
         <div className="flex items-center gap-2">
           <span
-            className="text-xs text-[#8A8A8A]"
+            className="text-xs text-[var(--color-muted)]"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Ver:
@@ -66,24 +63,23 @@ export default function Pagination({
               const val = e.target.value === "all" ? "all" : Number(e.target.value)
               onPerPageChange(val as PerPageOption)
             }}
-            className="bg-white/5 border border-white/10 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-[#D4AF37]/50"
+            className="bg-white/5 border border-white/10 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-[var(--color-gold)]/50"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             {PER_PAGE_OPTIONS.map((opt) => (
-              <option key={opt} value={opt} className="bg-[#0a0a0a]">
+              <option key={opt} value={opt} className="bg-[var(--color-bg)]">
                 {opt === "all" ? "Todos" : opt}
               </option>
             ))}
           </select>
         </div>
 
-        {/* Page buttons */}
         {totalPages > 1 && (
           <div className="flex items-center gap-1">
             <button
               onClick={() => onPageChange(page - 1)}
               disabled={page <= 1}
-              className="px-2 py-1 rounded text-xs text-[#8A8A8A] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="px-2 py-1 rounded text-xs text-[var(--color-muted)] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               ← Ant
@@ -92,7 +88,7 @@ export default function Pagination({
               p === "..." ? (
                 <span
                   key={`ellipsis-${i}`}
-                  className="px-2 py-1 text-xs text-[#8A8A8A]"
+                  className="px-2 py-1 text-xs text-[var(--color-muted)]"
                 >
                   …
                 </span>
@@ -102,8 +98,8 @@ export default function Pagination({
                   onClick={() => onPageChange(p)}
                   className={`min-w-[28px] px-2 py-1 rounded text-xs transition-colors ${
                     page === p
-                      ? "bg-[#D4AF37] text-[#050505] font-semibold"
-                      : "text-[#8A8A8A] hover:text-white hover:bg-white/5"
+                      ? "bg-[var(--color-gold)] text-[var(--color-bg)] font-semibold"
+                      : "text-[var(--color-muted)] hover:text-white hover:bg-white/5"
                   }`}
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
@@ -114,7 +110,7 @@ export default function Pagination({
             <button
               onClick={() => onPageChange(page + 1)}
               disabled={page >= totalPages}
-              className="px-2 py-1 rounded text-xs text-[#8A8A8A] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="px-2 py-1 rounded text-xs text-[var(--color-muted)] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               Sig →

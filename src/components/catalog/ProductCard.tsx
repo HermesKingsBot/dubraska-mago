@@ -13,10 +13,10 @@ interface ProductCardProps {
 }
 
 const COLOR_MAP: Record<string, string> = {
-  dorado: "#D4AF37",
-  plateado: "#C0C0C0",
-  rose: "#E8B4B8",
-  negro: "#1a1a1a",
+  dorado: "var(--color-gold)",
+  plateado: "oklch(0.82 0 0)",
+  rose: "var(--color-rose)",
+  negro: "var(--color-dark-accent)",
 }
 
 export default function ProductCard({ product, index }: ProductCardProps) {
@@ -54,10 +54,9 @@ export default function ProductCard({ product, index }: ProductCardProps) {
       ref={cardRef}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
-      className="group relative flex flex-col rounded-xl overflow-hidden bg-[#0a0a0a] border border-white/5 hover:border-[#D4AF37]/30 transition-colors duration-300"
+      className="group relative flex flex-col rounded-xl overflow-hidden bg-[var(--color-bg)] border border-white/5 hover:border-[var(--color-gold)]/30 transition-colors duration-300"
     >
-      {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden bg-[#111]">
+      <div className="relative aspect-square overflow-hidden bg-[var(--color-dark-card)]">
         <img
           src={product.image}
           alt={product.name}
@@ -65,17 +64,16 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           loading="lazy"
         />
 
-        {/* Badge */}
         {product.badge && (
           <span
             className={`absolute top-3 left-3 px-2.5 py-1 text-[10px] font-semibold tracking-wider rounded ${
               product.badge === "OFERTA"
                 ? "bg-red-500/90 text-white"
                 : product.badge === "NUEVO"
-                ? "bg-[#D4AF37] text-[#050505]"
+                ? "bg-[var(--color-gold)] text-[var(--color-bg)]"
                 : product.badge === "LIMITADO"
                 ? "bg-white/10 text-white border border-white/20"
-                : "bg-[#D4AF37]/90 text-[#050505]"
+                : "bg-[var(--color-gold)]/90 text-[var(--color-bg)]"
             }`}
             style={{ fontFamily: "var(--font-inter)" }}
           >
@@ -83,7 +81,6 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           </span>
         )}
 
-        {/* Discount Badge */}
         {discount && (
           <span
             className="absolute top-3 right-3 px-2 py-1 text-[10px] font-bold bg-red-500 text-white rounded"
@@ -93,27 +90,23 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           </span>
         )}
 
-        {/* Hover Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      {/* Info */}
       <div className="flex flex-col flex-1 p-4">
-        {/* Color + Category */}
         <div className="flex items-center gap-2 mb-2">
           <span
             className="w-3 h-3 rounded-full border border-white/20"
             style={{ backgroundColor: COLOR_MAP[product.color] }}
           />
           <span
-            className="text-[10px] uppercase tracking-widest text-[#8A8A8A]"
+            className="text-[10px] uppercase tracking-widest text-[var(--color-muted)]"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             {product.category}
           </span>
         </div>
 
-        {/* Name */}
         <h3
           className="text-white text-sm font-medium mb-1 line-clamp-1"
           style={{ fontFamily: "var(--font-inter)" }}
@@ -121,25 +114,23 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           {product.name}
         </h3>
 
-        {/* Material */}
         <p
-          className="text-[#8A8A8A] text-xs mb-3 line-clamp-1"
+          className="text-[var(--color-muted)] text-xs mb-3 line-clamp-1"
           style={{ fontFamily: "var(--font-inter)" }}
         >
           {product.material}
         </p>
 
-        {/* Price */}
         <div className="flex items-center gap-2 mb-4 mt-auto">
           <span
-            className="text-[#D4AF37] text-lg font-semibold"
+            className="text-[var(--color-gold)] text-lg font-semibold"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             ${product.price.toFixed(2)}
           </span>
           {product.oldPrice && (
             <span
-              className="text-[#8A8A8A] text-sm line-through"
+              className="text-[var(--color-muted)] text-sm line-through"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               ${product.oldPrice.toFixed(2)}
@@ -147,12 +138,11 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           )}
         </div>
 
-        {/* CTA */}
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[#25D366] text-white text-xs font-medium hover:bg-[#20BD5A] transition-colors"
+          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[oklch(0.75_0.18_155)] text-white text-xs font-medium hover:bg-[oklch(0.72_0.17_150)] transition-colors"
           style={{ fontFamily: "var(--font-inter)" }}
         >
           <svg

@@ -11,7 +11,7 @@ import Footer from "@/components/Footer"
 
 export default function Home() {
   return (
-    <div className="relative w-full bg-[#050505]">
+    <div className="relative w-full bg-[var(--color-bg)]">
       {/* ===== HERO SECTION (full viewport) ===== */}
       <section className="relative h-screen w-full overflow-hidden">
         <VideoBackground />
@@ -19,7 +19,7 @@ export default function Home() {
           className="absolute inset-0 z-[1] pointer-events-none"
           style={{
             background:
-              "linear-gradient(to bottom, #050505 0%, rgba(5,5,5,0.4) 30%, rgba(5,5,5,0.5) 60%, #050505 100%)",
+              "linear-gradient(to bottom, var(--color-bg) 0%, rgba(5,5,5,0.4) 30%, rgba(5,5,5,0.5) 60%, var(--color-bg) 100%)",
           }}
         />
         <NavigationBar />

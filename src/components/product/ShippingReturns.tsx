@@ -1,14 +1,17 @@
 "use client"
 
-import { forwardRef } from "react"
+interface ShippingReturnsProps {
+  ref?: React.Ref<HTMLDivElement>
+}
 
-const ShippingReturns = forwardRef<HTMLDivElement>(function ShippingReturns(props, ref) {
+function ShippingReturns(props: ShippingReturnsProps): React.JSX.Element {
+  const { ref } = props
   return (
     <div ref={ref} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-16">
       {[
         {
           icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <rect x="1" y="3" width="15" height="13" />
               <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
               <circle cx="5.5" cy="18.5" r="2.5" />
@@ -20,7 +23,7 @@ const ShippingReturns = forwardRef<HTMLDivElement>(function ShippingReturns(prop
         },
         {
           icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="1 4 1 10 7 10" />
               <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
             </svg>
@@ -30,7 +33,7 @@ const ShippingReturns = forwardRef<HTMLDivElement>(function ShippingReturns(prop
         },
         {
           icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
           ),
@@ -40,7 +43,7 @@ const ShippingReturns = forwardRef<HTMLDivElement>(function ShippingReturns(prop
       ].map((item, i) => (
         <div
           key={i}
-          className="flex items-start gap-4 p-5 rounded-xl bg-[#0a0a0a] border border-white/5"
+          className="flex items-start gap-4 p-5 rounded-xl bg-[var(--color-dark-card)] border border-white/5"
         >
           <div className="shrink-0">{item.icon}</div>
           <div>
@@ -51,7 +54,7 @@ const ShippingReturns = forwardRef<HTMLDivElement>(function ShippingReturns(prop
               {item.title}
             </h3>
             <p
-              className="text-xs text-[#8A8A8A]"
+              className="text-xs text-[var(--color-muted)]"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               {item.desc}
@@ -61,6 +64,6 @@ const ShippingReturns = forwardRef<HTMLDivElement>(function ShippingReturns(prop
       ))}
     </div>
   )
-})
+}
 
 export default ShippingReturns

@@ -12,7 +12,7 @@ export default function NosotrosLayout({
   children: React.ReactNode
 }) {
   return (
-    <main className="min-h-screen bg-[#050505]">
+    <main className="min-h-screen bg-[var(--color-bg)]">
       {children}
     </main>
   )

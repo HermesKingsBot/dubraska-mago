@@ -16,7 +16,7 @@ function ChevronIcon({ isOpen }: { isOpen: boolean }) {
       height="20"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#D4AF37"
+      stroke="var(--color-gold)"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -55,8 +55,8 @@ function ThumbsUpIcon({ active }: { active: boolean }) {
       width="14"
       height="14"
       viewBox="0 0 24 24"
-      fill={active ? "#D4AF37" : "none"}
-      stroke={active ? "#D4AF37" : "#8A8A8A"}
+      fill={active ? "var(--color-gold)" : "none"}
+      stroke={active ? "var(--color-gold)" : "var(--color-muted)"}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -72,8 +72,8 @@ function ThumbsDownIcon({ active }: { active: boolean }) {
       width="14"
       height="14"
       viewBox="0 0 24 24"
-      fill={active ? "#8A8A8A" : "none"}
-      stroke={active ? "#8A8A8A" : "#8A8A8A"}
+      fill={active ? "var(--color-muted)" : "none"}
+      stroke={active ? "var(--color-muted)" : "var(--color-muted)"}
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -101,7 +101,7 @@ export default function FAQItem({
   onToggle,
   onCopy,
   onFeedback,
-}: FAQItemProps) {
+}: FAQItemProps): React.JSX.Element {
   const answerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
@@ -156,18 +156,18 @@ export default function FAQItem({
           className="flex-1 flex items-center justify-between gap-4 text-left cursor-pointer group"
           style={{ fontFamily: "var(--font-inter)" }}
         >
-          <span className="text-base sm:text-lg text-white group-hover:text-[#D4AF37] transition-colors duration-300">
+          <span className="text-base sm:text-lg text-white group-hover:text-[var(--color-gold)] transition-colors duration-300">
             {item.question}
           </span>
           <ChevronIcon isOpen={isOpen} />
         </button>
         <button
           onClick={onCopy}
-          className="flex-shrink-0 p-2 rounded-lg text-[#8A8A8A] hover:text-[#D4AF37] hover:bg-[rgba(212,175,55,0.1)] transition-all duration-200 cursor-pointer"
+          className="flex-shrink-0 p-2 rounded-lg text-[var(--color-muted)] hover:text-[var(--color-gold)] hover:bg-[rgba(212,175,55,0.1)] transition-all duration-200 cursor-pointer"
           title={isCopied ? "¡Copiado!" : "Copiar pregunta"}
         >
           {isCopied ? (
-            <span className="text-[10px] text-[#D4AF37] font-semibold whitespace-nowrap">
+            <span className="text-[10px] text-[var(--color-gold)] font-semibold whitespace-nowrap">
               ✓ Copiado!
             </span>
           ) : (
@@ -183,14 +183,14 @@ export default function FAQItem({
       >
         <div ref={contentRef} className="pb-6 pl-0 sm:pl-2">
           <p
-            className="text-sm sm:text-base text-[#8A8A8A] leading-relaxed max-w-3xl"
+            className="text-sm sm:text-base text-[var(--color-muted)] leading-relaxed max-w-3xl"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
           >
             {item.answer}
           </p>
           <div className="flex items-center gap-4 mt-5">
             <span
-              className="text-[11px] text-[#8A8A8A]/60 uppercase tracking-wider"
+              className="text-[11px] text-[var(--color-muted)]/60 uppercase tracking-wider"
               style={{ fontFamily: "var(--font-inter)" }}
             >
               ¿Fue útil?
@@ -199,8 +199,8 @@ export default function FAQItem({
               onClick={() => onFeedback("up")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all duration-200 cursor-pointer border ${
                 feedbackType === "up"
-                  ? "bg-[rgba(212,175,55,0.15)] border-[rgba(212,175,55,0.3)] text-[#D4AF37]"
-                  : "bg-transparent border-[rgba(255,255,255,0.06)] text-[#8A8A8A] hover:border-[rgba(212,175,55,0.2)] hover:text-[#D4AF37]"
+                  ? "bg-[rgba(212,175,55,0.15)] border-[rgba(212,175,55,0.3)] text-[var(--color-gold)]"
+                  : "bg-transparent border-[rgba(255,255,255,0.06)] text-[var(--color-muted)] hover:border-[rgba(212,175,55,0.2)] hover:text-[var(--color-gold)]"
               }`}
               style={{ fontFamily: "var(--font-inter)" }}
             >
@@ -211,8 +211,8 @@ export default function FAQItem({
               onClick={() => onFeedback("down")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-medium transition-all duration-200 cursor-pointer border ${
                 feedbackType === "down"
-                  ? "bg-[rgba(138,138,138,0.15)] border-[rgba(138,138,138,0.3)] text-[#8A8A8A]"
-                  : "bg-transparent border-[rgba(255,255,255,0.06)] text-[#8A8A8A] hover:border-[rgba(138,138,138,0.2)]"
+                  ? "bg-[rgba(138,138,138,0.15)] border-[rgba(138,138,138,0.3)] text-[var(--color-muted)]"
+                  : "bg-transparent border-[rgba(255,255,255,0.06)] text-[var(--color-muted)] hover:border-[rgba(138,138,138,0.2)]"
               }`}
               style={{ fontFamily: "var(--font-inter)" }}
             >

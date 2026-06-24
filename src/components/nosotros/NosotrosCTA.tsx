@@ -1,8 +1,12 @@
 "use client"
 
-import { forwardRef, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 
-const NosotrosCTA = forwardRef<HTMLDivElement>(function NosotrosCTA(props, ref) {
+interface NosotrosCTAProps {
+  ref?: React.Ref<HTMLDivElement>
+}
+
+function NosotrosCTA({ ref }: NosotrosCTAProps): React.JSX.Element {
   const [particles, setParticles] = useState<
     { id: number; x: number; y: number; size: number; duration: number; delay: number }[]
   >([])
@@ -32,7 +36,7 @@ const NosotrosCTA = forwardRef<HTMLDivElement>(function NosotrosCTA(props, ref) 
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute rounded-full bg-[#D4AF37]/30 pointer-events-none"
+          className="absolute rounded-full bg-[var(--color-gold)]/30 pointer-events-none"
           style={{
             width: p.size,
             height: p.size,
@@ -74,7 +78,7 @@ const NosotrosCTA = forwardRef<HTMLDivElement>(function NosotrosCTA(props, ref) 
           ¿Quieres ser parte de nuestra{" "}
           <span
             style={{
-              background: "linear-gradient(135deg, #D4AF37 0%, #F5E6A3 50%, #D4AF37 100%)",
+              background: "linear-gradient(135deg, var(--color-gold) 0%, #F5E6A3 50%, var(--color-gold) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -85,7 +89,7 @@ const NosotrosCTA = forwardRef<HTMLDivElement>(function NosotrosCTA(props, ref) 
           ?
         </h2>
         <p
-          className="text-base sm:text-lg text-[#8A8A8A] mb-10 max-w-xl mx-auto"
+          className="text-base sm:text-lg text-[var(--color-muted)] mb-10 max-w-xl mx-auto"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
         >
           Únete a nuestra comunidad y sé la primera en conocer nuevas colecciones,
@@ -98,8 +102,8 @@ const NosotrosCTA = forwardRef<HTMLDivElement>(function NosotrosCTA(props, ref) 
             className="group inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-semibold tracking-wide border-none cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] active:scale-95"
             style={{
               fontFamily: "var(--font-inter)",
-              background: "linear-gradient(135deg, #D4AF37 0%, #B8941F 100%)",
-              color: "#050505",
+              background: "linear-gradient(135deg, var(--color-gold) 0%, #B8941F 100%)",
+              color: "var(--color-bg)",
             }}
           >
             Ver Colección
@@ -120,7 +124,7 @@ const NosotrosCTA = forwardRef<HTMLDivElement>(function NosotrosCTA(props, ref) 
           </a>
           <a
             href="/contacto"
-            className="inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-medium tracking-wide border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#050505] transition-all duration-300 cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-medium tracking-wide border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300 cursor-pointer"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Contactar
@@ -129,7 +133,7 @@ const NosotrosCTA = forwardRef<HTMLDivElement>(function NosotrosCTA(props, ref) 
             href="https://instagram.com/dubraska.mago"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-medium tracking-wide border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#050505] transition-all duration-300 cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-medium tracking-wide border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300 cursor-pointer"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -143,6 +147,6 @@ const NosotrosCTA = forwardRef<HTMLDivElement>(function NosotrosCTA(props, ref) 
       </div>
     </section>
   )
-})
+}
 
 export default NosotrosCTA

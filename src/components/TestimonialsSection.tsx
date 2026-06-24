@@ -49,7 +49,7 @@ const TESTIMONIALS = [
 
 function StarIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="#D4AF37" stroke="#D4AF37" strokeWidth="1">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--color-gold)" stroke="var(--color-gold)" strokeWidth="1">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
     </svg>
   )
@@ -118,12 +118,11 @@ export default function TestimonialsSection() {
   )
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[#050505] py-28 sm:py-36 md:py-44">
+    <section ref={sectionRef} className="relative w-full bg-[var(--color-bg)] py-28 sm:py-36 md:py-44">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Header */}
         <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
-            className="text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-4"
+            className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-4"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Nuestras clientas hablan
@@ -135,14 +134,13 @@ export default function TestimonialsSection() {
             Clientes felices
           </h2>
           <p
-            className="text-base sm:text-lg text-[#8A8A8A] mt-4 max-w-xl mx-auto"
+            className="text-base sm:text-lg text-[var(--color-muted)] mt-4 max-w-xl mx-auto"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Historias de mujeres que brillan con sus piezas Dubraska
           </p>
         </div>
 
-        {/* Testimonials Grid */}
         <div
           ref={cardsRef}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12"
@@ -150,29 +148,25 @@ export default function TestimonialsSection() {
           {TESTIMONIALS.map((t, i) => (
             <div
               key={i}
-              className="testimonial-card group relative p-6 rounded-xl border border-[rgba(255,255,255,0.04)] bg-[#111] hover:border-[rgba(212,175,55,0.1)] transition-all duration-500"
+              className="testimonial-card group relative p-6 rounded-xl border border-[rgba(255,255,255,0.04)] bg-[var(--color-dark-card)] hover:border-[rgba(212,175,55,0.1)] transition-all duration-500"
             >
-              {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: t.stars }).map((_, j) => (
                   <StarIcon key={j} />
                 ))}
               </div>
 
-              {/* Quote */}
               <p
-                className="text-sm text-[#B0B0B0] leading-[1.8] italic"
+                className="text-sm text-[oklch(0.76_0_0)] leading-[1.8] italic"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 &ldquo;{t.text}&rdquo
               </p>
 
-              {/* Author */}
               <div className="mt-5 pt-4 border-t border-[rgba(255,255,255,0.04)] flex items-center gap-3">
-                {/* Avatar placeholder */}
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#D4AF37]/20 to-[#D4AF37]/5 flex items-center justify-center">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--color-gold)]/20 to-[var(--color-gold)]/5 flex items-center justify-center">
                   <span
-                    className="text-xs text-[#D4AF37]/60 font-medium"
+                    className="text-xs text-[var(--color-gold)]/60 font-medium"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
                     {t.name.charAt(0)}
@@ -186,7 +180,7 @@ export default function TestimonialsSection() {
                     {t.name}
                   </p>
                   <p
-                    className="text-[11px] text-[#555]"
+                    className="text-[11px] text-[oklch(0.45_0_0)]"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
                     {t.location}
@@ -197,7 +191,6 @@ export default function TestimonialsSection() {
           ))}
         </div>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -210,11 +203,11 @@ export default function TestimonialsSection() {
             style={{ fontFamily: "var(--font-instrument-serif)" }}
           >
             ¿Lista para ser nuestra próxima clienta feliz?{" "}
-            <span className="text-[#D4AF37]">✨</span>
+            <span className="text-[var(--color-gold)]">✨</span>
           </p>
           <a
             href="/colecciones"
-            className="inline-flex items-center gap-3 rounded-full px-10 py-4 text-base font-semibold bg-[#D4AF37] text-[#050505] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-300"
+            className="inline-flex items-center gap-3 rounded-full px-10 py-4 text-base font-semibold bg-[var(--color-gold)] text-[var(--color-bg)] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-300"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Ver catálogo completo

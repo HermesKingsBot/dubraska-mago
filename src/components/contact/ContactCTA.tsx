@@ -1,8 +1,12 @@
 "use client"
 
-import { forwardRef, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 
-const ContactCTA = forwardRef<HTMLDivElement>(function ContactCTA(props, ref) {
+interface ContactCTAProps {
+  ref?: React.Ref<HTMLDivElement>
+}
+
+function ContactCTA({ ref }: ContactCTAProps): React.JSX.Element {
   const [particles, setParticles] = useState<
     { id: number; x: number; y: number; size: number; duration: number; delay: number }[]
   >([])
@@ -25,14 +29,14 @@ const ContactCTA = forwardRef<HTMLDivElement>(function ContactCTA(props, ref) {
         className="absolute inset-0 -z-10"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(212,175,55,0.06) 0%, rgba(5,5,5,0) 70%)",
+            "radial-gradient(ellipse at center, oklch(0.72 0.16 85 / 0.06) 0%, oklch(0.14 0.02 260 / 0) 70%)",
         }}
       />
 
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute rounded-full bg-[#D4AF37]/30 pointer-events-none"
+          className="absolute rounded-full bg-[var(--color-gold)]/30 pointer-events-none"
           style={{
             width: p.size,
             height: p.size,
@@ -74,7 +78,7 @@ const ContactCTA = forwardRef<HTMLDivElement>(function ContactCTA(props, ref) {
           ¿Listo para lucir algo{" "}
           <span
             style={{
-              background: "linear-gradient(135deg, #D4AF37 0%, #F5E6A3 50%, #D4AF37 100%)",
+              background: "linear-gradient(135deg, var(--color-gold) 0%, #F5E6A3 50%, var(--color-gold) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -85,7 +89,7 @@ const ContactCTA = forwardRef<HTMLDivElement>(function ContactCTA(props, ref) {
           ?
         </h2>
         <p
-          className="text-base sm:text-lg text-[#8A8A8A] mb-10 max-w-xl mx-auto"
+          className="text-base sm:text-lg text-[var(--color-muted)] mb-10 max-w-xl mx-auto"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
         >
           Piezas limitadas, hechas para destacar. Escríbenos por WhatsApp y comienza tu pedido hoy.
@@ -94,11 +98,11 @@ const ContactCTA = forwardRef<HTMLDivElement>(function ContactCTA(props, ref) {
           href="https://wa.me/584120000000"
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative inline-flex items-center gap-2 rounded-full px-12 py-5 text-base font-semibold tracking-wide border-none cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] active:scale-95"
+          className="group relative inline-flex items-center gap-2 rounded-full px-12 py-5 text-base font-semibold tracking-wide border-none cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_oklch(0.72 0.16 85)] active:scale-95"
           style={{
             fontFamily: "var(--font-inter)",
-            background: "linear-gradient(135deg, #D4AF37 0%, #B8941F 100%)",
-            color: "#050505",
+            background: "linear-gradient(135deg, var(--color-gold) 0%, #B8941F 100%)",
+            color: "var(--color-bg)",
           }}
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -109,6 +113,6 @@ const ContactCTA = forwardRef<HTMLDivElement>(function ContactCTA(props, ref) {
       </div>
     </section>
   )
-})
+}
 
 export default ContactCTA

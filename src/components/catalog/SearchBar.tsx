@@ -41,7 +41,7 @@ export default function SearchBar({ value, onSearch }: SearchBarProps) {
   return (
     <form onSubmit={handleSubmit} className="relative">
       <svg
-        className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8A8A8A]"
+        className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]"
         width="16"
         height="16"
         viewBox="0 0 24 24"
@@ -57,14 +57,14 @@ export default function SearchBar({ value, onSearch }: SearchBarProps) {
         value={localValue}
         onChange={handleChange}
         placeholder="Buscar joyas..."
-        className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[#8A8A8A] focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
+        className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)]/50 transition-colors"
         style={{ fontFamily: "var(--font-inter)" }}
       />
       {localValue && (
         <button
           type="button"
           onClick={handleClear}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#8A8A8A] hover:text-white transition-colors"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)] hover:text-white transition-colors"
         >
           <svg
             width="14"

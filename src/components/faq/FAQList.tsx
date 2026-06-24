@@ -1,6 +1,5 @@
 "use client"
 
-import { forwardRef } from "react"
 import FAQItem, { FAQItemData } from "@/components/faq/FAQItem"
 
 interface FAQListProps {
@@ -12,12 +11,20 @@ interface FAQListProps {
   onToggle: (id: number) => void
   onCopy: (id: number, text: string) => void
   onFeedback: (id: number, type: "up" | "down") => void
+  ref?: React.Ref<HTMLDivElement>
 }
 
-const FAQList = forwardRef<HTMLDivElement, FAQListProps>(function FAQList(
-  { filteredFAQs, searchQuery, openItems, copiedId, feedback, onToggle, onCopy, onFeedback },
-  ref
-) {
+function FAQList({
+  filteredFAQs,
+  searchQuery,
+  openItems,
+  copiedId,
+  feedback,
+  onToggle,
+  onCopy,
+  onFeedback,
+  ref,
+}: FAQListProps): React.JSX.Element {
   if (filteredFAQs.length === 0) {
     return (
       <div className="text-center py-16">
@@ -26,7 +33,7 @@ const FAQList = forwardRef<HTMLDivElement, FAQListProps>(function FAQList(
           height="48"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#8A8A8A"
+          stroke="var(--color-muted)"
           strokeWidth="1"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -36,14 +43,14 @@ const FAQList = forwardRef<HTMLDivElement, FAQListProps>(function FAQList(
           <path d="m21 21-4.3-4.3" />
         </svg>
         <p
-          className="text-[#8A8A8A] text-base sm:text-lg"
+          className="text-[var(--color-muted)] text-base sm:text-lg"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
         >
           No encontramos resultados para &ldquo
           <span className="text-white">{searchQuery}</span>&rdquo
         </p>
         <p
-          className="text-[#8A8A8A]/60 text-sm mt-2"
+          className="text-[var(--color-muted)]/60 text-sm mt-2"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
         >
           Intenta con otras palabras clave
@@ -68,6 +75,6 @@ const FAQList = forwardRef<HTMLDivElement, FAQListProps>(function FAQList(
       ))}
     </div>
   )
-})
+}
 
 export default FAQList

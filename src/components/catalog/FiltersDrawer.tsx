@@ -53,7 +53,6 @@ export default function FiltersDrawer({
     <AnimatePresence>
       {open && (
         <>
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -63,16 +62,14 @@ export default function FiltersDrawer({
             className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm"
           />
 
-          {/* Drawer */}
           <motion.div
             ref={drawerRef}
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed top-0 left-0 bottom-0 z-50 w-full max-w-sm bg-[#0a0a0a] border-r border-white/10 overflow-y-auto"
+            className="fixed top-0 left-0 bottom-0 z-50 w-full max-w-sm bg-[var(--color-bg)] border-r border-white/10 overflow-y-auto"
           >
-            {/* Header */}
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <div className="flex items-center gap-3">
                 <h2
@@ -83,7 +80,7 @@ export default function FiltersDrawer({
                 </h2>
                 {activeCount > 0 && (
                   <span
-                    className="px-2 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] text-xs"
+                    className="px-2 py-0.5 rounded-full bg-[var(--color-gold)]/20 text-[var(--color-gold)] text-xs"
                     style={{ fontFamily: "var(--font-inter)" }}
                   >
                     {activeCount}
@@ -92,7 +89,7 @@ export default function FiltersDrawer({
               </div>
               <button
                 onClick={onClose}
-                className="p-2 rounded-lg text-[#8A8A8A] hover:text-white hover:bg-white/5 transition-colors"
+                className="p-2 rounded-lg text-[var(--color-muted)] hover:text-white hover:bg-white/5 transition-colors"
               >
                 <svg
                   width="18"
@@ -107,9 +104,7 @@ export default function FiltersDrawer({
               </button>
             </div>
 
-            {/* Content */}
             <div className="p-6 space-y-8">
-              {/* Category */}
               <div>
                 <h3
                   className="text-white text-sm font-medium mb-4"
@@ -126,7 +121,7 @@ export default function FiltersDrawer({
                       <span
                         className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
                           filters.category.includes(cat.value)
-                            ? "bg-[#D4AF37] border-[#D4AF37]"
+                            ? "bg-[var(--color-gold)] border-[var(--color-gold)]"
                             : "border-white/20 group-hover:border-white/40"
                         }`}
                       >
@@ -144,7 +139,7 @@ export default function FiltersDrawer({
                         )}
                       </span>
                       <span
-                        className="text-sm text-[#8A8A8A] group-hover:text-white transition-colors"
+                        className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors"
                         style={{ fontFamily: "var(--font-inter)" }}
                       >
                         {cat.label}
@@ -154,7 +149,6 @@ export default function FiltersDrawer({
                 </div>
               </div>
 
-              {/* Color */}
               <div>
                 <h3
                   className="text-white text-sm font-medium mb-4"
@@ -171,7 +165,7 @@ export default function FiltersDrawer({
                       <span
                         className={`w-4 h-4 rounded-full border-2 flex items-center justify-center transition-colors ${
                           filters.color.includes(col.value)
-                            ? "border-[#D4AF37]"
+                            ? "border-[var(--color-gold)]"
                             : "border-white/20 group-hover:border-white/40"
                         }`}
                       >
@@ -181,7 +175,7 @@ export default function FiltersDrawer({
                         />
                       </span>
                       <span
-                        className="text-sm text-[#8A8A8A] group-hover:text-white transition-colors"
+                        className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors"
                         style={{ fontFamily: "var(--font-inter)" }}
                       >
                         {col.label}
@@ -191,7 +185,6 @@ export default function FiltersDrawer({
                 </div>
               </div>
 
-              {/* Price Range */}
               <div>
                 <h3
                   className="text-white text-sm font-medium mb-4"
@@ -201,7 +194,7 @@ export default function FiltersDrawer({
                 </h3>
                 <div className="flex items-center gap-3">
                   <div className="relative flex-1">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8A8A8A] text-xs">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)] text-xs">
                       $
                     </span>
                     <input
@@ -211,13 +204,13 @@ export default function FiltersDrawer({
                       onChange={(e) =>
                         onFilterChange({ priceMin: e.target.value })
                       }
-                      className="w-full pl-7 pr-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[#8A8A8A] focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
+                      className="w-full pl-7 pr-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)]/50 transition-colors"
                       style={{ fontFamily: "var(--font-inter)" }}
                     />
                   </div>
-                  <span className="text-[#8A8A8A] text-xs">—</span>
+                  <span className="text-[var(--color-muted)] text-xs">—</span>
                   <div className="relative flex-1">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8A8A8A] text-xs">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)] text-xs">
                       $
                     </span>
                     <input
@@ -227,14 +220,13 @@ export default function FiltersDrawer({
                       onChange={(e) =>
                         onFilterChange({ priceMax: e.target.value })
                       }
-                      className="w-full pl-7 pr-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[#8A8A8A] focus:outline-none focus:border-[#D4AF37]/50 transition-colors"
+                      className="w-full pl-7 pr-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)]/50 transition-colors"
                       style={{ fontFamily: "var(--font-inter)" }}
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Toggles */}
               <div>
                 <h3
                   className="text-white text-sm font-medium mb-4"
@@ -253,7 +245,7 @@ export default function FiltersDrawer({
                       className="flex items-center justify-between cursor-pointer group"
                     >
                       <span
-                        className="text-sm text-[#8A8A8A] group-hover:text-white transition-colors"
+                        className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors"
                         style={{ fontFamily: "var(--font-inter)" }}
                       >
                         {toggle.label}
@@ -265,7 +257,7 @@ export default function FiltersDrawer({
                           })
                         }
                         className={`relative w-10 h-5 rounded-full transition-colors ${
-                          filters[toggle.key] ? "bg-[#D4AF37]" : "bg-white/10"
+                          filters[toggle.key] ? "bg-[var(--color-gold)]" : "bg-white/10"
                         }`}
                       >
                         <span
@@ -280,8 +272,7 @@ export default function FiltersDrawer({
               </div>
             </div>
 
-            {/* Footer */}
-            <div className="sticky bottom-0 p-6 border-t border-white/10 bg-[#0a0a0a]">
+            <div className="sticky bottom-0 p-6 border-t border-white/10 bg-[var(--color-bg)]">
               <div className="flex gap-3">
                 <button
                   onClick={onClear}
@@ -292,7 +283,7 @@ export default function FiltersDrawer({
                 </button>
                 <button
                   onClick={onClose}
-                  className="flex-1 py-2.5 rounded-lg bg-[#D4AF37] text-[#050505] text-sm font-medium hover:bg-[#E8C96A] transition-colors"
+                  className="flex-1 py-2.5 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:bg-[oklch(0.87_0.12_90)] transition-colors"
                   style={{ fontFamily: "var(--font-inter)" }}
                 >
                   Aplicar

@@ -1,8 +1,12 @@
 "use client"
 
-import { forwardRef, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 
-const PoliticasCTA = forwardRef<HTMLDivElement>(function PoliticasCTA(props, ref) {
+interface PoliticasCTAProps {
+  ref?: React.Ref<HTMLDivElement>
+}
+
+function PoliticasCTA({ ref }: PoliticasCTAProps): React.JSX.Element {
   const [particles, setParticles] = useState<
     { id: number; x: number; y: number; size: number; duration: number; delay: number }[]
   >([])
@@ -32,7 +36,7 @@ const PoliticasCTA = forwardRef<HTMLDivElement>(function PoliticasCTA(props, ref
       {particles.map((p) => (
         <div
           key={p.id}
-          className="absolute rounded-full bg-[#D4AF37]/30 pointer-events-none"
+          className="absolute rounded-full bg-[var(--color-gold)]/30 pointer-events-none"
           style={{
             width: p.size,
             height: p.size,
@@ -74,7 +78,7 @@ const PoliticasCTA = forwardRef<HTMLDivElement>(function PoliticasCTA(props, ref
           ¿Necesitas{" "}
           <span
             style={{
-              background: "linear-gradient(135deg, #D4AF37 0%, #F5E6A3 50%, #D4AF37 100%)",
+              background: "linear-gradient(135deg, var(--color-gold) 0%, oklch(0.92 0.12 85) 50%, var(--color-gold) 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -85,7 +89,7 @@ const PoliticasCTA = forwardRef<HTMLDivElement>(function PoliticasCTA(props, ref
           con tu pedido?
         </h2>
         <p
-          className="text-base sm:text-lg text-[#8A8A8A] mb-10 max-w-xl mx-auto"
+          className="text-base sm:text-lg text-[var(--color-muted)] mb-10 max-w-xl mx-auto"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
         >
           Nuestro equipo está listo para resolver cualquier duda sobre cambios o devoluciones
@@ -99,8 +103,8 @@ const PoliticasCTA = forwardRef<HTMLDivElement>(function PoliticasCTA(props, ref
             className="group inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-semibold tracking-wide border-none cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] active:scale-95"
             style={{
               fontFamily: "var(--font-inter)",
-              background: "linear-gradient(135deg, #D4AF37 0%, #B8941F 100%)",
-              color: "#050505",
+              background: "linear-gradient(135deg, var(--color-gold) 0%, oklch(0.68 0.12 75) 100%)",
+              color: "var(--color-bg)",
             }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
@@ -124,7 +128,7 @@ const PoliticasCTA = forwardRef<HTMLDivElement>(function PoliticasCTA(props, ref
           </a>
           <a
             href="/preguntas-frecuentes"
-            className="inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-medium tracking-wide border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#050505] transition-all duration-300 cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-medium tracking-wide border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300 cursor-pointer"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             Ver Preguntas Frecuentes
@@ -133,6 +137,6 @@ const PoliticasCTA = forwardRef<HTMLDivElement>(function PoliticasCTA(props, ref
       </div>
     </section>
   )
-})
+}
 
 export default PoliticasCTA

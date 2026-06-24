@@ -29,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${instrumentSerif.variable} ${inter.variable}`}>
-      <body className="bg-[#050505] text-white antialiased">{children}</body>
+      <body className="bg-[var(--color-bg)] text-white antialiased">{children}</body>
     </html>
   )
 }

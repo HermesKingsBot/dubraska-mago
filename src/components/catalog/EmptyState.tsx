@@ -28,14 +28,14 @@ export default function EmptyState({ onClearFilters }: EmptyStateProps) {
         No encontramos resultados
       </h3>
       <p
-        className="text-[#8A8A8A] text-sm max-w-md mb-6"
+        className="text-[var(--color-muted)] text-sm max-w-md mb-6"
         style={{ fontFamily: "var(--font-inter)" }}
       >
         Intenta ajustar los filtros o el término de búsqueda para encontrar lo que buscas.
       </p>
       <button
         onClick={onClearFilters}
-        className="px-6 py-2.5 rounded-lg bg-[#D4AF37] text-[#050505] text-sm font-medium hover:bg-[#E8C96A] transition-colors"
+        className="px-6 py-2.5 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:bg-[oklch(0.87_0.12_90)] transition-colors"
         style={{ fontFamily: "var(--font-inter)" }}
       >
         Limpiar filtros

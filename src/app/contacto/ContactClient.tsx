@@ -15,8 +15,8 @@ gsap.registerPlugin(ScrollTrigger)
 const ContactMap = dynamic(() => import("@/components/contact/ContactMap"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[400px] md:h-[500px] rounded-xl border border-white/10 bg-[#0A0A0A] flex items-center justify-center">
-      <span className="text-[#8A8A8A] text-sm">Cargando mapa...</span>
+    <div className="w-full h-[400px] md:h-[500px] rounded-xl border border-white/10 bg-[var(--color-dark-card)] flex items-center justify-center">
+      <span className="text-[var(--color-muted)] text-sm">Cargando mapa...</span>
     </div>
   ),
 })
@@ -204,7 +204,7 @@ export default function ContactClient() {
           Nuestra Ubicación
         </h2>
         <p
-          className="text-center text-[#8A8A8A] mb-10 text-sm sm:text-base"
+          className="text-center text-[var(--color-muted)] mb-10 text-sm sm:text-base"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
         >
           Mercado La Isla, Caracas — Local 251

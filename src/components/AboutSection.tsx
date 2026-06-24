@@ -259,30 +259,27 @@ export default function AboutSection() {
   )
 
   return (
-    <section ref={sectionRef} className="relative w-full overflow-hidden bg-[#050505]">
-      {/* Top gold accent line */}
+    <section ref={sectionRef} className="relative w-full overflow-hidden bg-[var(--color-bg)]">
       <motion.div
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true, amount: 0.8 }}
         transition={{ duration: 1.2, ease: EASE }}
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-[1px] bg-[#D4AF37] origin-center"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-[1px] bg-[var(--color-gold)] origin-center"
       />
 
       <div className="relative max-w-7xl mx-auto px-6 py-24 sm:py-32 md:py-40">
-        {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: EASE }}
-          className="text-center text-[11px] uppercase tracking-[3px] text-[#D4AF37] mb-8"
+          className="text-center text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-8"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
         >
           Hola, soy Dubraska
         </motion.p>
 
-        {/* Main heading */}
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -292,22 +289,18 @@ export default function AboutSection() {
           style={{ fontFamily: "var(--font-instrument-serif)" }}
         >
           Cada pieza cuenta una historia.{" "}
-          <em className="text-[#D4AF37]">La tuya</em> empieza aquí.
+          <em className="text-[var(--color-gold)]">La tuya</em> empieza aquí.
         </motion.h2>
 
-        {/* Two column layout: Photo + Text */}
         <div className="mt-24 sm:mt-28 md:mt-36 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          {/* LEFT — Photo */}
           <div className="lg:col-span-5 relative">
             <div
               ref={photoRef}
               className="relative aspect-[3/4] rounded-2xl overflow-hidden opacity-0"
             >
-              {/* Gold border glow on hover */}
               <div className="absolute inset-0 rounded-2xl border border-[rgba(212,175,55,0.15)] group-hover:border-[rgba(212,175,55,0.35)] transition-colors duration-500 z-10" />
 
-              {/* Placeholder image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#111] to-[#0A0A0A]">
+              <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.05_0_0)] via-[var(--color-dark-card)] to-[oklch(0.05_0_0)]">
                 <Image
                   src="/images/dubraska-placeholder.jpg"
                   alt="Dubraska Mago — Fundadora"
@@ -316,16 +309,15 @@ export default function AboutSection() {
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   priority
                 />
-                {/* Fallback overlay if image doesn't load */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0A0A0A]">
-                  <div className="w-24 h-24 rounded-full border border-[#D4AF37]/20 flex items-center justify-center mb-4">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="0.8" opacity="0.4">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[oklch(0.05_0_0)]">
+                  <div className="w-24 h-24 rounded-full border border-[var(--color-gold)]/20 flex items-center justify-center mb-4">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.8" opacity="0.4">
                       <circle cx="12" cy="8" r="4" />
                       <path d="M4 20c0-4 4-7 8-7s8 3 8 7" />
                     </svg>
                   </div>
                   <p
-                    className="text-[#D4AF37]/30 text-sm tracking-[3px] uppercase"
+                    className="text-[var(--color-gold)]/30 text-sm tracking-[3px] uppercase"
                     style={{ fontFamily: "var(--font-instrument-serif)" }}
                   >
                     Dubraska Mago
@@ -333,13 +325,11 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              {/* Gradient overlay at bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-70" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-transparent to-transparent opacity-70" />
 
-              {/* Name overlay on photo */}
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                 <p
-                  className="text-[#D4AF37] text-lg tracking-wide"
+                  className="text-[var(--color-gold)] text-lg tracking-wide"
                   style={{ fontFamily: "var(--font-instrument-serif)" }}
                 >
                   Dubraska Mago
@@ -353,17 +343,14 @@ export default function AboutSection() {
               </div>
             </div>
 
-            {/* Decorative gold accent boxes behind photo */}
             <div className="deco-box absolute -bottom-4 -right-4 w-32 h-32 border border-[rgba(212,175,55,0.06)] rounded-2xl -z-10" />
             <div className="deco-box absolute -top-4 -left-4 w-24 h-24 border border-[rgba(212,175,55,0.04)] rounded-2xl -z-10" />
           </div>
 
-          {/* RIGHT — Text content */}
           <div ref={textRef} className="lg:col-span-7 flex flex-col justify-center opacity-0">
-            {/* Decorative quote mark */}
             <div
               ref={quoteRef}
-              className="text-7xl text-[#D4AF37]/10 leading-none mb-2 select-none opacity-0"
+              className="text-7xl text-[var(--color-gold)]/10 leading-none mb-2 select-none opacity-0"
               style={{ fontFamily: "var(--font-instrument-serif)" }}
             >
               &ldquo
@@ -371,7 +358,7 @@ export default function AboutSection() {
 
             <div className="space-y-6">
               <p
-                className="about-text-p text-base sm:text-lg text-[#B0B0B0] leading-[1.9]"
+                className="about-text-p text-base sm:text-lg text-[oklch(0.76_0_0)] leading-[1.9]"
                 style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
               >
                 Todo comenzó con una idea simple: que toda mujer merece sentirse{" "}
@@ -381,7 +368,7 @@ export default function AboutSection() {
               </p>
 
               <p
-                className="about-text-p text-base sm:text-lg text-[#B0B0B0] leading-[1.9]"
+                className="about-text-p text-base sm:text-lg text-[oklch(0.76_0_0)] leading-[1.9]"
                 style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
               >
                 Cada pieza que diseño está pensada para ti — para tu día a día, para ese
@@ -391,26 +378,24 @@ export default function AboutSection() {
               </p>
 
               <p
-                className="about-text-p text-base sm:text-lg text-[#B0B0B0] leading-[1.9]"
+                className="about-text-p text-base sm:text-lg text-[oklch(0.76_0_0)] leading-[1.9]"
                 style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
               >
                 Esto no es solo bisutería. Es una{" "}
-                <span className="text-[#D4AF37] font-medium">extensión de tu personalidad</span>.
+                <span className="text-[var(--color-gold)] font-medium">extensión de tu personalidad</span>.
               </p>
             </div>
 
-            {/* Signature */}
             <div className="about-signature mt-12 sm:mt-16 flex items-center gap-4">
-              <div className="w-12 h-[1px] bg-[#D4AF37]/40" />
+              <div className="w-12 h-[1px] bg-[var(--color-gold)]/40" />
               <p
-                className="text-[#D4AF37] text-lg italic"
+                className="text-[var(--color-gold)] text-lg italic"
                 style={{ fontFamily: "var(--font-instrument-serif)" }}
               >
                 Con cariño, Dubraska ✦
               </p>
             </div>
 
-            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -420,7 +405,7 @@ export default function AboutSection() {
             >
               <a
                 href="/nosotros"
-                className="inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-sm font-medium border border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#050505] transition-all duration-300 tracking-wide group"
+                className="inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-sm font-medium border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300 tracking-wide group"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 Conoce nuestra historia
@@ -444,7 +429,6 @@ export default function AboutSection() {
           </div>
         </div>
 
-        {/* Bottom stats */}
         <div
           ref={statsRef}
           className="mt-28 sm:mt-36 md:mt-44 grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 border-t border-[rgba(255,255,255,0.06)]"
@@ -457,13 +441,13 @@ export default function AboutSection() {
           ].map((stat) => (
             <div key={stat.label} className="stat-item text-center">
               <p
-                className="text-3xl sm:text-4xl text-[#D4AF37] tracking-tight"
+                className="text-3xl sm:text-4xl text-[var(--color-gold)] tracking-tight"
                 style={{ fontFamily: "var(--font-instrument-serif)" }}
               >
                 {stat.number}
               </p>
               <p
-                className="text-xs uppercase tracking-[2px] text-[#8A8A8A] mt-3"
+                className="text-xs uppercase tracking-[2px] text-[var(--color-muted)] mt-3"
                 style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
               >
                 {stat.label}
@@ -473,13 +457,12 @@ export default function AboutSection() {
         </div>
       </div>
 
-      {/* Bottom gold accent line */}
       <motion.div
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true, amount: 0.8 }}
         transition={{ duration: 1.2, ease: EASE }}
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[1px] bg-[#D4AF37] origin-center"
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[1px] bg-[var(--color-gold)] origin-center"
       />
     </section>
   )

@@ -1,15 +1,11 @@
 "use client"
 
-import { forwardRef } from "react"
-
 interface PoliticasHeroProps {
   heroLineRef?: React.Ref<HTMLDivElement>
+  ref?: React.Ref<HTMLDivElement>
 }
 
-const PoliticasHero = forwardRef<HTMLDivElement, PoliticasHeroProps>(function PoliticasHero(
-  { heroLineRef },
-  ref
-) {
+function PoliticasHero({ heroLineRef, ref }: PoliticasHeroProps): React.JSX.Element {
   return (
     <section
       ref={ref}
@@ -22,7 +18,7 @@ const PoliticasHero = forwardRef<HTMLDivElement, PoliticasHeroProps>(function Po
         Políticas de{" "}
         <span
           style={{
-            background: "linear-gradient(135deg, #D4AF37 0%, #F5E6A3 50%, #D4AF37 100%)",
+            background: "linear-gradient(135deg, var(--color-gold) 0%, oklch(0.92 0.12 85) 50%, var(--color-gold) 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -32,24 +28,24 @@ const PoliticasHero = forwardRef<HTMLDivElement, PoliticasHeroProps>(function Po
         </span>
       </h1>
       <p
-        className="text-base sm:text-lg md:text-xl max-w-2xl mt-6 leading-relaxed text-[#8A8A8A] opacity-0"
+        className="text-base sm:text-lg md:text-xl max-w-2xl mt-6 leading-relaxed text-[var(--color-muted)] opacity-0"
         style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
       >
         Tu satisfacción y confianza son nuestra prioridad
       </p>
       <div
         ref={heroLineRef}
-        className="mt-8 w-20 h-[1px] bg-[#D4AF37] origin-center"
+        className="mt-8 w-20 h-[1px] bg-[var(--color-gold)] origin-center"
       />
       <div
         data-badge
-        className="mt-6 inline-block rounded-full border border-[rgba(212,175,55,0.2)] bg-[#0A0A0A] px-4 py-1.5 text-xs text-[#8A8A8A] tracking-wide opacity-0"
+        className="mt-6 inline-block rounded-full border border-[rgba(212,175,55,0.2)] bg-[oklch(0.05_0_0)] px-4 py-1.5 text-xs text-[var(--color-muted)] tracking-wide opacity-0"
         style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
       >
         Última actualización: Junio 2026
       </div>
     </section>
   )
-})
+}
 
 export default PoliticasHero

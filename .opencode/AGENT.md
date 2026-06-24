@@ -194,23 +194,56 @@ return <ProductCard product={product} />
 return <ProductCard product={product} />
 ```
 
-### 4. EXPORT DEFAULT AT END
-Every component file MUST end with a single `export default ComponentName` on its own line at the very end of the file.
+### 4. FUNCTION COMPONENTS with React.JSX.Element
+Use `function` declarations for components (NOT `const` arrow functions). Return type must be `React.JSX.Element`.
 
 ```tsx
-const ProductCard = ({ product }: ProductCardProps) => {
+// ✅ CORRECT
+function ProductCard({ product }: ProductCardProps): React.JSX.Element {
   return <div>...</div>
 }
 
 export default ProductCard
 
 // ❌ WRONG
-export default function ProductCard() {}
-export const ProductCard = () => {}
+const ProductCard = ({ product }: ProductCardProps) => {
+  return <div>...</div>
+}
+
+// ❌ WRONG — no forwardRef
+const ProductCard = forwardRef<HTMLDivElement, ProductCardProps>(function ProductCard(props, ref) {
+  return <div ref={ref}>...</div>
+})
+
+// ✅ CORRECT — if parent needs ref, add to props
+interface ProductCardProps {
+  product: Product
+  ref?: React.Ref<HTMLDivElement>
+}
+
+function ProductCard({ product, ref }: ProductCardProps): React.JSX.Element {
+  return <div ref={ref}>...</div>
+}
 ```
+
+### 5. EXPORT DEFAULT AT END
+Every component file MUST end with a single `export default ComponentName` on its own line at the very end of the file.
 
 ### 5. 2-SPACE INDENTATION
 Use exactly 2 spaces for indentation. No tabs. No 4 spaces.
+
+### 6. OKLCH COLORS
+Use OKLCH color values instead of hex. Reference CSS variables:
+```tsx
+// ✅ CORRECT
+className="text-[var(--color-gold)] bg-[var(--color-bg)]"
+className="text-[oklch(0.78_0.14_85)]"
+
+// ❌ WRONG
+className="text-[#D4AF37] bg-[#050505]"
+```
+
+Brand colors: `--color-bg: oklch(0.13 0.005 60)`, `--color-gold: oklch(0.78 0.14 85)`, `--color-muted: oklch(0.62 0.005 60)`, `--color-white: oklch(1 0 0)`, `--color-rose: oklch(0.82 0.06 25)`
 
 ### IMPORTANT: These rules must be followed in EVERY new file and ENFORCED in every edit.
 

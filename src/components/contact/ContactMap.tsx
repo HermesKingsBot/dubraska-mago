@@ -4,13 +4,11 @@ import { useEffect, useRef } from "react"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
 
-const GOLD = "#D4AF37"
-
 const goldIcon = L.divIcon({
   className: "",
   html: `<svg width="28" height="40" viewBox="0 0 28 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M14 0C6.268 0 0 6.268 0 14c0 10.5 14 26 14 26s14-15.5 14-26C28 6.268 21.732 0 14 0z" fill="${GOLD}"/>
-    <circle cx="14" cy="14" r="6" fill="#050505"/>
+    <path d="M14 0C6.268 0 0 6.268 0 14c0 10.5 14 26 14 26s14-15.5 14-26C28 6.268 21.732 0 14 0z" fill="var(--color-gold)"/>
+    <circle cx="14" cy="14" r="6" fill="var(--color-bg)"/>
   </svg>`,
   iconSize: [28, 40],
   iconAnchor: [14, 40],
@@ -46,7 +44,7 @@ export default function ContactMap() {
     L.marker([10.4806, -66.9036], { icon: goldIcon })
       .addTo(map)
       .bindPopup(
-        `<div style="font-family:var(--font-inter);color:#050505;font-weight:500;">Dubraska Mago<br/><span style="font-size:12px;color:#8A8A8A;">Mercado La Isla, Caracas</span></div>`
+        `<div style="font-family:var(--font-inter);color:var(--color-bg);font-weight:500;">Dubraska Mago<br/><span style="font-size:12px;color:var(--color-muted);">Mercado La Isla, Caracas</span></div>`
       )
       .openPopup()
 

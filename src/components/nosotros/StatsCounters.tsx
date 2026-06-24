@@ -1,15 +1,11 @@
 "use client"
 
-import { forwardRef } from "react"
-
 interface StatsCountersProps {
   counters: { clientes: number; piezas: number; anos: number }
+  ref?: React.Ref<HTMLDivElement>
 }
 
-const StatsCounters = forwardRef<HTMLDivElement, StatsCountersProps>(function StatsCounters(
-  { counters },
-  ref
-) {
+function StatsCounters({ counters, ref }: StatsCountersProps): React.JSX.Element {
   return (
     <section
       ref={ref}
@@ -26,13 +22,13 @@ const StatsCounters = forwardRef<HTMLDivElement, StatsCountersProps>(function St
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <p
-                className="text-4xl sm:text-5xl md:text-6xl text-[#D4AF37] tracking-tight"
+                className="text-4xl sm:text-5xl md:text-6xl text-[var(--color-gold)] tracking-tight"
                 style={{ fontFamily: "var(--font-instrument-serif)" }}
               >
                 {stat.value}
               </p>
               <p
-                className="text-xs uppercase tracking-[2px] text-[#8A8A8A] mt-4"
+                className="text-xs uppercase tracking-[2px] text-[var(--color-muted)] mt-4"
                 style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
               >
                 {stat.label}
@@ -43,6 +39,6 @@ const StatsCounters = forwardRef<HTMLDivElement, StatsCountersProps>(function St
       </div>
     </section>
   )
-})
+}
 
 export default StatsCounters
