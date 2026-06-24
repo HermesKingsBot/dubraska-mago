@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useEffect, useRef } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import { useEffect, useRef } from "react"
+import L from "leaflet"
+import "leaflet/dist/leaflet.css"
 
-const GOLD = "#D4AF37";
+const GOLD = "#D4AF37"
 
 const goldIcon = L.divIcon({
   className: "",
@@ -15,23 +15,23 @@ const goldIcon = L.divIcon({
   iconSize: [28, 40],
   iconAnchor: [14, 40],
   popupAnchor: [0, -36],
-});
+})
 
 export default function ContactMap() {
-  const mapRef = useRef<HTMLDivElement>(null);
-  const mapInstance = useRef<L.Map | null>(null);
+  const mapRef = useRef<HTMLDivElement>(null)
+  const mapInstance = useRef<L.Map | null>(null)
 
   useEffect(() => {
-    if (!mapRef.current || mapInstance.current) return;
+    if (!mapRef.current || mapInstance.current) return
 
     const map = L.map(mapRef.current, {
       center: [10.4806, -66.9036],
       zoom: 14,
       zoomControl: false,
       scrollWheelZoom: false,
-    });
+    })
 
-    L.control.zoom({ position: "topright" }).addTo(map);
+    L.control.zoom({ position: "topright" }).addTo(map)
 
     L.tileLayer(
       "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
@@ -41,22 +41,22 @@ export default function ContactMap() {
         subdomains: "abcd",
         maxZoom: 19,
       }
-    ).addTo(map);
+    ).addTo(map)
 
     L.marker([10.4806, -66.9036], { icon: goldIcon })
       .addTo(map)
       .bindPopup(
         `<div style="font-family:var(--font-inter);color:#050505;font-weight:500;">Dubraska Mago<br/><span style="font-size:12px;color:#8A8A8A;">Mercado La Isla, Caracas</span></div>`
       )
-      .openPopup();
+      .openPopup()
 
-    mapInstance.current = map;
+    mapInstance.current = map
 
     return () => {
-      map.remove();
-      mapInstance.current = null;
-    };
-  }, []);
+      map.remove()
+      mapInstance.current = null
+    }
+  }, [])
 
   return (
     <div
@@ -64,5 +64,5 @@ export default function ContactMap() {
       className="w-full rounded-xl border border-white/10"
       style={{ height: "clamp(400px, 50vw, 500px)" }}
     />
-  );
+  )
 }

@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { useRef, useState, useEffect } from "react";
-import dynamic from "next/dynamic";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useState, useEffect } from "react"
+import dynamic from "next/dynamic"
+import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger)
 
 const ContactMap = dynamic(() => import("@/components/contact/ContactMap"), {
   ssr: false,
@@ -15,9 +15,9 @@ const ContactMap = dynamic(() => import("@/components/contact/ContactMap"), {
       <span className="text-[#8A8A8A] text-sm">Cargando mapa...</span>
     </div>
   ),
-});
+})
 
-const EASE = [0.25, 0.46, 0.45, 0.94] as const;
+const EASE = [0.25, 0.46, 0.45, 0.94] as const
 
 const contactCards = [
   {
@@ -67,30 +67,30 @@ const contactCards = [
       </svg>
     ),
   },
-];
+]
 
 const subjects = [
   "Pedido personalizado",
   "Consulta",
   "Colaboración",
   "Otro",
-];
+]
 
 interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-  subject: string;
-  message: string;
+  name: string
+  email: string
+  phone: string
+  subject: string
+  message: string
 }
 
 export default function ContactClient() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLDivElement>(null)
+  const mapRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
 
   const [form, setForm] = useState<FormData>({
     name: "",
@@ -98,12 +98,12 @@ export default function ContactClient() {
     phone: "",
     subject: "",
     message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
+  })
+  const [submitted, setSubmitted] = useState(false)
+  const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
   const [particles, setParticles] = useState<
     { id: number; x: number; y: number; size: number; duration: number; delay: number }[]
-  >([]);
+  >([])
 
   useEffect(() => {
     const p = Array.from({ length: 15 }, (_, i) => ({
@@ -113,37 +113,37 @@ export default function ContactClient() {
       size: Math.random() * 3 + 1.5,
       duration: Math.random() * 8 + 6,
       delay: Math.random() * 4,
-    }));
-    setParticles(p);
-  }, []);
+    }))
+    setParticles(p)
+  }, [])
 
   useGSAP(
     () => {
-      if (!heroRef.current) return;
+      if (!heroRef.current) return
 
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const heroH1 = heroRef.current?.querySelector("h1");
-        const heroP = heroRef.current?.querySelector("p");
+        const heroH1 = heroRef.current?.querySelector("h1")
+        const heroP = heroRef.current?.querySelector("p")
 
         if (heroH1) {
           gsap.fromTo(
             heroH1,
             { opacity: 0, y: 50, scale: 0.95 },
             { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: "power3.out" }
-          );
+          )
         }
         if (heroP) {
           gsap.fromTo(
             heroP,
             { opacity: 0, y: 30 },
             { opacity: 1, y: 0, duration: 1, delay: 0.3, ease: "power3.out" }
-          );
+          )
         }
 
         if (cardsRef.current) {
-          const cards = cardsRef.current.querySelectorAll("[data-card]");
+          const cards = cardsRef.current.querySelectorAll("[data-card]")
           gsap.fromTo(
             cards,
             { opacity: 0, y: 60, scale: 0.92 },
@@ -159,7 +159,7 @@ export default function ContactClient() {
                 start: "top 80%",
               },
             }
-          );
+          )
         }
 
         if (formRef.current) {
@@ -176,7 +176,7 @@ export default function ContactClient() {
                 start: "top 80%",
               },
             }
-          );
+          )
         }
 
         if (mapRef.current) {
@@ -193,7 +193,7 @@ export default function ContactClient() {
                 start: "top 80%",
               },
             }
-          );
+          )
         }
 
         if (ctaRef.current) {
@@ -210,52 +210,52 @@ export default function ContactClient() {
                 start: "top 85%",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        const allEls = [heroRef.current, cardsRef.current, formRef.current, mapRef.current, ctaRef.current].filter(Boolean);
+        const allEls = [heroRef.current, cardsRef.current, formRef.current, mapRef.current, ctaRef.current].filter(Boolean)
         allEls.forEach((el) => {
-          if (el) gsap.set(el, { opacity: 1 });
-        });
-        const heroH1 = heroRef.current?.querySelector("h1");
-        const heroP = heroRef.current?.querySelector("p");
-        if (heroH1) gsap.set(heroH1, { opacity: 1 });
-        if (heroP) gsap.set(heroP, { opacity: 1 });
-      });
+          if (el) gsap.set(el, { opacity: 1 })
+        })
+        const heroH1 = heroRef.current?.querySelector("h1")
+        const heroP = heroRef.current?.querySelector("p")
+        if (heroH1) gsap.set(heroH1, { opacity: 1 })
+        if (heroP) gsap.set(heroP, { opacity: 1 })
+      })
     },
     { scope: containerRef }
-  );
+  )
 
   const validate = (): boolean => {
-    const e: Partial<Record<keyof FormData, string>> = {};
-    if (!form.name.trim()) e.name = "El nombre es obligatorio";
+    const e: Partial<Record<keyof FormData, string>> = {}
+    if (!form.name.trim()) e.name = "El nombre es obligatorio"
     if (!form.email.trim()) {
-      e.email = "El email es obligatorio";
+      e.email = "El email es obligatorio"
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      e.email = "Email inválido";
+      e.email = "Email inválido"
     }
-    if (!form.subject) e.subject = "Selecciona un asunto";
-    if (!form.message.trim()) e.message = "El mensaje es obligatorio";
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  };
+    if (!form.subject) e.subject = "Selecciona un asunto"
+    if (!form.message.trim()) e.message = "El mensaje es obligatorio"
+    setErrors(e)
+    return Object.keys(e).length === 0
+  }
 
   const handleSubmit = (ev: React.FormEvent) => {
-    ev.preventDefault();
+    ev.preventDefault()
     if (validate()) {
-      setSubmitted(true);
+      setSubmitted(true)
     }
-  };
+  }
 
   const handleChange = (
     field: keyof FormData,
     value: string
   ) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
-    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
-  };
+    setForm((prev) => ({ ...prev, [field]: value }))
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }))
+  }
 
   return (
     <div ref={containerRef} className="min-h-screen">
@@ -615,5 +615,5 @@ export default function ContactClient() {
         </div>
       </section>
     </div>
-  );
+  )
 }

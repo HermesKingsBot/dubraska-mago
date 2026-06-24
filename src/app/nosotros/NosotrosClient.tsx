@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import { useRef, useState, useEffect } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useState, useEffect } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const EASE = [0.25, 0.46, 0.45, 0.94] as const;
+const EASE = [0.25, 0.46, 0.45, 0.94] as const
 
 const PROCESS_STEPS = [
   {
@@ -50,7 +50,7 @@ const PROCESS_STEPS = [
     title: "Entrega",
     desc: "Empacamos cada pieza con cuidado premium para que llegue perfecta a tus manos. Un detalle que se siente desde que abres la caja.",
   },
-];
+]
 
 const VALUES = [
   {
@@ -115,24 +115,24 @@ const VALUES = [
     title: "Atención Personalizada",
     desc: "Piezas personalizadas bajo pedido",
   },
-];
+]
 
 export default function NosotrosClient() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroLineRef = useRef<HTMLDivElement>(null);
-  const originLeftRef = useRef<HTMLDivElement>(null);
-  const originRightRef = useRef<HTMLDivElement>(null);
-  const missionRef = useRef<HTMLDivElement>(null);
-  const processRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const valuesRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLDivElement>(null)
+  const heroLineRef = useRef<HTMLDivElement>(null)
+  const originLeftRef = useRef<HTMLDivElement>(null)
+  const originRightRef = useRef<HTMLDivElement>(null)
+  const missionRef = useRef<HTMLDivElement>(null)
+  const processRef = useRef<HTMLDivElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
+  const valuesRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
 
-  const [counters, setCounters] = useState({ clientes: 0, piezas: 0, anos: 0 });
+  const [counters, setCounters] = useState({ clientes: 0, piezas: 0, anos: 0 })
   const [particles, setParticles] = useState<
     { id: number; x: number; y: number; size: number; duration: number; delay: number }[]
-  >([]);
+  >([])
 
   useEffect(() => {
     const p = Array.from({ length: 10 }, (_, i) => ({
@@ -142,37 +142,35 @@ export default function NosotrosClient() {
       size: Math.random() * 3 + 1.5,
       duration: Math.random() * 8 + 6,
       delay: Math.random() * 4,
-    }));
-    setParticles(p);
-  }, []);
+    }))
+    setParticles(p)
+  }, [])
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        // Hero text reveal
         if (heroRef.current) {
-          const heroH1 = heroRef.current.querySelector("h1");
-          const heroP = heroRef.current.querySelector("p");
+          const heroH1 = heroRef.current.querySelector("h1")
+          const heroP = heroRef.current.querySelector("p")
 
           if (heroH1) {
             gsap.fromTo(
               heroH1,
               { opacity: 0, y: 60, scale: 0.95 },
               { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power3.out" }
-            );
+            )
           }
           if (heroP) {
             gsap.fromTo(
               heroP,
               { opacity: 0, y: 30 },
               { opacity: 1, y: 0, duration: 1, delay: 0.4, ease: "power3.out" }
-            );
+            )
           }
         }
 
-        // Hero decorative line
         if (heroLineRef.current) {
           gsap.fromTo(
             heroLineRef.current,
@@ -183,10 +181,9 @@ export default function NosotrosClient() {
               delay: 0.8,
               ease: "power2.inOut",
             }
-          );
+          )
         }
 
-        // Origin story: left slides from left, right from right
         if (originLeftRef.current) {
           gsap.fromTo(
             originLeftRef.current,
@@ -203,7 +200,7 @@ export default function NosotrosClient() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
         if (originRightRef.current) {
@@ -223,12 +220,11 @@ export default function NosotrosClient() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Mission cards staggered
         if (missionRef.current) {
-          const cards = missionRef.current.querySelectorAll("[data-mission-card]");
+          const cards = missionRef.current.querySelectorAll("[data-mission-card]")
           if (cards.length) {
             gsap.fromTo(
               cards,
@@ -246,13 +242,12 @@ export default function NosotrosClient() {
                   toggleActions: "play none none reverse",
                 },
               }
-            );
+            )
           }
         }
 
-        // Process steps staggered
         if (processRef.current) {
-          const steps = processRef.current.querySelectorAll("[data-process-step]");
+          const steps = processRef.current.querySelectorAll("[data-process-step]")
           if (steps.length) {
             gsap.fromTo(
               steps,
@@ -269,18 +264,17 @@ export default function NosotrosClient() {
                   toggleActions: "play none none reverse",
                 },
               }
-            );
+            )
           }
         }
 
-        // Stats counter animation
         if (statsRef.current) {
           ScrollTrigger.create({
             trigger: statsRef.current,
             start: "top 80%",
             once: true,
             onEnter: () => {
-              const targets = { clientes: 500, piezas: 1000, anos: 3 };
+              const targets = { clientes: 500, piezas: 1000, anos: 3 }
               gsap.to(targets, {
                 clientes: targets.clientes,
                 piezas: targets.piezas,
@@ -292,16 +286,15 @@ export default function NosotrosClient() {
                     clientes: Math.round(targets.clientes),
                     piezas: Math.round(targets.piezas),
                     anos: Math.round(targets.anos),
-                  });
+                  })
                 },
-              });
+              })
             },
-          });
+          })
         }
 
-        // Values grid staggered
         if (valuesRef.current) {
-          const items = valuesRef.current.querySelectorAll("[data-value-item]");
+          const items = valuesRef.current.querySelectorAll("[data-value-item]")
           if (items.length) {
             gsap.fromTo(
               items,
@@ -318,11 +311,10 @@ export default function NosotrosClient() {
                   toggleActions: "play none none reverse",
                 },
               }
-            );
+            )
           }
         }
 
-        // CTA section scale + fade
         if (ctaRef.current) {
           gsap.fromTo(
             ctaRef.current,
@@ -337,9 +329,9 @@ export default function NosotrosClient() {
                 start: "top 85%",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
         const allEls = [
@@ -352,22 +344,22 @@ export default function NosotrosClient() {
           statsRef.current,
           valuesRef.current,
           ctaRef.current,
-        ].filter(Boolean);
+        ].filter(Boolean)
         allEls.forEach((el) => {
-          if (el) gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 });
-        });
-        const heroH1 = heroRef.current?.querySelector("h1");
-        const heroP = heroRef.current?.querySelector("p");
-        if (heroH1) gsap.set(heroH1, { opacity: 1, y: 0, scale: 1 });
-        if (heroP) gsap.set(heroP, { opacity: 1, y: 0 });
-        if (heroLineRef.current) gsap.set(heroLineRef.current, { scaleX: 1 });
-        setCounters({ clientes: 500, piezas: 1000, anos: 3 });
-      });
+          if (el) gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 })
+        })
+        const heroH1 = heroRef.current?.querySelector("h1")
+        const heroP = heroRef.current?.querySelector("p")
+        if (heroH1) gsap.set(heroH1, { opacity: 1, y: 0, scale: 1 })
+        if (heroP) gsap.set(heroP, { opacity: 1, y: 0 })
+        if (heroLineRef.current) gsap.set(heroLineRef.current, { scaleX: 1 })
+        setCounters({ clientes: 500, piezas: 1000, anos: 3 })
+      })
 
-      return () => mm.revert();
+      return () => mm.revert()
     },
     { scope: containerRef }
-  );
+  )
 
   return (
     <div ref={containerRef} className="min-h-screen">
@@ -845,5 +837,5 @@ export default function NosotrosClient() {
         </div>
       </section>
     </div>
-  );
+  )
 }

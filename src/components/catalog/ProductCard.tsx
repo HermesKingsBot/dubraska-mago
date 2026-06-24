@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { motion } from "motion/react";
-import { Product } from "@/types/product";
-import { buildWhatsAppLink } from "@/lib/catalog-utils";
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { motion } from "motion/react"
+import { Product } from "@/types/product"
+import { buildWhatsAppLink } from "@/lib/catalog-utils"
 
 interface ProductCardProps {
-  product: Product;
-  index: number;
+  product: Product
+  index: number
 }
 
 const COLOR_MAP: Record<string, string> = {
@@ -17,18 +17,18 @@ const COLOR_MAP: Record<string, string> = {
   plateado: "#C0C0C0",
   rose: "#E8B4B8",
   negro: "#1a1a1a",
-};
+}
 
 export default function ProductCard({ product, index }: ProductCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null)
 
   useGSAP(() => {
-    if (!cardRef.current) return;
+    if (!cardRef.current) return
 
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
+    ).matches
+    if (prefersReduced) return
 
     gsap.fromTo(
       cardRef.current,
@@ -40,14 +40,14 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         delay: index * 0.05,
         ease: "power2.out",
       }
-    );
-  }, { scope: cardRef });
+    )
+  }, { scope: cardRef })
 
   const discount = product.oldPrice
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
-    : null;
+    : null
 
-  const whatsappUrl = buildWhatsAppLink(product);
+  const whatsappUrl = buildWhatsAppLink(product)
 
   return (
     <motion.div
@@ -167,5 +167,5 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         </a>
       </div>
     </motion.div>
-  );
+  )
 }

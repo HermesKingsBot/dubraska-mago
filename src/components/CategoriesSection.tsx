@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const CATEGORIES = [
   {
@@ -39,18 +39,18 @@ const CATEGORIES = [
       </svg>
     ),
   },
-];
+]
 
 export default function CategoriesSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
       mm.add("(min-width: 768px)", () => {
-        const cards = cardsRef.current?.querySelectorAll(".cat-card");
+        const cards = cardsRef.current?.querySelectorAll(".cat-card")
         if (cards?.length) {
           gsap.fromTo(
             cards,
@@ -68,12 +68,12 @@ export default function CategoriesSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(max-width: 767px)", () => {
-        const cards = cardsRef.current?.querySelectorAll(".cat-card");
+        const cards = cardsRef.current?.querySelectorAll(".cat-card")
         if (cards?.length) {
           gsap.fromTo(
             cards,
@@ -90,19 +90,19 @@ export default function CategoriesSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        const _cc = cardsRef.current?.querySelectorAll(".cat-card");
-        if (_cc) gsap.set(_cc, { opacity: 1, y: 0, scale: 1 });
-      });
+        const _cc = cardsRef.current?.querySelectorAll(".cat-card")
+        if (_cc) gsap.set(_cc, { opacity: 1, y: 0, scale: 1 })
+      })
 
-      return () => mm.revert();
+      return () => mm.revert()
     },
     { scope: sectionRef }
-  );
+  )
 
   return (
     <section ref={sectionRef} className="relative w-full bg-[#050505] py-28 sm:py-36 md:py-44">
@@ -189,5 +189,5 @@ export default function CategoriesSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

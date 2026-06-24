@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import { useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { CatalogFilters } from "@/types/product";
-import { CATEGORIES, COLORS } from "@/types/product";
+import { useEffect, useRef, useCallback } from "react"
+import { motion, AnimatePresence } from "motion/react"
+import { CatalogFilters } from "@/types/product"
+import { CATEGORIES, COLORS } from "@/types/product"
 
 interface FiltersDrawerProps {
-  open: boolean;
-  onClose: () => void;
-  filters: CatalogFilters;
-  onFilterChange: (filters: Partial<CatalogFilters>) => void;
-  onClear: () => void;
+  open: boolean
+  onClose: () => void
+  filters: CatalogFilters
+  onFilterChange: (filters: Partial<CatalogFilters>) => void
+  onClear: () => void
 }
 
 export default function FiltersDrawer({
@@ -20,25 +20,25 @@ export default function FiltersDrawer({
   onFilterChange,
   onClear,
 }: FiltersDrawerProps) {
-  const drawerRef = useRef<HTMLDivElement>(null);
+  const drawerRef = useRef<HTMLDivElement>(null)
 
   const handleEscape = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") onClose()
     },
     [onClose]
-  );
+  )
 
   useEffect(() => {
     if (open) {
-      document.addEventListener("keydown", handleEscape);
-      document.body.style.overflow = "hidden";
+      document.addEventListener("keydown", handleEscape)
+      document.body.style.overflow = "hidden"
     }
     return () => {
-      document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "";
-    };
-  }, [open, handleEscape]);
+      document.removeEventListener("keydown", handleEscape)
+      document.body.style.overflow = ""
+    }
+  }, [open, handleEscape])
 
   const activeCount =
     filters.category.length +
@@ -47,7 +47,7 @@ export default function FiltersDrawer({
     (filters.nuevos ? 1 : 0) +
     (filters.limitados ? 1 : 0) +
     (filters.priceMin ? 1 : 0) +
-    (filters.priceMax ? 1 : 0);
+    (filters.priceMax ? 1 : 0)
 
   return (
     <AnimatePresence>
@@ -303,5 +303,5 @@ export default function FiltersDrawer({
         </>
       )}
     </AnimatePresence>
-  );
+  )
 }

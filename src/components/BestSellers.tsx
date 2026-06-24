@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "motion/react";
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { motion } from "motion/react"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const PRODUCTS = [
   {
@@ -38,19 +38,18 @@ const PRODUCTS = [
     badge: "OFERTA",
     color: "dorado",
   },
-];
+]
 
 export default function BestSellers() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
       mm.add("(min-width: 768px)", () => {
-        // Header animation
-        const headerEls = sectionRef.current?.querySelectorAll(".bs-header");
+        const headerEls = sectionRef.current?.querySelectorAll(".bs-header")
         if (headerEls?.length) {
           gsap.fromTo(
             headerEls,
@@ -67,11 +66,10 @@ export default function BestSellers() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Cards staggered
-        const cards = cardsRef.current?.querySelectorAll(".product-card");
+        const cards = cardsRef.current?.querySelectorAll(".product-card")
         if (cards?.length) {
           gsap.fromTo(
             cards,
@@ -89,11 +87,10 @@ export default function BestSellers() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // CTA fade in
-        const cta = sectionRef.current?.querySelector(".bs-cta");
+        const cta = sectionRef.current?.querySelector(".bs-cta")
         if (cta) {
           gsap.fromTo(
             cta,
@@ -109,12 +106,12 @@ export default function BestSellers() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(max-width: 767px)", () => {
-        const cards = cardsRef.current?.querySelectorAll(".product-card");
+        const cards = cardsRef.current?.querySelectorAll(".product-card")
         if (cards?.length) {
           gsap.fromTo(
             cards,
@@ -131,19 +128,19 @@ export default function BestSellers() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        const _pc = cardsRef.current?.querySelectorAll(".product-card");
-        if (_pc) gsap.set(_pc, { opacity: 1, y: 0, scale: 1 });
-      });
+        const _pc = cardsRef.current?.querySelectorAll(".product-card")
+        if (_pc) gsap.set(_pc, { opacity: 1, y: 0, scale: 1 })
+      })
 
-      return () => mm.revert();
+      return () => mm.revert()
     },
     { scope: sectionRef }
-  );
+  )
 
   return (
     <section ref={sectionRef} className="relative w-full bg-[#050505] py-28 sm:py-36 md:py-44">
@@ -319,5 +316,5 @@ export default function BestSellers() {
         </div>
       </div>
     </section>
-  );
+  )
 }

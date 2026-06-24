@@ -1,5 +1,5 @@
-import FAQClient from "./FAQClient";
+import FAQClient from "./FAQClient"
 
 export default function PreguntasFrecuentesPage() {
-  return <FAQClient />;
+  return <FAQClient />
 }

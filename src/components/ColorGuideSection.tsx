@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "motion/react";
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { motion } from "motion/react"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const COLORS = [
   {
@@ -45,18 +45,18 @@ const COLORS = [
     dotColor: "bg-[#E8B4B8]",
     filter: "color=rose",
   },
-];
+]
 
 export default function ColorGuideSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
       mm.add("(min-width: 768px)", () => {
-        const cards = cardsRef.current?.querySelectorAll(".color-card");
+        const cards = cardsRef.current?.querySelectorAll(".color-card")
         if (cards?.length) {
           gsap.fromTo(
             cards,
@@ -74,12 +74,12 @@ export default function ColorGuideSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(max-width: 767px)", () => {
-        const cards = cardsRef.current?.querySelectorAll(".color-card");
+        const cards = cardsRef.current?.querySelectorAll(".color-card")
         if (cards?.length) {
           gsap.fromTo(
             cards,
@@ -96,19 +96,19 @@ export default function ColorGuideSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        const _cdc = cardsRef.current?.querySelectorAll(".color-card");
-        if (_cdc) gsap.set(_cdc, { opacity: 1, y: 0, scale: 1 });
-      });
+        const _cdc = cardsRef.current?.querySelectorAll(".color-card")
+        if (_cdc) gsap.set(_cdc, { opacity: 1, y: 0, scale: 1 })
+      })
 
-      return () => mm.revert();
+      return () => mm.revert()
     },
     { scope: sectionRef }
-  );
+  )
 
   return (
     <section ref={sectionRef} className="relative w-full bg-[#050505] py-28 sm:py-36 md:py-44">
@@ -239,5 +239,5 @@ export default function ColorGuideSection() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }

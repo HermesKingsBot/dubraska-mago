@@ -1,42 +1,42 @@
-"use client";
+"use client"
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react"
 
 interface SearchBarProps {
-  value: string;
-  onSearch: (q: string) => void;
+  value: string
+  onSearch: (q: string) => void
 }
 
 export default function SearchBar({ value, onSearch }: SearchBarProps) {
-  const [localValue, setLocalValue] = useState(value);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [localValue, setLocalValue] = useState(value)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const val = e.target.value;
-      setLocalValue(val);
+      const val = e.target.value
+      setLocalValue(val)
 
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
       timeoutRef.current = setTimeout(() => {
-        onSearch(val);
-      }, 350);
+        onSearch(val)
+      }, 350)
     },
     [onSearch]
-  );
+  )
 
   const handleSubmit = useCallback(
     (e: React.FormEvent) => {
-      e.preventDefault();
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      onSearch(localValue);
+      e.preventDefault()
+      if (timeoutRef.current) clearTimeout(timeoutRef.current)
+      onSearch(localValue)
     },
     [localValue, onSearch]
-  );
+  )
 
   const handleClear = useCallback(() => {
-    setLocalValue("");
-    onSearch("");
-  }, [onSearch]);
+    setLocalValue("")
+    onSearch("")
+  }, [onSearch])
 
   return (
     <form onSubmit={handleSubmit} className="relative">
@@ -79,5 +79,5 @@ export default function SearchBar({ value, onSearch }: SearchBarProps) {
         </button>
       )}
     </form>
-  );
+  )
 }

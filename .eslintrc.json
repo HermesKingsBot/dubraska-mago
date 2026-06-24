@@ -1,0 +1,12 @@
+{
+  "extends": ["next/core-web-vitals"],
+  "rules": {
+    "semi": ["error", "never", { "omitLastInOneLineBlock": true }],
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }],
+    "no-warning-comments": "off",
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "no-extra-semi": "error",
+    "semi-spacing": ["error", { "before": false, "after": false }],
+    "no-comments": ["error", { "allow": ["@ts-ignore", "@ts-nocheck"] }]
+  }
+}

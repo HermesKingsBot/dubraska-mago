@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { motion } from "motion/react";
+import { motion } from "motion/react"
 
-const EASE = [0.25, 0.46, 0.45, 0.94] as const;
+const EASE = [0.25, 0.46, 0.45, 0.94] as const
 
 export default function HeroSection() {
   return (
@@ -82,5 +82,5 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
     </section>
-  );
+  )
 }

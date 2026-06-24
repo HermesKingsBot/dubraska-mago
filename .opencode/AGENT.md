@@ -131,10 +131,98 @@ className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
 ```tsx
 style={{ fontFamily: "var(--font-instrument-serif)" }}
 ```
+## Code Rules (OBLIGATORY)
+
+These rules apply to ALL code. Follow them EXACTLY.
+
+### 1. NO SEMICOLONS (in statements)
+Never use semicolons (`;`) at the end of statements. Statements end with newlines.
+
+```tsx
+// ✅ CORRECT
+const name = "Dubraska"
+const price = 85
+return <div>{name}</div>
+
+// ❌ WRONG
+const name = "Dubraska";
+const price = 85;
+return <div>{name}</div>;
+```
+
+**EXCEPTION**: `for` loop headers MUST use semicolons (JS syntax requirement):
+```tsx
+// ✅ CORRECT — for loop header needs semicolons
+for (let i = 0; i < items.length; i++) {
+  pages.push(i)
+}
+```
+
+**EXCEPTION**: TypeScript type annotations use semicolons:
+```tsx
+// ✅ CORRECT — type annotations use semicolons
+const LAYOUTS: { value: LayoutColumns; icon: ReactElement; label: string }[] = []
+```
+
+**EXCEPTION**: CSS-in-JS and template literal CSS use semicolons:
+```tsx
+// ✅ CORRECT — CSS in template literals
+const styles = `color: red; font-size: 14px;`
+```
+
+### 2. DOUBLE QUOTES ONLY
+Use double quotes for ALL string literals. Never use single quotes.
+
+```tsx
+// ✅ CORRECT
+const title = "Collar Cadena Dorado"
+const message = `Hola ${name}` // template literal OK for interpolation
+
+// ❌ WRONG
+const title = 'Collar Cadena Dorado'
+```
+
+### 3. NO COMMENTS
+Never write comments in code. No `//`, no `/* */`. Code must be self-documenting.
+
+```tsx
+// ❌ WRONG — never do this
+// This renders the product card
+return <ProductCard product={product} />
+
+// ✅ CORRECT — no comments
+return <ProductCard product={product} />
+```
+
+### 4. EXPORT DEFAULT AT END
+Every component file MUST end with a single `export default ComponentName` on its own line at the very end of the file.
+
+```tsx
+const ProductCard = ({ product }: ProductCardProps) => {
+  return <div>...</div>
+}
+
+export default ProductCard
+
+// ❌ WRONG
+export default function ProductCard() {}
+export const ProductCard = () => {}
+```
+
+### 5. 2-SPACE INDENTATION
+Use exactly 2 spaces for indentation. No tabs. No 4 spaces.
+
+### IMPORTANT: These rules must be followed in EVERY new file and ENFORCED in every edit.
 
 ## What You DON'T Do
+
 - Don't write backend code (APIs, databases) — that's the backend agent
 - Don't write tests — that's the testing agent
 - Don't publish without explicit approval from Hermes
 - Don't modify Instagram CM workflows
 - Don't change brand colors without confirmation
+- NEVER use semicolons
+- NEVER use single quotes for strings
+- NEVER write comments in code
+- ALWAYS end component files with `export default ComponentName`
+- ALWAYS use 2-space indentation

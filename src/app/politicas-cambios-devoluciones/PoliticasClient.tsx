@@ -1,28 +1,28 @@
-"use client";
+"use client"
 
-import { useRef, useEffect, useState } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef, useEffect, useState } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const EASE = [0.25, 0.46, 0.45, 0.94] as const;
+const EASE = [0.25, 0.46, 0.45, 0.94] as const
 
 export default function PoliticasClient() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const heroLineRef = useRef<HTMLDivElement>(null);
-  const devolucionesRef = useRef<HTMLDivElement>(null);
-  const cambiosRef = useRef<HTMLDivElement>(null);
-  const higieneRef = useRef<HTMLDivElement>(null);
-  const daniosRef = useRef<HTMLDivElement>(null);
-  const reembolsosRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const heroRef = useRef<HTMLDivElement>(null)
+  const heroLineRef = useRef<HTMLDivElement>(null)
+  const devolucionesRef = useRef<HTMLDivElement>(null)
+  const cambiosRef = useRef<HTMLDivElement>(null)
+  const higieneRef = useRef<HTMLDivElement>(null)
+  const daniosRef = useRef<HTMLDivElement>(null)
+  const reembolsosRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
 
   const [particles, setParticles] = useState<
     { id: number; x: number; y: number; size: number; duration: number; delay: number }[]
-  >([]);
+  >([])
 
   useEffect(() => {
     const p = Array.from({ length: 10 }, (_, i) => ({
@@ -32,40 +32,40 @@ export default function PoliticasClient() {
       size: Math.random() * 3 + 1.5,
       duration: Math.random() * 8 + 6,
       delay: Math.random() * 4,
-    }));
-    setParticles(p);
-  }, []);
+    }))
+    setParticles(p)
+  }, [])
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         if (heroRef.current) {
-          const heroH1 = heroRef.current.querySelector("h1");
-          const heroP = heroRef.current.querySelector("p");
-          const heroBadge = heroRef.current.querySelector("[data-badge]");
+          const heroH1 = heroRef.current.querySelector("h1")
+          const heroP = heroRef.current.querySelector("p")
+          const heroBadge = heroRef.current.querySelector("[data-badge]")
 
           if (heroH1) {
             gsap.fromTo(
               heroH1,
               { opacity: 0, y: 60, scale: 0.95 },
               { opacity: 1, y: 0, scale: 1, duration: 1.4, ease: "power3.out" }
-            );
+            )
           }
           if (heroP) {
             gsap.fromTo(
               heroP,
               { opacity: 0, y: 30 },
               { opacity: 1, y: 0, duration: 1, delay: 0.4, ease: "power3.out" }
-            );
+            )
           }
           if (heroBadge) {
             gsap.fromTo(
               heroBadge,
               { opacity: 0, y: 20 },
               { opacity: 1, y: 0, duration: 0.8, delay: 0.8, ease: "power3.out" }
-            );
+            )
           }
         }
 
@@ -74,10 +74,10 @@ export default function PoliticasClient() {
             heroLineRef.current,
             { scaleX: 0 },
             { scaleX: 1, duration: 1.2, delay: 0.6, ease: "power2.inOut" }
-          );
+          )
         }
 
-        const sections = [devolucionesRef, cambiosRef, higieneRef, daniosRef, reembolsosRef];
+        const sections = [devolucionesRef, cambiosRef, higieneRef, daniosRef, reembolsosRef]
         sections.forEach((ref) => {
           if (ref.current) {
             gsap.fromTo(
@@ -94,9 +94,9 @@ export default function PoliticasClient() {
                   toggleActions: "play none none reverse",
                 },
               }
-            );
+            )
           }
-        });
+        })
 
         if (ctaRef.current) {
           gsap.fromTo(
@@ -112,9 +112,9 @@ export default function PoliticasClient() {
                 start: "top 85%",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
         const allEls = [
@@ -126,23 +126,23 @@ export default function PoliticasClient() {
           daniosRef.current,
           reembolsosRef.current,
           ctaRef.current,
-        ].filter(Boolean);
+        ].filter(Boolean)
         allEls.forEach((el) => {
-          if (el) gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 });
-        });
-        const heroH1 = heroRef.current?.querySelector("h1");
-        const heroP = heroRef.current?.querySelector("p");
-        const heroBadge = heroRef.current?.querySelector("[data-badge]");
-        if (heroH1) gsap.set(heroH1, { opacity: 1, y: 0, scale: 1 });
-        if (heroP) gsap.set(heroP, { opacity: 1, y: 0 });
-        if (heroBadge) gsap.set(heroBadge, { opacity: 1, y: 0 });
-        if (heroLineRef.current) gsap.set(heroLineRef.current, { scaleX: 1 });
-      });
+          if (el) gsap.set(el, { opacity: 1, x: 0, y: 0, scale: 1 })
+        })
+        const heroH1 = heroRef.current?.querySelector("h1")
+        const heroP = heroRef.current?.querySelector("p")
+        const heroBadge = heroRef.current?.querySelector("[data-badge]")
+        if (heroH1) gsap.set(heroH1, { opacity: 1, y: 0, scale: 1 })
+        if (heroP) gsap.set(heroP, { opacity: 1, y: 0 })
+        if (heroBadge) gsap.set(heroBadge, { opacity: 1, y: 0 })
+        if (heroLineRef.current) gsap.set(heroLineRef.current, { scaleX: 1 })
+      })
 
-      return () => mm.revert();
+      return () => mm.revert()
     },
     { scope: containerRef }
-  );
+  )
 
   return (
     <div ref={containerRef} className="min-h-screen">
@@ -798,5 +798,5 @@ export default function PoliticasClient() {
         </div>
       </section>
     </div>
-  );
+  )
 }

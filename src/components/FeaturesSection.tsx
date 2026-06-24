@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const FEATURES = [
   {
@@ -69,18 +69,18 @@ const FEATURES = [
     title: "Atención personalizada",
     desc: "Cuando me escribes, me escribes directamente a mí, Dubraska. Te ayudo a elegir, te doy tips de cuidado y me aseguro de que tu experiencia sea increíble.",
   },
-];
+]
 
 export default function FeaturesSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null)
+  const gridRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
       mm.add("(min-width: 768px)", () => {
-        const items = gridRef.current?.querySelectorAll(".feature-item");
+        const items = gridRef.current?.querySelectorAll(".feature-item")
         if (items?.length) {
           gsap.fromTo(
             items,
@@ -97,12 +97,12 @@ export default function FeaturesSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(max-width: 767px)", () => {
-        const items = gridRef.current?.querySelectorAll(".feature-item");
+        const items = gridRef.current?.querySelectorAll(".feature-item")
         if (items?.length) {
           gsap.fromTo(
             items,
@@ -119,19 +119,19 @@ export default function FeaturesSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        const _fi = gridRef.current?.querySelectorAll(".feature-item");
-        if (_fi) gsap.set(_fi, { opacity: 1, y: 0 });
-      });
+        const _fi = gridRef.current?.querySelectorAll(".feature-item")
+        if (_fi) gsap.set(_fi, { opacity: 1, y: 0 })
+      })
 
-      return () => mm.revert();
+      return () => mm.revert()
     },
     { scope: sectionRef }
-  );
+  )
 
   return (
     <section ref={sectionRef} className="relative w-full py-28 sm:py-36 md:py-44" style={{ background: "#0A0A0A" }}>
@@ -197,5 +197,5 @@ export default function FeaturesSection() {
         </div>
       </div>
     </section>
-  );
+  )
 }

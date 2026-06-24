@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { ReactElement } from "react";
-import { LayoutColumns } from "@/types/product";
+import { ReactElement } from "react"
+import { LayoutColumns } from "@/types/product"
 
 interface LayoutToggleProps {
-  layout: LayoutColumns;
-  onChange: (layout: LayoutColumns) => void;
+  layout: LayoutColumns
+  onChange: (layout: LayoutColumns) => void
 }
 
 const LAYOUTS: { value: LayoutColumns; icon: ReactElement; label: string }[] = [
@@ -40,7 +40,7 @@ const LAYOUTS: { value: LayoutColumns; icon: ReactElement; label: string }[] = [
       </svg>
     ),
   },
-];
+]
 
 export default function LayoutToggle({ layout, onChange }: LayoutToggleProps) {
   return (
@@ -60,5 +60,5 @@ export default function LayoutToggle({ layout, onChange }: LayoutToggleProps) {
         </button>
       ))}
     </div>
-  );
+  )
 }

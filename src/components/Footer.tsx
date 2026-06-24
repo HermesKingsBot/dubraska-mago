@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const STORE_LINKS = [
   { label: "Collares", href: "/colecciones/collares" },
@@ -14,7 +14,7 @@ const STORE_LINKS = [
   { label: "Anillos", href: "/colecciones/anillos" },
   { label: "Sets completos", href: "/colecciones/sets" },
   { label: "Más vendidos", href: "/colecciones?filter=best-sellers" },
-];
+]
 
 const INFO_LINKS = [
   { label: "Sobre mí", href: "/nosotros" },
@@ -22,17 +22,17 @@ const INFO_LINKS = [
   { label: "Envíos", href: "/envios" },
   { label: "Cambios y devoluciones", href: "/devoluciones" },
   { label: "Contacto", href: "/contacto" },
-];
+]
 
 export default function Footer() {
-  const footerRef = useRef<HTMLElement>(null);
+  const footerRef = useRef<HTMLElement>(null)
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        const cols = footerRef.current?.querySelectorAll(".footer-col");
+        const cols = footerRef.current?.querySelectorAll(".footer-col")
         if (cols?.length) {
           gsap.fromTo(
             cols,
@@ -49,19 +49,19 @@ export default function Footer() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        const _fc = footerRef.current?.querySelectorAll(".footer-col");
-        if (_fc) gsap.set(_fc, { opacity: 1, y: 0 });
-      });
+        const _fc = footerRef.current?.querySelectorAll(".footer-col")
+        if (_fc) gsap.set(_fc, { opacity: 1, y: 0 })
+      })
 
-      return () => mm.revert();
+      return () => mm.revert()
     },
     { scope: footerRef }
-  );
+  )
 
   return (
     <footer ref={footerRef} className="relative w-full bg-[#050505] border-t border-[rgba(255,255,255,0.04)]">
@@ -224,5 +224,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }

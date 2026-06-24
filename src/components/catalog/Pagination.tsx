@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import { PerPageOption } from "@/types/product";
-import { PER_PAGE_OPTIONS } from "@/types/product";
+import { PerPageOption } from "@/types/product"
+import { PER_PAGE_OPTIONS } from "@/types/product"
 
 interface PaginationProps {
-  page: number;
-  totalPages: number;
-  perPage: PerPageOption;
-  total: number;
-  onPageChange: (page: number) => void;
-  onPerPageChange: (perPage: PerPageOption) => void;
+  page: number
+  totalPages: number
+  perPage: PerPageOption
+  total: number
+  onPageChange: (page: number) => void
+  onPerPageChange: (perPage: PerPageOption) => void
 }
 
 export default function Pagination({
@@ -20,25 +20,25 @@ export default function Pagination({
   onPageChange,
   onPerPageChange,
 }: PaginationProps) {
-  const pages: (number | "...")[] = [];
+  const pages: (number | "...")[] = []
   if (totalPages <= 7) {
-    for (let i = 1; i <= totalPages; i++) pages.push(i);
+    for (let i = 1; i <= totalPages; i++) pages.push(i)
   } else {
-    pages.push(1);
-    if (page > 3) pages.push("...");
+    pages.push(1)
+    if (page > 3) pages.push("...")
     for (
       let i = Math.max(2, page - 1);
       i <= Math.min(totalPages - 1, page + 1);
       i++
     ) {
-      pages.push(i);
+      pages.push(i)
     }
-    if (page < totalPages - 2) pages.push("...");
-    pages.push(totalPages);
+    if (page < totalPages - 2) pages.push("...")
+    pages.push(totalPages)
   }
 
-  const start = perPage === "all" ? 1 : (page - 1) * (perPage as number) + 1;
-  const end = perPage === "all" ? total : Math.min(page * (perPage as number), total);
+  const start = perPage === "all" ? 1 : (page - 1) * (perPage as number) + 1
+  const end = perPage === "all" ? total : Math.min(page * (perPage as number), total)
 
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-10 pt-6 border-t border-white/10">
@@ -63,8 +63,8 @@ export default function Pagination({
           <select
             value={perPage === "all" ? "all" : perPage}
             onChange={(e) => {
-              const val = e.target.value === "all" ? "all" : Number(e.target.value);
-              onPerPageChange(val as PerPageOption);
+              const val = e.target.value === "all" ? "all" : Number(e.target.value)
+              onPerPageChange(val as PerPageOption)
             }}
             className="bg-white/5 border border-white/10 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-[#D4AF37]/50"
             style={{ fontFamily: "var(--font-inter)" }}
@@ -123,5 +123,5 @@ export default function Pagination({
         )}
       </div>
     </div>
-  );
+  )
 }

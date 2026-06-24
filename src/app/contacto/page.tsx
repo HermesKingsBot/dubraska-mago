@@ -1,5 +1,5 @@
-import ContactClient from "./ContactClient";
+import ContactClient from "./ContactClient"
 
 export default function ContactoPage() {
-  return <ContactClient />;
+  return <ContactClient />
 }

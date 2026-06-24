@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { motion } from "motion/react";
+import { motion } from "motion/react"
 
 const NAV_ITEMS = [
   { label: "Inicio", href: "/", active: true },
@@ -8,7 +8,7 @@ const NAV_ITEMS = [
   { label: "Nosotros", href: "/nosotros", active: false },
   { label: "Preguntas Frecuentes", href: "/preguntas-frecuentes", active: false },
   { label: "Contacto", href: "/contacto", active: false },
-];
+]
 
 export default function NavigationBar() {
   return (
@@ -55,5 +55,5 @@ export default function NavigationBar() {
         Catálogo
       </a>
     </motion.nav>
-  );
+  )
 }

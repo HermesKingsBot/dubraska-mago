@@ -1,33 +1,31 @@
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "motion/react";
-import Image from "next/image";
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { motion } from "motion/react"
+import Image from "next/image"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const EASE = [0.25, 0.46, 0.45, 0.94] as const;
+const EASE = [0.25, 0.46, 0.45, 0.94] as const
 
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const photoRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
-  const quoteRef = useRef<HTMLDivElement>(null);
-  const pillsRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null)
+  const photoRef = useRef<HTMLDivElement>(null)
+  const textRef = useRef<HTMLDivElement>(null)
+  const quoteRef = useRef<HTMLDivElement>(null)
+  const pillsRef = useRef<HTMLDivElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     (context, contextSafe) => {
-      if (!sectionRef.current) return;
+      if (!sectionRef.current) return
 
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
-      // Desktop animations (min-width: 1024px)
       mm.add("(min-width: 1024px)", () => {
-        // Photo: slide from left
         if (photoRef.current) {
           gsap.fromTo(
             photoRef.current,
@@ -44,11 +42,10 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Decorative boxes behind photo
-        const decorBoxes = photoRef.current?.querySelectorAll(".deco-box");
+        const decorBoxes = photoRef.current?.querySelectorAll(".deco-box")
         if (decorBoxes?.length) {
           gsap.fromTo(
             decorBoxes,
@@ -66,10 +63,9 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Text content: slide from right
         if (textRef.current) {
           gsap.fromTo(
             textRef.current,
@@ -87,10 +83,9 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Quote mark: fade in
         if (quoteRef.current) {
           gsap.fromTo(
             quoteRef.current,
@@ -106,11 +101,10 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Paragraphs: staggered fade-up
-        const paragraphs = textRef.current?.querySelectorAll(".about-text-p");
+        const paragraphs = textRef.current?.querySelectorAll(".about-text-p")
         if (paragraphs?.length) {
           gsap.fromTo(
             paragraphs,
@@ -127,11 +121,10 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Signature: fade in
-        const signature = textRef.current?.querySelector(".about-signature");
+        const signature = textRef.current?.querySelector(".about-signature")
         if (signature) {
           gsap.fromTo(
             signature,
@@ -147,11 +140,10 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Stats: staggered counters
-        const statItems = statsRef.current?.querySelectorAll(".stat-item");
+        const statItems = statsRef.current?.querySelectorAll(".stat-item")
         if (statItems?.length) {
           gsap.fromTo(
             statItems,
@@ -168,13 +160,11 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
-      // Mobile animations (max-width: 1023px)
       mm.add("(max-width: 1023px)", () => {
-        // Photo: fade-in + scale
         if (photoRef.current) {
           gsap.fromTo(
             photoRef.current,
@@ -191,10 +181,9 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Text: fade-up
         if (textRef.current) {
           gsap.fromTo(
             textRef.current,
@@ -211,11 +200,10 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Paragraphs staggered
-        const paragraphs = textRef.current?.querySelectorAll(".about-text-p");
+        const paragraphs = textRef.current?.querySelectorAll(".about-text-p")
         if (paragraphs?.length) {
           gsap.fromTo(
             paragraphs,
@@ -232,11 +220,10 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
 
-        // Stats
-        const statItems = statsRef.current?.querySelectorAll(".stat-item");
+        const statItems = statsRef.current?.querySelectorAll(".stat-item")
         if (statItems?.length) {
           gsap.fromTo(
             statItems,
@@ -253,24 +240,23 @@ export default function AboutSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
-      // Reduced motion respect
       mm.add("(prefers-reduced-motion: reduce)", () => {
         gsap.set([photoRef.current, textRef.current, quoteRef.current, statsRef.current], {
           opacity: 1,
           x: 0,
           y: 0,
           scale: 1,
-        });
-      });
+        })
+      })
 
-      return () => mm.revert();
+      return () => mm.revert()
     },
     { scope: sectionRef }
-  );
+  )
 
   return (
     <section ref={sectionRef} className="relative w-full overflow-hidden bg-[#050505]">
@@ -380,7 +366,7 @@ export default function AboutSection() {
               className="text-7xl text-[#D4AF37]/10 leading-none mb-2 select-none opacity-0"
               style={{ fontFamily: "var(--font-instrument-serif)" }}
             >
-              &ldquo;
+              &ldquo
             </div>
 
             <div className="space-y-6">
@@ -496,5 +482,5 @@ export default function AboutSection() {
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-20 h-[1px] bg-[#D4AF37] origin-center"
       />
     </section>
-  );
+  )
 }

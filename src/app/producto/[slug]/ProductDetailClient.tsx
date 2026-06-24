@@ -1,25 +1,25 @@
-"use client";
+"use client"
 
-import { useState, useRef, useCallback } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Product } from "@/types/product";
-import ProductCard from "@/components/catalog/ProductCard";
-import { buildWhatsAppLink } from "@/lib/catalog-utils";
+import { useState, useRef, useCallback } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { Product } from "@/types/product"
+import ProductCard from "@/components/catalog/ProductCard"
+import { buildWhatsAppLink } from "@/lib/catalog-utils"
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger)
 
 interface ProductDetailProps {
   product: Product & {
-    gallery: string[];
-    waterResistant: boolean;
-    details: string;
-    careInstructions: string;
-    dimensions: string;
-    relatedIds: string[];
-  };
-  relatedProducts: Product[];
+    gallery: string[]
+    waterResistant: boolean
+    details: string
+    careInstructions: string
+    dimensions: string
+    relatedIds: string[]
+  }
+  relatedProducts: Product[]
 }
 
 const COLOR_MAP: Record<string, string> = {
@@ -27,70 +27,70 @@ const COLOR_MAP: Record<string, string> = {
   plateado: "#C0C0C0",
   rose: "#E8B4B8",
   negro: "#1a1a1a",
-};
+}
 
 const GALLERY_LABELS = [
   "Vista principal",
   "Detalle de material",
   "Visto en persona",
   "Referencia de tamaño",
-];
+]
 
 export default function ProductDetailClient({
   product,
   relatedProducts,
 }: ProductDetailProps) {
-  const [selectedImage, setSelectedImage] = useState(0);
-  const [quantity, setQuantity] = useState(1);
-  const [descOpen, setDescOpen] = useState(true);
-  const [careOpen, setCareOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0)
+  const [quantity, setQuantity] = useState(1)
+  const [descOpen, setDescOpen] = useState(true)
+  const [careOpen, setCareOpen] = useState(false)
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mainImageRef = useRef<HTMLDivElement>(null);
-  const infoRef = useRef<HTMLDivElement>(null);
-  const shippingRef = useRef<HTMLDivElement>(null);
-  const relatedRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const zoomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const mainImageRef = useRef<HTMLDivElement>(null)
+  const infoRef = useRef<HTMLDivElement>(null)
+  const shippingRef = useRef<HTMLDivElement>(null)
+  const relatedRef = useRef<HTMLDivElement>(null)
+  const ctaRef = useRef<HTMLDivElement>(null)
+  const zoomRef = useRef<HTMLDivElement>(null)
 
   const discount = product.oldPrice
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
-    : null;
+    : null
 
-  const whatsappUrl = buildWhatsAppLink(product);
+  const whatsappUrl = buildWhatsAppLink(product)
   const encodedMsg = encodeURIComponent(
     `Hola! Me interesa ${product.name} - $${product.price.toFixed(2)}. ¿Está disponible?`
-  );
-  const whatsappLink = `https://wa.me/584141234567?text=${encodedMsg}`;
+  )
+  const whatsappLink = `https://wa.me/584141234567?text=${encodedMsg}`
 
   const handleImageMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!zoomRef.current || !mainImageRef.current) return;
-      const rect = mainImageRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - rect.top) / rect.height) * 100;
-      zoomRef.current.style.opacity = "1";
-      zoomRef.current.style.transform = "scale(1.5)";
-      zoomRef.current.style.transformOrigin = `${x}% ${y}%`;
+      if (!zoomRef.current || !mainImageRef.current) return
+      const rect = mainImageRef.current.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 100
+      const y = ((e.clientY - rect.top) / rect.height) * 100
+      zoomRef.current.style.opacity = "1"
+      zoomRef.current.style.transform = "scale(1.5)"
+      zoomRef.current.style.transformOrigin = `${x}% ${y}%`
     },
     []
-  );
+  )
 
   const handleImageMouseLeave = useCallback(() => {
-    if (!zoomRef.current) return;
-    zoomRef.current.style.opacity = "0";
-    zoomRef.current.style.transform = "scale(1)";
-  }, []);
+    if (!zoomRef.current) return
+    zoomRef.current.style.opacity = "0"
+    zoomRef.current.style.transform = "scale(1)"
+  }, [])
 
   useGSAP(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) return
 
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
+    ).matches
+    if (prefersReduced) return
 
-    const mm = gsap.matchMedia();
+    const mm = gsap.matchMedia()
 
     mm.add("(min-width: 768px)", () => {
       if (mainImageRef.current) {
@@ -98,16 +98,16 @@ export default function ProductDetailClient({
           mainImageRef.current,
           { opacity: 0, x: -30 },
           { opacity: 1, x: 0, duration: 0.7, ease: "power2.out" }
-        );
+        )
       }
       if (infoRef.current) {
         gsap.fromTo(
           infoRef.current,
           { opacity: 0, x: 30 },
           { opacity: 1, x: 0, duration: 0.7, delay: 0.15, ease: "power2.out" }
-        );
+        )
       }
-    });
+    })
 
     mm.add("(max-width: 767px)", () => {
       if (mainImageRef.current) {
@@ -115,16 +115,16 @@ export default function ProductDetailClient({
           mainImageRef.current,
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-        );
+        )
       }
       if (infoRef.current) {
         gsap.fromTo(
           infoRef.current,
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.6, delay: 0.1, ease: "power2.out" }
-        );
+        )
       }
-    });
+    })
 
     if (shippingRef.current) {
       gsap.fromTo(
@@ -141,7 +141,7 @@ export default function ProductDetailClient({
             start: "top 85%",
           },
         }
-      );
+      )
     }
 
     if (relatedRef.current) {
@@ -158,7 +158,7 @@ export default function ProductDetailClient({
             start: "top 85%",
           },
         }
-      );
+      )
     }
 
     if (ctaRef.current) {
@@ -168,11 +168,11 @@ export default function ProductDetailClient({
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
-      });
+      })
     }
 
-    return () => mm.revert();
-  }, { scope: containerRef });
+    return () => mm.revert()
+  }, { scope: containerRef })
 
   return (
     <div ref={containerRef} className="min-h-screen bg-[#050505]">
@@ -632,5 +632,5 @@ export default function ProductDetailClient({
         )}
       </div>
     </div>
-  );
+  )
 }

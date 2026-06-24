@@ -1,25 +1,25 @@
-import { Product, CatalogFilters, CatalogSearchParams } from "@/types/product";
+import { Product, CatalogFilters, CatalogSearchParams } from "@/types/product"
 
 export function parseSearchParams(searchParams: CatalogSearchParams): CatalogFilters & {
-  q: string;
-  page: number;
-  perPage: number | "all";
-  layout: 4 | 2 | 1;
+  q: string
+  page: number
+  perPage: number | "all"
+  layout: 4 | 2 | 1
 } {
-  const q = searchParams.q ?? "";
-  const page = Math.max(1, parseInt(searchParams.page ?? "1", 10) || 1);
-  const perPageRaw = searchParams.perPage ?? "12";
-  const perPage = perPageRaw === "all" ? "all" : Math.min(100, Math.max(1, parseInt(perPageRaw, 10) || 12));
+  const q = searchParams.q ?? ""
+  const page = Math.max(1, parseInt(searchParams.page ?? "1", 10) || 1)
+  const perPageRaw = searchParams.perPage ?? "12"
+  const perPage = perPageRaw === "all" ? "all" : Math.min(100, Math.max(1, parseInt(perPageRaw, 10) || 12))
   const layout = ([4, 2, 1].includes(parseInt(searchParams.layout ?? "4", 10))
     ? parseInt(searchParams.layout ?? "4", 10)
-    : 4) as 4 | 2 | 1;
+    : 4) as 4 | 2 | 1
 
   const category = searchParams.category
     ? searchParams.category.split(",").filter(Boolean)
-    : [];
+    : []
   const color = searchParams.color
     ? searchParams.color.split(",").filter(Boolean)
-    : [];
+    : []
 
   return {
     q,
@@ -33,7 +33,7 @@ export function parseSearchParams(searchParams: CatalogSearchParams): CatalogFil
     page,
     perPage,
     layout,
-  };
+  }
 }
 
 export function filterProducts(
@@ -42,29 +42,29 @@ export function filterProducts(
 ): Product[] {
   return products.filter((p) => {
     if (filters.q) {
-      const q = filters.q.toLowerCase();
-      const searchable = `${p.name} ${p.description} ${p.category} ${p.color} ${p.material}`.toLowerCase();
-      if (!searchable.includes(q)) return false;
+      const q = filters.q.toLowerCase()
+      const searchable = `${p.name} ${p.description} ${p.category} ${p.color} ${p.material}`.toLowerCase()
+      if (!searchable.includes(q)) return false
     }
 
-    if (filters.category.length > 0 && !filters.category.includes(p.category)) return false;
-    if (filters.color.length > 0 && !filters.color.includes(p.color)) return false;
+    if (filters.category.length > 0 && !filters.category.includes(p.category)) return false
+    if (filters.color.length > 0 && !filters.color.includes(p.color)) return false
 
     if (filters.priceMin) {
-      const min = parseFloat(filters.priceMin);
-      if (!isNaN(min) && p.price < min) return false;
+      const min = parseFloat(filters.priceMin)
+      if (!isNaN(min) && p.price < min) return false
     }
     if (filters.priceMax) {
-      const max = parseFloat(filters.priceMax);
-      if (!isNaN(max) && p.price > max) return false;
+      const max = parseFloat(filters.priceMax)
+      if (!isNaN(max) && p.price > max) return false
     }
 
-    if (filters.ofertas && !p.oldPrice) return false;
-    if (filters.nuevos && p.badge !== "NUEVO") return false;
-    if (filters.limitados && p.badge !== "LIMITADO") return false;
+    if (filters.ofertas && !p.oldPrice) return false
+    if (filters.nuevos && p.badge !== "NUEVO") return false
+    if (filters.limitados && p.badge !== "LIMITADO") return false
 
-    return true;
-  });
+    return true
+  })
 }
 
 export function paginateProducts<T>(
@@ -72,38 +72,38 @@ export function paginateProducts<T>(
   page: number,
   perPage: number | "all"
 ): { items: T[]; totalPages: number; total: number } {
-  const total = products.length;
+  const total = products.length
   if (perPage === "all") {
-    return { items: products, totalPages: 1, total };
+    return { items: products, totalPages: 1, total }
   }
-  const totalPages = Math.max(1, Math.ceil(total / perPage));
-  const safePage = Math.min(page, totalPages);
-  const start = (safePage - 1) * perPage;
-  const items = products.slice(start, start + perPage);
-  return { items, totalPages, total };
+  const totalPages = Math.max(1, Math.ceil(total / perPage))
+  const safePage = Math.min(page, totalPages)
+  const start = (safePage - 1) * perPage
+  const items = products.slice(start, start + perPage)
+  return { items, totalPages, total }
 }
 
 export function buildWhatsAppLink(product: Product): string {
   const msg = encodeURIComponent(
     `Hola, me interesa el producto: ${product.name} — $${product.price.toFixed(2)} USD. ¿Está disponible?`
-  );
-  return `https://wa.me/584141234567?text=${msg}`;
+  )
+  return `https://wa.me/584141234567?text=${msg}`
 }
 
 export function buildSearchParams(
   filters: CatalogFilters & { q: string; page: number; perPage: number | "all"; layout: 4 | 2 | 1 }
 ): URLSearchParams {
-  const params = new URLSearchParams();
-  if (filters.q) params.set("q", filters.q);
-  if (filters.category.length > 0) params.set("category", filters.category.join(","));
-  if (filters.color.length > 0) params.set("color", filters.color.join(","));
-  if (filters.priceMin) params.set("priceMin", filters.priceMin);
-  if (filters.priceMax) params.set("priceMax", filters.priceMax);
-  if (filters.ofertas) params.set("ofertas", "true");
-  if (filters.nuevos) params.set("nuevos", "true");
-  if (filters.limitados) params.set("limitados", "true");
-  if (filters.page > 1) params.set("page", String(filters.page));
-  if (filters.perPage !== 12) params.set("perPage", String(filters.perPage));
-  if (filters.layout !== 4) params.set("layout", String(filters.layout));
-  return params;
+  const params = new URLSearchParams()
+  if (filters.q) params.set("q", filters.q)
+  if (filters.category.length > 0) params.set("category", filters.category.join(","))
+  if (filters.color.length > 0) params.set("color", filters.color.join(","))
+  if (filters.priceMin) params.set("priceMin", filters.priceMin)
+  if (filters.priceMax) params.set("priceMax", filters.priceMax)
+  if (filters.ofertas) params.set("ofertas", "true")
+  if (filters.nuevos) params.set("nuevos", "true")
+  if (filters.limitados) params.set("limitados", "true")
+  if (filters.page > 1) params.set("page", String(filters.page))
+  if (filters.perPage !== 12) params.set("perPage", String(filters.perPage))
+  if (filters.layout !== 4) params.set("layout", String(filters.layout))
+  return params
 }

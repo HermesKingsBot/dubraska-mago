@@ -1,30 +1,30 @@
-"use client";
+"use client"
 
-import { useState, useCallback, useEffect, useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Product, CatalogFilters, CatalogSearchParams, LayoutColumns, PerPageOption } from "@/types/product";
-import { buildSearchParams } from "@/lib/catalog-utils";
-import SearchBar from "@/components/catalog/SearchBar";
-import FiltersDrawer from "@/components/catalog/FiltersDrawer";
-import LayoutToggle from "@/components/catalog/LayoutToggle";
-import Pagination from "@/components/catalog/Pagination";
-import ProductGrid from "@/components/catalog/ProductGrid";
-import EmptyState from "@/components/catalog/EmptyState";
+import { useState, useCallback, useEffect, useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { Product, CatalogFilters, CatalogSearchParams, LayoutColumns, PerPageOption } from "@/types/product"
+import { buildSearchParams } from "@/lib/catalog-utils"
+import SearchBar from "@/components/catalog/SearchBar"
+import FiltersDrawer from "@/components/catalog/FiltersDrawer"
+import LayoutToggle from "@/components/catalog/LayoutToggle"
+import Pagination from "@/components/catalog/Pagination"
+import ProductGrid from "@/components/catalog/ProductGrid"
+import EmptyState from "@/components/catalog/EmptyState"
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger)
 
 interface CatalogClientProps {
-  products: Product[];
-  totalProducts: number;
-  totalPages: number;
+  products: Product[]
+  totalProducts: number
+  totalPages: number
   initialFilters: CatalogFilters & {
-    q: string;
-    page: number;
-    perPage: number | "all";
-    layout: LayoutColumns;
-  };
+    q: string
+    page: number
+    perPage: number | "all"
+    layout: LayoutColumns
+  }
 }
 
 export default function CatalogClient({
@@ -33,69 +33,69 @@ export default function CatalogClient({
   totalPages,
   initialFilters,
 }: CatalogClientProps) {
-  const [filters, setFilters] = useState(initialFilters);
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [filters, setFilters] = useState(initialFilters)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const updateURL = useCallback((newFilters: typeof filters) => {
-    const params = buildSearchParams(newFilters);
-    const qs = params.toString();
-    const url = qs ? `/colecciones?${qs}` : "/colecciones";
-    window.history.pushState({}, "", url);
-  }, []);
+    const params = buildSearchParams(newFilters)
+    const qs = params.toString()
+    const url = qs ? `/colecciones?${qs}` : "/colecciones"
+    window.history.pushState({}, "", url)
+  }, [])
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }
 
   const handleSearch = useCallback(
     (q: string) => {
-      const newFilters = { ...filters, q, page: 1 };
-      setFilters(newFilters);
-      updateURL(newFilters);
-      scrollToTop();
+      const newFilters = { ...filters, q, page: 1 }
+      setFilters(newFilters)
+      updateURL(newFilters)
+      scrollToTop()
     },
     [filters, updateURL]
-  );
+  )
 
   const handleFilterChange = useCallback(
     (newFilters: Partial<CatalogFilters>) => {
-      const updated = { ...filters, ...newFilters, page: 1 };
-      setFilters(updated);
-      updateURL(updated);
-      scrollToTop();
+      const updated = { ...filters, ...newFilters, page: 1 }
+      setFilters(updated)
+      updateURL(updated)
+      scrollToTop()
     },
     [filters, updateURL]
-  );
+  )
 
   const handlePageChange = useCallback(
     (page: number) => {
-      const newFilters = { ...filters, page };
-      setFilters(newFilters);
-      updateURL(newFilters);
-      scrollToTop();
+      const newFilters = { ...filters, page }
+      setFilters(newFilters)
+      updateURL(newFilters)
+      scrollToTop()
     },
     [filters, updateURL]
-  );
+  )
 
   const handlePerPageChange = useCallback(
     (perPage: PerPageOption) => {
-      const newFilters = { ...filters, perPage, page: 1 };
-      setFilters(newFilters);
-      updateURL(newFilters);
-      scrollToTop();
+      const newFilters = { ...filters, perPage, page: 1 }
+      setFilters(newFilters)
+      updateURL(newFilters)
+      scrollToTop()
     },
     [filters, updateURL]
-  );
+  )
 
   const handleLayoutChange = useCallback(
     (layout: LayoutColumns) => {
-      const newFilters = { ...filters, layout };
-      setFilters(newFilters);
-      updateURL(newFilters);
+      const newFilters = { ...filters, layout }
+      setFilters(newFilters)
+      updateURL(newFilters)
     },
     [filters, updateURL]
-  );
+  )
 
   const clearFilters = useCallback(() => {
     const cleared: typeof filters = {
@@ -110,11 +110,11 @@ export default function CatalogClient({
       page: 1,
       perPage: 12,
       layout: 4,
-    };
-    setFilters(cleared);
-    updateURL(cleared);
-    scrollToTop();
-  }, [updateURL]);
+    }
+    setFilters(cleared)
+    updateURL(cleared)
+    scrollToTop()
+  }, [updateURL])
 
   const hasActiveFilters =
     filters.category.length > 0 ||
@@ -123,35 +123,35 @@ export default function CatalogClient({
     filters.priceMax !== "" ||
     filters.ofertas ||
     filters.nuevos ||
-    filters.limitados;
+    filters.limitados
 
   useGSAP(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) return
 
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
-    ).matches;
-    if (prefersReduced) return;
+    ).matches
+    if (prefersReduced) return
 
     gsap.fromTo(
       containerRef.current,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-    );
-  }, { scope: containerRef });
+    )
+  }, { scope: containerRef })
 
   useEffect(() => {
     const handlePopState = () => {
-      const url = new URL(window.location.href);
-      const sp: Record<string, string> = {};
-      url.searchParams.forEach((v, k) => (sp[k] = v));
+      const url = new URL(window.location.href)
+      const sp: Record<string, string> = {}
+      url.searchParams.forEach((v, k) => (sp[k] = v))
       import("@/lib/catalog-utils").then(({ parseSearchParams }) => {
-        setFilters(parseSearchParams(sp as CatalogSearchParams));
-      });
-    };
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
+        setFilters(parseSearchParams(sp as CatalogSearchParams))
+      })
+    }
+    window.addEventListener("popstate", handlePopState)
+    return () => window.removeEventListener("popstate", handlePopState)
+  }, [])
 
   return (
     <div ref={containerRef} className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -306,5 +306,5 @@ export default function CatalogClient({
         onClear={clearFilters}
       />
     </div>
-  );
+  )
 }

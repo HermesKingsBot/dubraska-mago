@@ -1,5 +1,5 @@
-import NosotrosClient from "./NosotrosClient";
+import NosotrosClient from "./NosotrosClient"
 
 export default function NosotrosPage() {
-  return <NosotrosClient />;
+  return <NosotrosClient />
 }

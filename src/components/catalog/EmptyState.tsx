@@ -1,7 +1,7 @@
-"use client";
+"use client"
 
 interface EmptyStateProps {
-  onClearFilters: () => void;
+  onClearFilters: () => void
 }
 
 export default function EmptyState({ onClearFilters }: EmptyStateProps) {
@@ -41,5 +41,5 @@ export default function EmptyState({ onClearFilters }: EmptyStateProps) {
         Limpiar filtros
       </button>
     </div>
-  );
+  )
 }

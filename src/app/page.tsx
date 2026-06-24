@@ -1,13 +1,13 @@
-import VideoBackground from "@/components/VideoBackground";
-import NavigationBar from "@/components/NavigationBar";
-import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
-import BestSellers from "@/components/BestSellers";
-import CategoriesSection from "@/components/CategoriesSection";
-import FeaturesSection from "@/components/FeaturesSection";
-import ColorGuideSection from "@/components/ColorGuideSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import Footer from "@/components/Footer";
+import VideoBackground from "@/components/VideoBackground"
+import NavigationBar from "@/components/NavigationBar"
+import HeroSection from "@/components/HeroSection"
+import AboutSection from "@/components/AboutSection"
+import BestSellers from "@/components/BestSellers"
+import CategoriesSection from "@/components/CategoriesSection"
+import FeaturesSection from "@/components/FeaturesSection"
+import ColorGuideSection from "@/components/ColorGuideSection"
+import TestimonialsSection from "@/components/TestimonialsSection"
+import Footer from "@/components/Footer"
 
 export default function Home() {
   return (
@@ -48,5 +48,5 @@ export default function Home() {
       <Footer />
 
     </div>
-  );
+  )
 }

@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { motion } from "motion/react";
+import { useRef } from "react"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { motion } from "motion/react"
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
+gsap.registerPlugin(ScrollTrigger, useGSAP)
 
 const TESTIMONIALS = [
   {
@@ -45,26 +45,26 @@ const TESTIMONIALS = [
     location: "Mérida",
     stars: 5,
   },
-];
+]
 
 function StarIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="#D4AF37" stroke="#D4AF37" strokeWidth="1">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
     </svg>
-  );
+  )
 }
 
 export default function TestimonialsSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
+      const mm = gsap.matchMedia()
 
       mm.add("(min-width: 768px)", () => {
-        const cards = cardsRef.current?.querySelectorAll(".testimonial-card");
+        const cards = cardsRef.current?.querySelectorAll(".testimonial-card")
         if (cards?.length) {
           gsap.fromTo(
             cards,
@@ -81,12 +81,12 @@ export default function TestimonialsSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(max-width: 767px)", () => {
-        const cards = cardsRef.current?.querySelectorAll(".testimonial-card");
+        const cards = cardsRef.current?.querySelectorAll(".testimonial-card")
         if (cards?.length) {
           gsap.fromTo(
             cards,
@@ -103,19 +103,19 @@ export default function TestimonialsSection() {
                 toggleActions: "play none none reverse",
               },
             }
-          );
+          )
         }
-      });
+      })
 
       mm.add("(prefers-reduced-motion: reduce)", () => {
-        const _tc = cardsRef.current?.querySelectorAll(".testimonial-card");
-        if (_tc) gsap.set(_tc, { opacity: 1, y: 0 });
-      });
+        const _tc = cardsRef.current?.querySelectorAll(".testimonial-card")
+        if (_tc) gsap.set(_tc, { opacity: 1, y: 0 })
+      })
 
-      return () => mm.revert();
+      return () => mm.revert()
     },
     { scope: sectionRef }
-  );
+  )
 
   return (
     <section ref={sectionRef} className="relative w-full bg-[#050505] py-28 sm:py-36 md:py-44">
@@ -164,7 +164,7 @@ export default function TestimonialsSection() {
                 className="text-sm text-[#B0B0B0] leading-[1.8] italic"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
-                &ldquo;{t.text}&rdquo;
+                &ldquo;{t.text}&rdquo
               </p>
 
               {/* Author */}
@@ -226,5 +226,5 @@ export default function TestimonialsSection() {
         </motion.div>
       </div>
     </section>
-  );
+  )
 }
