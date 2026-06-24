@@ -4,7 +4,7 @@
     "name": "Collar Cadena Dorado",
     "slug": "collar-cadena-dorado",
     "description": "Acero inoxidable bañado en oro 18K. Cadena delicada de 45cm con cierre de mosquetón. Perfecto para diario y ocasiones especiales.",
-    "price": 85.00,
+    "price": 85.0,
     "oldPrice": null,
     "category": "collares",
     "color": "dorado",
@@ -14,14 +14,29 @@
     "length": "45cm",
     "weight": "12g",
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "gallery": [
+      "/images/products/collar-cadena-dorado.jpg",
+      "/images/products/collar-cadena-dorado-detail.jpg",
+      "/images/products/collar-cadena-dorado-worn.jpg",
+      "/images/products/collar-cadena-dorado-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "45cm",
+    "relatedIds": [
+      "collar-cadena-plateado",
+      "collar-choker-negro",
+      "collar-perlas-oro"
+    ]
   },
   {
     "id": "pulsera-eslabones",
     "name": "Pulsera Eslabones",
     "slug": "pulsera-eslabones",
     "description": "Acero inoxidable bañado en oro 18K. Eslabones pulidos de 18cm con extensor. Brillo intenso que dura.",
-    "price": 65.00,
+    "price": 65.0,
     "oldPrice": null,
     "category": "pulseras",
     "color": "dorado",
@@ -31,14 +46,29 @@
     "length": "18cm + 3cm extensor",
     "weight": "8g",
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "gallery": [
+      "/images/products/pulsera-eslabones.jpg",
+      "/images/products/pulsera-eslabones-detail.jpg",
+      "/images/products/pulsera-eslabones-worn.jpg",
+      "/images/products/pulsera-eslabones-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "18cm + 3cm extensor",
+    "relatedIds": [
+      "pulsera-rose",
+      "pulsera-tobillera-oro",
+      "pulsera-cadena-doble"
+    ]
   },
   {
     "id": "aretes-argolla-grande",
     "name": "Aretes Argolla Grande",
     "slug": "aretes-argolla-grande",
     "description": "Acero inoxidable bañado en oro 18K. Argollas de 3mm hipoalergénicas. Cómodas todo el día.",
-    "price": 45.00,
+    "price": 45.0,
     "oldPrice": null,
     "category": "aretes",
     "color": "dorado",
@@ -48,15 +78,30 @@
     "diameter": "3mm",
     "weight": "3g",
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "gallery": [
+      "/images/products/aretes-argolla-grande.jpg",
+      "/images/products/aretes-argolla-grande-detail.jpg",
+      "/images/products/aretes-argolla-grande-worn.jpg",
+      "/images/products/aretes-argolla-grande-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "3mm",
+    "relatedIds": [
+      "aretes-pendulo-oro",
+      "aretes-stud-plateado",
+      "aretes-aro-grande"
+    ]
   },
   {
     "id": "set-collar-pulsera",
     "name": "Set Collar + Pulsera",
     "slug": "set-collar-pulsera",
     "description": "Combo perfecto: Collar cadena + Pulsera eslabones en oro 18K. El regalo ideal para ella.",
-    "price": 130.00,
-    "oldPrice": 150.00,
+    "price": 130.0,
+    "oldPrice": 150.0,
     "category": "sets",
     "color": "dorado",
     "badge": "OFERTA",
@@ -65,14 +110,28 @@
     "pieces": 2,
     "weight": "20g",
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "gallery": [
+      "/images/products/set-collar-pulsera.jpg",
+      "/images/products/set-collar-pulsera-detail.jpg",
+      "/images/products/set-collar-pulsera-worn.jpg",
+      "/images/products/set-collar-pulsera-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "Estandar",
+    "relatedIds": [
+      "set-completo-rose",
+      "set-minimal-oro"
+    ]
   },
   {
     "id": "collar-cadena-plateado",
     "name": "Collar Cadena Plateado",
     "slug": "collar-cadena-plateado",
     "description": "Acero inoxidable plateado. Cadena minimalista de 42cm. Elegancia atemporal para pieles frías.",
-    "price": 75.00,
+    "price": 75.0,
     "oldPrice": null,
     "category": "collares",
     "color": "plateado",
@@ -82,14 +141,29 @@
     "length": "42cm",
     "weight": "10g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/collar-cadena-plateado.jpg",
+      "/images/products/collar-cadena-plateado-detail.jpg",
+      "/images/products/collar-cadena-plateado-worn.jpg",
+      "/images/products/collar-cadena-plateado-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable 316L. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "42cm",
+    "relatedIds": [
+      "collar-cadena-dorado",
+      "collar-choker-negro",
+      "collar-perlas-oro"
+    ]
   },
   {
     "id": "pulsera-rose",
     "name": "Pulsera Rosé",
     "slug": "pulsera-rose",
     "description": "Acero inoxidable con baño rosé. Delicada pulsera de 17cm con dije de estrella. Romántica y femenina.",
-    "price": 70.00,
+    "price": 70.0,
     "oldPrice": null,
     "category": "pulseras",
     "color": "rose",
@@ -99,14 +173,29 @@
     "length": "17cm + 3cm",
     "weight": "7g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/pulsera-rose.jpg",
+      "/images/products/pulsera-rose-detail.jpg",
+      "/images/products/pulsera-rose-worn.jpg",
+      "/images/products/pulsera-rose-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Baño Rosé. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "17cm + 3cm",
+    "relatedIds": [
+      "pulsera-eslabones",
+      "pulsera-tobillera-oro",
+      "pulsera-cadena-doble"
+    ]
   },
   {
     "id": "aretes-pendulo-oro",
     "name": "Aretes Péndulo Oro",
     "slug": "aretes-pendulo-oro",
     "description": "Acero inoxidable bañado en oro 18K. Péndulos elegantes de 5cm con cristal. Movimiento y brillo.",
-    "price": 55.00,
+    "price": 55.0,
     "oldPrice": null,
     "category": "aretes",
     "color": "dorado",
@@ -116,14 +205,29 @@
     "length": "5cm",
     "weight": "4g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/aretes-pendulo-oro.jpg",
+      "/images/products/aretes-pendulo-oro-detail.jpg",
+      "/images/products/aretes-pendulo-oro-worn.jpg",
+      "/images/products/aretes-pendulo-oro-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K + Cristal. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "5cm",
+    "relatedIds": [
+      "aretes-argolla-grande",
+      "aretes-stud-plateado",
+      "aretes-aro-grande"
+    ]
   },
   {
     "id": "collar-choker-negro",
     "name": "Choker Negro",
     "slug": "collar-choker-negro",
     "description": "Acero inoxidable con recubrimiento PVD negro. Choker ajustable de 38cm. Look audaz y moderno.",
-    "price": 60.00,
+    "price": 60.0,
     "oldPrice": null,
     "category": "collares",
     "color": "negro",
@@ -133,14 +237,29 @@
     "length": "38cm ajustable",
     "weight": "9g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/collar-choker-negro.jpg",
+      "/images/products/collar-choker-negro-detail.jpg",
+      "/images/products/collar-choker-negro-worn.jpg",
+      "/images/products/collar-choker-negro-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + PVD Negro. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "38cm ajustable",
+    "relatedIds": [
+      "collar-cadena-dorado",
+      "collar-cadena-plateado",
+      "collar-perlas-oro"
+    ]
   },
   {
     "id": "pulsera-tobillera-oro",
     "name": "Tobillera Oro",
     "slug": "pulsera-tobillera-oro",
     "description": "Acero inoxidable bañado en oro 18K. Tobillera de 22cm con dije de luna. Para la que brilla.",
-    "price": 80.00,
+    "price": 80.0,
     "oldPrice": null,
     "category": "pulseras",
     "color": "dorado",
@@ -150,14 +269,29 @@
     "length": "22cm + 3cm",
     "weight": "11g",
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "gallery": [
+      "/images/products/pulsera-tobillera-oro.jpg",
+      "/images/products/pulsera-tobillera-oro-detail.jpg",
+      "/images/products/pulsera-tobillera-oro-worn.jpg",
+      "/images/products/pulsera-tobillera-oro-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "22cm + 3cm",
+    "relatedIds": [
+      "pulsera-eslabones",
+      "pulsera-rose",
+      "pulsera-cadena-doble"
+    ]
   },
   {
     "id": "aretes-stud-plateado",
     "name": "Aretes Stud Plateado",
     "slug": "aretes-stud-plateado",
     "description": "Acero inoxidable plateado. Studs clásicos de 6mm con cierre mariposa. Básico de diario.",
-    "price": 35.00,
+    "price": 35.0,
     "oldPrice": null,
     "category": "aretes",
     "color": "plateado",
@@ -167,15 +301,30 @@
     "diameter": "6mm",
     "weight": "2g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/aretes-stud-plateado.jpg",
+      "/images/products/aretes-stud-plateado-detail.jpg",
+      "/images/products/aretes-stud-plateado-worn.jpg",
+      "/images/products/aretes-stud-plateado-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable 316L. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "6mm",
+    "relatedIds": [
+      "aretes-argolla-grande",
+      "aretes-pendulo-oro",
+      "aretes-aro-grande"
+    ]
   },
   {
     "id": "set-completo-rose",
     "name": "Set Completo Rosé",
     "slug": "set-completo-rose",
     "description": "Collar + Pulsera + Aretes en rosé. El set más completo. Brillo suave que enamora.",
-    "price": 180.00,
-    "oldPrice": 210.00,
+    "price": 180.0,
+    "oldPrice": 210.0,
     "category": "sets",
     "color": "rose",
     "badge": "OFERTA",
@@ -184,14 +333,28 @@
     "pieces": 3,
     "weight": "25g",
     "inStock": true,
-    "featured": true
+    "featured": true,
+    "gallery": [
+      "/images/products/set-completo-rose.jpg",
+      "/images/products/set-completo-rose-detail.jpg",
+      "/images/products/set-completo-rose-worn.jpg",
+      "/images/products/set-completo-rose-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Baño Rosé. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "Estandar",
+    "relatedIds": [
+      "set-collar-pulsera",
+      "set-minimal-oro"
+    ]
   },
   {
     "id": "collar-perlas-oro",
     "name": "Collar Perlas Oro",
     "slug": "collar-perlas-oro",
     "description": "Acero inoxidable bañado en oro 18K con perlas de acero. Collar de 40cm. Elegancia clásica.",
-    "price": 95.00,
+    "price": 95.0,
     "oldPrice": null,
     "category": "collares",
     "color": "dorado",
@@ -201,14 +364,29 @@
     "length": "40cm",
     "weight": "15g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/collar-perlas-oro.jpg",
+      "/images/products/collar-perlas-oro-detail.jpg",
+      "/images/products/collar-perlas-oro-worn.jpg",
+      "/images/products/collar-perlas-oro-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K + Perlas. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "40cm",
+    "relatedIds": [
+      "collar-cadena-dorado",
+      "collar-cadena-plateado",
+      "collar-choker-negro"
+    ]
   },
   {
     "id": "pulsera-cadena-doble",
     "name": "Pulsera Cadena Doble",
     "slug": "pulsera-cadena-doble",
     "description": "Doble cadena en oro 18K. Pulsera de 19cm con cierre de gancho. Capa de estilo.",
-    "price": 72.00,
+    "price": 72.0,
     "oldPrice": null,
     "category": "pulseras",
     "color": "dorado",
@@ -218,14 +396,29 @@
     "length": "19cm + 3cm",
     "weight": "9g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/pulsera-cadena-doble.jpg",
+      "/images/products/pulsera-cadena-doble-detail.jpg",
+      "/images/products/pulsera-cadena-doble-worn.jpg",
+      "/images/products/pulsera-cadena-doble-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "19cm + 3cm",
+    "relatedIds": [
+      "pulsera-eslabones",
+      "pulsera-rose",
+      "pulsera-tobillera-oro"
+    ]
   },
   {
     "id": "aretes-aro-grande",
     "name": "Aros Grandes Oro",
     "slug": "aros-grandes-oro",
     "description": "Aros grandes de 4cm en oro 18K. Acero inoxidable hipoalergénico. Statement piece.",
-    "price": 58.00,
+    "price": 58.0,
     "oldPrice": null,
     "category": "aretes",
     "color": "dorado",
@@ -235,14 +428,29 @@
     "diameter": "4cm",
     "weight": "5g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/aretes-aro-grande.jpg",
+      "/images/products/aretes-aro-grande-detail.jpg",
+      "/images/products/aretes-aro-grande-worn.jpg",
+      "/images/products/aretes-aro-grande-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "4cm",
+    "relatedIds": [
+      "aretes-argolla-grande",
+      "aretes-pendulo-oro",
+      "aretes-stud-plateado"
+    ]
   },
   {
     "id": "collar-lariat-plateado",
     "name": "Collar Lariat Plateado",
     "slug": "collar-lariat-plateado",
     "description": "Collar lariat de 48cm en acero plateado. Diseño Y-shape elegante. Para ocasiones especiales.",
-    "price": 88.00,
+    "price": 88.0,
     "oldPrice": null,
     "category": "collares",
     "color": "plateado",
@@ -252,14 +460,29 @@
     "length": "48cm",
     "weight": "13g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/collar-lariat-plateado.jpg",
+      "/images/products/collar-lariat-plateado-detail.jpg",
+      "/images/products/collar-lariat-plateado-worn.jpg",
+      "/images/products/collar-lariat-plateado-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable 316L. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "48cm",
+    "relatedIds": [
+      "collar-cadena-dorado",
+      "collar-cadena-plateado",
+      "collar-choker-negro"
+    ]
   },
   {
     "id": "pulsera-pulsera-negra",
     "name": "Pulsera Negra",
     "slug": "pulsera-negra",
     "description": "Acero inoxidable con recubrimiento PVD negro. Pulsera de 18cm. Minimalista y sofisticada.",
-    "price": 55.00,
+    "price": 55.0,
     "oldPrice": null,
     "category": "pulseras",
     "color": "negro",
@@ -269,14 +492,29 @@
     "length": "18cm + 3cm",
     "weight": "7g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/pulsera-pulsera-negra.jpg",
+      "/images/products/pulsera-pulsera-negra-detail.jpg",
+      "/images/products/pulsera-pulsera-negra-worn.jpg",
+      "/images/products/pulsera-pulsera-negra-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + PVD Negro. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "18cm + 3cm",
+    "relatedIds": [
+      "pulsera-eslabones",
+      "pulsera-rose",
+      "pulsera-tobillera-oro"
+    ]
   },
   {
     "id": "set-minimal-oro",
     "name": "Set Minimal Oro",
     "slug": "set-minimal-oro",
     "description": "Collar minimal + Aretes stud en oro 18K. Menos es más. Perfecto para diario.",
-    "price": 110.00,
+    "price": 110.0,
     "oldPrice": null,
     "category": "sets",
     "color": "dorado",
@@ -286,14 +524,28 @@
     "pieces": 2,
     "weight": "14g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/set-minimal-oro.jpg",
+      "/images/products/set-minimal-oro-detail.jpg",
+      "/images/products/set-minimal-oro-worn.jpg",
+      "/images/products/set-minimal-oro-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "Estandar",
+    "relatedIds": [
+      "set-collar-pulsera",
+      "set-completo-rose"
+    ]
   },
   {
     "id": "aretes-circulo-rose",
     "name": "Aretes Círculo Rosé",
     "slug": "aretes-circulo-rose",
     "description": "Aretes círculo de 2.5cm en baño rosé. Acero inoxidable. Delicados y femeninos.",
-    "price": 42.00,
+    "price": 42.0,
     "oldPrice": null,
     "category": "aretes",
     "color": "rose",
@@ -303,14 +555,29 @@
     "diameter": "2.5cm",
     "weight": "3g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/aretes-circulo-rose.jpg",
+      "/images/products/aretes-circulo-rose-detail.jpg",
+      "/images/products/aretes-circulo-rose-worn.jpg",
+      "/images/products/aretes-circulo-rose-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Baño Rosé. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "2.5cm",
+    "relatedIds": [
+      "aretes-argolla-grande",
+      "aretes-pendulo-oro",
+      "aretes-stud-plateado"
+    ]
   },
   {
     "id": "collar-gargantilla-oro",
     "name": "Gargantilla Oro",
     "slug": "collar-gargantilla-oro",
     "description": "Gargantilla ajustable en oro 18K. 35cm + cadena extensor. Clásica y versátil.",
-    "price": 68.00,
+    "price": 68.0,
     "oldPrice": null,
     "category": "collares",
     "color": "dorado",
@@ -320,14 +587,29 @@
     "length": "35cm ajustable",
     "weight": "10g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/collar-gargantilla-oro.jpg",
+      "/images/products/collar-gargantilla-oro-detail.jpg",
+      "/images/products/collar-gargantilla-oro-worn.jpg",
+      "/images/products/collar-gargantilla-oro-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + Oro 18K. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "35cm ajustable",
+    "relatedIds": [
+      "collar-cadena-dorado",
+      "collar-cadena-plateado",
+      "collar-choker-negro"
+    ]
   },
   {
     "id": "pulsera-bracelet-negro",
     "name": "Bracelet Negro",
     "slug": "bracelet-negro",
     "description": "Bracelet rígido de 17cm en acero PVD negro. Cierre magnético. Elegancia audaz.",
-    "price": 78.00,
+    "price": 78.0,
     "oldPrice": null,
     "category": "pulseras",
     "color": "negro",
@@ -337,6 +619,21 @@
     "diameter": "17cm",
     "weight": "12g",
     "inStock": true,
-    "featured": false
+    "featured": false,
+    "gallery": [
+      "/images/products/pulsera-bracelet-negro.jpg",
+      "/images/products/pulsera-bracelet-negro-detail.jpg",
+      "/images/products/pulsera-bracelet-negro-worn.jpg",
+      "/images/products/pulsera-bracelet-negro-size.jpg"
+    ],
+    "waterResistant": true,
+    "details": "Esta pieza está fabricada con Acero inoxidable + PVD Negro. Cada unidad es ensamblada a mano con atención al detalle, garantizando acabados impecables y durabilidad prolongada.",
+    "careInstructions": "Evita contacto con agua salada, cloro, perfumes y cremas. Guarda en su empaque original o bolsa suave. Limpia con paño seco de microfibra después de cada uso.",
+    "dimensions": "17cm",
+    "relatedIds": [
+      "pulsera-eslabones",
+      "pulsera-rose",
+      "pulsera-tobillera-oro"
+    ]
   }
 ]
