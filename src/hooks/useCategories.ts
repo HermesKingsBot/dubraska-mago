@@ -18,10 +18,11 @@ function mapCategory(c: ApiCategory): Category {
 export function useCategories() {
   const [categories, setCategories] = useState<Category[]>([])
   const [loaded, setLoaded] = useState(false)
+  const [showDeleted, setShowDeleted] = useState(false)
 
-  const fetchCategories = useCallback(async () => {
+  const fetchCategories = useCallback(async (includeDeleted = false) => {
     try {
-      const res = await fetch("/api/categories", { credentials: "include" })
+      const res = await fetch(`/api/categories${includeDeleted ? "?includeDeleted=true" : ""}`, { credentials: "include" })
       const json = await res.json()
       if (json.success) {
         const mapped = (json.data || []).map(mapCategory)
@@ -33,8 +34,8 @@ export function useCategories() {
   }, [])
 
   useEffect(() => {
-    fetchCategories().then(() => setLoaded(true))
-  }, [fetchCategories])
+    fetchCategories(showDeleted).then(() => setLoaded(true))
+  }, [fetchCategories, showDeleted])
 
   const addCategory = useCallback(
     async (cat: Category) => {
@@ -85,5 +86,5 @@ export function useCategories() {
     [fetchCategories]
   )
 
-  return { categories, loaded, addCategory, updateCategory, deleteCategory }
+  return { categories, loaded, showDeleted, setShowDeleted, addCategory, updateCategory, deleteCategory }
 }

@@ -10,8 +10,9 @@ async function GET(request: NextRequest) {
     const user = requireAuth(request)
     const { searchParams } = new URL(request.url)
     const status = searchParams.get("status") || undefined
+    const includeDeleted = searchParams.get("includeDeleted") === "true"
 
-    const where: Record<string, unknown> = {}
+    const where: Record<string, unknown> = includeDeleted ? {} : { deletedAt: null }
     if (status) where.status = status
     if (user.role === "CUSTOMER") {
       where.userId = user.userId

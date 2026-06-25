@@ -32,7 +32,7 @@ async function POST(request: NextRequest) {
     const body = await request.json()
     const data = cartItemSchema.parse(body)
 
-    const product = await db.product.findUnique({ where: { id: data.productId } })
+    const product = await db.product.findUnique({ where: { id: data.productId, deletedAt: null } })
     if (!product) {
       return errorResponse("Producto no encontrado", 404)
     }

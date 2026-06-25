@@ -9,7 +9,7 @@ type RouteParams = { params: Promise<{ slug: string }> }
 async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     const { slug } = await params
-    const product = await db.product.findUnique({ where: { slug } })
+    const product = await db.product.findUnique({ where: { slug, deletedAt: null } })
     if (!product) {
       return errorResponse("Producto no encontrado", 404)
     }
@@ -71,7 +71,7 @@ async function GET(request: NextRequest, { params }: RouteParams) {
 async function POST(request: NextRequest, { params }: RouteParams) {
   try {
     const { slug } = await params
-    const product = await db.product.findUnique({ where: { slug } })
+    const product = await db.product.findUnique({ where: { slug, deletedAt: null } })
     if (!product) {
       return errorResponse("Producto no encontrado", 404)
     }

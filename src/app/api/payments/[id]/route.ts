@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import db from "@/lib/db"
 import { successResponse, errorResponse, handleApiError } from "@/lib/api"
 import { requireAdmin } from "@/lib/auth"
+import { logStatusChange } from "@/lib/audit"
 
 type RouteParams = { params: Promise<{ id: string }> }
 
@@ -42,6 +43,8 @@ async function PATCH(request: NextRequest, { params }: RouteParams) {
       where: { id: payment.orderId },
       data: { status: orderStatus },
     })
+
+    await logStatusChange(admin, "Payment", payment, payment.status, status, request)
 
     return successResponse(updatedPayment)
   } catch (error) {

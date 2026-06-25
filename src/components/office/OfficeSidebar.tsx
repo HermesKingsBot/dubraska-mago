@@ -1,9 +1,10 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useAuth } from "@/context/OfficeAuthContext"
+import TrashBadge from "@/components/office/TrashBadge"
 
 const NAV_ITEMS = [
   { label: "Dashboard", icon: "📊", href: "/office/dashboard" },
@@ -12,6 +13,8 @@ const NAV_ITEMS = [
   { label: "Categorías", icon: "🏷️", href: "/office/categorias" },
   { label: "Testimonios", icon: "⭐", href: "/office/testimonios" },
   { label: "Configuración", icon: "⚙️", href: "/office/configuracion" },
+  { label: "Auditoría", icon: "📋", href: "/office/auditoria" },
+  { label: "Papelera", icon: "🗑", href: "/office/papelera", showBadge: true },
 ]
 
 interface OfficeSidebarProps {
@@ -24,6 +27,14 @@ function OfficeSidebar({ open, onClose }: OfficeSidebarProps): React.JSX.Element
   const router = useRouter()
   const { user, logout } = useAuth()
   const [collapsed, setCollapsed] = useState(false)
+  const [trashCount, setTrashCount] = useState(0)
+
+  useEffect(() => {
+    fetch("/api/trash", { credentials: "include" })
+      .then((r) => r.json())
+      .then((j) => { if (j.success) setTrashCount(j.data.totalCount) })
+      .catch(() => {})
+  }, [pathname])
 
   const handleNav = (href: string) => {
     router.push(href)
@@ -81,6 +92,9 @@ function OfficeSidebar({ open, onClose }: OfficeSidebarProps): React.JSX.Element
             >
               <span className="text-base">{item.icon}</span>
               {!collapsed && <span>{item.label}</span>}
+              {!collapsed && "showBadge" in item && item.showBadge && trashCount > 0 && (
+                <TrashBadge count={trashCount} />
+              )}
             </button>
           )
         })}

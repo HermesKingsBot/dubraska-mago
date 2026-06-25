@@ -3,12 +3,13 @@ import db from "@/lib/db"
 import { successResponse, errorResponse, handleApiError } from "@/lib/api"
 import { requireAdmin } from "@/lib/auth"
 import { clearSettingsCache } from "@/lib/settings"
+import { logUpdate } from "@/lib/audit"
 
 type RouteParams = { params: Promise<{ key: string }> }
 
 async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
-    requireAdmin(request)
+    const admin = requireAdmin(request)
     const { key } = await params
     const body = await request.json()
     const { value } = body
@@ -24,6 +25,7 @@ async function PATCH(request: NextRequest, { params }: RouteParams) {
       data: { value },
     })
     clearSettingsCache()
+    await logUpdate(admin, "Setting", { id: key, name: key }, { value: existing.value }, { value }, request)
     return successResponse({ message: 'Setting updated' })
   } catch (error) {
     if (error instanceof Error && (error.message === 'Unauthorized' || error.message === 'Forbidden: Admins only')) {

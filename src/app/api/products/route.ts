@@ -3,6 +3,8 @@ import { Prisma } from "@prisma/client"
 import db from "@/lib/db"
 import { successResponse, handleApiError } from "@/lib/api"
 import { createProductSchema } from "@/lib/schemas"
+import { requireAuth } from "@/lib/auth"
+import { logCreate } from "@/lib/audit"
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
@@ -15,11 +17,12 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const minPrice = searchParams.get("minPrice") || undefined
     const maxPrice = searchParams.get("maxPrice") || undefined
     const search = searchParams.get("q") || undefined
+    const includeDeleted = searchParams.get("includeDeleted") === "true"
     const page = parseInt(searchParams.get("page") || "1")
     const limit = parseInt(searchParams.get("limit") || "20")
     const sort = searchParams.get("sort") || "newest"
 
-    const where: Prisma.ProductWhereInput = {}
+    const where: Prisma.ProductWhereInput = includeDeleted ? {} : { deletedAt: null }
     if (categories.length > 0) where.categoryId = { in: categories }
     if (colors.length > 0) where.color = { in: colors }
     if (featured) where.featured = true
@@ -103,6 +106,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
+    const user = requireAuth(request)
     const body = await request.json()
     const data = createProductSchema.parse(body)
     const gallery = data.gallery || []
@@ -112,8 +116,12 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
         gallery: JSON.stringify(gallery),
       },
     })
+    await logCreate(user, "Product", product, request)
     return successResponse({ ...product, gallery }, 201)
   } catch (error) {
+    if (error instanceof Error && error.message === "Unauthorized") {
+      return handleApiError(error)
+    }
     return handleApiError(error)
   }
 }

@@ -9,7 +9,7 @@ async function POST(request: NextRequest) {
     const data = inventoryAdjustmentSchema.parse(body)
     const result = await db.$transaction(async (tx) => {
       const product = await tx.product.findUnique({
-        where: { id: data.productId },
+        where: { id: data.productId, deletedAt: null },
       })
       if (!product) {
         throw new Error("Product not found")

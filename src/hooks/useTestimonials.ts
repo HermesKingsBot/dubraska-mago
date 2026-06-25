@@ -19,10 +19,11 @@ function mapTestimonial(t: ApiTestimonial): Testimonial {
 export function useTestimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [loaded, setLoaded] = useState(false)
+  const [showDeleted, setShowDeleted] = useState(false)
 
-  const fetchTestimonials = useCallback(async () => {
+  const fetchTestimonials = useCallback(async (includeDeleted = false) => {
     try {
-      const res = await fetch("/api/testimonials", { credentials: "include" })
+      const res = await fetch(`/api/testimonials${includeDeleted ? "?includeDeleted=true" : ""}`, { credentials: "include" })
       const json = await res.json()
       if (json.success) {
         const mapped = (json.data || []).map(mapTestimonial)
@@ -34,8 +35,8 @@ export function useTestimonials() {
   }, [])
 
   useEffect(() => {
-    fetchTestimonials().then(() => setLoaded(true))
-  }, [fetchTestimonials])
+    fetchTestimonials(showDeleted).then(() => setLoaded(true))
+  }, [fetchTestimonials, showDeleted])
 
   const addTestimonial = useCallback(
     async (t: Testimonial) => {
@@ -86,5 +87,5 @@ export function useTestimonials() {
     [fetchTestimonials]
   )
 
-  return { testimonials, loaded, addTestimonial, updateTestimonial, deleteTestimonial }
+  return { testimonials, loaded, showDeleted, setShowDeleted, addTestimonial, updateTestimonial, deleteTestimonial }
 }

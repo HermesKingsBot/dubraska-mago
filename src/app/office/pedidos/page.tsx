@@ -1,8 +1,10 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import AuthGuard from "@/components/office/AuthGuard"
+import ToggleSwitch from "@/components/office/ToggleSwitch"
+import RestoreButton from "@/components/office/RestoreButton"
 
 interface Order {
   id: string
@@ -58,24 +60,30 @@ function PedidosPage(): React.JSX.Element {
   const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
+  const [showDeleted, setShowDeleted] = useState(false)
 
-  useEffect(() => {
-    async function fetchOrders() {
-      try {
-        const url = statusFilter ? `/api/orders?status=${statusFilter}` : "/api/orders"
-        const res = await fetch(url, { credentials: "include" })
-        const json = await res.json()
-        if (json.success) setOrders(json.data || [])
-      } catch {
-        // ignore
-      } finally {
-        setLoading(false)
-      }
+  const fetchOrders = useCallback(async () => {
+    setLoading(true)
+    try {
+      const params = new URLSearchParams()
+      if (statusFilter) params.set("status", statusFilter)
+      if (showDeleted) params.set("includeDeleted", "true")
+      const res = await fetch(`/api/orders?${params}`, { credentials: "include" })
+      const json = await res.json()
+      if (json.success) setOrders(json.data || [])
+    } catch {
+      // ignore
+    } finally {
+      setLoading(false)
     }
-    fetchOrders()
-  }, [statusFilter])
+  }, [statusFilter, showDeleted])
+
+  useEffect(() => { fetchOrders() }, [fetchOrders])
 
   const filtered = orders.filter((o) => {
+    const isDeleted = !!(o as unknown as { deletedAt: string | null }).deletedAt
+    if (showDeleted && !isDeleted) return true
+    if (!showDeleted && isDeleted) return false
     if (!search) return true
     const q = search.toLowerCase()
     return o.orderNumber.toLowerCase().includes(q) || o.customerName.toLowerCase().includes(q)
@@ -88,9 +96,15 @@ function PedidosPage(): React.JSX.Element {
   return (
     <AuthGuard>
       <div className="max-w-6xl mx-auto space-y-6">
-        <h1 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-instrument-serif)" }}>
-          Gestión de Pedidos
-        </h1>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <h1 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-instrument-serif)" }}>
+            Gestión de Pedidos
+          </h1>
+          <div className="flex items-center gap-2">
+            <ToggleSwitch checked={showDeleted} onChange={setShowDeleted} size="sm" />
+            <span className="text-xs text-[var(--color-muted)]">Mostrar eliminados</span>
+          </div>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative flex-1">
@@ -147,24 +161,43 @@ function PedidosPage(): React.JSX.Element {
               <span>Estado</span>
               <span>Pago</span>
             </div>
-            {filtered.map((order) => (
-              <div
-                key={order.id}
-                onClick={() => router.push(`/office/pedidos/${order.id}`)}
-                className="grid grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-4 px-4 py-3 border-b border-[#222] last:border-b-0 cursor-pointer hover:bg-white/[0.02] transition-colors"
-              >
-                <span className="text-sm text-[var(--color-gold)] font-medium">#{order.orderNumber}</span>
-                <span className="text-sm text-white truncate">{order.customerName}</span>
-                <span className="text-sm text-[var(--color-muted)]">{formatDate(order.createdAt)}</span>
-                <span className="text-sm text-white text-right font-medium">${order.total.toFixed(2)}</span>
-                <span className={`text-xs font-medium px-2 py-1 rounded-full border w-fit ${STATUS_COLORS[order.status] || "text-[var(--color-muted)] bg-white/5 border-[#333]"}`}>
-                  {STATUS_LABELS[order.status] || order.status}
-                </span>
-                <span className={`text-xs font-medium px-2 py-1 rounded-full border w-fit ${PAYMENT_COLORS[order.payment?.status || "PENDING"] || "text-[var(--color-muted)] bg-white/5 border-[#333]"}`}>
-                  {PAYMENT_LABELS[order.payment?.status || "PENDING"] || "Sin pago"}
-                </span>
-              </div>
-            ))}
+            {filtered.map((order) => {
+              const isDeleted = !!(order as unknown as { deletedAt: string | null }).deletedAt
+              return (
+                <div
+                  key={order.id}
+                  className={`grid grid-cols-1 sm:grid-cols-6 gap-2 sm:gap-4 px-4 py-3 border-b border-[#222] last:border-b-0 transition-colors ${
+                    isDeleted ? "opacity-60" : "cursor-pointer hover:bg-white/[0.02]"
+                  }`}
+                  onClick={isDeleted ? undefined : () => router.push(`/office/pedidos/${order.id}`)}
+                >
+                  <span className="text-sm text-[var(--color-gold)] font-medium">#{order.orderNumber}</span>
+                  <span className="text-sm text-white truncate">{order.customerName}</span>
+                  <span className="text-sm text-[var(--color-muted)]">{formatDate(order.createdAt)}</span>
+                  <span className="text-sm text-white text-right font-medium">${order.total.toFixed(2)}</span>
+                  <span className={`text-xs font-medium px-2 py-1 rounded-full border w-fit ${STATUS_COLORS[order.status] || "text-[var(--color-muted)] bg-white/5 border-[#333]"}`}>
+                    {STATUS_LABELS[order.status] || order.status}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    {showDeleted && isDeleted ? (
+                      <RestoreButton
+                        name={order.orderNumber}
+                        onRestore={async () => {
+                          const res = await fetch(`/api/trash/Order/${order.id}`, { method: "POST", credentials: "include" })
+                          const json = await res.json()
+                          if (json.success) fetchOrders()
+                          return json.success
+                        }}
+                      />
+                    ) : (
+                      <span className={`text-xs font-medium px-2 py-1 rounded-full border w-fit ${PAYMENT_COLORS[order.payment?.status || "PENDING"] || "text-[var(--color-muted)] bg-white/5 border-[#333]"}`}>
+                        {PAYMENT_LABELS[order.payment?.status || "PENDING"] || "Sin pago"}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              )
+            })}
           </div>
         )}
       </div>

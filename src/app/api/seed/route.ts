@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import db from "@/lib/db"
-import { successResponse, errorResponse, handleApiError } from "@/lib/api"
+import { successResponse, handleApiError } from "@/lib/api"
 import * as bcrypt from "bcryptjs"
 import products from "../../../../data/products.json"
 import testimonials from "../../../../data/testimonials.json"
@@ -18,6 +18,7 @@ async function POST(request: NextRequest) {
     await db.product.deleteMany({})
     await db.category.deleteMany({})
     await db.user.deleteMany({})
+    await db.activityLog.deleteMany({})
 
     const categoryMap: Record<string, string> = {}
     const categoryNames: string[] = []
@@ -211,6 +212,14 @@ async function POST(request: NextRequest) {
     for (const link of defaultSocialLinks) {
       await db.socialLink.create({ data: link })
     }
+
+    await db.activityLog.create({
+      data: {
+        action: "CREATE",
+        entityType: "Seed",
+        description: "Base de datos inicializada con datos de demostración",
+      },
+    })
 
     return successResponse({
       message: "Database seeded successfully",

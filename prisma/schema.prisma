@@ -18,6 +18,7 @@ model User {
   emailVerified Boolean  @default(false)
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  deletedAt     DateTime?
   addresses     Address[]
   orders        Order[]
   cartItems     CartItem[]
@@ -87,6 +88,22 @@ model Payment {
   updatedAt     DateTime  @updatedAt
 }
 
+model ActivityLog {
+  id          String   @id @default(cuid())
+  userId      String?
+  userEmail   String?
+  action      String
+  entityType  String
+  entityId    String?
+  entityName  String?
+  oldValues   String?
+  newValues   String?
+  description String
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+}
+
 model Category {
   id          String    @id @default(cuid())
   name        String
@@ -94,6 +111,7 @@ model Category {
   description String    @default("")
   active      Boolean   @default(true)
   order       Int       @default(0)
+  deletedAt   DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   products    Product[]
@@ -130,6 +148,7 @@ model Product {
   wishlistItems WishlistItem[]
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
+  deletedAt DateTime?
 }
 
 model Review {
@@ -149,6 +168,7 @@ model Review {
   status    String   @default("PENDING")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deletedAt DateTime?
 }
 
 model ProductComparison {
@@ -171,6 +191,7 @@ model Testimonial {
   active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deletedAt DateTime?
 }
 
 model Order {
@@ -199,6 +220,7 @@ model Order {
   payment         Payment?
   createdAt       DateTime   @default(now())
   updatedAt       DateTime   @updatedAt
+  deletedAt       DateTime?
 }
 
 model OrderItem {
@@ -235,6 +257,7 @@ model Setting {
   order     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deletedAt DateTime?
 }
 
 model SocialLink {
@@ -247,4 +270,5 @@ model SocialLink {
   icon      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deletedAt DateTime?
 }

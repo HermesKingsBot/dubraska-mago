@@ -3,6 +3,7 @@
 import React from "react"
 import StatusBadge from "@/components/office/StatusBadge"
 import ToggleSwitch from "@/components/office/ToggleSwitch"
+import RestoreButton from "@/components/office/RestoreButton"
 import type { OfficeProduct } from "@/types/office"
 
 interface ProductListProps {
@@ -10,6 +11,8 @@ interface ProductListProps {
   onEdit: (product: OfficeProduct) => void
   onDelete: (product: OfficeProduct) => void
   onToggleVisible: (id: string, visible: boolean) => void
+  onRestore?: (id: string) => Promise<boolean>
+  showDeleted?: boolean
 }
 
 function ProductList({
@@ -17,6 +20,8 @@ function ProductList({
   onEdit,
   onDelete,
   onToggleVisible,
+  onRestore,
+  showDeleted,
 }: ProductListProps): React.JSX.Element {
   return (
     <div className="bg-[#111] border border-[#222] rounded-xl overflow-hidden">
@@ -48,18 +53,24 @@ function ProductList({
                 size="sm"
               />
               <div className="flex gap-1">
-                <button
-                  onClick={() => onEdit(p)}
-                  className="text-xs px-2 py-1 rounded border border-[#333] text-[var(--color-muted)] hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] transition-colors"
-                >
-                  Editar
-                </button>
-                <button
-                  onClick={() => onDelete(p)}
-                  className="text-xs px-2 py-1 rounded border border-[#333] text-[var(--color-muted)] hover:border-red-500 hover:text-red-400 transition-colors"
-                >
-                  ✕
-                </button>
+                {showDeleted && onRestore ? (
+                  <RestoreButton name={p.name} onRestore={() => onRestore(p.id)} />
+                ) : (
+                  <>
+                    <button
+                      onClick={() => onEdit(p)}
+                      className="text-xs px-2 py-1 rounded border border-[#333] text-[var(--color-muted)] hover:border-[var(--color-gold)] hover:text-[var(--color-gold)] transition-colors"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => onDelete(p)}
+                      className="text-xs px-2 py-1 rounded border border-[#333] text-[var(--color-muted)] hover:border-red-500 hover:text-red-400 transition-colors"
+                    >
+                      ✕
+                    </button>
+                  </>
+                )}
               </div>
             </div>
 
@@ -84,18 +95,24 @@ function ProductList({
                   size="sm"
                 />
                 <div className="flex gap-2">
-                  <button
-                    onClick={() => onEdit(p)}
-                    className="text-xs px-3 py-1 rounded border border-[var(--color-gold)] text-[var(--color-gold)]"
-                  >
-                    Editar
-                  </button>
-                  <button
-                    onClick={() => onDelete(p)}
-                    className="text-xs px-3 py-1 rounded border border-red-500 text-red-400"
-                  >
-                    Eliminar
-                  </button>
+                  {showDeleted && onRestore ? (
+                    <RestoreButton name={p.name} onRestore={() => onRestore(p.id)} />
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => onEdit(p)}
+                        className="text-xs px-3 py-1 rounded border border-[var(--color-gold)] text-[var(--color-gold)]"
+                      >
+                        Editar
+                      </button>
+                      <button
+                        onClick={() => onDelete(p)}
+                        className="text-xs px-3 py-1 rounded border border-red-500 text-red-400"
+                      >
+                        Eliminar
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

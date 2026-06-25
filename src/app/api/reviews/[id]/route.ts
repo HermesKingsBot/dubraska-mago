@@ -3,18 +3,23 @@ import db from "@/lib/db"
 import { successResponse, errorResponse, handleApiError } from "@/lib/api"
 import { requireAdmin } from "@/lib/auth"
 import { updateReviewSchema } from "@/lib/schemas"
+import { logUpdate, logDelete, logStatusChange } from "@/lib/audit"
 
 type RouteParams = { params: Promise<{ id: string }> }
 
 async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
-    requireAdmin(request)
+    const admin = requireAdmin(request)
     const { id } = await params
     const body = await request.json()
     const data = updateReviewSchema.parse(body)
     const existing = await db.review.findUnique({ where: { id } })
     if (!existing) {
       return errorResponse("Reseña no encontrada", 404)
+    }
+    const oldValues: Record<string, unknown> = {}
+    for (const key of Object.keys(data)) {
+      ;(oldValues as any)[key] = (existing as any)[key]
     }
     const updateData: Record<string, unknown> = {}
     if (data.name !== undefined) updateData.name = data.name
@@ -28,6 +33,11 @@ async function PATCH(request: NextRequest, { params }: RouteParams) {
       where: { id },
       data: updateData,
     })
+    if (data.status && data.status !== existing.status) {
+      await logStatusChange(admin, "Review", existing, existing.status, data.status, request)
+    } else {
+      await logUpdate(admin, "Review", existing, oldValues, data as any, request)
+    }
     return successResponse({ ...review, images: JSON.parse(review.images || "[]") })
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
@@ -39,13 +49,17 @@ async function PATCH(request: NextRequest, { params }: RouteParams) {
 
 async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
-    requireAdmin(request)
+    const admin = requireAdmin(request)
     const { id } = await params
     const existing = await db.review.findUnique({ where: { id } })
     if (!existing) {
       return errorResponse("Reseña no encontrada", 404)
     }
-    await db.review.delete({ where: { id } })
+    await db.review.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    })
+    await logDelete(admin, "Review", existing, { name: existing.name, rating: existing.rating }, request)
     return successResponse({ message: "Reseña eliminada" })
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {

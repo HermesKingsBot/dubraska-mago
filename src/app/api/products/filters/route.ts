@@ -5,11 +5,13 @@ import { successResponse, handleApiError } from "@/lib/api"
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     const categories = await db.category.findMany({
+      where: { deletedAt: null },
       include: { _count: { select: { products: true } } },
       orderBy: { order: "asc" },
     })
 
     const products = await db.product.findMany({
+      where: { deletedAt: null },
       select: { color: true, price: true, badge: true },
     })
 

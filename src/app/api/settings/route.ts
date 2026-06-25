@@ -4,12 +4,14 @@ import { successResponse, errorResponse, handleApiError } from "@/lib/api"
 import { bulkUpdateSettingsSchema } from "@/lib/schemas"
 import { requireAdmin } from "@/lib/auth"
 import { clearSettingsCache } from "@/lib/settings"
+import { logActivity } from "@/lib/audit"
 
 async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const group = searchParams.get('group')
-    const where = group ? { group } : {}
+    const where: Record<string, unknown> = { deletedAt: null }
+    if (group) where.group = group
     const settings = await db.setting.findMany({
       where,
       orderBy: [{ group: 'asc' }, { order: 'asc' }],
@@ -26,7 +28,7 @@ async function GET(request: NextRequest) {
 
 async function POST(request: NextRequest) {
   try {
-    requireAdmin(request)
+    const admin = requireAdmin(request)
     const body = await request.json()
     const { settings } = bulkUpdateSettingsSchema.parse(body)
     for (const s of settings) {
@@ -37,6 +39,15 @@ async function POST(request: NextRequest) {
       })
     }
     clearSettingsCache()
+    await logActivity({
+      userId: admin.userId,
+      userEmail: admin.email,
+      action: "BULK_UPDATE",
+      entityType: "Setting",
+      description: `Actualizó ${settings.length} configuraciones`,
+      newValues: { settings: settings.map(s => ({ key: s.key, value: s.value })) },
+      request,
+    })
     return successResponse({ message: 'Settings updated' })
   } catch (error) {
     if (error instanceof Error && (error.message === 'Unauthorized' || error.message === 'Forbidden: Admins only')) {

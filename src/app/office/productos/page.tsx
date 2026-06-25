@@ -5,6 +5,8 @@ import AuthGuard from "@/components/office/AuthGuard"
 import ConfirmDialog from "@/components/office/ConfirmDialog"
 import ProductModal from "@/components/office/ProductModal"
 import ProductList from "@/components/office/ProductList"
+import ToggleSwitch from "@/components/office/ToggleSwitch"
+import RestoreButton from "@/components/office/RestoreButton"
 import { useProducts } from "@/hooks/useProducts"
 import { CATEGORIES } from "@/types/product"
 import type { OfficeProduct } from "@/types/office"
@@ -26,7 +28,7 @@ function ProductSkeletonRow() {
 }
 
 function ProductosPage(): React.JSX.Element {
-  const { products, loaded, addProduct, updateProduct, deleteProduct } = useProducts()
+  const { products, loaded, showDeleted, setShowDeleted, addProduct, updateProduct, deleteProduct } = useProducts()
   const [search, setSearch] = useState("")
   const [catFilter, setCatFilter] = useState("")
   const [statusFilter, setStatusFilter] = useState("Todos")
@@ -36,6 +38,9 @@ function ProductosPage(): React.JSX.Element {
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
+      const isDeleted = !!(p as unknown as { deletedAt: string | null }).deletedAt
+      if (showDeleted && !isDeleted) return true
+      if (!showDeleted && isDeleted) return false
       const matchSearch =
         !search ||
         p.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -48,7 +53,7 @@ function ProductosPage(): React.JSX.Element {
         (statusFilter === "Agotado" && p.stock === 0)
       return matchSearch && matchCat && matchStatus
     })
-  }, [products, search, catFilter, statusFilter])
+  }, [products, search, catFilter, statusFilter, showDeleted])
 
   const handleSave = (data: OfficeProduct) => {
     if (editingProduct) {
@@ -72,13 +77,19 @@ function ProductosPage(): React.JSX.Element {
           <h2 className="text-xl font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
             Productos ({loaded ? filtered.length : "..."})
           </h2>
-          <button
-            onClick={openNew}
-            className="px-4 py-2 text-sm rounded-lg text-black font-medium"
-            style={{ background: "linear-gradient(135deg, #D4AF37, #B8960C)" }}
-          >
-            + Nuevo Producto
-          </button>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <ToggleSwitch checked={showDeleted} onChange={setShowDeleted} size="sm" />
+              <span className="text-xs text-[var(--color-muted)]">Mostrar eliminados</span>
+            </div>
+            <button
+              onClick={openNew}
+              className="px-4 py-2 text-sm rounded-lg text-black font-medium"
+              style={{ background: "linear-gradient(135deg, #D4AF37, #B8960C)" }}
+            >
+              + Nuevo Producto
+            </button>
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
@@ -131,6 +142,12 @@ function ProductosPage(): React.JSX.Element {
             }}
             onDelete={setDeleting}
             onToggleVisible={(id, v) => updateProduct(id, { visible: v })}
+            onRestore={async (id) => {
+              const res = await fetch(`/api/trash/Product/${id}`, { method: "POST", credentials: "include" })
+              const json = await res.json()
+              return json.success
+            }}
+            showDeleted={showDeleted}
           />
         ) : (
           <div className="bg-[#111] border border-[#222] rounded-xl p-12 text-center">

@@ -4,11 +4,12 @@ import React, { useState } from "react"
 import AuthGuard from "@/components/office/AuthGuard"
 import TestimonialList from "@/components/office/TestimonialList"
 import TestimonialModal from "@/components/office/TestimonialModal"
+import ToggleSwitch from "@/components/office/ToggleSwitch"
 import { useTestimonials } from "@/hooks/useTestimonials"
 import type { Testimonial } from "@/types/office"
 
 function TestimoniosPage(): React.JSX.Element {
-  const { testimonials, loaded, addTestimonial, updateTestimonial, deleteTestimonial } = useTestimonials()
+  const { testimonials, loaded, showDeleted, setShowDeleted, addTestimonial, updateTestimonial, deleteTestimonial } = useTestimonials()
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<Testimonial | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
@@ -55,12 +56,18 @@ function TestimoniosPage(): React.JSX.Element {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold">Testimonios</h2>
-          <button
-            onClick={() => { setEditing(null); setModalOpen(true) }}
-            className="px-4 py-2 text-sm bg-[var(--color-gold)] text-black font-semibold rounded hover:opacity-90 transition-opacity"
-          >
-            Nuevo Testimonio
-          </button>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <ToggleSwitch checked={showDeleted} onChange={setShowDeleted} size="sm" />
+              <span className="text-xs text-[var(--color-muted)]">Mostrar eliminados</span>
+            </div>
+            <button
+              onClick={() => { setEditing(null); setModalOpen(true) }}
+              className="px-4 py-2 text-sm bg-[var(--color-gold)] text-black font-semibold rounded hover:opacity-90 transition-opacity"
+            >
+              Nuevo Testimonio
+            </button>
+          </div>
         </div>
 
         <TestimonialList
@@ -68,6 +75,12 @@ function TestimoniosPage(): React.JSX.Element {
           onEdit={handleEdit}
           onDelete={handleDelete}
           onToggle={handleToggle}
+          onRestore={async (id) => {
+            const res = await fetch(`/api/trash/Testimonial/${id}`, { method: "POST", credentials: "include" })
+            const json = await res.json()
+            return json.success
+          }}
+          showDeleted={showDeleted}
         />
 
         <TestimonialModal

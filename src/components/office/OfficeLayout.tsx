@@ -13,6 +13,8 @@ const PAGE_TITLES: Record<string, string> = {
   "/office/categorias": "Categorías",
   "/office/testimonios": "Testimonios",
   "/office/configuracion": "Configuración",
+  "/office/auditoria": "Auditoría",
+  "/office/papelera": "Papelera",
 }
 
 function OfficeLayout({

@@ -156,3 +156,14 @@ export const updateReviewSchema = createReviewSchema.partial().extend({
 export const saveComparisonSchema = z.object({
   productIds: z.array(z.string()).min(2, "Mínimo 2 productos").max(4, "Máximo 4 productos"),
 })
+
+export const auditLogQuerySchema = z.object({
+  action: z.enum(["CREATE", "UPDATE", "DELETE", "APPROVE", "REJECT", "STATUS_CHANGE", "LOGIN", "LOGOUT"]).optional(),
+  entityType: z.string().optional(),
+  userId: z.string().optional(),
+  search: z.string().optional(),
+  from: z.string().optional(),
+  to: z.string().optional(),
+  page: z.coerce.number().default(1),
+  limit: z.coerce.number().max(100).default(50),
+})

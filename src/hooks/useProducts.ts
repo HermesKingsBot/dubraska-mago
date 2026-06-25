@@ -8,10 +8,11 @@ export function useProducts() {
   const [orders, setOrders] = useState<StockOrder[]>([])
   const [adjustments, setAdjustments] = useState<StockAdjustment[]>([])
   const [loaded, setLoaded] = useState(false)
+  const [showDeleted, setShowDeleted] = useState(false)
 
-  const fetchProducts = useCallback(async () => {
+  const fetchProducts = useCallback(async (includeDeleted = false) => {
     try {
-      const res = await fetch("/api/products?limit=200", { credentials: "include" })
+      const res = await fetch(`/api/products?limit=200${includeDeleted ? "&includeDeleted=true" : ""}`, { credentials: "include" })
       const json = await res.json()
       if (json.success) {
         const items = json.data.items || []
@@ -83,10 +84,10 @@ export function useProducts() {
   }, [])
 
   useEffect(() => {
-    Promise.all([fetchProducts(), fetchOrders(), fetchAdjustments()]).then(
+    Promise.all([fetchProducts(showDeleted), fetchOrders(), fetchAdjustments()]).then(
       () => setLoaded(true)
     )
-  }, [fetchProducts, fetchOrders, fetchAdjustments])
+  }, [fetchProducts, fetchOrders, fetchAdjustments, showDeleted])
 
   const addProduct = useCallback(
     async (product: OfficeProduct) => {
@@ -227,6 +228,8 @@ export function useProducts() {
     orders,
     adjustments,
     loaded,
+    showDeleted,
+    setShowDeleted,
     addProduct,
     updateProduct,
     deleteProduct,
