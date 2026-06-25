@@ -4,14 +4,17 @@ import { useState, useCallback, useEffect, useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Product, CatalogFilters, CatalogSearchParams, LayoutColumns, PerPageOption } from "@/types/product"
-import { buildSearchParams } from "@/lib/catalog-utils"
+import { Product, CatalogFilters, CatalogSearchParams, LayoutColumns, PerPageOption, SortOption, AvailableFilters } from "@/types/product"
+import { buildSearchParams, buildApiQueryString } from "@/lib/catalog-utils"
 import SearchBar from "@/components/catalog/SearchBar"
 import FiltersDrawer from "@/components/catalog/FiltersDrawer"
 import LayoutToggle from "@/components/catalog/LayoutToggle"
 import Pagination from "@/components/catalog/Pagination"
 import ProductGrid from "@/components/catalog/ProductGrid"
 import EmptyState from "@/components/catalog/EmptyState"
+import FilterChips from "@/components/catalog/FilterChips"
+import SortDropdown from "@/components/catalog/SortDropdown"
+import ProductSkeleton from "@/components/catalog/ProductSkeleton"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -24,18 +27,89 @@ interface CatalogClientProps {
     page: number
     perPage: number | "all"
     layout: LayoutColumns
+    sort: SortOption
+  }
+  availableFilters: AvailableFilters
+}
+
+function mapApiProduct(p: Record<string, unknown>): Product {
+  const cat = p.category as Record<string, unknown> | undefined
+  return {
+    id: String(p.id),
+    name: String(p.name),
+    slug: String(p.slug),
+    description: String(p.description),
+    price: Number(p.price),
+    oldPrice: p.oldPrice ? Number(p.oldPrice) : null,
+    category: cat?.name ? String(cat.name) : String(p.categoryId || ""),
+    color: String(p.color),
+    badge: p.badge ? String(p.badge) : null,
+    image: String(p.image),
+    material: String(p.material),
+    length: p.length ? String(p.length) : undefined,
+    diameter: p.diameter ? String(p.diameter) : undefined,
+    weight: p.weight ? String(p.weight) : undefined,
+    pieces: undefined,
+    inStock: Boolean(p.inStock),
+    featured: Boolean(p.featured),
+    stock: Number(p.stock),
+    lowStockThreshold: Number(p.lowStock) || 5,
+    sku: String(p.sku),
   }
 }
 
 export default function CatalogClient({
-  products,
-  totalProducts,
-  totalPages,
+  products: initialProducts,
+  totalProducts: initialTotal,
+  totalPages: initialTotalPages,
   initialFilters,
+  availableFilters: initialAvailableFilters,
 }: CatalogClientProps) {
   const [filters, setFilters] = useState(initialFilters)
+  const [products, setProducts] = useState(initialProducts)
+  const [totalProducts, setTotalProducts] = useState(initialTotal)
+  const [totalPages, setTotalPages] = useState(initialTotalPages)
+  const [availableFilters, setAvailableFilters] = useState(initialAvailableFilters)
+  const [loading, setLoading] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const abortRef = useRef<AbortController | null>(null)
+
+  const fetchProducts = useCallback(async (newFilters: typeof filters) => {
+    if (abortRef.current) abortRef.current.abort()
+    const controller = new AbortController()
+    abortRef.current = controller
+
+    setLoading(true)
+    try {
+      const qs = buildApiQueryString(newFilters)
+      const res = await fetch(`/api/products?${qs}`, {
+        cache: "no-store",
+        signal: controller.signal,
+      })
+      const json = await res.json()
+      if (!controller.signal.aborted && json.success) {
+        const data = json.data
+        setProducts((data.items || []).map(mapApiProduct))
+        setTotalProducts(data.total || 0)
+        setTotalPages(data.totalPages || 1)
+        if (data.availableFilters) {
+          setAvailableFilters({
+            categories: data.availableFilters.categories || [],
+            colors: data.availableFilters.colors || [],
+            badges: data.availableFilters.badges || [],
+            priceRange: data.availableFilters.priceRange || { min: 0, max: 0 },
+          })
+        }
+      }
+    } catch {
+      if (!controller.signal.aborted) {
+        setProducts([])
+      }
+    } finally {
+      if (!controller.signal.aborted) setLoading(false)
+    }
+  }, [])
 
   const updateURL = useCallback((newFilters: typeof filters) => {
     const params = buildSearchParams(newFilters)
@@ -53,9 +127,10 @@ export default function CatalogClient({
       const newFilters = { ...filters, q, page: 1 }
       setFilters(newFilters)
       updateURL(newFilters)
+      fetchProducts(newFilters)
       scrollToTop()
     },
-    [filters, updateURL]
+    [filters, updateURL, fetchProducts]
   )
 
   const handleFilterChange = useCallback(
@@ -63,9 +138,10 @@ export default function CatalogClient({
       const updated = { ...filters, ...newFilters, page: 1 }
       setFilters(updated)
       updateURL(updated)
+      fetchProducts(updated)
       scrollToTop()
     },
-    [filters, updateURL]
+    [filters, updateURL, fetchProducts]
   )
 
   const handlePageChange = useCallback(
@@ -73,9 +149,10 @@ export default function CatalogClient({
       const newFilters = { ...filters, page }
       setFilters(newFilters)
       updateURL(newFilters)
+      fetchProducts(newFilters)
       scrollToTop()
     },
-    [filters, updateURL]
+    [filters, updateURL, fetchProducts]
   )
 
   const handlePerPageChange = useCallback(
@@ -97,6 +174,17 @@ export default function CatalogClient({
     [filters, updateURL]
   )
 
+  const handleSortChange = useCallback(
+    (sort: SortOption) => {
+      const newFilters = { ...filters, sort, page: 1 }
+      setFilters(newFilters)
+      updateURL(newFilters)
+      fetchProducts(newFilters)
+      scrollToTop()
+    },
+    [filters, updateURL, fetchProducts]
+  )
+
   const clearFilters = useCallback(() => {
     const cleared: typeof filters = {
       q: "",
@@ -110,11 +198,13 @@ export default function CatalogClient({
       page: 1,
       perPage: 12,
       layout: 4,
+      sort: "newest",
     }
     setFilters(cleared)
     updateURL(cleared)
+    fetchProducts(cleared)
     scrollToTop()
-  }, [updateURL])
+  }, [updateURL, fetchProducts])
 
   const hasActiveFilters =
     filters.category.length > 0 ||
@@ -146,16 +236,17 @@ export default function CatalogClient({
       const sp: Record<string, string> = {}
       url.searchParams.forEach((v, k) => (sp[k] = v))
       import("@/lib/catalog-utils").then(({ parseSearchParams }) => {
-        setFilters(parseSearchParams(sp as CatalogSearchParams))
+        const newFilters = parseSearchParams(sp as CatalogSearchParams)
+        setFilters(newFilters)
+        fetchProducts(newFilters)
       })
     }
     window.addEventListener("popstate", handlePopState)
     return () => window.removeEventListener("popstate", handlePopState)
-  }, [])
+  }, [fetchProducts])
 
   return (
     <div ref={containerRef} className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-      {/* Header */}
       <div className="mb-10">
         <h1
           className="text-3xl sm:text-4xl md:text-5xl text-white mb-3"
@@ -167,16 +258,16 @@ export default function CatalogClient({
           className="text-[var(--color-muted)] text-sm sm:text-base"
           style={{ fontFamily: "var(--font-inter)" }}
         >
-          {totalProducts} {totalProducts === 1 ? "producto" : "productos"} disponibles
+          {loading ? "Buscando..." : `${totalProducts} ${totalProducts === 1 ? "producto" : "productos"} disponibles`}
         </p>
       </div>
 
-      {/* Toolbar */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8">
         <div className="flex-1 w-full sm:w-auto">
           <SearchBar value={filters.q} onSearch={handleSearch} />
         </div>
         <div className="flex items-center gap-3">
+          <SortDropdown value={filters.sort} onChange={handleSortChange} />
           <button
             onClick={() => setDrawerOpen(true)}
             className="relative flex items-center gap-2 px-4 py-2.5 rounded-lg border border-white/10 bg-white/5 text-white text-sm hover:border-[var(--color-gold)]/50 transition-colors"
@@ -194,94 +285,24 @@ export default function CatalogClient({
         </div>
       </div>
 
-      {/* Active Filters */}
       {hasActiveFilters && (
-        <div className="flex flex-wrap items-center gap-2 mb-6">
-          <span className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
-            Filtros activos:
-          </span>
-          {filters.category.map((c) => (
-            <button
-              key={c}
-              onClick={() =>
-                handleFilterChange({
-                  category: filters.category.filter((x) => x !== c),
-                })
-              }
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-gold)]/10 text-[var(--color-gold)] text-xs hover:bg-[var(--color-gold)]/20 transition-colors"
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              {c}
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M2 2l6 6M8 2l-6 6" />
-              </svg>
-            </button>
-          ))}
-          {filters.color.map((c) => (
-            <button
-              key={c}
-              onClick={() =>
-                handleFilterChange({
-                  color: filters.color.filter((x) => x !== c),
-                })
-              }
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-rose)]/10 text-[var(--color-rose)] text-xs hover:bg-[var(--color-rose)]/20 transition-colors"
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              {c}
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M2 2l6 6M8 2l-6 6" />
-              </svg>
-            </button>
-          ))}
-          {filters.ofertas && (
-            <button
-              onClick={() => handleFilterChange({ ofertas: false })}
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-gold)]/10 text-[var(--color-gold)] text-xs hover:bg-[var(--color-gold)]/20 transition-colors"
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              Ofertas
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M2 2l6 6M8 2l-6 6" />
-              </svg>
-            </button>
-          )}
-          {filters.nuevos && (
-            <button
-              onClick={() => handleFilterChange({ nuevos: false })}
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-gold)]/10 text-[var(--color-gold)] text-xs hover:bg-[var(--color-gold)]/20 transition-colors"
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              Nuevos
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M2 2l6 6M8 2l-6 6" />
-              </svg>
-            </button>
-          )}
-          {filters.limitados && (
-            <button
-              onClick={() => handleFilterChange({ limitados: false })}
-              className="flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--color-gold)]/10 text-[var(--color-gold)] text-xs hover:bg-[var(--color-gold)]/20 transition-colors"
-              style={{ fontFamily: "var(--font-inter)" }}
-            >
-              Limitados
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M2 2l6 6M8 2l-6 6" />
-              </svg>
-            </button>
-          )}
-          <button
-            onClick={clearFilters}
-            className="text-xs text-[var(--color-muted)] hover:text-white transition-colors underline underline-offset-2"
-            style={{ fontFamily: "var(--font-inter)" }}
-          >
-            Limpiar todo
-          </button>
-        </div>
+        <FilterChips
+          filters={filters}
+          onRemoveCategory={(c) =>
+            handleFilterChange({ category: filters.category.filter((x) => x !== c) })
+          }
+          onRemoveColor={(c) =>
+            handleFilterChange({ color: filters.color.filter((x) => x !== c) })
+          }
+          onRemoveBadge={(key) => handleFilterChange({ [key]: false })}
+          onRemovePrice={(key) => handleFilterChange({ [key]: "" })}
+          onClearAll={clearFilters}
+        />
       )}
 
-      {/* Products or Empty State */}
-      {products.length > 0 ? (
+      {loading ? (
+        <ProductSkeleton layout={filters.layout} />
+      ) : products.length > 0 ? (
         <>
           <ProductGrid products={products} layout={filters.layout} />
           <Pagination
@@ -297,13 +318,13 @@ export default function CatalogClient({
         <EmptyState onClearFilters={clearFilters} />
       )}
 
-      {/* Filters Drawer */}
       <FiltersDrawer
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
         filters={filters}
         onFilterChange={handleFilterChange}
         onClear={clearFilters}
+        availableFilters={availableFilters}
       />
     </div>
   )

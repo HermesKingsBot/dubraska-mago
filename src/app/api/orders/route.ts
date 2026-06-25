@@ -5,7 +5,22 @@ import { createOrderSchema } from "@/lib/schemas"
 
 async function GET(request: NextRequest) {
   try {
+    const { searchParams } = new URL(request.url)
+    const status = searchParams.get("status") || undefined
+    const sort = searchParams.get("sort") || "newest"
+
+    const where: Record<string, unknown> = {}
+    if (status) where.status = status
+
+    const orderBy: Record<string, string> = {}
+    switch (sort) {
+      case "oldest": orderBy.createdAt = "asc"; break
+      case "total": orderBy.total = "desc"; break
+      default: orderBy.createdAt = "desc"
+    }
+
     const orders = await db.order.findMany({
+      where,
       include: {
         items: {
           include: {
@@ -13,7 +28,7 @@ async function GET(request: NextRequest) {
           },
         },
       },
-      orderBy: { createdAt: "desc" },
+      orderBy,
     })
     return successResponse(orders)
   } catch (error) {

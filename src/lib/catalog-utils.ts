@@ -1,10 +1,11 @@
-import { Product, CatalogFilters, CatalogSearchParams } from "@/types/product"
+import { Product, CatalogFilters, CatalogSearchParams, SortOption } from "@/types/product"
 
 export function parseSearchParams(searchParams: CatalogSearchParams): CatalogFilters & {
   q: string
   page: number
   perPage: number | "all"
   layout: 4 | 2 | 1
+  sort: SortOption
 } {
   const q = searchParams.q ?? ""
   const page = Math.max(1, parseInt(searchParams.page ?? "1", 10) || 1)
@@ -13,6 +14,9 @@ export function parseSearchParams(searchParams: CatalogSearchParams): CatalogFil
   const layout = ([4, 2, 1].includes(parseInt(searchParams.layout ?? "4", 10))
     ? parseInt(searchParams.layout ?? "4", 10)
     : 4) as 4 | 2 | 1
+  const sort = (["newest", "oldest", "price_asc", "price_desc", "name_asc"].includes(searchParams.sort ?? "")
+    ? searchParams.sort
+    : "newest") as SortOption
 
   const category = searchParams.category
     ? searchParams.category.split(",").filter(Boolean)
@@ -33,6 +37,7 @@ export function parseSearchParams(searchParams: CatalogSearchParams): CatalogFil
     page,
     perPage,
     layout,
+    sort,
   }
 }
 
@@ -91,7 +96,7 @@ export function buildWhatsAppLink(product: Product): string {
 }
 
 export function buildSearchParams(
-  filters: CatalogFilters & { q: string; page: number; perPage: number | "all"; layout: 4 | 2 | 1 }
+  filters: CatalogFilters & { q: string; page: number; perPage: number | "all"; layout: 4 | 2 | 1; sort: SortOption }
 ): URLSearchParams {
   const params = new URLSearchParams()
   if (filters.q) params.set("q", filters.q)
@@ -105,5 +110,24 @@ export function buildSearchParams(
   if (filters.page > 1) params.set("page", String(filters.page))
   if (filters.perPage !== 12) params.set("perPage", String(filters.perPage))
   if (filters.layout !== 4) params.set("layout", String(filters.layout))
+  if (filters.sort !== "newest") params.set("sort", filters.sort)
   return params
+}
+
+export function buildApiQueryString(
+  filters: CatalogFilters & { q: string; page: number; sort: SortOption }
+): string {
+  const params = new URLSearchParams()
+  if (filters.q) params.set("q", filters.q)
+  if (filters.category.length > 0) params.set("category", filters.category.join(","))
+  if (filters.color.length > 0) params.set("color", filters.color.join(","))
+  if (filters.priceMin) params.set("minPrice", filters.priceMin)
+  if (filters.priceMax) params.set("maxPrice", filters.priceMax)
+  if (filters.ofertas) params.set("badge", "OFERTA")
+  if (filters.nuevos) params.set("badge", "NUEVO")
+  if (filters.limitados) params.set("badge", "LIMITADO")
+  if (filters.page > 1) params.set("page", String(filters.page))
+  params.set("limit", "20")
+  if (filters.sort) params.set("sort", filters.sort)
+  return params.toString()
 }

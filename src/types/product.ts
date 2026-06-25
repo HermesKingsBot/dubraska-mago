@@ -35,6 +35,23 @@ export interface CatalogFilters {
   limitados: boolean
 }
 
+export type SortOption = "newest" | "oldest" | "price_asc" | "price_desc" | "name_asc"
+
+export const SORT_OPTIONS: { value: SortOption; label: string }[] = [
+  { value: "newest", label: "Más recientes" },
+  { value: "oldest", label: "Más antiguos" },
+  { value: "price_asc", label: "Precio: menor a mayor" },
+  { value: "price_desc", label: "Precio: mayor a menor" },
+  { value: "name_asc", label: "Nombre A-Z" },
+]
+
+export interface AvailableFilters {
+  categories: { id: string; name: string; slug: string; count: number }[]
+  colors: { value: string; count: number }[]
+  badges: { value: string; count: number }[]
+  priceRange: { min: number; max: number }
+}
+
 export interface CatalogSearchParams {
   q?: string
   category?: string
@@ -47,6 +64,7 @@ export interface CatalogSearchParams {
   page?: string
   perPage?: string
   layout?: string
+  sort?: string
 }
 
 export const CATEGORIES = [

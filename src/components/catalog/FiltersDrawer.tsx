@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useCallback } from "react"
 import { motion, AnimatePresence } from "motion/react"
-import { CatalogFilters } from "@/types/product"
-import { CATEGORIES, COLORS } from "@/types/product"
+import { CatalogFilters, AvailableFilters } from "@/types/product"
+import PriceRangeSlider from "./PriceRangeSlider"
 
 interface FiltersDrawerProps {
   open: boolean
@@ -11,6 +11,14 @@ interface FiltersDrawerProps {
   filters: CatalogFilters
   onFilterChange: (filters: Partial<CatalogFilters>) => void
   onClear: () => void
+  availableFilters: AvailableFilters
+}
+
+const COLOR_HEX: Record<string, string> = {
+  dorado: "#D4AF37",
+  plateado: "#C0C0C0",
+  rose: "#E8B4B8",
+  negro: "#1a1a1a",
 }
 
 export default function FiltersDrawer({
@@ -19,6 +27,7 @@ export default function FiltersDrawer({
   filters,
   onFilterChange,
   onClear,
+  availableFilters,
 }: FiltersDrawerProps) {
   const drawerRef = useRef<HTMLDivElement>(null)
 
@@ -49,6 +58,10 @@ export default function FiltersDrawer({
     (filters.priceMin ? 1 : 0) +
     (filters.priceMax ? 1 : 0)
 
+  const categories = availableFilters.categories.length > 0
+    ? availableFilters.categories
+    : []
+
   return (
     <AnimatePresence>
       {open && (
@@ -68,7 +81,7 @@ export default function FiltersDrawer({
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
-            className="fixed top-0 left-0 bottom-0 z-50 w-full max-w-sm bg-[var(--color-bg)] border-r border-white/10 overflow-y-auto"
+            className="fixed top-0 left-0 bottom-0 z-50 w-full max-w-sm bg-[var(--color-bg)] border-r border-white/10 overflow-y-auto max-md:top-auto max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:max-w-full max-md:rounded-t-2xl max-md:border-r-0 max-md:border-t border-white/10"
           >
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <div className="flex items-center gap-3">
@@ -91,14 +104,7 @@ export default function FiltersDrawer({
                 onClick={onClose}
                 className="p-2 rounded-lg text-[var(--color-muted)] hover:text-white hover:bg-white/5 transition-colors"
               >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6 6 18M6 6l12 12" />
                 </svg>
               </button>
@@ -113,39 +119,39 @@ export default function FiltersDrawer({
                   Categoría
                 </h3>
                 <div className="space-y-2">
-                  {CATEGORIES.map((cat) => (
-                    <label
-                      key={cat.value}
-                      className="flex items-center gap-3 cursor-pointer group"
-                    >
-                      <span
-                        className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
-                          filters.category.includes(cat.value)
-                            ? "bg-[var(--color-gold)] border-[var(--color-gold)]"
-                            : "border-white/20 group-hover:border-white/40"
-                        }`}
+                  {categories.length > 0 ? (
+                    categories.map((cat) => (
+                      <label
+                        key={cat.slug}
+                        className="flex items-center gap-3 cursor-pointer group"
                       >
-                        {filters.category.includes(cat.value) && (
-                          <svg
-                            width="10"
-                            height="10"
-                            viewBox="0 0 10 10"
-                            fill="none"
-                            stroke="#050505"
-                            strokeWidth="2"
-                          >
-                            <path d="M2 5l2.5 2.5L8 3" />
-                          </svg>
-                        )}
-                      </span>
-                      <span
-                        className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors"
-                        style={{ fontFamily: "var(--font-inter)" }}
-                      >
-                        {cat.label}
-                      </span>
-                    </label>
-                  ))}
+                        <span
+                          className={`w-4 h-4 rounded border flex items-center justify-center transition-colors ${
+                            filters.category.includes(cat.slug)
+                              ? "bg-[var(--color-gold)] border-[var(--color-gold)]"
+                              : "border-white/20 group-hover:border-white/40"
+                          }`}
+                        >
+                          {filters.category.includes(cat.slug) && (
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#050505" strokeWidth="2">
+                              <path d="M2 5l2.5 2.5L8 3" />
+                            </svg>
+                          )}
+                        </span>
+                        <span
+                          className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors flex-1"
+                          style={{ fontFamily: "var(--font-inter)" }}
+                        >
+                          {cat.name}
+                        </span>
+                        <span className="text-xs text-[var(--color-muted)]/60">{cat.count}</span>
+                      </label>
+                    ))
+                  ) : (
+                    <p className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+                      Cargando categorías...
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -157,7 +163,7 @@ export default function FiltersDrawer({
                   Color
                 </h3>
                 <div className="space-y-2">
-                  {COLORS.map((col) => (
+                  {availableFilters.colors.map((col) => (
                     <label
                       key={col.value}
                       className="flex items-center gap-3 cursor-pointer group"
@@ -171,15 +177,16 @@ export default function FiltersDrawer({
                       >
                         <span
                           className="w-2.5 h-2.5 rounded-full"
-                          style={{ backgroundColor: col.hex }}
+                          style={{ backgroundColor: COLOR_HEX[col.value] || col.value }}
                         />
                       </span>
                       <span
-                        className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors"
+                        className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors flex-1"
                         style={{ fontFamily: "var(--font-inter)" }}
                       >
-                        {col.label}
+                        {col.value}
                       </span>
+                      <span className="text-xs text-[var(--color-muted)]/60">{col.count}</span>
                     </label>
                   ))}
                 </div>
@@ -192,39 +199,13 @@ export default function FiltersDrawer({
                 >
                   Rango de precio
                 </h3>
-                <div className="flex items-center gap-3">
-                  <div className="relative flex-1">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)] text-xs">
-                      $
-                    </span>
-                    <input
-                      type="number"
-                      placeholder="Min"
-                      value={filters.priceMin}
-                      onChange={(e) =>
-                        onFilterChange({ priceMin: e.target.value })
-                      }
-                      className="w-full pl-7 pr-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)]/50 transition-colors"
-                      style={{ fontFamily: "var(--font-inter)" }}
-                    />
-                  </div>
-                  <span className="text-[var(--color-muted)] text-xs">—</span>
-                  <div className="relative flex-1">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)] text-xs">
-                      $
-                    </span>
-                    <input
-                      type="number"
-                      placeholder="Max"
-                      value={filters.priceMax}
-                      onChange={(e) =>
-                        onFilterChange({ priceMax: e.target.value })
-                      }
-                      className="w-full pl-7 pr-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)]/50 transition-colors"
-                      style={{ fontFamily: "var(--font-inter)" }}
-                    />
-                  </div>
-                </div>
+                <PriceRangeSlider
+                  min={availableFilters.priceRange.min}
+                  max={availableFilters.priceRange.max}
+                  valueMin={filters.priceMin}
+                  valueMax={filters.priceMax}
+                  onChange={(min, max) => onFilterChange({ priceMin: min, priceMax: max })}
+                />
               </div>
 
               <div>

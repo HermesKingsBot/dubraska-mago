@@ -11,8 +11,22 @@ import type { OfficeProduct } from "@/types/office"
 
 const STATUS_FILTERS = ["Todos", "Disponible", "Stock Bajo", "Agotado"]
 
+function ProductSkeletonRow() {
+  return (
+    <div className="px-4 py-4 flex items-center gap-4 animate-pulse">
+      <div className="w-12 h-12 rounded-lg bg-white/5" />
+      <div className="flex-1 space-y-2">
+        <div className="h-3.5 w-1/3 bg-white/10 rounded" />
+        <div className="h-2.5 w-1/5 bg-white/10 rounded" />
+      </div>
+      <div className="h-4 w-16 bg-white/10 rounded" />
+      <div className="h-4 w-8 bg-white/10 rounded" />
+    </div>
+  )
+}
+
 function ProductosPage(): React.JSX.Element {
-  const { products, addProduct, updateProduct, deleteProduct } = useProducts()
+  const { products, loaded, addProduct, updateProduct, deleteProduct } = useProducts()
   const [search, setSearch] = useState("")
   const [catFilter, setCatFilter] = useState("")
   const [statusFilter, setStatusFilter] = useState("Todos")
@@ -56,7 +70,7 @@ function ProductosPage(): React.JSX.Element {
       <div className="max-w-6xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <h2 className="text-xl font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
-            Productos ({filtered.length})
+            Productos ({loaded ? filtered.length : "..."})
           </h2>
           <button
             onClick={openNew}
@@ -68,13 +82,19 @@ function ProductosPage(): React.JSX.Element {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Buscar por nombre o SKU..."
-            className="flex-1 bg-[#111] border border-[#333] rounded-lg px-3 py-2 text-sm text-white focus:border-[var(--color-gold)] focus:outline-none"
-          />
+          <div className="relative flex-1">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-muted)]" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Buscar por nombre o SKU..."
+              className="w-full pl-9 pr-3 py-2 bg-[#111] border border-[#333] rounded-lg text-sm text-white focus:border-[var(--color-gold)] focus:outline-none"
+            />
+          </div>
           <select
             value={catFilter}
             onChange={(e) => setCatFilter(e.target.value)}
@@ -96,15 +116,34 @@ function ProductosPage(): React.JSX.Element {
           </select>
         </div>
 
-        <ProductList
-          products={filtered}
-          onEdit={(p) => {
-            setEditingProduct(p)
-            setModalOpen(true)
-          }}
-          onDelete={setDeleting}
-          onToggleVisible={(id, v) => updateProduct(id, { visible: v })}
-        />
+        {!loaded ? (
+          <div className="bg-[#111] border border-[#222] rounded-xl divide-y divide-[#222]">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <ProductSkeletonRow key={i} />
+            ))}
+          </div>
+        ) : filtered.length > 0 ? (
+          <ProductList
+            products={filtered}
+            onEdit={(p) => {
+              setEditingProduct(p)
+              setModalOpen(true)
+            }}
+            onDelete={setDeleting}
+            onToggleVisible={(id, v) => updateProduct(id, { visible: v })}
+          />
+        ) : (
+          <div className="bg-[#111] border border-[#222] rounded-xl p-12 text-center">
+            <svg className="mx-auto mb-4 text-[var(--color-muted)]" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+              <path d="M8 11h6" />
+            </svg>
+            <p className="text-[var(--color-muted)] text-sm" style={{ fontFamily: "var(--font-inter)" }}>
+              No se encontraron productos con esos filtros.
+            </p>
+          </div>
+        )}
 
         <ProductModal
           open={modalOpen}

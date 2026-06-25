@@ -7,7 +7,15 @@ async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const active = searchParams.get("active")
-    const where = active === "true" ? { active: true } : {}
+    const rating = searchParams.get("rating")
+    const productId = searchParams.get("productId")
+
+    const where: Record<string, unknown> = {}
+    if (active === "true") where.active = true
+    if (active === "false") where.active = false
+    if (rating) where.rating = parseInt(rating)
+    if (productId) where.productId = productId
+
     const testimonials = await db.testimonial.findMany({
       where,
       orderBy: { date: "desc" },
