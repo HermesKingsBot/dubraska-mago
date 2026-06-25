@@ -167,3 +167,51 @@ export const auditLogQuerySchema = z.object({
   page: z.coerce.number().default(1),
   limit: z.coerce.number().max(100).default(50),
 })
+
+export const importProductSchema = z.object({
+  name: z.string().min(1, "Nombre requerido"),
+  slug: z.string().min(1, "Slug requerido"),
+  sku: z.string().default(""),
+  description: z.string().default(""),
+  price: z.coerce.number().positive("Precio debe ser positivo"),
+  oldPrice: z.coerce.number().positive().nullable().optional(),
+  material: z.string().default(""),
+  length: z.string().nullable().optional(),
+  diameter: z.string().nullable().optional(),
+  weight: z.string().nullable().optional(),
+  color: z.string().default(""),
+  badge: z.string().nullable().optional(),
+  image: z.string().default(""),
+  inStock: z.coerce.boolean().default(true),
+  featured: z.coerce.boolean().default(false),
+  stock: z.coerce.number().int().default(0),
+  lowStock: z.coerce.number().int().default(5),
+  categoryName: z.string().default(""),
+  sizes: z.string().default("[]"),
+  compareGroup: z.string().nullable().optional(),
+})
+
+export const importCategorySchema = z.object({
+  name: z.string().min(1, "Nombre requerido"),
+  slug: z.string().min(1, "Slug requerido"),
+  description: z.string().default(""),
+  active: z.coerce.boolean().default(true),
+  order: z.coerce.number().int().default(0),
+})
+
+export const importTestimonialSchema = z.object({
+  name: z.string().min(1, "Nombre requerido"),
+  text: z.string().min(1, "Texto requerido"),
+  rating: z.coerce.number().int().min(1).max(5),
+  productSlug: z.string().nullable().optional(),
+  date: z.string().nullable().optional(),
+  active: z.coerce.boolean().default(true),
+})
+
+export const inventoryMovementSchema = z.object({
+  productSku: z.string().min(1, "SKU de producto requerido"),
+  type: z.enum(["STOCK_IN", "STOCK_OUT", "SET"]),
+  quantity: z.coerce.number().int().positive("Cantidad debe ser positiva"),
+  reason: z.string().nullable().optional(),
+  reference: z.string().nullable().optional(),
+})

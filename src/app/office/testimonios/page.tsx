@@ -1,10 +1,11 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useCallback } from "react"
 import AuthGuard from "@/components/office/AuthGuard"
 import TestimonialList from "@/components/office/TestimonialList"
 import TestimonialModal from "@/components/office/TestimonialModal"
 import ToggleSwitch from "@/components/office/ToggleSwitch"
+import ExportImportButtons from "@/components/office/ExportImportButtons"
 import { useTestimonials } from "@/hooks/useTestimonials"
 import type { Testimonial } from "@/types/office"
 
@@ -13,6 +14,11 @@ function TestimoniosPage(): React.JSX.Element {
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<Testimonial | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [, setRefreshKey] = useState(0)
+
+  const refresh = useCallback(() => {
+    setRefreshKey((k) => k + 1)
+  }, [])
 
   const handleSave = (t: Testimonial) => {
     if (editing) {
@@ -61,6 +67,7 @@ function TestimoniosPage(): React.JSX.Element {
               <ToggleSwitch checked={showDeleted} onChange={setShowDeleted} size="sm" />
               <span className="text-xs text-[var(--color-muted)]">Mostrar eliminados</span>
             </div>
+            <ExportImportButtons entity="testimonials" onImportComplete={refresh} />
             <button
               onClick={() => { setEditing(null); setModalOpen(true) }}
               className="px-4 py-2 text-sm bg-[var(--color-gold)] text-black font-semibold rounded hover:opacity-90 transition-opacity"

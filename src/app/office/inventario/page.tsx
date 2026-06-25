@@ -1,10 +1,11 @@
 "use client"
 
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useCallback } from "react"
 import AuthGuard from "@/components/office/AuthGuard"
 import StatusBadge from "@/components/office/StatusBadge"
 import OrderModal from "@/components/office/OrderModal"
 import AdjustmentModal from "@/components/office/AdjustmentModal"
+import ExportImportButtons from "@/components/office/ExportImportButtons"
 import { useProducts } from "@/hooks/useProducts"
 import type { OfficeProduct, StockOrder, StockAdjustment } from "@/types/office"
 
@@ -47,6 +48,11 @@ function InventarioPage(): React.JSX.Element {
   const [adjustProduct, setAdjustProduct] = useState<OfficeProduct | null>(null)
   const [search, setSearch] = useState("")
   const [movementFilter, setMovementFilter] = useState<string>("Todos")
+  const [, setRefreshKey] = useState(0)
+
+  const refresh = useCallback(() => {
+    setRefreshKey((k) => k + 1)
+  }, [])
 
   const totalUnits = products.reduce((s, p) => s + p.stock, 0)
   const lowStockCount = products.filter(
@@ -96,16 +102,19 @@ function InventarioPage(): React.JSX.Element {
           <h2 className="text-xl font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
             Inventario
           </h2>
-          <div className="flex gap-4 text-sm">
-            <span className="text-[var(--color-muted)]">
-              Total: <span className="text-white font-medium">{totalUnits}</span> unidades
-            </span>
-            <span className="text-yellow-400">
-              Stock bajo: {lowStockCount}
-            </span>
-            <span className="text-red-400">
-              Agotados: {outOfStockCount}
-            </span>
+          <div className="flex items-center gap-4">
+            <div className="flex gap-4 text-sm">
+              <span className="text-[var(--color-muted)]">
+                Total: <span className="text-white font-medium">{totalUnits}</span> unidades
+              </span>
+              <span className="text-yellow-400">
+                Stock bajo: {lowStockCount}
+              </span>
+              <span className="text-red-400">
+                Agotados: {outOfStockCount}
+              </span>
+            </div>
+            <ExportImportButtons entity="inventory" onImportComplete={refresh} />
           </div>
         </div>
 

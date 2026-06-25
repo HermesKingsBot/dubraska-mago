@@ -1,12 +1,13 @@
 "use client"
 
-import React, { useState, useMemo } from "react"
+import React, { useState, useMemo, useCallback } from "react"
 import AuthGuard from "@/components/office/AuthGuard"
 import ConfirmDialog from "@/components/office/ConfirmDialog"
 import ProductModal from "@/components/office/ProductModal"
 import ProductList from "@/components/office/ProductList"
 import ToggleSwitch from "@/components/office/ToggleSwitch"
 import RestoreButton from "@/components/office/RestoreButton"
+import ExportImportButtons from "@/components/office/ExportImportButtons"
 import { useProducts } from "@/hooks/useProducts"
 import { CATEGORIES } from "@/types/product"
 import type { OfficeProduct } from "@/types/office"
@@ -35,6 +36,11 @@ function ProductosPage(): React.JSX.Element {
   const [modalOpen, setModalOpen] = useState(false)
   const [editingProduct, setEditingProduct] = useState<OfficeProduct | null>(null)
   const [deleting, setDeleting] = useState<OfficeProduct | null>(null)
+  const [, setRefreshKey] = useState(0)
+
+  const refresh = useCallback(() => {
+    setRefreshKey((k) => k + 1)
+  }, [])
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
@@ -82,6 +88,7 @@ function ProductosPage(): React.JSX.Element {
               <ToggleSwitch checked={showDeleted} onChange={setShowDeleted} size="sm" />
               <span className="text-xs text-[var(--color-muted)]">Mostrar eliminados</span>
             </div>
+            <ExportImportButtons entity="products" onImportComplete={refresh} />
             <button
               onClick={openNew}
               className="px-4 py-2 text-sm rounded-lg text-black font-medium"

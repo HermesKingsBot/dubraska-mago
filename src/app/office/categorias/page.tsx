@@ -1,11 +1,12 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useCallback } from "react"
 import AuthGuard from "@/components/office/AuthGuard"
 import CategoryList from "@/components/office/CategoryList"
 import CategoryModal from "@/components/office/CategoryModal"
 import ToggleSwitch from "@/components/office/ToggleSwitch"
 import RestoreButton from "@/components/office/RestoreButton"
+import ExportImportButtons from "@/components/office/ExportImportButtons"
 import { useCategories } from "@/hooks/useCategories"
 import type { Category } from "@/types/office"
 
@@ -14,6 +15,11 @@ function CategoriasPage(): React.JSX.Element {
   const [modalOpen, setModalOpen] = useState(false)
   const [editing, setEditing] = useState<Category | null>(null)
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [, setRefreshKey] = useState(0)
+
+  const refresh = useCallback(() => {
+    setRefreshKey((k) => k + 1)
+  }, [])
 
   const handleSave = (cat: Category) => {
     if (editing) {
@@ -62,6 +68,7 @@ function CategoriasPage(): React.JSX.Element {
               <ToggleSwitch checked={showDeleted} onChange={setShowDeleted} size="sm" />
               <span className="text-xs text-[var(--color-muted)]">Mostrar eliminados</span>
             </div>
+            <ExportImportButtons entity="categories" onImportComplete={refresh} />
             <button
               onClick={() => { setEditing(null); setModalOpen(true) }}
               className="px-4 py-2 text-sm bg-[var(--color-gold)] text-black font-semibold rounded hover:opacity-90 transition-opacity"
