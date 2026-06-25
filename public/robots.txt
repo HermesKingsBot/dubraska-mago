@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /office/
+Disallow: /office/*
+
+User-agent: Googlebot
+Allow: /
+Disallow: /api/
+Disallow: /office/
+
+Sitemap: https://dubraska-mago.vercel.app/sitemap.xml
+Host: https://dubraska-mago.vercel.app

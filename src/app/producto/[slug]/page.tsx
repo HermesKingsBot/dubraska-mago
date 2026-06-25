@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation"
+import type { Metadata } from "next"
 import type { Product } from "@/types/product"
 import ProductDetailClient from "./ProductDetailClient"
+import StructuredData from "@/components/StructuredData"
 
 interface ApiProduct extends Product {
   gallery: string[]
@@ -72,7 +74,7 @@ export async function generateStaticParams() {
 
 type Props = { params: Promise<{ slug: string }> }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const products = await fetchProducts()
   const product = products.find((p) => p.slug === slug)
@@ -132,10 +134,66 @@ export default async function ProductPage({ params }: Props) {
   const displayRelated =
     relatedProducts.length >= 3 ? relatedProducts.slice(0, 3) : fallbackProducts
 
+  const productData = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description,
+    image: product.image,
+    sku: product.sku,
+    brand: {
+      "@type": "Brand",
+      name: "Dubraska Mago",
+    },
+    offers: {
+      "@type": "Offer",
+      url: `https://dubraska-mago.vercel.app/producto/${product.slug}`,
+      priceCurrency: "USD",
+      price: product.price,
+      availability: product.inStock
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      seller: {
+        "@type": "Organization",
+        name: "Dubraska Mago",
+      },
+    },
+    category: product.category,
+  }
+
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: "https://dubraska-mago.vercel.app",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Colecciones",
+        item: "https://dubraska-mago.vercel.app/colecciones",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: `https://dubraska-mago.vercel.app/producto/${product.slug}`,
+      },
+    ],
+  }
+
   return (
-    <ProductDetailClient
-      product={product}
-      relatedProducts={displayRelated}
-    />
+    <>
+      <ProductDetailClient
+        product={product}
+        relatedProducts={displayRelated}
+      />
+      <StructuredData data={productData} />
+      <StructuredData data={breadcrumbData} />
+    </>
   )
 }

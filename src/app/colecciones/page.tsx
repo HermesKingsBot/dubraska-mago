@@ -1,8 +1,19 @@
+import type { Metadata } from "next"
 import { CatalogSearchParams } from "@/types/product"
 import type { AvailableFilters } from "@/types/product"
 import { parseSearchParams, buildApiQueryString } from "@/lib/catalog-utils"
 import type { Product } from "@/types/product"
 import CatalogClient from "./CatalogClient"
+
+export const metadata: Metadata = {
+  title: "Colección Completa | Dubraska Mago®",
+  description:
+    "Explora toda nuestra colección de joyería de lujo. Collares, pulseras, aretes y sets en acero inoxidable bañado en oro 18K.",
+  openGraph: {
+    title: "Colección Completa | Dubraska Mago®",
+    description: "Explora toda nuestra colección de joyería de lujo.",
+  },
+}
 
 interface PageProps {
   searchParams: Promise<CatalogSearchParams>
