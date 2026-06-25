@@ -13,6 +13,9 @@ import ProductCTA from "@/components/product/ProductCTA"
 import CareInstructions from "@/components/product/CareInstructions"
 import ShippingReturns from "@/components/product/ShippingReturns"
 import RelatedProducts from "@/components/product/RelatedProducts"
+import ProductReviews from "@/components/product/ProductReviews"
+import OfferCountdown from "@/components/product/OfferCountdown"
+import CustomersAlsoBought from "@/components/product/CustomersAlsoBought"
 import { useSettingsContext } from "@/context/SettingsContext"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -37,6 +40,13 @@ export default function ProductDetailClient({
   const [quantity, setQuantity] = useState(1)
   const [descOpen, setDescOpen] = useState(true)
   const [careOpen, setCareOpen] = useState(false)
+  const [selectedSize, setSelectedSize] = useState<string | null>(null)
+  const [reviews, setReviews] = useState<any[]>([])
+  const [reviewSummary, setReviewSummary] = useState({
+    total: 0,
+    averageRating: 0,
+    ratingDistribution: {} as Record<number, number>,
+  })
 
   const containerRef = useRef<HTMLDivElement>(null)
   const mainImageRef = useRef<HTMLDivElement>(null)
@@ -45,6 +55,8 @@ export default function ProductDetailClient({
   const relatedRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
   const zoomRef = useRef<HTMLDivElement>(null)
+  const reviewsRef = useRef<HTMLDivElement>(null)
+  const alsoBoughtRef = useRef<HTMLDivElement>(null)
 
   const { getSetting } = useSettingsContext()
 
@@ -52,9 +64,9 @@ export default function ProductDetailClient({
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
     : null
 
-  const whatsappUrl = buildWhatsAppLink(product)
+  const sizeText = selectedSize ? ` (Talla: ${selectedSize})` : ""
   const encodedMsg = encodeURIComponent(
-    `Hola! Me interesa ${product.name} - $${product.price.toFixed(2)}. ¿Está disponible?`
+    `Hola! Me interesa ${product.name}${sizeText} - $${product.price.toFixed(2)}. ¿Está disponible?`
   )
   const whatsappLink = `https://wa.me/${getSetting("whatsapp", "584141234567")}?text=${encodedMsg}`
 
@@ -156,6 +168,40 @@ export default function ProductDetailClient({
       )
     }
 
+    if (reviewsRef.current) {
+      gsap.fromTo(
+        reviewsRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: reviewsRef.current,
+            start: "top 85%",
+          },
+        }
+      )
+    }
+
+    if (alsoBoughtRef.current) {
+      gsap.fromTo(
+        alsoBoughtRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: alsoBoughtRef.current,
+            start: "top 85%",
+          },
+        }
+      )
+    }
+
     if (ctaRef.current) {
       gsap.to(ctaRef.current, {
         scale: 1.02,
@@ -182,6 +228,10 @@ export default function ProductDetailClient({
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="mb-6">
+          <OfferCountdown oldPrice={product.oldPrice} />
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           <ProductGallery
             ref={mainImageRef}
@@ -200,6 +250,8 @@ export default function ProductDetailClient({
               ref={infoRef}
               product={product}
               discount={discount}
+              selectedSize={selectedSize}
+              onSizeChange={setSelectedSize}
             />
             <ProductCTA
               ref={ctaRef}
@@ -207,6 +259,7 @@ export default function ProductDetailClient({
               onQuantityChange={setQuantity}
               whatsappLink={whatsappLink}
               inStock={product.inStock}
+              selectedSize={selectedSize}
             />
             <ProductDescription
               product={product}
@@ -222,7 +275,22 @@ export default function ProductDetailClient({
         </div>
 
         <ShippingReturns ref={shippingRef} />
+
+        <div ref={reviewsRef}>
+          <ProductReviews
+            productId={product.id}
+            initialReviews={reviews}
+            averageRating={reviewSummary.averageRating}
+            totalReviews={reviewSummary.total}
+            ratingDistribution={reviewSummary.ratingDistribution}
+          />
+        </div>
+
         <RelatedProducts ref={relatedRef} relatedProducts={relatedProducts} />
+
+        <div ref={alsoBoughtRef}>
+          <CustomersAlsoBought products={relatedProducts} />
+        </div>
       </div>
     </div>
   )

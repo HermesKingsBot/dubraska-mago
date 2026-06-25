@@ -7,6 +7,7 @@ import { motion } from "motion/react"
 import { Product } from "@/types/product"
 import { buildWhatsAppLink } from "@/lib/catalog-utils"
 import HeartButton from "@/components/wishlist/HeartButton"
+import CompareButton from "@/components/compare/CompareButton"
 
 interface ProductCardProps {
   product: Product
@@ -91,7 +92,8 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           </span>
         )}
 
-        <div className="absolute top-3 right-3 z-10">
+        <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5">
+          <CompareButton productId={product.id} />
           <HeartButton productId={product.id} size="sm" />
         </div>
 

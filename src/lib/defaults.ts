@@ -44,6 +44,14 @@ export const COMPANY_DEFAULTS: Record<string, string> = {
   return_days: '7',
 }
 
+export const PRODUCT_SIZE_DEFAULTS: Record<string, string[]> = {
+  collares: ["40cm", "45cm", "50cm"],
+  pulseras: ["S", "M", "L"],
+  aretes: ["Único"],
+  sets: ["Único"],
+  anillos: ["48", "50", "52", "54", "56"],
+}
+
 export const SOCIAL_DEFAULTS: SocialLink[] = [
   { id: 'instagram', platform: 'Instagram', url: 'https://instagram.com/dubraska.mago', handle: '@dubraska.mago', active: true, order: 0 },
   { id: 'whatsapp', platform: 'WhatsApp', url: 'https://wa.me/584120000000', handle: '+58 412 000 0000', active: true, order: 1 },

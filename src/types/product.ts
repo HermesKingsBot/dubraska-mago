@@ -19,6 +19,37 @@ export interface Product {
   stock: number
   lowStockThreshold: number
   sku: string
+  sizes?: string[]
+}
+
+export interface ProductWithMeta extends Product {
+  compareGroup?: string | null
+  reviewCount: number
+  averageRating: number
+  gallery: string[]
+}
+
+export interface Review {
+  id: string
+  productId: string
+  userId: string | null
+  name: string
+  email: string | null
+  rating: number
+  title: string | null
+  comment: string
+  verified: boolean
+  images: string[]
+  helpful: number
+  status: "PENDING" | "APPROVED" | "REJECTED"
+  createdAt: string
+  updatedAt: string
+}
+
+export interface ReviewSummary {
+  total: number
+  averageRating: number
+  ratingDistribution: Record<number, number>
 }
 
 export type LayoutColumns = 4 | 2 | 1
@@ -84,3 +115,11 @@ export const COLORS = [
 export const PER_PAGE_OPTIONS: PerPageOption[] = [8, 12, 20, "all"]
 
 export const WHATSAPP_BASE = "https://wa.me/584141234567?text="
+
+export const PRODUCT_SIZE_MAP: Record<string, string[]> = {
+  collares: ["40cm", "45cm", "50cm"],
+  pulseras: ["S", "M", "L"],
+  aretes: ["Único"],
+  sets: ["Único"],
+  anillos: ["48", "50", "52", "54", "56"],
+}

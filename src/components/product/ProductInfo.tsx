@@ -1,6 +1,8 @@
 "use client"
 
+import { useState } from "react"
 import { Product } from "@/types/product"
+import SizeGuideModal from "./SizeGuideModal"
 
 const COLOR_MAP: Record<string, string> = {
   dorado: "var(--color-gold)",
@@ -15,10 +17,15 @@ interface ProductInfoProps {
     dimensions: string
   }
   discount: number | null
+  selectedSize: string | null
+  onSizeChange: (size: string) => void
   ref?: React.Ref<HTMLDivElement>
 }
 
-function ProductInfo({ product, discount, ref }: ProductInfoProps): React.JSX.Element {
+function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: ProductInfoProps): React.JSX.Element {
+  const [sizeGuideOpen, setSizeGuideOpen] = useState(false)
+  const sizes = Array.isArray(product.sizes) ? product.sizes : []
+
   return (
     <div ref={ref} className="flex flex-col">
       <span
@@ -60,6 +67,38 @@ function ProductInfo({ product, discount, ref }: ProductInfoProps): React.JSX.El
         )}
       </div>
 
+      {sizes.length > 0 && (
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm text-white" style={{ fontFamily: "var(--font-inter)" }}>
+              Talla: {selectedSize || "Selecciona"}
+            </span>
+            <button
+              onClick={() => setSizeGuideOpen(true)}
+              className="text-xs text-[var(--color-gold)] underline"
+            >
+              Guía de tallas
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {sizes.map((size: string) => (
+              <button
+                key={size}
+                onClick={() => onSizeChange(size)}
+                className={`px-3 py-1.5 rounded border text-sm transition-colors ${
+                  selectedSize === size
+                    ? "border-[var(--color-gold)] bg-[var(--color-gold)]/10 text-[var(--color-gold)]"
+                    : "border-white/10 text-[var(--color-muted)] hover:border-white/30"
+                }`}
+                style={{ fontFamily: "var(--font-inter)" }}
+              >
+                {size}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="flex flex-wrap items-center gap-4 mb-4">
         <div className="flex items-center gap-2">
           <span
@@ -100,6 +139,12 @@ function ProductInfo({ product, discount, ref }: ProductInfoProps): React.JSX.El
           </span>
         </div>
       )}
+
+      <SizeGuideModal
+        isOpen={sizeGuideOpen}
+        onClose={() => setSizeGuideOpen(false)}
+        category={product.category}
+      />
     </div>
   )
 }

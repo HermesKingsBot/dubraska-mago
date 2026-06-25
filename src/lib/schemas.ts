@@ -134,3 +134,25 @@ export const socialLinkSchema = z.object({
 })
 
 export const updateSocialLinkSchema = socialLinkSchema.partial()
+
+export const updateProductSizesSchema = z.object({
+  sizes: z.array(z.string()).default([]),
+})
+
+export const createReviewSchema = z.object({
+  productId: z.string().min(1),
+  name: z.string().min(2, "Nombre muy corto").max(50),
+  email: z.string().email("Email inválido").optional(),
+  rating: z.number().int().min(1, "Mínimo 1 estrella").max(5, "Máximo 5 estrellas"),
+  title: z.string().max(100).optional(),
+  comment: z.string().min(10, "Mínimo 10 caracteres").max(1000, "Máximo 1000 caracteres"),
+  images: z.array(z.string()).default([]),
+})
+
+export const updateReviewSchema = createReviewSchema.partial().extend({
+  status: z.enum(["PENDING", "APPROVED", "REJECTED"]).optional(),
+})
+
+export const saveComparisonSchema = z.object({
+  productIds: z.array(z.string()).min(2, "Mínimo 2 productos").max(4, "Máximo 4 productos"),
+})

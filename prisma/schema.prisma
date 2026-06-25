@@ -23,6 +23,8 @@ model User {
   cartItems     CartItem[]
   wishlistItems WishlistItem[]
   payments      Payment[]
+  reviews       Review[]
+  comparisons   ProductComparison[]
 }
 
 model Address {
@@ -119,12 +121,44 @@ model Product {
   sku         String
   categoryId  String
   category    Category            @relation(fields: [categoryId], references: [id])
+  sizes       String              @default("[]")
+  compareGroup String?
+  reviews     Review[]
   orderItems  OrderItem[]
   movements   InventoryMovement[]
   cartItems   CartItem[]
   wishlistItems WishlistItem[]
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
+}
+
+model Review {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  name      String
+  email     String?
+  rating    Int
+  title     String?
+  comment   String
+  verified  Boolean  @default(false)
+  images    String   @default("[]")
+  helpful   Int      @default(0)
+  status    String   @default("PENDING")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ProductComparison {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessionId String?
+  productIds String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Testimonial {

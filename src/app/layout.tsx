@@ -6,6 +6,7 @@ import Footer from "@/components/Footer"
 import { AuthProvider } from "@/context/AuthContext"
 import { CustomerAuthProvider } from "@/context/CustomerAuthContext"
 import { SettingsProvider } from "@/context/SettingsContext"
+import { CompareProvider } from "@/context/CompareContext"
 import { getServerSettings } from "@/lib/server-settings"
 
 const instrumentSerif = Instrument_Serif({
@@ -124,9 +125,11 @@ export default function RootLayout({
         <AuthProvider>
           <CustomerAuthProvider>
             <SettingsProvider>
-              <NavigationBar />
-              <main>{children}</main>
-              <Footer />
+              <CompareProvider>
+                <NavigationBar />
+                <main>{children}</main>
+                <Footer />
+              </CompareProvider>
             </SettingsProvider>
           </CustomerAuthProvider>
         </AuthProvider>

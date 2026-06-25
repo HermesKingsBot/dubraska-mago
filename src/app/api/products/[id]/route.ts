@@ -19,6 +19,7 @@ async function GET(request: NextRequest, { params }: RouteParams) {
     return successResponse({
       ...product,
       gallery: JSON.parse(product.gallery || "[]"),
+      sizes: JSON.parse(product.sizes || "[]"),
     })
   } catch (error) {
     return handleApiError(error)
@@ -36,11 +37,15 @@ async function PATCH(request: NextRequest, { params }: RouteParams) {
       return errorResponse("Product not found", 404)
     }
     const gallery = data.gallery || JSON.parse(existing.gallery || "[]")
+    const updateData: Record<string, unknown> = { ...data, gallery: JSON.stringify(gallery) }
+    if (body.sizes !== undefined) {
+      updateData.sizes = JSON.stringify(body.sizes)
+    }
     const product = await db.product.update({
       where: { id },
-      data: { ...data, gallery: JSON.stringify(gallery) },
+      data: updateData,
     })
-    return successResponse({ ...product, gallery })
+    return successResponse({ ...product, gallery, sizes: JSON.parse(product.sizes || "[]") })
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
       return errorResponse("Unauthorized", 401)

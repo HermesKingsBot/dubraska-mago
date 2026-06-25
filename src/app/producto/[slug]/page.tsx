@@ -6,6 +6,7 @@ import StructuredData from "@/components/StructuredData"
 
 interface ApiProduct extends Product {
   gallery: string[]
+  sizes: string[]
   waterResistant: boolean
   details: string
   careInstructions: string
@@ -32,6 +33,12 @@ async function fetchProducts(): Promise<ApiProduct[]> {
         : typeof rawGallery === "string"
           ? JSON.parse(rawGallery)
           : []
+      const rawSizes = p.sizes
+      const sizes = Array.isArray(rawSizes)
+        ? rawSizes
+        : typeof rawSizes === "string"
+          ? JSON.parse(rawSizes)
+          : []
       return {
         id: String(p.id),
         name: String(p.name),
@@ -54,6 +61,7 @@ async function fetchProducts(): Promise<ApiProduct[]> {
         lowStockThreshold: Number(p.lowStock) || 5,
         sku: String(p.sku),
         gallery,
+        sizes,
         waterResistant: false,
         details: "",
         careInstructions: "",

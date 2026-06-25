@@ -50,7 +50,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     const [items, total] = await Promise.all([
       db.product.findMany({
         where,
-        include: { category: true },
+        include: {
+          category: true,
+          reviews: {
+            where: { status: "APPROVED" },
+            select: { rating: true },
+          },
+        },
         orderBy,
         skip: (page - 1) * limit,
         take: limit,
@@ -58,10 +64,21 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       db.product.count({ where }),
     ])
 
-    const itemsWithGallery = items.map((p) => ({
-      ...p,
-      gallery: JSON.parse(p.gallery || "[]"),
-    }))
+    const itemsWithGallery = items.map((p) => {
+      const reviewRatings = p.reviews.map(r => r.rating)
+      const reviewCount = reviewRatings.length
+      const averageRating = reviewCount > 0
+        ? reviewRatings.reduce((a, b) => a + b, 0) / reviewCount
+        : 0
+      const { reviews, ...rest } = p
+      return {
+        ...rest,
+        gallery: JSON.parse(p.gallery || "[]"),
+        sizes: JSON.parse(p.sizes || "[]"),
+        reviewCount,
+        averageRating: Math.round(averageRating * 10) / 10,
+      }
+    })
 
     return successResponse({
       items: itemsWithGallery,

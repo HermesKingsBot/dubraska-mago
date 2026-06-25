@@ -5,10 +5,11 @@ interface ProductCTAProps {
   onQuantityChange: (q: number) => void
   whatsappLink: string
   inStock: boolean
+  selectedSize: string | null
   ref?: React.Ref<HTMLDivElement>
 }
 
-function ProductCTA({ quantity, onQuantityChange, whatsappLink, inStock, ref }: ProductCTAProps): React.JSX.Element {
+function ProductCTA({ quantity, onQuantityChange, whatsappLink, inStock, selectedSize, ref }: ProductCTAProps): React.JSX.Element {
   return (
     <div ref={ref} className="flex flex-col gap-4 p-6 rounded-xl bg-[var(--color-dark-card)] border border-white/5">
       <div className="flex items-center gap-4">
@@ -38,6 +39,13 @@ function ProductCTA({ quantity, onQuantityChange, whatsappLink, inStock, ref }: 
           </button>
         </div>
       </div>
+
+      {selectedSize && (
+        <div className="flex items-center gap-2 text-sm" style={{ fontFamily: "var(--font-inter)" }}>
+          <span className="text-[var(--color-muted)]">Talla:</span>
+          <span className="text-[var(--color-gold)] font-medium">{selectedSize}</span>
+        </div>
+      )}
 
       <a
         href={whatsappLink}

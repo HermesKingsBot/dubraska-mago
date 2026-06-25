@@ -8,6 +8,7 @@ import { CartButton, WishlistLink } from "@/components/CartIcon"
 import UserMenu from "@/components/UserMenu"
 import SearchOverlay from "@/components/SearchOverlay"
 import { useSettingsContext } from "@/context/SettingsContext"
+import CompareLink from "@/components/compare/CompareLink"
 
 interface Product {
   id: string
@@ -94,6 +95,7 @@ export default function NavigationBar() {
             </button>
 
             <div className="hidden sm:flex items-center gap-1">
+              <CompareLink />
               <CartButton />
               <WishlistLink />
             </div>
@@ -143,6 +145,7 @@ export default function NavigationBar() {
                 </a>
               ))}
               <div className="flex items-center gap-3 py-3">
+                <CompareLink />
                 <CartButton />
                 <WishlistLink />
                 <a href="/login" className="ml-auto text-sm text-[var(--color-gold)]" style={{ fontFamily: "var(--font-inter)" }}>

@@ -41,6 +41,14 @@ async function POST(request: NextRequest) {
       categoryMap[catName] = category.id
     }
 
+    const categorySizes: Record<string, string[]> = {
+      collares: ["40cm", "45cm", "50cm"],
+      pulseras: ["S", "M", "L"],
+      aretes: ["Único"],
+      sets: ["Único"],
+    }
+
+    const createdProducts: Array<{ id: string; name: string; slug: string }> = []
     for (const product of products as Array<{
       name: string
       slug: string
@@ -61,7 +69,7 @@ async function POST(request: NextRequest) {
       lowStockThreshold: number
       sku: string
     }>) {
-      await db.product.create({
+      const created = await db.product.create({
         data: {
           name: product.name,
           slug: product.slug,
@@ -80,10 +88,39 @@ async function POST(request: NextRequest) {
           stock: product.stock,
           lowStock: product.lowStockThreshold,
           sku: product.sku,
+          sizes: JSON.stringify(categorySizes[product.category] || []),
           categoryId: categoryMap[product.category],
         },
       })
+      createdProducts.push({ id: created.id, name: created.name, slug: created.slug })
     }
+
+    const sampleReviews = [
+      { name: "María G.", email: "maria@example.com", rating: 5, title: "Hermoso", comment: "La calidad es impresionante, el dorado se ve espectacular. Muy feliz con mi compra.", verified: true },
+      { name: "Carlos R.", email: "carlos@example.com", rating: 4, title: "Muy bonito", comment: "El diseño es hermoso, solo que el tamaño era un poco más grande de lo que esperaba. Aún así lo recomiendo.", verified: true },
+      { name: "Ana P.", email: "ana@example.com", rating: 5, title: "Regalo perfecto", comment: "Lo compré como regalo para mi mamá y le encantó. Los detalles son preciosos.", verified: true },
+      { name: "José M.", email: "jose@example.com", rating: 5, title: "Excelente producto", comment: "Llegó antes de lo esperado y en perfectas condiciones. La cadena es resistente y brillante.", verified: false },
+      { name: "Laura S.", email: "laura@example.com", rating: 3, title: "Está bien", comment: "El producto es bonito pero esperaba un poco más de brillo. Para el precio está bien.", verified: true },
+    ]
+    for (const review of sampleReviews) {
+      const targetProduct = createdProducts.find(p => p.slug === "collar-cadena-dorado") || createdProducts[0]
+      await db.review.create({
+        data: {
+          ...review,
+          images: "[]",
+          productId: targetProduct.id,
+          status: "APPROVED",
+        },
+      })
+    }
+    const review2Target = createdProducts.find(p => p.slug === "pulsera-eslabones") || createdProducts[1]
+    await db.review.create({
+      data: {
+        name: "Diana L.", email: "diana@example.com", rating: 5, title: "Me encanta",
+        comment: "La pulsera es preciosa, el baño de oro se ve de alta calidad. La uso a diario.", verified: true,
+        images: "[]", productId: review2Target.id, status: "APPROVED",
+      },
+    })
 
     for (const testimonial of testimonials as Array<{
       name: string
