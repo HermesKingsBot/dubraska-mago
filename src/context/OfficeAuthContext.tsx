@@ -6,15 +6,12 @@ import type { AuthUser } from "@/types/office"
 interface AuthContextType {
   user: AuthUser | null
   isAuthenticated: boolean
-  login: (email: string, password: string) => boolean
-  logout: () => void
+  isLoading: boolean
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>
+  logout: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
-
-const VALID_EMAIL = "admin@dubraskamago.com"
-const VALID_PASSWORD = "Dubraska2026!"
-const STORAGE_KEY = "office_auth"
 
 function OfficeAuthProvider({
   children,
@@ -22,43 +19,79 @@ function OfficeAuthProvider({
   children: React.ReactNode
 }): React.JSX.Element {
   const [user, setUser] = useState<AuthUser | null>(null)
-  const [loaded, setLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) {
+    async function checkSession() {
       try {
-        const parsed = JSON.parse(stored) as AuthUser
-        setUser(parsed)
+        const res = await fetch("/api/auth/me", { credentials: "include" })
+        const json = await res.json()
+        if (json.success && json.data) {
+          setUser(json.data as AuthUser)
+        }
       } catch {
-        localStorage.removeItem(STORAGE_KEY)
+        setUser(null)
+      } finally {
+        setIsLoading(false)
       }
     }
-    setLoaded(true)
+    checkSession()
   }, [])
 
-  const login = (email: string, password: string): boolean => {
-    if (email === VALID_EMAIL && password === VALID_PASSWORD) {
-      const authUser: AuthUser = { email, name: "Admin", role: "admin" }
-      setUser(authUser)
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(authUser))
-      return true
+  const login = async (email: string, password: string) => {
+    try {
+      const loginRes = await fetch("/api/auth/login", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      })
+      const loginJson = await loginRes.json()
+      if (!loginJson.success) {
+        return { success: false, error: loginJson.error || "Login failed" }
+      }
+      const { token, user: userData } = loginJson.data
+      const cookieRes = await fetch("/api/auth/set-cookie", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token }),
+      })
+      const cookieJson = await cookieRes.json()
+      if (!cookieJson.success) {
+        return { success: false, error: "Failed to set session cookie" }
+      }
+      setUser(userData as AuthUser)
+      return { success: true }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : "Network error"
+      return { success: false, error: msg }
     }
-    return false
   }
 
-  const logout = () => {
+  const logout = async () => {
+    try {
+      await fetch("/api/auth/clear-cookie", {
+        method: "POST",
+        credentials: "include",
+      })
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      })
+    } catch {
+      // ignore
+    }
     setUser(null)
-    localStorage.removeItem(STORAGE_KEY)
   }
 
-  if (!loaded) {
+  if (isLoading) {
     return <div className="min-h-screen bg-[var(--color-bg)]" />
   }
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated: !!user, login, logout }}
+      value={{ user, isAuthenticated: !!user, isLoading, login, logout }}
     >
       {children}
     </AuthContext.Provider>

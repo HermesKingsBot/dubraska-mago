@@ -2,63 +2,87 @@
 
 import { useState, useEffect, useCallback } from "react"
 import type { Category } from "@/types/office"
+import type { Category as ApiCategory } from "@/types/index"
 
-const STORAGE_KEY = "office_categories"
-
-const DEFAULT_CATEGORIES: Category[] = [
-  { id: "cat-1", name: "Collares", slug: "collares", description: "Collares y gargantillas de oro 18K", active: true, order: 1 },
-  { id: "cat-2", name: "Pulseras", slug: "pulseras", description: "Pulseras, tobilleras y cadenas", active: true, order: 2 },
-  { id: "cat-3", name: "Aretes", slug: "aretes", description: "Aretes, zarcillos y piercings", active: true, order: 3 },
-  { id: "cat-4", name: "Sets", slug: "sets", description: "Sets completos collar + pulsera", active: true, order: 4 },
-  { id: "cat-5", name: "Anillos", slug: "anillos", description: "Anillos y alianzas", active: false, order: 5 },
-]
-
-function loadCategories(): Category[] {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored) as Category[]
-    } catch {
-      // fall through
-    }
+function mapCategory(c: ApiCategory): Category {
+  return {
+    id: c.id,
+    name: c.name,
+    slug: c.slug,
+    description: c.description,
+    active: c.active,
+    order: c.order,
   }
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(DEFAULT_CATEGORIES))
-  return DEFAULT_CATEGORIES
 }
 
 export function useCategories() {
   const [categories, setCategories] = useState<Category[]>([])
   const [loaded, setLoaded] = useState(false)
 
-  useEffect(() => {
-    setCategories(loadCategories())
-    setLoaded(true)
+  const fetchCategories = useCallback(async () => {
+    try {
+      const res = await fetch("/api/categories", { credentials: "include" })
+      const json = await res.json()
+      if (json.success) {
+        const mapped = (json.data || []).map(mapCategory)
+        setCategories(mapped)
+      }
+    } catch {
+      setCategories([])
+    }
   }, [])
 
-  const save = useCallback((next: Category[]) => {
-    setCategories(next)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
-  }, [])
+  useEffect(() => {
+    fetchCategories().then(() => setLoaded(true))
+  }, [fetchCategories])
 
   const addCategory = useCallback(
-    (cat: Category) => {
-      save([...categories, cat])
+    async (cat: Category) => {
+      try {
+        await fetch("/api/categories", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(cat),
+        })
+        await fetchCategories()
+      } catch {
+        // ignore
+      }
     },
-    [categories, save]
+    [fetchCategories]
   )
 
   const updateCategory = useCallback(
-    (id: string, updates: Partial<Category>) => {
-      save(categories.map((c) => (c.id === id ? { ...c, ...updates } : c)))
+    async (id: string, updates: Partial<Category>) => {
+      try {
+        await fetch(`/api/categories/${id}`, {
+          method: "PATCH",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updates),
+        })
+        await fetchCategories()
+      } catch {
+        // ignore
+      }
     },
-    [categories, save]
+    [fetchCategories]
   )
 
   const deleteCategory = useCallback(
-    (id: string) => {
-      save(categories.filter((c) => c.id !== id))
+    async (id: string) => {
+      try {
+        await fetch(`/api/categories/${id}`, {
+          method: "DELETE",
+          credentials: "include",
+        })
+        await fetchCategories()
+      } catch {
+        // ignore
+      }
     },
-    [categories, save]
+    [fetchCategories]
   )
 
   return { categories, loaded, addCategory, updateCategory, deleteCategory }

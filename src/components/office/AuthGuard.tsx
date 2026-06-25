@@ -9,14 +9,18 @@ function AuthGuard({
 }: {
   children: React.ReactNode
 }): React.JSX.Element {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, isLoading } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isLoading && !isAuthenticated) {
       router.replace("/office")
     }
-  }, [isAuthenticated, router])
+  }, [isAuthenticated, isLoading, router])
+
+  if (isLoading) {
+    return <div className="min-h-screen bg-[var(--color-bg)]" />
+  }
 
   if (!isAuthenticated) {
     return <div className="min-h-screen bg-[var(--color-bg)]" />

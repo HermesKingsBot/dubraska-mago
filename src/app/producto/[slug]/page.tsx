@@ -1,45 +1,72 @@
 import { notFound } from "next/navigation"
-import fs from "fs/promises"
-import path from "path"
+import type { Product } from "@/types/product"
 import ProductDetailClient from "./ProductDetailClient"
 
-export interface ProductDetail {
-  id: string
-  name: string
-  slug: string
-  description: string
-  price: number
-  oldPrice: number | null
-  category: string
-  color: string
-  badge: string | null
-  image: string
-  material: string
-  length?: string
-  diameter?: string
-  weight?: string
-  pieces?: number
-  inStock: boolean
-  featured: boolean
-  stock: number
-  lowStockThreshold: number
-  sku: string
+interface ApiProduct extends Product {
   gallery: string[]
   waterResistant: boolean
   details: string
   careInstructions: string
   dimensions: string
   relatedIds: string[]
+  categoryId: string
 }
 
-async function getProducts(): Promise<ProductDetail[]> {
-  const filePath = path.join(process.cwd(), "data", "products.json")
-  const raw = await fs.readFile(filePath, "utf-8")
-  return JSON.parse(raw) as ProductDetail[]
+async function fetchProducts(): Promise<ApiProduct[]> {
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL || ""}/api/products?limit=200`,
+      { cache: "no-store" }
+    )
+    const json = await res.json()
+    if (!json.success) return []
+    const items = json.data.items || []
+    return items.map((p: Record<string, unknown>) => {
+      const cat = p.category as Record<string, unknown> | undefined
+      const catName = cat?.name ? String(cat.name) : ""
+      const rawGallery = p.gallery
+      const gallery = Array.isArray(rawGallery)
+        ? rawGallery
+        : typeof rawGallery === "string"
+          ? JSON.parse(rawGallery)
+          : []
+      return {
+        id: String(p.id),
+        name: String(p.name),
+        slug: String(p.slug),
+        description: String(p.description),
+        price: Number(p.price),
+        oldPrice: p.oldPrice ? Number(p.oldPrice) : null,
+        category: catName || String(p.categoryId || ""),
+        color: String(p.color),
+        badge: p.badge ? String(p.badge) : null,
+        image: String(p.image),
+        material: String(p.material),
+        length: p.length ? String(p.length) : undefined,
+        diameter: p.diameter ? String(p.diameter) : undefined,
+        weight: p.weight ? String(p.weight) : undefined,
+        pieces: undefined,
+        inStock: Boolean(p.inStock),
+        featured: Boolean(p.featured),
+        stock: Number(p.stock),
+        lowStockThreshold: Number(p.lowStock) || 5,
+        sku: String(p.sku),
+        gallery,
+        waterResistant: false,
+        details: "",
+        careInstructions: "",
+        dimensions: "",
+        relatedIds: [],
+        categoryId: String(p.categoryId),
+      } as ApiProduct
+    })
+  } catch {
+    return []
+  }
 }
 
 export async function generateStaticParams() {
-  const products = await getProducts()
+  const products = await fetchProducts()
   return products.map((p) => ({ slug: p.slug }))
 }
 
@@ -47,7 +74,7 @@ type Props = { params: Promise<{ slug: string }> }
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
-  const products = await getProducts()
+  const products = await fetchProducts()
   const product = products.find((p) => p.slug === slug)
 
   if (!product) {
@@ -67,7 +94,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params
-  const products = await getProducts()
+  const products = await fetchProducts()
   const product = products.find((p) => p.slug === slug)
 
   if (!product) {

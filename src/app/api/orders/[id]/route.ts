@@ -1,17 +1,18 @@
 import { NextRequest, NextResponse } from "next/server"
 import db from "@/lib/db"
 import { successResponse, errorResponse, handleApiError } from "@/lib/api"
+import { requireAuth } from "@/lib/auth"
 
-async function GET(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+type RouteParams = { params: Promise<{ id: string }> }
+
+async function GET(request: NextRequest, { params }: RouteParams) {
   try {
     const { id } = await params
     const order = await db.order.findUnique({
       where: { id },
       include: {
         items: {
-          include: {
-            product: true,
-          },
+          include: { product: true },
         },
       },
     })
@@ -24,27 +25,50 @@ async function GET(request: NextRequest, { params }: { params: Promise<{ id: str
   }
 }
 
-async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
+    requireAuth(request)
     const { id } = await params
     const body = await request.json()
-    const { status } = body
+    const existing = await db.order.findUnique({ where: { id } })
+    if (!existing) {
+      return errorResponse("Order not found", 404)
+    }
     const order = await db.order.update({
       where: { id },
-      data: { status },
+      data: body,
       include: {
         items: {
-          include: {
-            product: true,
-          },
+          include: { product: true },
         },
       },
     })
     return successResponse(order)
   } catch (error) {
+    if (error instanceof Error && error.message === "Unauthorized") {
+      return errorResponse("Unauthorized", 401)
+    }
     return handleApiError(error)
   }
 }
 
-export { GET, PATCH }
-export default { GET, PATCH }
+async function DELETE(request: NextRequest, { params }: RouteParams) {
+  try {
+    requireAuth(request)
+    const { id } = await params
+    const existing = await db.order.findUnique({ where: { id } })
+    if (!existing) {
+      return errorResponse("Order not found", 404)
+    }
+    await db.order.delete({ where: { id } })
+    return successResponse({ message: "Order deleted" })
+  } catch (error) {
+    if (error instanceof Error && error.message === "Unauthorized") {
+      return errorResponse("Unauthorized", 401)
+    }
+    return handleApiError(error)
+  }
+}
+
+export { GET, PATCH, DELETE }
+export default { GET, PATCH, DELETE }

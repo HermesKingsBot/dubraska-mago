@@ -2,77 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react"
 import type { OfficeProduct, StockOrder, StockAdjustment } from "@/types/office"
-import productsData from "@/../data/products.json"
-
-const PRODUCTS_KEY = "office_products"
-const ORDERS_KEY = "office_stock_orders"
-const ADJUSTMENTS_KEY = "office_stock_adjustments"
-
-function mapToOffice(raw: Record<string, unknown>): OfficeProduct {
-  return {
-    id: raw.id as string,
-    name: raw.name as string,
-    slug: raw.slug as string,
-    description: raw.description as string,
-    price: raw.price as number,
-    oldPrice: (raw.oldPrice as number) ?? null,
-    category: raw.category as string,
-    color: raw.color as string,
-    badge: (raw.badge as string) ?? null,
-    image: raw.image as string,
-    material: raw.material as string,
-    length: raw.length as string | undefined,
-    diameter: raw.diameter as string | undefined,
-    weight: raw.weight as string | undefined,
-    pieces: raw.pieces as number | undefined,
-    inStock: raw.inStock as boolean,
-    featured: raw.featured as boolean,
-    stock: (raw.stock as number) ?? 0,
-    lowStockThreshold: (raw.lowStockThreshold as number) ?? 5,
-    sku: (raw.sku as string) ?? "",
-    visible: true,
-  }
-}
-
-function loadProducts(): OfficeProduct[] {
-  const stored = localStorage.getItem(PRODUCTS_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored) as OfficeProduct[]
-    } catch {
-      // fall through
-    }
-  }
-  const mapped = (productsData as unknown as Record<string, unknown>[]).map(
-    mapToOffice
-  )
-  localStorage.setItem(PRODUCTS_KEY, JSON.stringify(mapped))
-  return mapped
-}
-
-function loadOrders(): StockOrder[] {
-  const stored = localStorage.getItem(ORDERS_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored) as StockOrder[]
-    } catch {
-      return []
-    }
-  }
-  return []
-}
-
-function loadAdjustments(): StockAdjustment[] {
-  const stored = localStorage.getItem(ADJUSTMENTS_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored) as StockAdjustment[]
-    } catch {
-      return []
-    }
-  }
-  return []
-}
 
 export function useProducts() {
   const [products, setProducts] = useState<OfficeProduct[]>([])
@@ -80,74 +9,217 @@ export function useProducts() {
   const [adjustments, setAdjustments] = useState<StockAdjustment[]>([])
   const [loaded, setLoaded] = useState(false)
 
-  useEffect(() => {
-    setProducts(loadProducts())
-    setOrders(loadOrders())
-    setAdjustments(loadAdjustments())
-    setLoaded(true)
+  const fetchProducts = useCallback(async () => {
+    try {
+      const res = await fetch("/api/products?limit=200", { credentials: "include" })
+      const json = await res.json()
+      if (json.success) {
+        const items = json.data.items || []
+        const mapped = items.map((p: Record<string, unknown>) => {
+          const cat = p.category as Record<string, unknown> | undefined
+          return {
+            id: String(p.id),
+            name: String(p.name),
+            slug: String(p.slug),
+            description: String(p.description),
+            price: Number(p.price),
+            oldPrice: p.oldPrice ? Number(p.oldPrice) : null,
+            category: cat?.slug ? String(cat.slug) : String(p.categoryId || ""),
+            color: String(p.color),
+            badge: p.badge ? String(p.badge) : null,
+            image: String(p.image),
+            material: String(p.material),
+            length: p.length ? String(p.length) : undefined,
+            diameter: p.diameter ? String(p.diameter) : undefined,
+            weight: p.weight ? String(p.weight) : undefined,
+            inStock: Boolean(p.inStock),
+            featured: Boolean(p.featured),
+            stock: Number(p.stock),
+            lowStockThreshold: Number(p.lowStock) || 5,
+            sku: String(p.sku),
+            visible: true,
+          } as OfficeProduct
+        })
+        setProducts(mapped)
+      }
+    } catch {
+      setProducts([])
+    }
   }, [])
 
-  const saveProducts = useCallback((next: OfficeProduct[]) => {
-    setProducts(next)
-    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(next))
+  const fetchOrders = useCallback(async () => {
+    try {
+      const res = await fetch("/api/orders", { credentials: "include" })
+      const json = await res.json()
+      if (json.success) {
+        setOrders(json.data || [])
+      }
+    } catch {
+      setOrders([])
+    }
   }, [])
+
+  const fetchAdjustments = useCallback(async () => {
+    try {
+      const res = await fetch("/api/inventory", { credentials: "include" })
+      const json = await res.json()
+      if (json.success) {
+        const items = json.data || []
+        setAdjustments(
+          items.map((m: Record<string, unknown>) => ({
+            id: m.id as string,
+            productId: m.productId as string,
+            productName: (m.product as Record<string, unknown>)?.name as string || "",
+            previousStock: m.previousStock as number,
+            newStock: m.newStock as number,
+            reason: m.reason as string,
+            createdAt: m.createdAt as string,
+          }))
+        )
+      }
+    } catch {
+      setAdjustments([])
+    }
+  }, [])
+
+  useEffect(() => {
+    Promise.all([fetchProducts(), fetchOrders(), fetchAdjustments()]).then(
+      () => setLoaded(true)
+    )
+  }, [fetchProducts, fetchOrders, fetchAdjustments])
 
   const addProduct = useCallback(
-    (product: OfficeProduct) => {
-      saveProducts([...products, product])
+    async (product: OfficeProduct) => {
+      try {
+        const res = await fetch("/api/products", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            ...product,
+            lowStock: product.lowStockThreshold,
+            gallery: [],
+          }),
+        })
+        const json = await res.json()
+        if (json.success) {
+          await fetchProducts()
+        }
+      } catch {
+        // ignore
+      }
     },
-    [products, saveProducts]
+    [fetchProducts]
   )
 
   const updateProduct = useCallback(
-    (id: string, updates: Partial<OfficeProduct>) => {
-      saveProducts(
-        products.map((p) => (p.id === id ? { ...p, ...updates } : p))
-      )
+    async (id: string, updates: Partial<OfficeProduct>) => {
+      try {
+        const res = await fetch(`/api/products/${id}`, {
+          method: "PATCH",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updates),
+        })
+        const json = await res.json()
+        if (json.success) {
+          await fetchProducts()
+        }
+      } catch {
+        // ignore
+      }
     },
-    [products, saveProducts]
+    [fetchProducts]
   )
 
   const deleteProduct = useCallback(
-    (id: string) => {
-      saveProducts(products.filter((p) => p.id !== id))
+    async (id: string) => {
+      try {
+        await fetch(`/api/products/${id}`, {
+          method: "DELETE",
+          credentials: "include",
+        })
+        await fetchProducts()
+      } catch {
+        // ignore
+      }
     },
-    [products, saveProducts]
+    [fetchProducts]
   )
 
   const adjustStock = useCallback(
-    (id: string, newStock: number) => {
-      saveProducts(
-        products.map((p) =>
-          p.id === id
-            ? {
-                ...p,
-                stock: newStock,
-                inStock: newStock > 0,
-              }
-            : p
-        )
-      )
+    async (id: string, newStock: number) => {
+      try {
+        const product = products.find((p) => p.id === id)
+        if (!product) return
+        const quantity = Math.abs(newStock - product.stock)
+        const type = newStock > product.stock ? "STOCK_IN" : "STOCK_OUT"
+        await fetch("/api/inventory/adjust", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            productId: id,
+            type,
+            quantity: quantity || 1,
+            reason: "Manual adjustment",
+          }),
+        })
+        await fetchProducts()
+        await fetchAdjustments()
+      } catch {
+        // ignore
+      }
     },
-    [products, saveProducts]
+    [products, fetchProducts, fetchAdjustments]
   )
 
   const addOrder = useCallback(
-    (order: StockOrder) => {
-      const next = [...orders, order]
-      setOrders(next)
-      localStorage.setItem(ORDERS_KEY, JSON.stringify(next))
+    async (order: StockOrder) => {
+      try {
+        await fetch("/api/orders", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            customerName: order.supplier,
+            customerEmail: "office@dubraska.com",
+            notes: order.notes,
+            items: [{ productId: order.productId, quantity: order.quantity }],
+          }),
+        })
+        await fetchOrders()
+        await fetchProducts()
+      } catch {
+        // ignore
+      }
     },
-    [orders]
+    [fetchOrders, fetchProducts]
   )
 
   const addAdjustment = useCallback(
-    (adj: StockAdjustment) => {
-      const next = [...adjustments, adj]
-      setAdjustments(next)
-      localStorage.setItem(ADJUSTMENTS_KEY, JSON.stringify(next))
+    async (adj: StockAdjustment) => {
+      try {
+        const type = adj.newStock > adj.previousStock ? "STOCK_IN" : "STOCK_OUT"
+        const quantity = Math.abs(adj.newStock - adj.previousStock)
+        await fetch("/api/inventory/adjust", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            productId: adj.productId,
+            type,
+            quantity: quantity || 1,
+            reason: adj.reason,
+          }),
+        })
+        await fetchAdjustments()
+        await fetchProducts()
+      } catch {
+        // ignore
+      }
     },
-    [adjustments]
+    [fetchAdjustments, fetchProducts]
   )
 
   return {

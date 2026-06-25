@@ -7,11 +7,17 @@ const JWT_SECRET = process.env.JWT_SECRET || "dubraska-secret-key-change-in-prod
 
 async function GET(request: NextRequest) {
   try {
+    let token: string | null = null
     const authHeader = request.headers.get("authorization")
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    if (authHeader?.startsWith("Bearer ")) {
+      token = authHeader.split(" ")[1]
+    }
+    if (!token) {
+      token = request.cookies.get("dubraska_auth")?.value || null
+    }
+    if (!token) {
       return errorResponse("No token provided", 401)
     }
-    const token = authHeader.split(" ")[1]
     const decoded = jwt.verify(token, JWT_SECRET) as { id: string }
     const user = await db.adminUser.findUnique({
       where: { id: decoded.id },

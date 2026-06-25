@@ -2,57 +2,88 @@
 
 import { useState, useEffect, useCallback } from "react"
 import type { Testimonial } from "@/types/office"
-import testimonialsData from "@/../data/testimonials.json"
+import type { Testimonial as ApiTestimonial } from "@/types/index"
 
-const STORAGE_KEY = "office_testimonials"
-
-function loadTestimonials(): Testimonial[] {
-  const stored = localStorage.getItem(STORAGE_KEY)
-  if (stored) {
-    try {
-      return JSON.parse(stored) as Testimonial[]
-    } catch {
-      // fall through
-    }
+function mapTestimonial(t: ApiTestimonial): Testimonial {
+  return {
+    id: t.id,
+    name: t.name,
+    text: t.text,
+    rating: t.rating,
+    productId: t.productId || "",
+    date: t.date,
+    active: t.active,
   }
-  const data = testimonialsData as unknown as Testimonial[]
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-  return data
 }
 
 export function useTestimonials() {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [loaded, setLoaded] = useState(false)
 
-  useEffect(() => {
-    setTestimonials(loadTestimonials())
-    setLoaded(true)
+  const fetchTestimonials = useCallback(async () => {
+    try {
+      const res = await fetch("/api/testimonials", { credentials: "include" })
+      const json = await res.json()
+      if (json.success) {
+        const mapped = (json.data || []).map(mapTestimonial)
+        setTestimonials(mapped)
+      }
+    } catch {
+      setTestimonials([])
+    }
   }, [])
 
-  const save = useCallback((next: Testimonial[]) => {
-    setTestimonials(next)
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
-  }, [])
+  useEffect(() => {
+    fetchTestimonials().then(() => setLoaded(true))
+  }, [fetchTestimonials])
 
   const addTestimonial = useCallback(
-    (t: Testimonial) => {
-      save([...testimonials, t])
+    async (t: Testimonial) => {
+      try {
+        await fetch("/api/testimonials", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(t),
+        })
+        await fetchTestimonials()
+      } catch {
+        // ignore
+      }
     },
-    [testimonials, save]
+    [fetchTestimonials]
   )
 
   const updateTestimonial = useCallback(
-    (id: string, updates: Partial<Testimonial>) => {
-      save(testimonials.map((t) => (t.id === id ? { ...t, ...updates } : t)))
+    async (id: string, updates: Partial<Testimonial>) => {
+      try {
+        await fetch(`/api/testimonials/${id}`, {
+          method: "PATCH",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updates),
+        })
+        await fetchTestimonials()
+      } catch {
+        // ignore
+      }
     },
-    [testimonials, save]
+    [fetchTestimonials]
   )
 
   const deleteTestimonial = useCallback(
-    (id: string) => {
-      save(testimonials.filter((t) => t.id !== id))
+    async (id: string) => {
+      try {
+        await fetch(`/api/testimonials/${id}`, {
+          method: "DELETE",
+          credentials: "include",
+        })
+        await fetchTestimonials()
+      } catch {
+        // ignore
+      }
     },
-    [testimonials, save]
+    [fetchTestimonials]
   )
 
   return { testimonials, loaded, addTestimonial, updateTestimonial, deleteTestimonial }
