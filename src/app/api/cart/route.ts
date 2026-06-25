@@ -1,0 +1,93 @@
+import { NextRequest, NextResponse } from "next/server"
+import db from "@/lib/db"
+import { successResponse, errorResponse, handleApiError } from "@/lib/api"
+import { requireCustomer } from "@/lib/auth"
+import { addToCartSchema } from "@/lib/schemas"
+
+async function GET(request: NextRequest) {
+  try {
+    const user = requireCustomer(request)
+    const items = await db.cartItem.findMany({
+      where: { userId: user.userId },
+      include: { product: true },
+      orderBy: { createdAt: "desc" },
+    })
+    return successResponse(items)
+  } catch (error) {
+    if (error instanceof Error && error.message === "Unauthorized") {
+      return errorResponse("Unauthorized", 401)
+    }
+    if (error instanceof Error && error.message === "Forbidden: Customers only") {
+      return errorResponse("Forbidden", 403)
+    }
+    return handleApiError(error)
+  }
+}
+
+async function POST(request: NextRequest) {
+  try {
+    const user = requireCustomer(request)
+    const body = await request.json()
+    const data = addToCartSchema.parse(body)
+    const product = await db.product.findUnique({
+      where: { id: data.productId },
+    })
+    if (!product) {
+      return errorResponse("Producto no encontrado", 404)
+    }
+    const existing = await db.cartItem.findUnique({
+      where: {
+        userId_productId: {
+          userId: user.userId,
+          productId: data.productId,
+        },
+      },
+    })
+    if (existing) {
+      const item = await db.cartItem.update({
+        where: { id: existing.id },
+        data: { quantity: existing.quantity + data.quantity },
+        include: { product: true },
+      })
+      return successResponse(item)
+    }
+    const item = await db.cartItem.create({
+      data: {
+        userId: user.userId,
+        productId: data.productId,
+        quantity: data.quantity,
+      },
+      include: { product: true },
+    })
+    return successResponse(item, 201)
+  } catch (error) {
+    if (error instanceof Error && error.message === "Unauthorized") {
+      return errorResponse("Unauthorized", 401)
+    }
+    if (error instanceof Error && error.message === "Forbidden: Customers only") {
+      return errorResponse("Forbidden", 403)
+    }
+    return handleApiError(error)
+  }
+}
+
+async function DELETE(request: NextRequest) {
+  try {
+    const user = requireCustomer(request)
+    await db.cartItem.deleteMany({
+      where: { userId: user.userId },
+    })
+    return successResponse({ message: "Carrito vaciado" })
+  } catch (error) {
+    if (error instanceof Error && error.message === "Unauthorized") {
+      return errorResponse("Unauthorized", 401)
+    }
+    if (error instanceof Error && error.message === "Forbidden: Customers only") {
+      return errorResponse("Forbidden", 403)
+    }
+    return handleApiError(error)
+  }
+}
+
+export { GET, POST, DELETE }
+export default { GET, POST, DELETE }

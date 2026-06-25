@@ -18,14 +18,15 @@ async function GET(request: NextRequest) {
     if (!token) {
       return errorResponse("No token provided", 401)
     }
-    const decoded = jwt.verify(token, JWT_SECRET) as { id: string }
-    const user = await db.adminUser.findUnique({
-      where: { id: decoded.id },
+    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string }
+    const user = await db.user.findUnique({
+      where: { id: decoded.userId },
       select: {
         id: true,
         email: true,
         name: true,
         role: true,
+        phone: true,
       },
     })
     if (!user) {

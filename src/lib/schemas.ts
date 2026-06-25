@@ -5,6 +5,51 @@ export const loginSchema = z.object({
   password: z.string().min(1),
 })
 
+export const registerSchema = z.object({
+  name: z.string().min(2, "Nombre muy corto"),
+  email: z.string().email("Email inválido"),
+  password: z.string().min(6, "Mínimo 6 caracteres"),
+  phone: z.string().optional(),
+})
+
+export const addressSchema = z.object({
+  label: z.string().default("Casa"),
+  fullName: z.string().min(1, "Nombre requerido"),
+  phone: z.string().min(1, "Teléfono requerido"),
+  street: z.string().min(1, "Dirección requerida"),
+  city: z.string().min(1, "Ciudad requerida"),
+  state: z.string().min(1, "Estado requerido"),
+  zipCode: z.string().optional(),
+  carrier: z.string().optional(),
+  officeCode: z.string().optional(),
+  reference: z.string().optional(),
+  isDefault: z.boolean().default(false),
+})
+
+export const addToCartSchema = z.object({
+  productId: z.string().min(1),
+  quantity: z.number().int().positive().default(1),
+})
+
+export const updateCartItemSchema = z.object({
+  quantity: z.number().int().min(0),
+})
+
+export const checkoutSchema = z.object({
+  addressId: z.string().min(1),
+  notes: z.string().optional(),
+  shippingCarrier: z.string().min(1),
+  shippingOffice: z.string().optional(),
+  shippingCost: z.number().default(0),
+})
+
+export const paymentSchema = z.object({
+  orderId: z.string().min(1),
+  method: z.enum(["transferencia", "pago_movil", "zelle", "paypal", "efectivo"]),
+  reference: z.string().optional(),
+  amount: z.number().positive(),
+})
+
 export const createProductSchema = z.object({
   name: z.string().min(1),
   slug: z.string().min(1),

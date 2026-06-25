@@ -3,6 +3,8 @@ import { Instrument_Serif, Inter } from "next/font/google"
 import "./globals.css"
 import NavigationBar from "@/components/NavigationBar"
 import Footer from "@/components/Footer"
+import { AuthProvider } from "@/context/AuthContext"
+import { CustomerAuthProvider } from "@/context/CustomerAuthContext"
 
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
@@ -112,9 +114,13 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${instrumentSerif.variable} ${inter.variable}`}>
       <body className="bg-[var(--color-bg)] text-white antialiased">
-        <NavigationBar />
-        <main>{children}</main>
-        <Footer />
+        <AuthProvider>
+          <CustomerAuthProvider>
+            <NavigationBar />
+            <main>{children}</main>
+            <Footer />
+          </CustomerAuthProvider>
+        </AuthProvider>
       </body>
     </html>
   )

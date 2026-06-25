@@ -11,18 +11,21 @@ async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const data = loginSchema.parse(body)
-    const user = await db.adminUser.findUnique({
+    const user = await db.user.findUnique({
       where: { email: data.email },
     })
     if (!user) {
       return errorResponse("Invalid credentials", 401)
+    }
+    if (!user.active) {
+      return errorResponse("Cuenta desactivada", 401)
     }
     const isValid = await bcrypt.compare(data.password, user.password)
     if (!isValid) {
       return errorResponse("Invalid credentials", 401)
     }
     const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role },
+      { userId: user.id, email: user.email, role: user.role },
       JWT_SECRET,
       { expiresIn: "7d" }
     )
@@ -33,6 +36,7 @@ async function POST(request: NextRequest) {
         email: user.email,
         name: user.name,
         role: user.role,
+        phone: user.phone,
       },
     })
   } catch (error) {

@@ -40,3 +40,19 @@ export function requireAuth(request: NextRequest): JwtPayload {
   }
   return user
 }
+
+export function requireAdmin(request: NextRequest): JwtPayload {
+  const user = requireAuth(request)
+  if (user.role !== "ADMIN") {
+    throw new Error("Forbidden: Admins only")
+  }
+  return user
+}
+
+export function requireCustomer(request: NextRequest): JwtPayload {
+  const user = requireAuth(request)
+  if (user.role !== "CUSTOMER") {
+    throw new Error("Forbidden: Customers only")
+  }
+  return user
+}

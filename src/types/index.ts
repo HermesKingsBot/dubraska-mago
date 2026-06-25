@@ -50,13 +50,26 @@ export interface Testimonial {
 export interface Order {
   id: string
   orderNumber: string
-  status: "PENDING" | "CONFIRMED" | "PROCESSING" | "SHIPPED" | "DELIVERED" | "CANCELLED"
+  status: string
+  userId: string | null
   customerName: string
   customerEmail: string
   customerPhone: string | null
+  shippingName: string
+  shippingPhone: string
+  shippingStreet: string
+  shippingCity: string
+  shippingState: string
+  shippingZip: string | null
+  shippingCarrier: string | null
+  shippingOffice: string | null
+  shippingRef: string | null
+  subtotal: number
+  shippingCost: number
   total: number
   notes: string | null
   items: OrderItem[]
+  payment?: unknown
   createdAt: string
   updatedAt: string
 }

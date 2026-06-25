@@ -7,12 +7,17 @@ import testimonials from "../../../../data/testimonials.json"
 
 async function POST(request: NextRequest) {
   try {
+    await db.payment.deleteMany({})
+    await db.wishlistItem.deleteMany({})
+    await db.cartItem.deleteMany({})
+    await db.address.deleteMany({})
     await db.inventoryMovement.deleteMany({})
     await db.orderItem.deleteMany({})
     await db.order.deleteMany({})
     await db.testimonial.deleteMany({})
     await db.product.deleteMany({})
     await db.category.deleteMany({})
+    await db.user.deleteMany({})
 
     const categoryMap: Record<string, string> = {}
     const categoryNames: string[] = []
@@ -101,12 +106,13 @@ async function POST(request: NextRequest) {
     }
 
     const hashedPassword = await bcrypt.hash("admin123", 10)
-    await db.adminUser.create({
+    await db.user.create({
       data: {
         email: "admin@dubraskamago.com",
         password: hashedPassword,
         name: "Admin",
         role: "ADMIN",
+        active: true,
       },
     })
 

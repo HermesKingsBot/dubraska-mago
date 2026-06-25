@@ -6,6 +6,7 @@ import gsap from "gsap"
 import { motion } from "motion/react"
 import { Product } from "@/types/product"
 import { buildWhatsAppLink } from "@/lib/catalog-utils"
+import HeartButton from "@/components/wishlist/HeartButton"
 
 interface ProductCardProps {
   product: Product
@@ -83,12 +84,16 @@ export default function ProductCard({ product, index }: ProductCardProps) {
 
         {discount && (
           <span
-            className="absolute top-3 right-3 px-2 py-1 text-[10px] font-bold bg-red-500 text-white rounded"
+            className="absolute top-3 right-14 px-2 py-1 text-[10px] font-bold bg-red-500 text-white rounded"
             style={{ fontFamily: "var(--font-inter)" }}
           >
             -{discount}%
           </span>
         )}
+
+        <div className="absolute top-3 right-3 z-10">
+          <HeartButton productId={product.id} size="sm" />
+        </div>
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>

@@ -7,15 +7,82 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model AdminUser {
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String
+  password      String
+  role          String   @default("CUSTOMER")
+  phone         String?
+  active        Boolean  @default(true)
+  emailVerified Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  addresses     Address[]
+  orders        Order[]
+  cartItems     CartItem[]
+  wishlistItems WishlistItem[]
+  payments      Payment[]
+}
+
+model Address {
   id        String   @id @default(cuid())
-  email     String   @unique
-  name      String
-  password  String
-  role      String   @default("ADMIN")
-  active    Boolean  @default(true)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  label     String   @default("Casa")
+  fullName  String
+  phone     String
+  street    String
+  city      String
+  state     String
+  zipCode   String?
+  carrier   String?
+  officeCode String?
+  reference String?
+  isDefault Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@unique([userId, productId])
+}
+
+model WishlistItem {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  @@unique([userId, productId])
+}
+
+model Payment {
+  id            String    @id @default(cuid())
+  orderId       String    @unique
+  order         Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  amount        Float
+  method        String
+  reference     String?
+  proofImageUrl String?
+  status        String    @default("PENDING")
+  adminNote     String?
+  paidAt        DateTime?
+  verifiedAt    DateTime?
+  verifiedBy    String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model Category {
@@ -54,6 +121,8 @@ model Product {
   category    Category            @relation(fields: [categoryId], references: [id])
   orderItems  OrderItem[]
   movements   InventoryMovement[]
+  cartItems   CartItem[]
+  wishlistItems WishlistItem[]
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
 }
@@ -71,17 +140,31 @@ model Testimonial {
 }
 
 model Order {
-  id            String     @id @default(cuid())
-  orderNumber   String     @unique
-  status        String     @default("PENDING")
-  customerName  String
-  customerEmail String
-  customerPhone String?
-  total         Float
-  notes         String?
-  items         OrderItem[]
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  id              String     @id @default(cuid())
+  orderNumber     String     @unique
+  status          String     @default("PENDING")
+  userId          String?
+  user            User?      @relation(fields: [userId], references: [id])
+  customerName    String     @default("")
+  customerEmail   String     @default("")
+  customerPhone   String?
+  shippingName    String     @default("")
+  shippingPhone   String     @default("")
+  shippingStreet  String     @default("")
+  shippingCity    String     @default("")
+  shippingState   String     @default("")
+  shippingZip     String?
+  shippingCarrier String?
+  shippingOffice  String?
+  shippingRef     String?
+  subtotal        Float      @default(0)
+  shippingCost    Float      @default(0)
+  total           Float
+  notes           String?
+  items           OrderItem[]
+  payment         Payment?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
 }
 
 model OrderItem {
@@ -93,6 +176,7 @@ model OrderItem {
   order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   product   Product @relation(fields: [productId], references: [id])
 }
+
 model InventoryMovement {
   id           String   @id @default(cuid())
   productId    String

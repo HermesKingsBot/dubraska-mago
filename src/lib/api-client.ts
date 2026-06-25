@@ -111,8 +111,9 @@ export function deleteTestimonial(id: string) {
   })
 }
 
-export function getOrders() {
-  return request<Order[]>("/api/orders")
+export function getOrders(params?: Record<string, string>) {
+  const qs = params ? "?" + new URLSearchParams(params).toString() : ""
+  return request<Order[]>(`/api/orders${qs}`)
 }
 
 export function getOrder(id: string) {
@@ -133,12 +134,120 @@ export function updateOrder(id: string, data: Record<string, unknown>) {
   })
 }
 
-export function getInventory() {
-  return request<unknown[]>("/api/inventory")
+export function submitPayment(orderId: string, data: Record<string, unknown>) {
+  return request<unknown>(`/api/orders/${orderId}/pay`, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
 }
 
-export function adjustInventory(data: Record<string, unknown>) {
-  return request<unknown>("/api/inventory/adjust", {
+export function getPayments(params?: Record<string, string>) {
+  const qs = params ? "?" + new URLSearchParams(params).toString() : ""
+  return request<unknown[]>(`/api/payments${qs}`)
+}
+
+export function approvePayment(id: string, data: Record<string, unknown>) {
+  return request<unknown>(`/api/payments/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(data),
+  })
+}
+
+export function getCart() {
+  return request<unknown[]>("/api/cart")
+}
+
+export function addToCart(productId: string, quantity = 1) {
+  return request<unknown>("/api/cart", {
+    method: "POST",
+    body: JSON.stringify({ productId, quantity }),
+  })
+}
+
+export function updateCartItem(productId: string, quantity: number) {
+  return request<unknown>(`/api/cart/${productId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ quantity }),
+  })
+}
+
+export function removeFromCart(productId: string) {
+  return request<{ message: string }>(`/api/cart/${productId}`, {
+    method: "DELETE",
+  })
+}
+
+export function clearCart() {
+  return request<{ message: string }>("/api/cart", {
+    method: "DELETE",
+  })
+}
+
+export function getWishlist() {
+  return request<unknown[]>("/api/wishlist")
+}
+
+export function addToWishlist(productId: string) {
+  return request<unknown>("/api/wishlist", {
+    method: "POST",
+    body: JSON.stringify({ productId }),
+  })
+}
+
+export function removeFromWishlist(productId: string) {
+  return request<{ message: string }>(`/api/wishlist/${productId}`, {
+    method: "DELETE",
+  })
+}
+
+export function isInWishlist(productId: string) {
+  return request<{ inWishlist: boolean }>(`/api/wishlist/${productId}`)
+}
+
+export function getAddresses() {
+  return request<unknown[]>("/api/addresses")
+}
+
+export function createAddress(data: Record<string, unknown>) {
+  return request<unknown>("/api/addresses", {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+}
+
+export function updateAddress(id: string, data: Record<string, unknown>) {
+  return request<unknown>(`/api/addresses/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(data),
+  })
+}
+
+export function deleteAddress(id: string) {
+  return request<{ message: string }>(`/api/addresses/${id}`, {
+    method: "DELETE",
+  })
+}
+
+export function getAccount() {
+  return request<unknown>("/api/account")
+}
+
+export function updateAccount(data: Record<string, unknown>) {
+  return request<unknown>("/api/account", {
+    method: "PATCH",
+    body: JSON.stringify(data),
+  })
+}
+
+export function changePassword(currentPassword: string, newPassword: string) {
+  return request<{ message: string }>("/api/account/password", {
+    method: "PATCH",
+    body: JSON.stringify({ currentPassword, newPassword }),
+  })
+}
+
+export function register(data: Record<string, unknown>) {
+  return request<{ token: string; user: unknown }>("/api/auth/register", {
     method: "POST",
     body: JSON.stringify(data),
   })

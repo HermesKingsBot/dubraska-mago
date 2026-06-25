@@ -1,0 +1,20 @@
+import { NextResponse } from "next/server"
+import { COOKIE_NAME } from "@/lib/customer-auth"
+
+async function POST() {
+  const response = NextResponse.json(
+    { success: true, data: { message: "Sesión cerrada" } },
+    { status: 200 }
+  )
+  response.cookies.set(COOKIE_NAME, "", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 0,
+    path: "/",
+  })
+  return response
+}
+
+export { POST }
+export default { POST }
