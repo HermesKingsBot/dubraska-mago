@@ -13,6 +13,7 @@ import ProductCTA from "@/components/product/ProductCTA"
 import CareInstructions from "@/components/product/CareInstructions"
 import ShippingReturns from "@/components/product/ShippingReturns"
 import RelatedProducts from "@/components/product/RelatedProducts"
+import { useSettingsContext } from "@/context/SettingsContext"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -45,6 +46,8 @@ export default function ProductDetailClient({
   const ctaRef = useRef<HTMLDivElement>(null)
   const zoomRef = useRef<HTMLDivElement>(null)
 
+  const { getSetting } = useSettingsContext()
+
   const discount = product.oldPrice
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
     : null
@@ -53,7 +56,7 @@ export default function ProductDetailClient({
   const encodedMsg = encodeURIComponent(
     `Hola! Me interesa ${product.name} - $${product.price.toFixed(2)}. ¿Está disponible?`
   )
-  const whatsappLink = `https://wa.me/584141234567?text=${encodedMsg}`
+  const whatsappLink = `https://wa.me/${getSetting("whatsapp", "584141234567")}?text=${encodedMsg}`
 
   const handleImageMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {

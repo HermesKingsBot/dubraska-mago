@@ -9,6 +9,7 @@ import ContactHero from "@/components/contact/ContactHero"
 import ContactCards from "@/components/contact/ContactCards"
 import ContactForm from "@/components/contact/ContactForm"
 import ContactCTA from "@/components/contact/ContactCTA"
+import { useSettingsContext } from "@/context/SettingsContext"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -36,6 +37,8 @@ export default function ContactClient() {
   const formRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
+
+  const { getSetting } = useSettingsContext()
 
   const [form, setForm] = useState<FormData>({
     name: "",
@@ -207,7 +210,7 @@ export default function ContactClient() {
           className="text-center text-[var(--color-muted)] mb-10 text-sm sm:text-base"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
         >
-          Mercado La Isla, Caracas — Local 251
+          {getSetting("address", "Mercado La Isla, Caracas — Local 251")}
         </p>
         <ContactMap />
       </section>

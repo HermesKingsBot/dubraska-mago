@@ -115,3 +115,22 @@ export const inventoryAdjustmentSchema = z.object({
   reason: z.string().nullable().optional(),
   reference: z.string().nullable().optional(),
 })
+
+export const updateSettingSchema = z.object({
+  key: z.string().min(1),
+  value: z.string(),
+})
+
+export const bulkUpdateSettingsSchema = z.object({
+  settings: z.array(updateSettingSchema).min(1),
+})
+
+export const socialLinkSchema = z.object({
+  platform: z.string().min(1),
+  url: z.string().url("URL inválida"),
+  handle: z.string().optional(),
+  active: z.boolean().default(true),
+  order: z.number().int().default(0),
+})
+
+export const updateSocialLinkSchema = socialLinkSchema.partial()

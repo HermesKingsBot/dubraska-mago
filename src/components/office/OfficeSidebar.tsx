@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { label: "Inventario", icon: "📦", href: "/office/inventario" },
   { label: "Categorías", icon: "🏷️", href: "/office/categorias" },
   { label: "Testimonios", icon: "⭐", href: "/office/testimonios" },
+  { label: "Configuración", icon: "⚙️", href: "/office/configuracion" },
 ]
 
 interface OfficeSidebarProps {

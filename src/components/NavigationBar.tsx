@@ -7,6 +7,7 @@ import products from "../../data/products.json"
 import { CartButton, WishlistLink } from "@/components/CartIcon"
 import UserMenu from "@/components/UserMenu"
 import SearchOverlay from "@/components/SearchOverlay"
+import { useSettingsContext } from "@/context/SettingsContext"
 
 interface Product {
   id: string
@@ -31,6 +32,9 @@ export default function NavigationBar() {
   const [searchOpen, setSearchOpen] = useState(false)
 
   const headerRef = useRef<HTMLElement>(null)
+  const { getSetting } = useSettingsContext()
+
+  const companyName = getSetting("company_name", "Dubraska Mago")
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -61,7 +65,7 @@ export default function NavigationBar() {
             className="text-2xl md:text-3xl tracking-tight text-[var(--color-gold)] hover:text-[oklch(0.84_0.12_85)] transition-colors duration-300"
             style={{ fontFamily: "var(--font-instrument-serif)" }}
           >
-            DUBRASKA MAGO<sup className="text-xs">®</sup>
+            {companyName.toUpperCase()}<sup className="text-xs">®</sup>
           </a>
 
           <nav className="hidden md:flex items-center gap-8">

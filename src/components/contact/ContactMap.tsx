@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
+import { useSettingsContext } from "@/context/SettingsContext"
 
 const goldIcon = L.divIcon({
   className: "",
@@ -18,12 +19,18 @@ const goldIcon = L.divIcon({
 export default function ContactMap() {
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInstance = useRef<L.Map | null>(null)
+  const { getSetting } = useSettingsContext()
+
+  const lat = parseFloat(getSetting("map_lat", "10.4806"))
+  const lng = parseFloat(getSetting("map_lng", "-66.9036"))
+  const companyName = getSetting("company_name", "Dubraska Mago")
+  const address = getSetting("address", "")
 
   useEffect(() => {
     if (!mapRef.current || mapInstance.current) return
 
     const map = L.map(mapRef.current, {
-      center: [10.4806, -66.9036],
+      center: [lat, lng],
       zoom: 14,
       zoomControl: false,
       scrollWheelZoom: false,
@@ -41,10 +48,10 @@ export default function ContactMap() {
       }
     ).addTo(map)
 
-    L.marker([10.4806, -66.9036], { icon: goldIcon })
+    L.marker([lat, lng], { icon: goldIcon })
       .addTo(map)
       .bindPopup(
-        `<div style="font-family:var(--font-inter);color:var(--color-bg);font-weight:500;">Dubraska Mago<br/><span style="font-size:12px;color:var(--color-muted);">Mercado La Isla, Caracas</span></div>`
+        `<div style="font-family:var(--font-inter);color:var(--color-bg);font-weight:500;">${companyName}<br/><span style="font-size:12px;color:var(--color-muted);">${address}</span></div>`
       )
       .openPopup()
 
@@ -54,7 +61,7 @@ export default function ContactMap() {
       map.remove()
       mapInstance.current = null
     }
-  }, [])
+  }, [lat, lng, companyName, address])
 
   return (
     <div

@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useSettingsContext } from "@/context/SettingsContext"
 
 interface ContactCTAProps {
   ref?: React.Ref<HTMLDivElement>
@@ -10,6 +11,9 @@ function ContactCTA({ ref }: ContactCTAProps): React.JSX.Element {
   const [particles, setParticles] = useState<
     { id: number; x: number; y: number; size: number; duration: number; delay: number }[]
   >([])
+  const { getSetting } = useSettingsContext()
+
+  const whatsapp = getSetting("whatsapp", "584120000000")
 
   useEffect(() => {
     const p = Array.from({ length: 15 }, (_, i) => ({
@@ -95,7 +99,7 @@ function ContactCTA({ ref }: ContactCTAProps): React.JSX.Element {
           Piezas limitadas, hechas para destacar. Escríbenos por WhatsApp y comienza tu pedido hoy.
         </p>
         <a
-          href="https://wa.me/584120000000"
+          href={`https://wa.me/${whatsapp}`}
           target="_blank"
           rel="noopener noreferrer"
           className="group relative inline-flex items-center gap-2 rounded-full px-12 py-5 text-base font-semibold tracking-wide border-none cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_oklch(0.72 0.16 85)] active:scale-95"

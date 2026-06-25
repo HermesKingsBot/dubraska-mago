@@ -1,10 +1,23 @@
 "use client"
 
 import { motion } from "motion/react"
+import { useSettingsContext } from "@/context/SettingsContext"
 
 const EASE = [0.25, 0.46, 0.45, 0.94] as const
 
 export default function HeroSection() {
+  const { getSetting } = useSettingsContext()
+
+  const shippingEnabled = getSetting("shipping_enabled") === "true"
+  const casheaEnabled = getSetting("cashea_enabled") === "true"
+  const address = getSetting("address")
+
+  const badges = [
+    shippingEnabled ? "Envíos a toda Venezuela" : null,
+    casheaEnabled ? "Aceptamos Cashea" : null,
+    address || null,
+  ].filter(Boolean)
+
   return (
     <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24 sm:py-32 md:py-40 h-full" style={{ minHeight: "calc(100vh - 8rem)" }}>
       <motion.h1
@@ -43,14 +56,14 @@ export default function HeroSection() {
         Ver Catálogo
       </motion.a>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.9, delay: 0.6, ease: EASE }}
-        className="flex flex-wrap justify-center gap-6 mt-8"
-      >
-        {["Envíos a toda Venezuela", "Aceptamos Cashea", "Mercado La Isla, Local 251"].map(
-          (badge) => (
+      {badges.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9, delay: 0.6, ease: EASE }}
+          className="flex flex-wrap justify-center gap-6 mt-8"
+        >
+          {badges.map((badge) => (
             <span
               key={badge}
               className="text-xs text-[var(--color-muted)]/60"
@@ -58,9 +71,9 @@ export default function HeroSection() {
             >
               {badge}
             </span>
-          )
-        )}
-      </motion.div>
+          ))}
+        </motion.div>
+      )}
 
       <motion.div
         initial={{ opacity: 0 }}

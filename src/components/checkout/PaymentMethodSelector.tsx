@@ -8,49 +8,66 @@ import {
   DollarSign,
   Landmark,
 } from "lucide-react"
+import { useSettingsContext } from "@/context/SettingsContext"
 
 interface PaymentMethodSelectorProps {
   selected: string
   onSelect: (method: string) => void
 }
 
-const methods = [
-  {
-    id: "transferencia",
-    label: "Transferencia",
-    icon: Landmark,
-    detail: "Banco XYZ, Cuenta XXXX, CI XXXXXXXX",
-  },
-  {
-    id: "pago_movil",
-    label: "Pago Móvil",
-    icon: Smartphone,
-    detail: "0414-XXXXXXX, CI: XXXXXXXX",
-  },
-  {
-    id: "zelle",
-    label: "Zelle",
-    icon: Mail,
-    detail: "email@example.com",
-  },
-  {
-    id: "paypal",
-    label: "PayPal",
-    icon: DollarSign,
-    detail: "email@example.com",
-  },
-  {
-    id: "efectivo",
-    label: "Efectivo",
-    icon: Banknote,
-    detail: "Pago en efectivo al recibir tu pedido",
-  },
-]
-
 export default function PaymentMethodSelector({
   selected,
   onSelect,
 }: PaymentMethodSelectorProps) {
+  const { getSetting } = useSettingsContext()
+
+  const bankName = getSetting("bank_name")
+  const bankAccount = getSetting("bank_account")
+  const bankHolder = getSetting("bank_holder")
+  const bankRif = getSetting("bank_rif")
+  const pmPhone = getSetting("pagomovil_phone")
+  const pmBank = getSetting("pagomovil_bank")
+  const pmCi = getSetting("pagomovil_ci")
+  const zelleEmail = getSetting("zelle_email")
+  const paypalEmail = getSetting("paypal_email")
+
+  const methods = [
+    {
+      id: "transferencia",
+      label: "Transferencia",
+      icon: Landmark,
+      detail: bankName
+        ? `${bankName}, Cta: ${bankAccount}, Titular: ${bankHolder}, RIF: ${bankRif}`
+        : "Banco, cuenta, titular, RIF",
+    },
+    {
+      id: "pago_movil",
+      label: "Pago Móvil",
+      icon: Smartphone,
+      detail: pmPhone
+        ? `${pmPhone}, Banco: ${pmBank}, CI: ${pmCi}`
+        : "Teléfono, banco, CI",
+    },
+    {
+      id: "zelle",
+      label: "Zelle",
+      icon: Mail,
+      detail: zelleEmail || "email@ejemplo.com",
+    },
+    {
+      id: "paypal",
+      label: "PayPal",
+      icon: DollarSign,
+      detail: paypalEmail || "email@ejemplo.com",
+    },
+    {
+      id: "efectivo",
+      label: "Efectivo",
+      icon: Banknote,
+      detail: "Pago en efectivo al recibir tu pedido",
+    },
+  ]
+
   return (
     <div className="space-y-3">
       {methods.map((m) => {
