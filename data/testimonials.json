@@ -1,0 +1,10 @@
+[
+  { "id": "t1", "name": "María G.", "text": "Me encanta mi collar dorado, la calidad es increíble para el precio. Lo uso todos los días y sigue perfecto.", "rating": 5, "productId": "collar-cadena-dorado", "date": "2026-05-15", "active": true },
+  { "id": "t2", "name": "Carlos R.", "text": "Le compré unos aretes a mi novia y le encantaron. El empaque llegó muy bien y el brillo es hermoso.", "rating": 5, "productId": "aretes-argolla-grande", "date": "2026-05-10", "active": true },
+  { "id": "t3", "name": "Ana L.", "text": "Mi pulsera eslabones es perfecta. Se ve muy elegante y es cómoda para el día a día. Recomendada 100%.", "rating": 5, "productId": "pulsera-eslabones", "date": "2026-04-28", "active": true },
+  { "id": "t4", "name": "Luisa M.", "text": "El set completo llegó en perfecto estado. La pulsera y collar combinanHermosamente. Excelente servicio al cliente.", "rating": 5, "productId": "set-collar-pulsera", "date": "2026-04-15", "active": true },
+  { "id": "t5", "name": "Jorge P.", "text": "Muy buena calidad en los aretes stud. El cierre es firme y el brillo no se pierde. Volveré a comprar.", "rating": 4, "productId": "aretes-stud-plateado", "date": "2026-03-20", "active": true },
+  { "id": "t6", "name": "Patricia V.", "text": "La tobillera dorada es hermosa. Llegó rapidísimo y bien empacada. Ya quiero comprar otra en plateado.", "rating": 5, "productId": "tobillera-oro", "date": "2026-03-08", "active": true },
+  { "id": "t7", "name": "Roberto S.", "text": "Mi esposa amó el collar perlas. Las perlas tienen un brillo muy natural y el oro se ve premium.", "rating": 5, "productId": "collar-perlas-oro", "date": "2026-02-22", "active": true },
+  { "id": "t8", "name": "Daniela F.", "text": "Los aretes péndulo son mis favoritos. Se mueven con elegancia y son perfectos para salidas.", "rating": 5, "productId": "aretes-pendulo-oro", "date": "2026-02-10", "active": true }
+]

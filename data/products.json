@@ -29,7 +29,10 @@
       "collar-cadena-plateado",
       "collar-choker-negro",
       "collar-perlas-oro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-COL-ADO"
   },
   {
     "id": "pulsera-eslabones",
@@ -61,7 +64,10 @@
       "pulsera-rose",
       "pulsera-tobillera-oro",
       "pulsera-cadena-doble"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-PUL-NES"
   },
   {
     "id": "aretes-argolla-grande",
@@ -93,7 +99,10 @@
       "aretes-pendulo-oro",
       "aretes-stud-plateado",
       "aretes-aro-grande"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-ARE-NDE"
   },
   {
     "id": "set-collar-pulsera",
@@ -124,7 +133,10 @@
     "relatedIds": [
       "set-completo-rose",
       "set-minimal-oro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-SET-ERA"
   },
   {
     "id": "collar-cadena-plateado",
@@ -156,7 +168,10 @@
       "collar-cadena-dorado",
       "collar-choker-negro",
       "collar-perlas-oro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-COL-ADO"
   },
   {
     "id": "pulsera-rose",
@@ -188,7 +203,10 @@
       "pulsera-eslabones",
       "pulsera-tobillera-oro",
       "pulsera-cadena-doble"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-PUL-OSE"
   },
   {
     "id": "aretes-pendulo-oro",
@@ -220,7 +238,10 @@
       "aretes-argolla-grande",
       "aretes-stud-plateado",
       "aretes-aro-grande"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-ARE-ORO"
   },
   {
     "id": "collar-choker-negro",
@@ -252,7 +273,10 @@
       "collar-cadena-dorado",
       "collar-cadena-plateado",
       "collar-perlas-oro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-COL-GRO"
   },
   {
     "id": "pulsera-tobillera-oro",
@@ -284,7 +308,10 @@
       "pulsera-eslabones",
       "pulsera-rose",
       "pulsera-cadena-doble"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-PUL-ORO"
   },
   {
     "id": "aretes-stud-plateado",
@@ -316,7 +343,10 @@
       "aretes-argolla-grande",
       "aretes-pendulo-oro",
       "aretes-aro-grande"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-ARE-ADO"
   },
   {
     "id": "set-completo-rose",
@@ -347,7 +377,10 @@
     "relatedIds": [
       "set-collar-pulsera",
       "set-minimal-oro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-SET-OSE"
   },
   {
     "id": "collar-perlas-oro",
@@ -379,7 +412,10 @@
       "collar-cadena-dorado",
       "collar-cadena-plateado",
       "collar-choker-negro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-COL-ORO"
   },
   {
     "id": "pulsera-cadena-doble",
@@ -411,7 +447,10 @@
       "pulsera-eslabones",
       "pulsera-rose",
       "pulsera-tobillera-oro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-PUL-BLE"
   },
   {
     "id": "aretes-aro-grande",
@@ -443,7 +482,10 @@
       "aretes-argolla-grande",
       "aretes-pendulo-oro",
       "aretes-stud-plateado"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-ARE-NDE"
   },
   {
     "id": "collar-lariat-plateado",
@@ -475,7 +517,10 @@
       "collar-cadena-dorado",
       "collar-cadena-plateado",
       "collar-choker-negro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-COL-ADO"
   },
   {
     "id": "pulsera-pulsera-negra",
@@ -507,7 +552,10 @@
       "pulsera-eslabones",
       "pulsera-rose",
       "pulsera-tobillera-oro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-PUL-GRA"
   },
   {
     "id": "set-minimal-oro",
@@ -538,7 +586,10 @@
     "relatedIds": [
       "set-collar-pulsera",
       "set-completo-rose"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-SET-ORO"
   },
   {
     "id": "aretes-circulo-rose",
@@ -570,7 +621,10 @@
       "aretes-argolla-grande",
       "aretes-pendulo-oro",
       "aretes-stud-plateado"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-ARE-OSE"
   },
   {
     "id": "collar-gargantilla-oro",
@@ -602,7 +656,10 @@
       "collar-cadena-dorado",
       "collar-cadena-plateado",
       "collar-choker-negro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-COL-ORO"
   },
   {
     "id": "pulsera-bracelet-negro",
@@ -634,6 +691,9 @@
       "pulsera-eslabones",
       "pulsera-rose",
       "pulsera-tobillera-oro"
-    ]
+    ],
+    "stock": 15,
+    "lowStockThreshold": 5,
+    "sku": "DM-PUL-GRO"
   }
 ]

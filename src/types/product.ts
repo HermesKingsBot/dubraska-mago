@@ -16,6 +16,9 @@ export interface Product {
   pieces?: number
   inStock: boolean
   featured: boolean
+  stock: number
+  lowStockThreshold: number
+  sku: string
 }
 
 export type LayoutColumns = 4 | 2 | 1

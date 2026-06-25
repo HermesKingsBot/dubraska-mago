@@ -21,6 +21,9 @@ export interface ProductDetail {
   pieces?: number
   inStock: boolean
   featured: boolean
+  stock: number
+  lowStockThreshold: number
+  sku: string
   gallery: string[]
   waterResistant: boolean
   details: string
