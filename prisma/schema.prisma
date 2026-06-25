@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      String   @default("ADMIN")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String    @default("")
+  active      Boolean   @default(true)
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[]
+}
+
+model Product {
+  id          String              @id @default(cuid())
+  name        String
+  slug        String              @unique
+  description String
+  price       Float
+  oldPrice    Float?
+  material    String
+  length      String?
+  diameter    String?
+  weight      String?
+  color       String
+  badge       String?
+  image       String
+  gallery     String              @default("[]")
+  inStock     Boolean             @default(true)
+  featured    Boolean             @default(false)
+  stock       Int                 @default(0)
+  lowStock    Int                 @default(5)
+  sku         String
+  categoryId  String
+  category    Category            @relation(fields: [categoryId], references: [id])
+  orderItems  OrderItem[]
+  movements   InventoryMovement[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  text      String
+  rating    Int
+  productId String?
+  date      DateTime @default(now())
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id            String     @id @default(cuid())
+  orderNumber   String     @unique
+  status        String     @default("PENDING")
+  customerName  String
+  customerEmail String
+  customerPhone String?
+  total         Float
+  notes         String?
+  items         OrderItem[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+}
+model InventoryMovement {
+  id           String   @id @default(cuid())
+  productId    String
+  product      Product  @relation(fields: [productId], references: [id])
+  type         String
+  quantity     Int
+  reason       String?
+  reference    String?
+  previousStock Int
+  newStock     Int
+  createdAt    DateTime @default(now())
+  createdBy    String?
+}
