@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import { useAuth } from "@/context/OfficeAuthContext"
 import OfficeSidebar from "./OfficeSidebar"
 import OfficeTopBar from "./OfficeTopBar"
@@ -22,6 +22,7 @@ function OfficeLayout({
   const { isAuthenticated } = useAuth()
   const pathname = usePathname()
   const title = PAGE_TITLES[pathname] ?? "Admin"
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   if (!isAuthenticated || pathname === "/office") {
     return <>{children}</>
@@ -29,9 +30,9 @@ function OfficeLayout({
 
   return (
     <div className="flex min-h-screen">
-      <OfficeSidebar />
-      <div className="flex-1 ml-60 transition-all duration-300 md:ml-60">
-        <OfficeTopBar title={title} />
+      <OfficeSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="flex-1 md:ml-60 transition-all duration-300">
+        <OfficeTopBar title={title} onToggleSidebar={() => setSidebarOpen((v) => !v)} />
         <main className="p-6">{children}</main>
       </div>
     </div>

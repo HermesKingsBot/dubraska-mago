@@ -52,3 +52,22 @@ export interface StockAdjustment {
 export type OrderSupplier = "Proveedor" | "Fabricación" | "Reposición"
 
 export type AdjustmentReason = "Conteo físico" | "Ajuste sistema" | "Devolución" | "Otro"
+
+export interface Category {
+  id: string
+  name: string
+  slug: string
+  description: string
+  active: boolean
+  order: number
+}
+
+export interface Testimonial {
+  id: string
+  name: string
+  text: string
+  rating: number
+  productId: string
+  date: string
+  active: boolean
+}
