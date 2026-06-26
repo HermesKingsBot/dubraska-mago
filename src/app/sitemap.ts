@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+import db from "@/lib/db"
 
 const baseUrl = "https://dubraska-mago.vercel.app"
 
@@ -20,19 +21,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/nosotros`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/contacto`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.6,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/envios`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/preguntas-frecuentes`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.5,
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/politicas-privacidad`,
+      lastModified: new Date(),
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
     {
       url: `${baseUrl}/politicas-cambios-devoluciones`,
@@ -44,26 +57,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let productPages: MetadataRoute.Sitemap = []
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || baseUrl}/api/products?limit=200`,
-      { cache: "no-store" }
-    )
-    const json = await res.json()
-    if (json.success && json.data?.items) {
-      productPages = json.data.items.map(
-        (product: { slug: string; updatedAt: string }) => ({
-          url: `${baseUrl}/producto/${product.slug}`,
-          lastModified: product.updatedAt
-            ? new Date(product.updatedAt)
-            : new Date(),
-          changeFrequency: "weekly" as const,
-          priority: 0.8,
-        })
-      )
-    }
+    const products = await db.product.findMany({
+      where: { deletedAt: null },
+      select: { slug: true, updatedAt: true },
+    })
+    productPages = products.map((p) => ({
+      url: `${baseUrl}/producto/${p.slug}`,
+      lastModified: p.updatedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    }))
   } catch {
-    // sitemap without product pages
+    // continue without products
   }
 
-  return [...staticPages, ...productPages]
+  let categoryPages: MetadataRoute.Sitemap = []
+  try {
+    const categories = await db.category.findMany({
+      where: { active: true, deletedAt: null },
+      select: { slug: true, updatedAt: true },
+    })
+    categoryPages = categories.map((c) => ({
+      url: `${baseUrl}/colecciones?category=${c.slug}`,
+      lastModified: c.updatedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    }))
+  } catch {
+    // continue without categories
+  }
+
+  return [...staticPages, ...productPages, ...categoryPages]
 }

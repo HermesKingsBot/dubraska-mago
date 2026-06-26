@@ -5,6 +5,7 @@ import { requireAuth } from "@/lib/auth"
 import { logCreate } from "@/lib/audit"
 import { importCategorySchema } from "@/lib/schemas"
 import { parseImportFile, validateImportFile } from "@/lib/import-utils"
+import { checkRateLimit, RATE_LIMITS, createRateLimitResponse } from "@/lib/rate-limit"
 
 const CATEGORY_FIELD_MAP: Record<string, string> = {
   "Nombre": "name",
@@ -17,6 +18,11 @@ const CATEGORY_FIELD_MAP: Record<string, string> = {
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const user = requireAuth(request)
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+    const importResult = checkRateLimit(ip, RATE_LIMITS.import)
+    if (!importResult.success) {
+      return createRateLimitResponse(importResult)
+    }
     const formData = await request.formData()
     const file = formData.get("file") as File | null
 

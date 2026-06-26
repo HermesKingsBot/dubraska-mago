@@ -91,13 +91,36 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Producto no encontrado" }
   }
 
+  const siteUrl = "https://dubraska-mago.vercel.app"
+  const ogImageParam = product.image ? `&image=${encodeURIComponent(product.image)}` : ""
+  const ogImageUrl = `${siteUrl}/api/og?title=${encodeURIComponent(product.name)}&price=${product.price}${ogImageParam}`
+  const description = product.description.slice(0, 160)
+
   return {
-    title: product.name,
-    description: product.description,
+    title: `${product.name} | Dubraska Mago®`,
+    description,
+    alternates: {
+      canonical: `${siteUrl}/producto/${product.slug}`,
+    },
     openGraph: {
+      title: `${product.name} | Dubraska Mago®`,
+      description,
+      type: "website",
+      url: `${siteUrl}/producto/${product.slug}`,
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: product.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
       title: product.name,
-      description: product.description,
-      images: [product.image ?? ""],
+      description,
+      images: [ogImageUrl],
     },
   }
 }

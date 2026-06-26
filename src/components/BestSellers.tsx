@@ -6,6 +6,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { motion, useInView } from "motion/react"
 import Link from "next/link"
+import Image from "next/image"
 import { useEffect, useState } from "react"
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -194,13 +195,19 @@ export default function BestSellers({ products }: { products: Product[] }) {
             >
               <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-[var(--color-dark-card)]">
                 {product.image ? (
-                  <motion.img
-                    src={product.image}
-                    alt={product.name}
-                    className="absolute inset-0 w-full h-full object-cover"
+                  <motion.div
+                    className="absolute inset-0"
                     whileInView={{ scale: [1, 1.05] }}
                     transition={{ duration: 8, repeat: Infinity, ease: "linear", repeatType: "reverse" }}
-                  />
+                  >
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                      className="object-cover"
+                    />
+                  </motion.div>
                 ) : (
                   <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-dark-card)] via-[var(--color-dark-accent)] to-[var(--color-dark-card)]" />
                 )}

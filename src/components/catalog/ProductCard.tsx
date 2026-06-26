@@ -4,6 +4,7 @@ import { useRef, useState, useCallback } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { motion } from "motion/react"
+import Image from "next/image"
 import { Product } from "@/types/product"
 import { buildWhatsAppLink } from "@/lib/catalog-utils"
 import HeartButton from "@/components/wishlist/HeartButton"
@@ -88,15 +89,25 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         {!imageLoaded && (
           <div className="absolute inset-0 bg-[var(--color-dark-card)] animate-pulse" />
         )}
-        <motion.img
-          src={product.image}
-          alt={product.name}
-          className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
-          onLoad={() => setImageLoaded(true)}
+        <motion.div
+          className="w-full h-full"
           whileHover={{ scale: 1.08 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          loading="lazy"
-        />
+        >
+          {product.image ? (
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={400}
+              height={400}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className={`w-full h-full object-cover transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+              onLoad={() => setImageLoaded(true)}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-[var(--color-muted)] text-xs">Sin imagen</div>
+          )}
+        </motion.div>
 
         {product.badge && (
           <motion.span

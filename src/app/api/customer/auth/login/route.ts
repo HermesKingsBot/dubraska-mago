@@ -5,9 +5,16 @@ import { loginSchema } from "@/lib/schemas"
 import * as bcrypt from "bcryptjs"
 import { signCustomerToken, COOKIE_NAME } from "@/lib/customer-auth"
 import { NextResponse } from "next/server"
+import { checkRateLimit, RATE_LIMITS, createRateLimitResponse } from "@/lib/rate-limit"
 
 async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+    const loginResult = checkRateLimit(ip, RATE_LIMITS.login)
+    if (!loginResult.success) {
+      return createRateLimitResponse(loginResult)
+    }
+
     const body = await request.json()
     const data = loginSchema.parse(body)
 

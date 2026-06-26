@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useCallback, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
+import Image from "next/image"
 import { Product } from "@/types/product"
 import Link from "next/link"
 
@@ -92,9 +93,12 @@ export default function QuickViewModal({
             <div className="grid grid-cols-1 md:grid-cols-2">
               <div className="aspect-square bg-[var(--color-dark-card)] relative overflow-hidden">
                 {product.image && (
-                  <img
+                  <Image
                     src={product.image}
                     alt={product.name}
+                    width={500}
+                    height={500}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     className="w-full h-full object-cover"
                   />
                 )}

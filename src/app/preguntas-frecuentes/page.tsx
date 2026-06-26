@@ -4,8 +4,7 @@ import StructuredData from "@/components/StructuredData"
 
 export const metadata: Metadata = {
   title: "Preguntas Frecuentes | Dubraska Mago®",
-  description:
-    "Respuestas a las preguntas más frecuentes sobre envíos, cuidados, devoluciones y más.",
+  description: "Respuestas a las preguntas más frecuentes sobre envíos, pagos, devoluciones, cuidados de joyería y más.",
 }
 
 const faqData = {

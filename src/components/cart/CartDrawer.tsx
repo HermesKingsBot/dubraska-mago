@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import { motion, AnimatePresence } from "motion/react"
+import Image from "next/image"
 import { useCart } from "@/context/CartContext"
 import Link from "next/link"
 import EmptyStates from "@/components/EmptyStates"
@@ -156,9 +157,11 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       >
                         <div className="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 bg-[var(--color-dark-accent)]">
                           {item.product?.image ? (
-                            <img
+                            <Image
                               src={item.product.image}
                               alt={item.product.name}
+                              width={64}
+                              height={64}
                               className="w-full h-full object-cover"
                             />
                           ) : (

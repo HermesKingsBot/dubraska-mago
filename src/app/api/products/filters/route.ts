@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from "next/server"
 import db from "@/lib/db"
 import { successResponse, handleApiError } from "@/lib/api"
+import { checkRateLimit, RATE_LIMITS, createRateLimitResponse } from "@/lib/rate-limit"
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+    const searchResult = checkRateLimit(ip, RATE_LIMITS.search)
+    if (!searchResult.success) {
+      return createRateLimitResponse(searchResult)
+    }
     const categories = await db.category.findMany({
       where: { deletedAt: null },
       include: { _count: { select: { products: true } } },

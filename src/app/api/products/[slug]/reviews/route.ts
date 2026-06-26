@@ -3,6 +3,7 @@ import db from "@/lib/db"
 import { successResponse, errorResponse, handleApiError } from "@/lib/api"
 import { createReviewSchema } from "@/lib/schemas"
 import { verifyToken } from "@/lib/auth"
+import { checkRateLimit, RATE_LIMITS, createRateLimitResponse } from "@/lib/rate-limit"
 
 type RouteParams = { params: Promise<{ slug: string }> }
 
@@ -70,6 +71,12 @@ async function GET(request: NextRequest, { params }: RouteParams) {
 
 async function POST(request: NextRequest, { params }: RouteParams) {
   try {
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+    const contactResult = checkRateLimit(ip, RATE_LIMITS.contact)
+    if (!contactResult.success) {
+      return createRateLimitResponse(contactResult)
+    }
+
     const { slug } = await params
     const product = await db.product.findUnique({ where: { slug, deletedAt: null } })
     if (!product) {

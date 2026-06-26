@@ -3,8 +3,7 @@ import ContactClient from "./ContactClient"
 
 export const metadata: Metadata = {
   title: "Contacto | Dubraska Mago®",
-  description:
-    "Contáctanos para consultas, pedidos personalizados o soporte. Estamos aquí para ayudarte.",
+  description: "Contáctanos por WhatsApp, email o Instagram. Estamos para atenderte. Envíos a toda Venezuela.",
 }
 
 export default function ContactoPage() {

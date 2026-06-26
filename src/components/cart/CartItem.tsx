@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
+import Image from "next/image"
 import { useCart } from "@/context/CartContext"
 
 interface CartItemProps {
@@ -33,9 +34,11 @@ export default function CartItem({ item }: CartItemProps) {
     >
       <div className="relative w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-[var(--color-dark-accent)]">
         {item.product?.image ? (
-          <img
+          <Image
             src={item.product.image}
             alt={item.product.name}
+            width={80}
+            height={80}
             className="w-full h-full object-cover"
           />
         ) : (

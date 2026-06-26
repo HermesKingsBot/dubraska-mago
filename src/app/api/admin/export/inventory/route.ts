@@ -3,6 +3,7 @@ import db from "@/lib/db"
 import { handleApiError } from "@/lib/api"
 import { requireAuth } from "@/lib/auth"
 import { generateExportFile, getExportHeaders, Column } from "@/lib/export-utils"
+import { checkRateLimit, RATE_LIMITS, createRateLimitResponse } from "@/lib/rate-limit"
 
 const INVENTORY_COLUMNS: Column[] = [
   { key: "productName", header: "Producto", width: 30 },
@@ -20,6 +21,11 @@ const INVENTORY_COLUMNS: Column[] = [
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     requireAuth(request)
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+    const exportResult = checkRateLimit(ip, RATE_LIMITS.export)
+    if (!exportResult.success) {
+      return createRateLimitResponse(exportResult)
+    }
     const { searchParams } = new URL(request.url)
     const format = searchParams.get("format") === "csv" ? "csv" : "xlsx"
 

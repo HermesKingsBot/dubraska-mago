@@ -4,11 +4,18 @@ import { successResponse, errorResponse, handleApiError } from "@/lib/api"
 import { registerSchema } from "@/lib/schemas"
 import * as bcrypt from "bcryptjs"
 import * as jwt from "jsonwebtoken"
+import { checkRateLimit, RATE_LIMITS, createRateLimitResponse } from "@/lib/rate-limit"
 
 const JWT_SECRET = process.env.JWT_SECRET || "dubraska-secret-key-change-in-production"
 
 async function POST(request: NextRequest) {
   try {
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown"
+    const registerResult = checkRateLimit(ip, RATE_LIMITS.register)
+    if (!registerResult.success) {
+      return createRateLimitResponse(registerResult)
+    }
+
     const body = await request.json()
     const data = registerSchema.parse(body)
     const existing = await db.user.findUnique({
