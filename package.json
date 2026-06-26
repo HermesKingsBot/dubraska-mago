@@ -13,7 +13,16 @@
     "test:coverage": "vitest run --coverage",
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "prepare": "husky",
+"predeploy": "vitest run && next build",
+"deploy:prod": "bash scripts/deploy.sh prod",
+"deploy:staging": "bash scripts/deploy.sh staging"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "npx vitest run --reporter=verbose --no-coverage"
+    ]
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -46,7 +55,9 @@
     "@vitejs/plugin-react": "^6.0.3",
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "lint-staged": "^17.0.8",
     "tailwindcss": "^4",
     "tsx": "^4.22.4",
     "typescript": "^5",
