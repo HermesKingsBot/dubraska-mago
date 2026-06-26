@@ -250,7 +250,7 @@ export default function Footer() {
               Términos y condiciones
             </a>
             <a
-              href="/privacidad"
+              href="/politicas-privacidad"
               className="text-[11px] text-[var(--color-muted)] hover:text-white transition-colors duration-300"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
