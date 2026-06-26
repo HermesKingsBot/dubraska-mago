@@ -4,44 +4,64 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Link from "next/link"
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const CATEGORIES = [
-  {
-    name: "Collares",
-    count: "12 piezas",
-    gradient: "from-[var(--color-gold)]/20 via-[var(--color-dark-accent)] to-[oklch(0.05_0_0)]",
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.7" opacity="0.4">
-        <path d="M6 8a6 6 0 0 1 12 0c0 6-3 10-6 14-3-4-6-8-6-14z" />
-      </svg>
-    ),
-  },
-  {
-    name: "Pulseras",
-    count: "8 piezas",
-    gradient: "from-[var(--color-rose)]/20 via-[var(--color-dark-accent)] to-[oklch(0.05_0_0)]",
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.7" opacity="0.4">
-        <ellipse cx="12" cy="12" rx="9" ry="5" />
-      </svg>
-    ),
-  },
-  {
-    name: "Aretes",
-    count: "15 piezas",
-    gradient: "from-[oklch(0.76_0_0)]/20 via-[var(--color-dark-accent)] to-[oklch(0.05_0_0)]",
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.7" opacity="0.4">
-        <circle cx="8" cy="14" r="3" />
-        <circle cx="16" cy="14" r="3" />
-      </svg>
-    ),
-  },
-]
+interface Category {
+  id: string
+  name: string
+  slug: string
+  _count: { products: number }
+}
 
-export default function CategoriesSection() {
+const ICONS: Record<string, React.JSX.Element> = {
+  collares: (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.7" opacity="0.4">
+      <path d="M6 8a6 6 0 0 1 12 0c0 6-3 10-6 14-3-4-6-8-6-14z" />
+    </svg>
+  ),
+  pulseras: (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.7" opacity="0.4">
+      <ellipse cx="12" cy="12" rx="9" ry="5" />
+    </svg>
+  ),
+  aretes: (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.7" opacity="0.4">
+      <circle cx="8" cy="14" r="3" />
+      <circle cx="16" cy="14" r="3" />
+    </svg>
+  ),
+  anillos: (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.7" opacity="0.4">
+      <circle cx="12" cy="12" r="7" />
+      <circle cx="12" cy="12" r="4" />
+    </svg>
+  ),
+  "sets completos": (
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.7" opacity="0.4">
+      <path d="M6 8a6 6 0 0 1 12 0c0 6-3 10-6 14-3-4-6-8-6-14z" />
+      <ellipse cx="12" cy="18" rx="5" ry="3" />
+    </svg>
+  ),
+}
+
+function getIcon(slug: string): React.JSX.Element {
+  return ICONS[slug] || ICONS.collares
+}
+
+function getGradient(slug: string): string {
+  const gradients: Record<string, string> = {
+    collares: "from-[var(--color-gold)]/20 via-[var(--color-dark-accent)] to-[oklch(0.05_0_0)]",
+    pulseras: "from-[var(--color-rose)]/20 via-[var(--color-dark-accent)] to-[oklch(0.05_0_0)]",
+    aretes: "from-[oklch(0.76_0_0)]/20 via-[var(--color-dark-accent)] to-[oklch(0.05_0_0)]",
+    anillos: "from-[oklch(0.65_0.15_320)]/20 via-[var(--color-dark-accent)] to-[oklch(0.05_0_0)]",
+    "sets completos": "from-[var(--color-gold)]/15 via-[var(--color-rose)]/10 to-[oklch(0.05_0_0)]",
+  }
+  return gradients[slug] || gradients.collares
+}
+
+export default function CategoriesSection({ categories }: { categories: Category[] }) {
   const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
 
@@ -104,6 +124,8 @@ export default function CategoriesSection() {
     { scope: sectionRef }
   )
 
+  if (!categories.length) return null
+
   return (
     <section ref={sectionRef} className="relative w-full bg-[var(--color-bg)] py-28 sm:py-36 md:py-44">
       <div className="max-w-5xl mx-auto px-6">
@@ -126,13 +148,13 @@ export default function CategoriesSection() {
           ref={cardsRef}
           className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12"
         >
-          {CATEGORIES.map((cat) => (
-            <a
-              key={cat.name}
-              href={`/colecciones/${cat.name.toLowerCase()}`}
+          {categories.map((cat) => (
+            <Link
+              key={cat.id}
+              href={`/colecciones/${cat.slug}`}
               className="cat-card group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer"
             >
-              <div className={`absolute inset-0 bg-gradient-to-b ${cat.gradient}`} />
+              <div className={`absolute inset-0 bg-gradient-to-b ${getGradient(cat.slug)}`} />
 
               <div className="absolute inset-0 bg-[var(--color-bg)]/40 group-hover:bg-[var(--color-bg)]/20 transition-colors duration-500" />
 
@@ -143,7 +165,7 @@ export default function CategoriesSection() {
 
               <div className="absolute inset-0 flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity duration-500">
                 <div className="transform group-hover:scale-110 transition-transform duration-500">
-                  {cat.icon}
+                  {getIcon(cat.slug)}
                 </div>
               </div>
 
@@ -162,7 +184,7 @@ export default function CategoriesSection() {
                       className="text-xs text-[var(--color-muted)] mt-1"
                       style={{ fontFamily: "var(--font-inter)" }}
                     >
-                      {cat.count}
+                      {cat._count.products} pieza{cat._count.products !== 1 ? "s" : ""}
                     </p>
                   </div>
                   <div className="w-8 h-8 rounded-full border border-[rgba(212,175,55,0.2)] flex items-center justify-center group-hover:bg-[var(--color-gold)] group-hover:border-[var(--color-gold)] transition-all duration-300">
@@ -175,7 +197,7 @@ export default function CategoriesSection() {
               </div>
 
               <div className="absolute -inset-1 rounded-2xl bg-[var(--color-gold)]/0 group-hover:bg-[var(--color-gold)]/[0.03] transition-colors duration-500 -z-10" />
-            </a>
+            </Link>
           ))}
         </div>
       </div>

@@ -5,47 +5,16 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { motion } from "motion/react"
+import Link from "next/link"
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
-const TESTIMONIALS = [
-  {
-    text: "Me encantó la calidad del collar. Pensé que por el precio sería básico, pero cuando lo recibí ¡quedé encantada! El oro no se ha despintado para nada y todo el mundo me pregunta dónde lo compré.",
-    name: "María G.",
-    location: "Caracas",
-    stars: 5,
-  },
-  {
-    text: "Compré el set de collar + pulsera para un evento y fue el centro de atención. La calidad es increíble, parecen de oro de verdad. Ya voy a encargar otro para mi mamá.",
-    name: "Andrea L.",
-    location: "Maracaibo",
-    stars: 5,
-  },
-  {
-    text: "Lo que más me gusta es la atención de Dubraska. Me ayudó a elegir el color perfecto para mi tono de piel. Los arees me llegaron súper rápido y hermosos.",
-    name: "Carolina R.",
-    location: "Valencia",
-    stars: 5,
-  },
-  {
-    text: "Soy alérgica a casi todos los metales y estas piezas no me causaron ninguna reacción. ¡Por fin encontré joyería bonita que puedo usar! Ya tengo 4 piezas.",
-    name: "Daniela M.",
-    location: "Barquisimeto",
-    stars: 5,
-  },
-  {
-    text: "Pedí la pulsera por WhatsApp, súper fácil. Dubraska me mandó fotos para que eligiera y al día siguiente ya la tenía. El envío fue rapidísimo.",
-    name: "Laura P.",
-    location: "Margarita",
-    stars: 5,
-  },
-  {
-    text: "Regalé el collar dorado en Navidad y mi hermana no se lo quita. Dice que es la joya más bonita que tiene. Calidad-precio imbatible, 100% recomendada.",
-    name: "Gabriela S.",
-    location: "Mérida",
-    stars: 5,
-  },
-]
+interface Testimonial {
+  id: string
+  name: string
+  text: string
+  rating: number
+}
 
 function StarIcon() {
   return (
@@ -55,7 +24,7 @@ function StarIcon() {
   )
 }
 
-export default function TestimonialsSection() {
+export default function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
   const sectionRef = useRef<HTMLElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
 
@@ -141,55 +110,51 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        <div
-          ref={cardsRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12"
-        >
-          {TESTIMONIALS.map((t, i) => (
-            <div
-              key={i}
-              className="testimonial-card group relative p-6 rounded-xl border border-[rgba(255,255,255,0.04)] bg-[var(--color-dark-card)] hover:border-[rgba(212,175,55,0.1)] transition-all duration-500"
-            >
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: t.stars }).map((_, j) => (
-                  <StarIcon key={j} />
-                ))}
-              </div>
-
-              <p
-                className="text-sm text-[oklch(0.76_0_0)] leading-[1.8] italic"
-                style={{ fontFamily: "var(--font-inter)" }}
+        {testimonials.length > 0 && (
+          <div
+            ref={cardsRef}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12"
+          >
+            {testimonials.map((t) => (
+              <div
+                key={t.id}
+                className="testimonial-card group relative p-6 rounded-xl border border-[rgba(255,255,255,0.04)] bg-[var(--color-dark-card)] hover:border-[rgba(212,175,55,0.1)] transition-all duration-500"
               >
-                &ldquo;{t.text}&rdquo
-              </p>
-
-              <div className="mt-5 pt-4 border-t border-[rgba(255,255,255,0.04)] flex items-center gap-3">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--color-gold)]/20 to-[var(--color-gold)]/5 flex items-center justify-center">
-                  <span
-                    className="text-xs text-[var(--color-gold)]/60 font-medium"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                  >
-                    {t.name.charAt(0)}
-                  </span>
+                <div className="flex gap-1 mb-4">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <StarIcon key={j} />
+                  ))}
                 </div>
-                <div>
-                  <p
-                    className="text-sm text-white font-medium"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                  >
-                    {t.name}
-                  </p>
-                  <p
-                    className="text-[11px] text-[oklch(0.45_0_0)]"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                  >
-                    {t.location}
-                  </p>
+
+                <p
+                  className="text-sm text-[oklch(0.76_0_0)] leading-[1.8] italic"
+                  style={{ fontFamily: "var(--font-inter)" }}
+                >
+                  &ldquo;{t.text}&rdquo;
+                </p>
+
+                <div className="mt-5 pt-4 border-t border-[rgba(255,255,255,0.04)] flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--color-gold)]/20 to-[var(--color-gold)]/5 flex items-center justify-center">
+                    <span
+                      className="text-xs text-[var(--color-gold)]/60 font-medium"
+                      style={{ fontFamily: "var(--font-inter)" }}
+                    >
+                      {t.name.charAt(0)}
+                    </span>
+                  </div>
+                  <div>
+                    <p
+                      className="text-sm text-white font-medium"
+                      style={{ fontFamily: "var(--font-inter)" }}
+                    >
+                      {t.name}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 15 }}
@@ -205,7 +170,7 @@ export default function TestimonialsSection() {
             ¿Lista para ser nuestra próxima clienta feliz?{" "}
             <span className="text-[var(--color-gold)]">✨</span>
           </p>
-          <a
+          <Link
             href="/colecciones"
             className="inline-flex items-center gap-3 rounded-full px-10 py-4 text-base font-semibold bg-[var(--color-gold)] text-[var(--color-bg)] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-300"
             style={{ fontFamily: "var(--font-inter)" }}
@@ -215,7 +180,7 @@ export default function TestimonialsSection() {
               <path d="M5 12h14" />
               <path d="m12 5 7 7-7 7" />
             </svg>
-          </a>
+          </Link>
         </motion.div>
       </div>
     </section>

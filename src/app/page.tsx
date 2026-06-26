@@ -7,6 +7,7 @@ import FeaturesSection from "@/components/FeaturesSection"
 import ColorGuideSection from "@/components/ColorGuideSection"
 import TestimonialsSection from "@/components/TestimonialsSection"
 import StructuredData from "@/components/StructuredData"
+import db from "@/lib/db"
 
 const organizationData = {
   "@context": "https://schema.org",
@@ -45,7 +46,28 @@ const websiteData = {
   },
 }
 
-export default function Home() {
+export const revalidate = 300
+
+export default async function Home() {
+  const [featuredProducts, categories, testimonials] = await Promise.all([
+    db.product.findMany({
+      where: { featured: true, deletedAt: null },
+      include: { category: { select: { name: true } } },
+      orderBy: { createdAt: "desc" },
+      take: 4,
+    }),
+    db.category.findMany({
+      where: { active: true, deletedAt: null },
+      include: { _count: { select: { products: true } } },
+      orderBy: { order: "asc" },
+    }),
+    db.testimonial.findMany({
+      where: { active: true },
+      orderBy: { createdAt: "desc" },
+      take: 6,
+    }),
+  ])
+
   return (
     <div className="relative w-full bg-[var(--color-bg)]">
       <section className="relative h-screen w-full overflow-hidden">
@@ -61,11 +83,11 @@ export default function Home() {
       </section>
 
       <AboutSection />
-      <BestSellers />
-      <CategoriesSection />
+      <BestSellers products={featuredProducts} />
+      <CategoriesSection categories={categories} />
       <FeaturesSection />
       <ColorGuideSection />
-      <TestimonialsSection />
+      <TestimonialsSection testimonials={testimonials} />
 
       <StructuredData data={organizationData} />
       <StructuredData data={websiteData} />
