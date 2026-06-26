@@ -134,9 +134,9 @@ export default function FeaturesSection() {
   )
 
   return (
-    <section ref={sectionRef} className="relative w-full py-28 sm:py-36 md:py-44" style={{ background: "oklch(0.05 0 0)" }}>
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="text-center mb-20 sm:mb-24 md:mb-28">
+    <section ref={sectionRef} className="relative w-full py-16 sm:py-24 md:py-32" style={{ background: "oklch(0.05 0 0)" }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-10 sm:mb-14 md:mb-18">
           <p
             className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
@@ -160,7 +160,7 @@ export default function FeaturesSection() {
 
         <div
           ref={gridRef}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 md:gap-12"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {FEATURES.map((feature) => (
             <div
