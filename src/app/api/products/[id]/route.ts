@@ -12,15 +12,27 @@ async function GET(request: NextRequest, { params }: RouteParams) {
     const { id } = await params
     const product = await db.product.findUnique({
       where: { id, deletedAt: null },
-      include: { category: true },
+      include: {
+        category: true,
+        variants: {
+          where: { deletedAt: null },
+          orderBy: { createdAt: "asc" },
+        },
+      },
     })
     if (!product) {
-      return errorResponse("Product not found", 404)
+      return errorResponse("Producto no encontrado", 404)
     }
+    const { variants, ...rest } = product
     return successResponse({
-      ...product,
+      ...rest,
       gallery: JSON.parse(product.gallery || "[]"),
       sizes: JSON.parse(product.sizes || "[]"),
+      variantAttributes: JSON.parse(product.variantAttributes || "[]"),
+      variants: variants.map(v => ({
+        ...v,
+        gallery: JSON.parse(v.gallery || "[]"),
+      })),
     })
   } catch (error) {
     return handleApiError(error)
@@ -35,26 +47,34 @@ async function PATCH(request: NextRequest, { params }: RouteParams) {
     const data = updateProductSchema.parse(body)
     const existing = await db.product.findUnique({ where: { id, deletedAt: null } })
     if (!existing) {
-      return errorResponse("Product not found", 404)
+      return errorResponse("Producto no encontrado", 404)
     }
     const oldValues: Record<string, unknown> = {}
     for (const key of Object.keys(data)) {
-      ;(oldValues as any)[key] = (existing as any)[key]
+      ;(oldValues as Record<string, unknown>)[key] = (existing as Record<string, unknown>)[key]
     }
     const gallery = data.gallery || JSON.parse(existing.gallery || "[]")
     const updateData: Record<string, unknown> = { ...data, gallery: JSON.stringify(gallery) }
     if (body.sizes !== undefined) {
       updateData.sizes = JSON.stringify(body.sizes)
     }
+    if (body.variantAttributes !== undefined) {
+      updateData.variantAttributes = JSON.stringify(body.variantAttributes)
+    }
     const product = await db.product.update({
       where: { id },
       data: updateData,
     })
-    await logUpdate(user, "Product", existing, oldValues, data as any, request)
-    return successResponse({ ...product, gallery, sizes: JSON.parse(product.sizes || "[]") })
+    await logUpdate(user, "Product", existing, oldValues, data as unknown as Record<string, unknown>, request)
+    return successResponse({
+      ...product,
+      gallery,
+      sizes: JSON.parse(product.sizes || "[]"),
+      variantAttributes: JSON.parse(product.variantAttributes || "[]"),
+    })
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
-      return errorResponse("Unauthorized", 401)
+      return errorResponse("No autorizado", 401)
     }
     return handleApiError(error)
   }
@@ -66,17 +86,17 @@ async function DELETE(request: NextRequest, { params }: RouteParams) {
     const { id } = await params
     const existing = await db.product.findUnique({ where: { id, deletedAt: null } })
     if (!existing) {
-      return errorResponse("Product not found", 404)
+      return errorResponse("Producto no encontrado", 404)
     }
     await db.product.update({
       where: { id },
       data: { deletedAt: new Date() },
     })
     await logDelete(user, "Product", existing, { name: existing.name, price: existing.price }, request)
-    return successResponse({ message: "Product deleted" })
+    return successResponse({ message: "Producto eliminado" })
   } catch (error) {
     if (error instanceof Error && error.message === "Unauthorized") {
-      return errorResponse("Unauthorized", 401)
+      return errorResponse("No autorizado", 401)
     }
     return handleApiError(error)
   }

@@ -47,7 +47,7 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
           className="text-2xl sm:text-3xl text-[var(--color-gold)] font-semibold"
           style={{ fontFamily: "var(--font-inter)" }}
         >
-          ${product.price.toFixed(2)}
+          ${(product.price ?? 0).toFixed(2)}
         </span>
         {product.oldPrice && (
           <>
@@ -103,13 +103,13 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
         <div className="flex items-center gap-2">
           <span
             className="w-4 h-4 rounded-full border border-white/20"
-            style={{ backgroundColor: COLOR_MAP[product.color] }}
+            style={{ backgroundColor: product.color ? COLOR_MAP[product.color] : "var(--color-muted)" }}
           />
           <span
             className="text-sm text-[var(--color-muted)]"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            {product.color.charAt(0).toUpperCase() + product.color.slice(1)}
+            {product.color ? product.color.charAt(0).toUpperCase() + product.color.slice(1) : "—"}
           </span>
         </div>
         <div className="flex items-center gap-2">

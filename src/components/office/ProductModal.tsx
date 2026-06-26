@@ -45,6 +45,7 @@ function ProductModal({
     featured: false,
     badge: "",
     stock: 0,
+    hasVariants: false,
   })
 
   useEffect(() => {
@@ -64,6 +65,7 @@ function ProductModal({
         featured: product.featured,
         badge: product.badge ?? "",
         stock: product.stock,
+        hasVariants: product.hasVariants ?? false,
       })
     } else {
       setForm({
@@ -81,6 +83,7 @@ function ProductModal({
         featured: false,
         badge: "",
         stock: 0,
+        hasVariants: false,
       })
     }
   }, [product, open])

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { Prisma } from "@prisma/client"
 import db from "@/lib/db"
 import { successResponse, handleApiError } from "@/lib/api"
-import { createProductSchema } from "@/lib/schemas"
+import { createProductSchema, createProductWithVariantsSchema } from "@/lib/schemas"
 import { requireAuth } from "@/lib/auth"
 import { logCreate } from "@/lib/audit"
 
@@ -59,6 +59,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
             where: { status: "APPROVED" },
             select: { rating: true },
           },
+          variants: {
+            where: { deletedAt: null, active: true },
+          },
         },
         orderBy,
         skip: (page - 1) * limit,
@@ -73,11 +76,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       const averageRating = reviewCount > 0
         ? reviewRatings.reduce((a, b) => a + b, 0) / reviewCount
         : 0
-      const { reviews, ...rest } = p
+      const { reviews, variants, ...rest } = p
       return {
         ...rest,
         gallery: JSON.parse(p.gallery || "[]"),
         sizes: JSON.parse(p.sizes || "[]"),
+        variantAttributes: JSON.parse(p.variantAttributes || "[]"),
+        variants: variants.map(v => ({
+          ...v,
+          gallery: JSON.parse(v.gallery || "[]"),
+        })),
         reviewCount,
         averageRating: Math.round(averageRating * 10) / 10,
       }
@@ -94,8 +102,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         categories: [...new Set(items.map(p => p.category?.name).filter(Boolean))],
         colors: [...new Set(items.map(p => p.color).filter(Boolean))],
         priceRange: {
-          min: items.length > 0 ? Math.min(...items.map(p => Number(p.price))) : 0,
-          max: items.length > 0 ? Math.max(...items.map(p => Number(p.price))) : 0,
+          min: items.length > 0 ? Math.min(...items.map(p => Number(p.price)).filter(n => n > 0)) : 0,
+          max: items.length > 0 ? Math.max(...items.map(p => Number(p.price)).filter(n => n > 0)) : 0,
         },
       },
     })
@@ -108,6 +116,72 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const user = requireAuth(request)
     const body = await request.json()
+    const hasVariants = body.hasVariants === true
+
+    if (hasVariants) {
+      const data = createProductWithVariantsSchema.parse(body)
+      const gallery = data.gallery || []
+      const variantsData = data.variants || []
+
+      const product = await db.$transaction(async (tx) => {
+        const product = await tx.product.create({
+          data: {
+            name: data.name,
+            slug: data.slug,
+            description: data.description,
+            price: data.price,
+            oldPrice: data.oldPrice ?? null,
+            material: data.material,
+            length: data.length ?? null,
+            diameter: data.diameter ?? null,
+            weight: data.weight ?? null,
+            color: data.color,
+            badge: data.badge ?? null,
+            image: data.image,
+            gallery: JSON.stringify(gallery),
+            inStock: data.inStock,
+            featured: data.featured,
+            stock: data.stock,
+            lowStock: data.lowStock,
+            sku: data.sku,
+            categoryId: data.categoryId,
+            sizes: data.sizes,
+            compareGroup: data.compareGroup ?? null,
+            hasVariants: true,
+            variantAttributes: data.variantAttributes,
+          },
+        })
+
+        for (const v of variantsData) {
+          await tx.productVariant.create({
+            data: {
+              productId: product.id,
+              sku: v.sku,
+              name: v.name,
+              color: v.color,
+              colorHex: v.colorHex,
+              size: v.size,
+              material: v.material,
+              price: v.price,
+              oldPrice: v.oldPrice,
+              stock: v.stock,
+              lowStock: v.lowStock,
+              weight: v.weight,
+              image: v.image,
+              gallery: v.gallery,
+              inStock: v.inStock,
+              active: v.active,
+            },
+          })
+        }
+
+        return product
+      })
+
+      await logCreate(user, "Product", product, request)
+      return successResponse({ ...product, gallery }, 201)
+    }
+
     const data = createProductSchema.parse(body)
     const gallery = data.gallery || []
     const product = await db.product.create({

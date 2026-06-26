@@ -15,9 +15,9 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       select: { color: true, price: true, badge: true },
     })
 
-    const colors = [...new Set(products.map(p => p.color))]
+    const colors = [...new Set(products.map(p => p.color).filter(Boolean))]
     const badges = [...new Set(products.map(p => p.badge).filter(Boolean))]
-    const prices = products.map(p => Number(p.price))
+    const prices = products.map(p => Number(p.price)).filter(p => p > 0)
 
     return successResponse({
       categories: categories.map(c => ({

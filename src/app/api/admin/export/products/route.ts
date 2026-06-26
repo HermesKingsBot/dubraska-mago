@@ -25,6 +25,15 @@ const PRODUCT_COLUMNS: Column[] = [
   { key: "categoryName", header: "Categoría", width: 20 },
   { key: "sizes", header: "Tallas (JSON)", width: 25 },
   { key: "compareGroup", header: "Grupo Comparación", width: 15 },
+  { key: "hasVariants", header: "Tiene Variantes", width: 12 },
+  { key: "variantSku", header: "Variante SKU", width: 15 },
+  { key: "variantName", header: "Variante Nombre", width: 25 },
+  { key: "variantColor", header: "Variante Color", width: 12 },
+  { key: "variantColorHex", header: "Variante Color Hex", width: 12 },
+  { key: "variantSize", header: "Variante Talla", width: 12 },
+  { key: "variantMaterial", header: "Variante Material", width: 20 },
+  { key: "variantPrice", header: "Variante Precio", width: 12 },
+  { key: "variantStock", header: "Variante Stock", width: 8 },
 ]
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
@@ -36,32 +45,66 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     const products = await db.product.findMany({
       where: includeDeleted ? {} : { deletedAt: null },
-      include: { category: true },
+      include: {
+        category: true,
+        variants: {
+          where: { deletedAt: null },
+        },
+      },
       orderBy: { createdAt: "desc" },
     })
 
-    const data = products.map(p => ({
-      name: p.name,
-      slug: p.slug,
-      sku: p.sku,
-      description: p.description,
-      price: p.price,
-      oldPrice: p.oldPrice ?? "",
-      material: p.material,
-      length: p.length ?? "",
-      diameter: p.diameter ?? "",
-      weight: p.weight ?? "",
-      color: p.color,
-      badge: p.badge ?? "",
-      image: p.image,
-      inStock: p.inStock ? "Sí" : "No",
-      featured: p.featured ? "Sí" : "No",
-      stock: p.stock,
-      lowStock: p.lowStock,
-      categoryName: p.category?.name ?? "",
-      sizes: p.sizes,
-      compareGroup: p.compareGroup ?? "",
-    }))
+    const data: Record<string, unknown>[] = products.flatMap((p: Record<string, unknown> & { variants: Array<{ sku: string; name: string; color: string | null; colorHex: string | null; size: string | null; material: string | null; price: number | null; stock: number }> }) => {
+      const base: Record<string, unknown> = {
+        name: p.name,
+        slug: p.slug,
+        sku: p.sku ?? "",
+        description: p.description,
+        price: p.price ?? 0,
+        oldPrice: p.oldPrice ?? "",
+        material: p.material ?? "",
+        length: p.length ?? "",
+        diameter: p.diameter ?? "",
+        weight: p.weight ?? "",
+        color: p.color ?? "",
+        badge: p.badge ?? "",
+        image: p.image ?? "",
+        inStock: p.inStock ? "Sí" : "No",
+        featured: p.featured ? "Sí" : "No",
+        stock: p.stock,
+        lowStock: p.lowStock,
+        categoryName: p.category ?? "",
+        sizes: p.sizes,
+        compareGroup: p.compareGroup ?? "",
+        hasVariants: p.hasVariants ? "Sí" : "No",
+      }
+
+      if (p.variants.length > 0) {
+        return p.variants.map((v: { sku: string; name: string; color: string | null; colorHex: string | null; size: string | null; material: string | null; price: number | null; stock: number }) => ({
+          ...base,
+          variantSku: v.sku,
+          variantName: v.name,
+          variantColor: v.color ?? "",
+          variantColorHex: v.colorHex ?? "",
+          variantSize: v.size ?? "",
+          variantMaterial: v.material ?? "",
+          variantPrice: v.price ?? "",
+          variantStock: v.stock ?? 0,
+        }))
+      }
+
+      return [{
+        ...base,
+        variantSku: "",
+        variantName: "",
+        variantColor: "",
+        variantColorHex: "",
+        variantSize: "",
+        variantMaterial: "",
+        variantPrice: "",
+        variantStock: 0,
+      }]
+    })
 
     const buffer = generateExportFile({
       filename: "productos",

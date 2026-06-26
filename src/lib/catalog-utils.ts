@@ -53,15 +53,15 @@ export function filterProducts(
     }
 
     if (filters.category.length > 0 && !filters.category.includes(p.category)) return false
-    if (filters.color.length > 0 && !filters.color.includes(p.color)) return false
+    if (filters.color.length > 0 && !filters.color.includes(p.color ?? "")) return false
 
     if (filters.priceMin) {
       const min = parseFloat(filters.priceMin)
-      if (!isNaN(min) && p.price < min) return false
+      if (!isNaN(min) && (p.price ?? 0) < min) return false
     }
     if (filters.priceMax) {
       const max = parseFloat(filters.priceMax)
-      if (!isNaN(max) && p.price > max) return false
+      if (!isNaN(max) && (p.price ?? 0) > max) return false
     }
 
     if (filters.ofertas && !p.oldPrice) return false
@@ -90,7 +90,7 @@ export function paginateProducts<T>(
 
 export function buildWhatsAppLink(product: Product): string {
   const msg = encodeURIComponent(
-    `Hola, me interesa el producto: ${product.name} — $${product.price.toFixed(2)} USD. ¿Está disponible?`
+    `Hola, me interesa el producto: ${product.name} — $${(product.price ?? 0).toFixed(2)} USD. ¿Está disponible?`
   )
   return `https://wa.me/584141234567?text=${msg}`
 }

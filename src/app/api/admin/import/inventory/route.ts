@@ -85,8 +85,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
           },
         })
 
-        movements.push({ id: movement.id, productSku: product.sku })
-        await logCreate(user, "InventoryMovement", { id: movement.id, name: product.sku }, request)
+        movements.push({ id: movement.id, productSku: product.sku ?? "" })
+        await logCreate(user, "InventoryMovement", { id: movement.id, name: product.sku ?? "" }, request)
       }
     })
 

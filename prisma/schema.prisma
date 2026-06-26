@@ -122,25 +122,28 @@ model Product {
   name        String
   slug        String              @unique
   description String
-  price       Float
+  price       Float?
   oldPrice    Float?
-  material    String
+  material    String?
   length      String?
   diameter    String?
   weight      String?
-  color       String
+  color       String?
   badge       String?
-  image       String
+  image       String?
   gallery     String              @default("[]")
   inStock     Boolean             @default(true)
   featured    Boolean             @default(false)
   stock       Int                 @default(0)
   lowStock    Int                 @default(5)
-  sku         String
+  sku         String?
   categoryId  String
   category    Category            @relation(fields: [categoryId], references: [id])
   sizes       String              @default("[]")
   compareGroup String?
+  hasVariants Boolean             @default(false)
+  variantAttributes String        @default("[]")
+  variants    ProductVariant[]
   reviews     Review[]
   orderItems  OrderItem[]
   movements   InventoryMovement[]
@@ -148,7 +151,38 @@ model Product {
   wishlistItems WishlistItem[]
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
-  deletedAt DateTime?
+  deletedAt   DateTime?
+}
+
+model ProductVariant {
+  id          String   @id @default(cuid())
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  sku         String   @unique
+  name        String
+  color       String?
+  colorHex    String?
+  size        String?
+  material    String?
+  price       Float?
+  oldPrice    Float?
+  stock       Int      @default(0)
+  lowStock    Int      @default(5)
+  weight      String?
+  image       String?
+  gallery     String   @default("[]")
+  inStock     Boolean  @default(true)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  orderItems  OrderItem[]
+  movements   InventoryMovement[]
+
+  @@index([productId])
+  @@index([color])
+  @@index([size])
 }
 
 model Review {
@@ -224,26 +258,30 @@ model Order {
 }
 
 model OrderItem {
-  id        String  @id @default(cuid())
+  id        String          @id @default(cuid())
   orderId   String
   productId String
+  variantId String?
   quantity  Int
   price     Float
-  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  product   Product @relation(fields: [productId], references: [id])
+  order     Order           @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product         @relation(fields: [productId], references: [id])
+  variant   ProductVariant? @relation(fields: [variantId], references: [id])
 }
 
 model InventoryMovement {
-  id           String   @id @default(cuid())
+  id           String          @id @default(cuid())
   productId    String
-  product      Product  @relation(fields: [productId], references: [id])
+  variantId    String?
+  product      Product         @relation(fields: [productId], references: [id])
+  variant      ProductVariant? @relation(fields: [variantId], references: [id])
   type         String
   quantity     Int
   reason       String?
   reference    String?
   previousStock Int
   newStock     Int
-  createdAt    DateTime @default(now())
+  createdAt    DateTime        @default(now())
   createdBy    String?
 }
 

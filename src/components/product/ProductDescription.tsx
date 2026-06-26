@@ -62,7 +62,7 @@ function ProductDescription({ product, descOpen, onToggleDesc, ref }: ProductDes
                     product.weight ? ["Peso", product.weight] : null,
                     ["Resistencia al agua", product.waterResistant ? "Sí" : "No"],
                     ["Categoría", product.category.charAt(0).toUpperCase() + product.category.slice(1)],
-                    ["Color", product.color.charAt(0).toUpperCase() + product.color.slice(1)],
+                    ["Color", product.color ? product.color.charAt(0).toUpperCase() + product.color.slice(1) : "—"],
                     ["Garantía", "6 meses"],
                   ] as [string, string][]
                 )

@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useRef, useCallback } from "react"
+import { useState, useRef, useCallback, useEffect, useMemo } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Product } from "@/types/product"
+import { Product, ProductVariant } from "@/types/product"
 import { buildWhatsAppLink } from "@/lib/catalog-utils"
 import ProductGallery from "@/components/product/ProductGallery"
 import ProductInfo from "@/components/product/ProductInfo"
@@ -16,6 +16,8 @@ import RelatedProducts from "@/components/product/RelatedProducts"
 import ProductReviews from "@/components/product/ProductReviews"
 import OfferCountdown from "@/components/product/OfferCountdown"
 import CustomersAlsoBought from "@/components/product/CustomersAlsoBought"
+import VariantColorSelector from "@/components/product/VariantColorSelector"
+import VariantSizeSelector from "@/components/product/VariantSizeSelector"
 import { useSettingsContext } from "@/context/SettingsContext"
 
 gsap.registerPlugin(ScrollTrigger)
@@ -32,6 +34,56 @@ interface ProductDetailProps {
   relatedProducts: Product[]
 }
 
+function getDisplayPrice(
+  product: Product,
+  selectedVariant: ProductVariant | null
+): number {
+  if (selectedVariant && selectedVariant.price !== null) {
+    return selectedVariant.price
+  }
+  return product.price ?? 0
+}
+
+function getDisplayOldPrice(
+  product: Product,
+  selectedVariant: ProductVariant | null
+): number | null {
+  if (selectedVariant && selectedVariant.oldPrice !== null) {
+    return selectedVariant.oldPrice
+  }
+  return product.oldPrice ?? null
+}
+
+function getDisplayImage(
+  product: Product,
+  selectedVariant: ProductVariant | null
+): string {
+  if (selectedVariant && selectedVariant.image) {
+    return selectedVariant.image
+  }
+  return product.image || ""
+}
+
+function getDisplayGallery(
+  product: Product,
+  selectedVariant: ProductVariant | null
+): string[] {
+  if (selectedVariant && selectedVariant.gallery && selectedVariant.gallery.length > 0) {
+    return selectedVariant.gallery
+  }
+  return product.variants?.[0]?.gallery ?? []
+}
+
+function getDisplayStock(
+  product: Product,
+  selectedVariant: ProductVariant | null
+): boolean {
+  if (selectedVariant) {
+    return selectedVariant.inStock
+  }
+  return product.inStock ?? false
+}
+
 export default function ProductDetailClient({
   product,
   relatedProducts,
@@ -41,6 +93,7 @@ export default function ProductDetailClient({
   const [descOpen, setDescOpen] = useState(true)
   const [careOpen, setCareOpen] = useState(false)
   const [selectedSize, setSelectedSize] = useState<string | null>(null)
+  const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null)
   const [reviews, setReviews] = useState<any[]>([])
   const [reviewSummary, setReviewSummary] = useState({
     total: 0,
@@ -60,13 +113,74 @@ export default function ProductDetailClient({
 
   const { getSetting } = useSettingsContext()
 
-  const discount = product.oldPrice
-    ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
+  const hasVariants = product.hasVariants && product.variants && product.variants.length > 0
+  const variants = product.variants || []
+
+  const selectedVariant = useMemo(
+    () => variants.find((v) => v.id === selectedVariantId) || null,
+    [variants, selectedVariantId]
+  )
+
+  const selectedColor = selectedVariant?.color || null
+
+  const displayPrice = getDisplayPrice(product, selectedVariant)
+  const displayOldPrice = getDisplayOldPrice(product, selectedVariant)
+  const displayImage = getDisplayImage(product, selectedVariant)
+  const displayGallery = getDisplayGallery(product, selectedVariant)
+  const displayInStock = getDisplayStock(product, selectedVariant)
+
+  useEffect(() => {
+    if (hasVariants && variants.length > 0 && !selectedVariantId) {
+      const firstActive = variants.find((v) => v.active && v.inStock)
+      if (firstActive) {
+        setSelectedVariantId(firstActive.id)
+        if (firstActive.size) setSelectedSize(firstActive.size)
+      }
+    }
+  }, [hasVariants, variants, selectedVariantId])
+
+  useEffect(() => {
+    setSelectedImage(0)
+  }, [selectedVariantId])
+
+  const handleSelectVariant = useCallback(
+    (variantId: string) => {
+      setSelectedVariantId(variantId)
+      const v = variants.find((vr) => vr.id === variantId)
+      if (v?.size) setSelectedSize(v.size)
+    },
+    [variants]
+  )
+
+  const handleSelectSize = useCallback(
+    (size: string) => {
+      setSelectedSize(size)
+      if (hasVariants && selectedColor) {
+        const match = variants.find(
+          (v) => v.color === selectedColor && v.size === size && v.active
+        )
+        if (match) setSelectedVariantId(match.id)
+      }
+    },
+    [hasVariants, selectedColor, variants]
+  )
+
+  const discount = displayOldPrice
+    ? Math.round(((displayOldPrice - displayPrice) / displayOldPrice) * 100)
     : null
 
-  const sizeText = selectedSize ? ` (Talla: ${selectedSize})` : ""
+  const variantInfo =
+    selectedVariant && hasVariants
+      ? [selectedVariant.color, selectedVariant.size].filter(Boolean).join(" / ")
+      : ""
+
+  const sizeText = variantInfo
+    ? ` (${variantInfo})`
+    : selectedSize
+      ? ` (Talla: ${selectedSize})`
+      : ""
   const encodedMsg = encodeURIComponent(
-    `Hola! Me interesa ${product.name}${sizeText} - $${product.price.toFixed(2)}. ¿Está disponible?`
+    `Hola! Me interesa ${product.name}${sizeText} - $${displayPrice.toFixed(2)}. ¿Está disponible?`
   )
   const whatsappLink = `https://wa.me/${getSetting("whatsapp", "584141234567")}?text=${encodedMsg}`
 
@@ -215,6 +329,15 @@ export default function ProductDetailClient({
     return () => mm.revert()
   }, { scope: containerRef })
 
+  const variantProduct = {
+    ...product,
+    price: displayPrice,
+    oldPrice: displayOldPrice,
+    image: displayImage,
+    gallery: displayGallery,
+    inStock: displayInStock,
+  }
+
   return (
     <div ref={containerRef} className="min-h-screen bg-[var(--color-bg)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4">
@@ -229,13 +352,13 @@ export default function ProductDetailClient({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
         <div className="mb-6">
-          <OfferCountdown oldPrice={product.oldPrice} />
+          <OfferCountdown oldPrice={displayOldPrice} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           <ProductGallery
             ref={mainImageRef}
-            gallery={product.gallery}
+            gallery={displayGallery}
             selectedImage={selectedImage}
             onSelectImage={setSelectedImage}
             badge={product.badge}
@@ -246,28 +369,44 @@ export default function ProductDetailClient({
           />
 
           <div className="flex flex-col">
-            <ProductInfo
-              ref={infoRef}
-              product={product}
-              discount={discount}
-              selectedSize={selectedSize}
-              onSizeChange={setSelectedSize}
-            />
+            <div ref={infoRef}>
+              {hasVariants && (
+                <div className="mb-4 space-y-3">
+                  <VariantColorSelector
+                    variants={variants}
+                    selectedVariantId={selectedVariantId}
+                    onSelectVariant={handleSelectVariant}
+                  />
+                  <VariantSizeSelector
+                    variants={variants}
+                    selectedColor={selectedColor}
+                    selectedSize={selectedSize}
+                    onSelectSize={handleSelectSize}
+                  />
+                </div>
+              )}
+              <ProductInfo
+                product={variantProduct as any}
+                discount={discount}
+                selectedSize={selectedSize}
+                onSizeChange={handleSelectSize}
+              />
+            </div>
             <ProductCTA
               ref={ctaRef}
               quantity={quantity}
               onQuantityChange={setQuantity}
               whatsappLink={whatsappLink}
-              inStock={product.inStock}
+              inStock={displayInStock}
               selectedSize={selectedSize}
             />
             <ProductDescription
-              product={product}
+              product={variantProduct as any}
               descOpen={descOpen}
               onToggleDesc={() => setDescOpen(!descOpen)}
             />
             <CareInstructions
-              product={product}
+              product={variantProduct as any}
               careOpen={careOpen}
               onToggleCare={() => setCareOpen(!careOpen)}
             />

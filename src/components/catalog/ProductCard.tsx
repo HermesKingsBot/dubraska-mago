@@ -45,7 +45,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
     )
   }, { scope: cardRef })
 
-  const discount = product.oldPrice
+  const discount = product.oldPrice && product.price
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
     : null
 
@@ -104,7 +104,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         <div className="flex items-center gap-2 mb-2">
           <span
             className="w-3 h-3 rounded-full border border-white/20"
-            style={{ backgroundColor: COLOR_MAP[product.color] }}
+            style={{ backgroundColor: product.color ? COLOR_MAP[product.color] : "var(--color-muted)" }}
           />
           <span
             className="text-[10px] uppercase tracking-widest text-[var(--color-muted)]"
@@ -133,7 +133,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
             className="text-[var(--color-gold)] text-lg font-semibold"
             style={{ fontFamily: "var(--font-inter)" }}
           >
-            ${product.price.toFixed(2)}
+            ${(product.price ?? 0).toFixed(2)}
           </span>
           {product.oldPrice && (
             <span

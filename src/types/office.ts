@@ -26,6 +26,9 @@ export interface OfficeProduct {
   lowStockThreshold: number
   sku: string
   visible: boolean
+  hasVariants?: boolean
+  variantAttributes?: string[]
+  variants?: import("@/types/product").ProductVariant[]
 }
 
 export interface StockOrder {

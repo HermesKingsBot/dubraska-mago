@@ -27,6 +27,19 @@ const PRODUCT_FIELD_MAP: Record<string, string> = {
   "Categoría": "categoryName",
   "Tallas (JSON)": "sizes",
   "Grupo Comparación": "compareGroup",
+  "Tiene Variantes": "hasVariants",
+  "Variante SKU": "variantSku",
+  "Variante Nombre": "variantName",
+  "Variante Color": "variantColor",
+  "Variante Color Hex": "variantColorHex",
+  "Variante Talla": "variantSize",
+  "Variante Material": "variantMaterial",
+  "Variante Precio": "variantPrice",
+  "Variante Stock": "variantStock",
+  "Variante Stock Mínimo": "variantLowStock",
+  "Variante Peso": "variantWeight",
+  "Variante Imagen URL": "variantImage",
+  "Variante Disponible": "variantInStock",
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
@@ -55,46 +68,81 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const created: { id: string; name: string }[] = []
     const errors: { row: number; message: string }[] = []
 
+    const groups = new Map<string, typeof result.valid>()
+    for (const item of result.valid) {
+      const existing = groups.get(item.slug) || []
+      existing.push(item)
+      groups.set(item.slug, existing)
+    }
+
     await db.$transaction(async (tx) => {
-      for (let i = 0; i < result.valid.length; i++) {
-        const item = result.valid[i]
+      for (const [slug, rows] of groups) {
+        const first = rows[0]
         let categoryId: string | null = null
 
-        if (item.categoryName) {
+        if (first.categoryName) {
           const category = await tx.category.findFirst({
-            where: { name: item.categoryName, deletedAt: null },
+            where: { name: first.categoryName, deletedAt: null },
           })
           if (!category) {
-            errors.push({ row: i + 2, message: `Categoría "${item.categoryName}" no encontrada` })
+            errors.push({ row: 1, message: `Categoría "${first.categoryName}" no encontrada para slug "${slug}"` })
             continue
           }
           categoryId = category.id
         }
 
+        const hasVariantRows = rows.some(r => r.variantSku)
+
         const product = await tx.product.create({
           data: {
-            name: item.name,
-            slug: item.slug,
-            sku: item.sku,
-            description: item.description,
-            price: item.price,
-            oldPrice: item.oldPrice ?? null,
-            material: item.material,
-            length: item.length ?? null,
-            diameter: item.diameter ?? null,
-            weight: item.weight ?? null,
-            color: item.color,
-            badge: item.badge ?? null,
-            image: item.image,
-            inStock: item.inStock,
-            featured: item.featured,
-            stock: item.stock,
-            lowStock: item.lowStock,
+            name: first.name,
+            slug: first.slug,
+            sku: first.sku,
+            description: first.description,
+            price: first.price,
+            oldPrice: first.oldPrice ?? null,
+            material: first.material,
+            length: first.length ?? null,
+            diameter: first.diameter ?? null,
+            weight: first.weight ?? null,
+            color: first.color,
+            badge: first.badge ?? null,
+            image: first.image,
+            inStock: first.inStock,
+            featured: first.featured,
+            stock: first.stock,
+            lowStock: first.lowStock,
             categoryId: categoryId || "",
-            sizes: item.sizes,
-            compareGroup: item.compareGroup ?? null,
+            sizes: first.sizes,
+            compareGroup: first.compareGroup ?? null,
+            hasVariants: hasVariantRows,
+            variantAttributes: hasVariantRows ? JSON.stringify(["color", "size"]) : "[]",
           },
         })
+
+        if (hasVariantRows) {
+          for (const row of rows) {
+            if (!row.variantSku) continue
+            await tx.productVariant.create({
+              data: {
+                productId: product.id,
+                sku: row.variantSku,
+                name: row.variantName || `${row.name} - ${row.variantColor || row.variantSize || ""}`.trim(),
+                color: row.variantColor ?? null,
+                colorHex: row.variantColorHex ?? null,
+                size: row.variantSize ?? null,
+                material: row.variantMaterial ?? null,
+                price: row.variantPrice ?? null,
+                stock: row.variantStock,
+                lowStock: row.variantLowStock,
+                weight: row.variantWeight ?? null,
+                image: row.variantImage ?? null,
+                inStock: row.variantInStock,
+                active: true,
+              },
+            })
+          }
+        }
 
         created.push({ id: product.id, name: product.name })
 

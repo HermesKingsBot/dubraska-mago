@@ -1,25 +1,50 @@
+export interface ProductVariant {
+  id: string
+  productId: string
+  sku: string
+  name: string
+  color: string | null
+  colorHex: string | null
+  size: string | null
+  material: string | null
+  price: number | null
+  oldPrice: number | null
+  stock: number
+  lowStock: number
+  weight: string | null
+  image: string | null
+  gallery: string[]
+  inStock: boolean
+  active: boolean
+  createdAt: string
+  updatedAt: string
+}
+
 export interface Product {
   id: string
   name: string
   slug: string
   description: string
-  price: number
-  oldPrice: number | null
+  price?: number
+  oldPrice?: number | null
   category: string
-  color: string
-  badge: string | null
-  image: string
-  material: string
+  color?: string
+  badge?: string | null
+  image?: string
+  material?: string
   length?: string
   diameter?: string
   weight?: string
   pieces?: number
-  inStock: boolean
-  featured: boolean
-  stock: number
-  lowStockThreshold: number
-  sku: string
+  inStock?: boolean
+  featured?: boolean
+  stock?: number
+  lowStockThreshold?: number
+  sku?: string
   sizes?: string[]
+  hasVariants?: boolean
+  variantAttributes?: string[]
+  variants?: ProductVariant[]
 }
 
 export interface ProductWithMeta extends Product {
@@ -27,6 +52,7 @@ export interface ProductWithMeta extends Product {
   reviewCount: number
   averageRating: number
   gallery: string[]
+  variants?: ProductVariant[]
 }
 
 export interface Review {

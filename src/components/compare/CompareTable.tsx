@@ -36,7 +36,7 @@ const ROWS: Row[] = [
     key: "price",
     render: (p) => (
       <span className="text-[var(--color-gold)] text-lg font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
-        ${p.price.toFixed(2)}
+        ${(p.price ?? 0).toFixed(2)}
       </span>
     ),
   },
@@ -54,7 +54,7 @@ const ROWS: Row[] = [
     key: "color",
     render: (p) => (
       <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
-        {p.color.charAt(0).toUpperCase() + p.color.slice(1)}
+        {p.color ? p.color.charAt(0).toUpperCase() + p.color.slice(1) : "—"}
       </span>
     ),
   },

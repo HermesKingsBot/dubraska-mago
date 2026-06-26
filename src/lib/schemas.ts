@@ -189,6 +189,20 @@ export const importProductSchema = z.object({
   categoryName: z.string().default(""),
   sizes: z.string().default("[]"),
   compareGroup: z.string().nullable().optional(),
+  hasVariants: z.coerce.boolean().default(false),
+  variantSku: z.string().optional(),
+  variantName: z.string().optional(),
+  variantColor: z.string().optional(),
+  variantColorHex: z.string().optional(),
+  variantSize: z.string().optional(),
+  variantMaterial: z.string().optional(),
+  variantPrice: z.coerce.number().nullable().optional(),
+  variantStock: z.coerce.number().int().default(0),
+  variantLowStock: z.coerce.number().int().default(5),
+  variantWeight: z.string().nullable().optional(),
+  variantImage: z.string().nullable().optional(),
+  variantInStock: z.coerce.boolean().default(true),
+  variantActive: z.coerce.boolean().default(true),
 })
 
 export const importCategorySchema = z.object({
@@ -214,4 +228,71 @@ export const inventoryMovementSchema = z.object({
   quantity: z.coerce.number().int().positive("Cantidad debe ser positiva"),
   reason: z.string().nullable().optional(),
   reference: z.string().nullable().optional(),
+})
+
+export const variantSchema = z.object({
+  sku: z.string().min(1, "SKU requerido"),
+  name: z.string().min(1, "Nombre requerido"),
+  color: z.string().nullable().optional(),
+  colorHex: z.string().nullable().optional(),
+  size: z.string().nullable().optional(),
+  material: z.string().nullable().optional(),
+  price: z.number().positive().nullable().optional(),
+  oldPrice: z.number().positive().nullable().optional(),
+  stock: z.coerce.number().int().default(0),
+  lowStock: z.coerce.number().int().default(5),
+  weight: z.string().nullable().optional(),
+  image: z.string().nullable().optional(),
+  gallery: z.string().default("[]"),
+  inStock: z.coerce.boolean().default(true),
+  active: z.coerce.boolean().default(true),
+})
+
+export const updateVariantSchema = variantSchema.partial()
+
+export const createProductWithVariantsSchema = z.object({
+  name: z.string().min(1),
+  slug: z.string().min(1),
+  description: z.string().default(""),
+  price: z.number().positive(),
+  oldPrice: z.number().positive().nullable().optional(),
+  material: z.string().default(""),
+  length: z.string().nullable().optional(),
+  diameter: z.string().nullable().optional(),
+  weight: z.string().nullable().optional(),
+  color: z.string().default(""),
+  badge: z.string().nullable().optional(),
+  image: z.string().default(""),
+  gallery: z.string().default("[]"),
+  inStock: z.boolean().default(true),
+  featured: z.boolean().default(false),
+  stock: z.number().int().default(0),
+  lowStock: z.number().int().default(5),
+  sku: z.string().default(""),
+  categoryId: z.string().min(1),
+  sizes: z.string().default("[]"),
+  compareGroup: z.string().nullable().optional(),
+  hasVariants: z.boolean().default(false),
+  variantAttributes: z.string().default("[]"),
+  variants: z.array(variantSchema).default([]),
+})
+
+export const updateProductWithVariantsSchema = createProductWithVariantsSchema.partial()
+
+export const variantImportSchema = z.object({
+  sku: z.string().min(1),
+  name: z.string().min(1),
+  color: z.string().nullable().optional(),
+  colorHex: z.string().nullable().optional(),
+  size: z.string().nullable().optional(),
+  material: z.string().nullable().optional(),
+  price: z.coerce.number().positive().nullable().optional(),
+  oldPrice: z.coerce.number().positive().nullable().optional(),
+  stock: z.coerce.number().int().default(0),
+  lowStock: z.coerce.number().int().default(5),
+  weight: z.string().nullable().optional(),
+  image: z.string().nullable().optional(),
+  gallery: z.string().default("[]"),
+  inStock: z.coerce.boolean().default(true),
+  active: z.coerce.boolean().default(true),
 })
