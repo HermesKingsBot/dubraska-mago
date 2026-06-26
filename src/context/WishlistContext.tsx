@@ -139,10 +139,6 @@ function WishlistProvider({
     return items.some((i) => i.productId === productId)
   }
 
-  if (isLoading) {
-    return <div className="min-h-screen bg-[var(--color-bg)]" />
-  }
-
   return (
     <WishlistContext.Provider
       value={{ items, wishlistItems: items, wishlistCount, toggleWishlist, addToWishlist: toggleWishlist, removeFromWishlist: toggleWishlist, isInWishlist, isLoading }}
