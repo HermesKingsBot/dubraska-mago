@@ -125,7 +125,7 @@ export default function ConfiguracionPage() {
       <div className="flex items-center justify-between mb-6">
         <h1
           className="text-2xl text-white"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           Configuración
         </h1>

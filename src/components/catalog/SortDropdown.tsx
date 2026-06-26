@@ -27,7 +27,7 @@ export default function SortDropdown({ value, onChange }: SortDropdownProps) {
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-white/10 bg-white/5 text-white text-sm hover:border-[var(--color-gold)]/50 transition-colors"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M3 6h18M3 12h12M3 18h6" />
@@ -60,7 +60,7 @@ export default function SortDropdown({ value, onChange }: SortDropdownProps) {
                   ? "bg-[var(--color-gold)]/10 text-[var(--color-gold)]"
                   : "text-[var(--color-muted)] hover:text-white hover:bg-white/5"
               }`}
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {opt.label}
             </button>

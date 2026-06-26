@@ -98,7 +98,7 @@ function DashboardPage(): React.JSX.Element {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1 space-y-4">
-            <h2 className="text-lg font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
+            <h2 className="text-lg font-semibold" style={{ fontFamily: "var(--font-dm-sans)" }}>
               Acciones Rápidas
             </h2>
             <div className="space-y-3">
@@ -135,7 +135,7 @@ function DashboardPage(): React.JSX.Element {
           </div>
 
           <div className="lg:col-span-2">
-            <h2 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-inter)" }}>
+            <h2 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-dm-sans)" }}>
               Pedidos Recientes
             </h2>
             {!statsLoaded ? (
@@ -174,7 +174,7 @@ function DashboardPage(): React.JSX.Element {
 
             {lowStock > 0 && (
               <>
-                <h2 className="text-lg font-semibold mt-6 mb-4" style={{ fontFamily: "var(--font-inter)" }}>
+                <h2 className="text-lg font-semibold mt-6 mb-4" style={{ fontFamily: "var(--font-dm-sans)" }}>
                   Alertas de Stock Bajo
                 </h2>
                 <div className="bg-[#111] border border-[#222] rounded-xl divide-y divide-[#222]">

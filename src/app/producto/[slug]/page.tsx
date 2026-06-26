@@ -112,20 +112,20 @@ export default async function ProductPage({ params }: Props) {
       <div className="min-h-screen flex flex-col items-center justify-center gap-4 px-4">
         <h1
           className="text-3xl text-white"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           Producto no encontrado
         </h1>
         <p
           className="text-[var(--color-muted)] text-sm"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           El producto que buscas no existe o fue removido.
         </p>
         <a
           href="/colecciones"
           className="mt-4 px-6 py-3 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:bg-[oklch(0.72_0.12_85)] transition-colors"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Ver catálogo
         </a>

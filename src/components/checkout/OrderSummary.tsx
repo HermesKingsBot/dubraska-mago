@@ -32,7 +32,7 @@ export default function OrderSummary({
     >
       <h3
         className="text-lg font-semibold"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Resumen del pedido
       </h3>

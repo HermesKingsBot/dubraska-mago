@@ -22,7 +22,7 @@ function ProductDescription({ product, descOpen, onToggleDesc, ref }: ProductDes
       >
         <span
           className="text-sm font-medium text-white"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Descripción
         </span>
@@ -42,18 +42,18 @@ function ProductDescription({ product, descOpen, onToggleDesc, ref }: ProductDes
         <div className="py-4">
           <p
             className="text-sm text-[var(--color-muted)] leading-relaxed mb-4"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {product.description}
           </p>
           <p
             className="text-sm text-[var(--color-muted)] leading-relaxed mb-6"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {product.details}
           </p>
           <div className="border border-white/5 rounded-lg overflow-hidden">
-            <table className="w-full text-sm" style={{ fontFamily: "var(--font-inter)" }}>
+            <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
               <tbody>
                 {(
                   [

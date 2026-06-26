@@ -29,7 +29,7 @@ function ShippingDamage({ ref }: ShippingDamageProps): React.JSX.Element {
             </div>
             <h2
               className="text-2xl sm:text-3xl md:text-4xl text-[var(--color-white)]"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
+              style={{ fontFamily: "var(--font-playfair)" }}
             >
               ¿Qué pasa si mi pieza llega rota por el envío?
             </h2>
@@ -39,32 +39,32 @@ function ShippingDamage({ ref }: ShippingDamageProps): React.JSX.Element {
             <div>
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Daños durante el envío
               </h3>
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] mb-4"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Si tu paquete llega visiblemente dañado en el exterior (caja aplastada, rota, mojada):
               </p>
               <ol className="space-y-3">
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-6 relative before:content-['1'] before:absolute before:left-0 before:top-0 before:w-5 before:h-5 before:rounded-full before:border before:border-[rgba(212,175,55,0.3)] before:bg-[oklch(0.05_0_0)] before:flex before:items-center before:justify-center before:text-[10px] before:text-[var(--color-gold)] before:font-medium"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   <span className="text-[var(--color-white)] font-medium">No lo recibas</span> o documenta el daño con fotos/video en el momento de la entrega.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-6 relative before:content-['2'] before:absolute before:left-0 before:top-0 before:w-5 before:h-5 before:rounded-full before:border before:border-[rgba(212,175,55,0.3)] before:bg-[oklch(0.05_0_0)] before:flex before:items-center before:justify-center before:text-[10px] before:text-[var(--color-gold)] before:font-medium"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   <span className="text-[var(--color-white)] font-medium">Contáctanos inmediatamente</span> por WhatsApp con fotos del empaque y la pieza.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-6 relative before:content-['3'] before:absolute before:left-0 before:top-0 before:w-5 before:h-5 before:rounded-full before:border before:border-[rgba(212,175,55,0.3)] before:bg-[oklch(0.05_0_0)] before:flex before:items-center before:justify-center before:text-[10px] before:text-[var(--color-gold)] before:font-medium"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   <span className="text-[var(--color-white)] font-medium">Nos haremos cargo al 100%</span> — te enviaremos una pieza nueva sin costo o te reembolsaremos completamente.
                 </li>
@@ -74,32 +74,32 @@ function ShippingDamage({ ref }: ShippingDamageProps): React.JSX.Element {
             <div className="rounded-xl border border-[rgba(212,175,55,0.15)] bg-[var(--color-bg)] p-6">
               <h4
                 className="text-base sm:text-lg text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Proceso para piezas dañadas
               </h4>
               <ul className="space-y-3">
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Envía evidencia fotográfica dentro de las primeras <span className="text-[var(--color-white)] font-medium">24 horas</span>.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Verificamos el caso (puede tomar 1-2 días hábiles).
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Te enviamos un reemplazo o procesamos el reembolso completo.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   <span className="text-[var(--color-white)] font-medium">No necesitas devolver la pieza dañada</span> — quédate como evidencia.
                 </li>
@@ -109,13 +109,13 @@ function ShippingDamage({ ref }: ShippingDamageProps): React.JSX.Element {
             <div className="rounded-xl border border-[rgba(212,175,55,0.1)] bg-[var(--color-bg)]/60 p-6">
               <h4
                 className="text-base sm:text-lg text-[var(--color-gold)] mb-3"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Nuestra promesa
               </h4>
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Cada pieza sale de nuestro taller con empaque protector diseñado para el transporte. Si llega dañada, es responsabilidad del transportista y nosotros respondemos por ti.
               </p>

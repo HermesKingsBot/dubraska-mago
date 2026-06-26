@@ -65,7 +65,7 @@ export default function ProductReviews({
     <div className="mt-16">
       <h2
         className="text-2xl sm:text-3xl text-white mb-8"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Reseñas de <em className="text-[var(--color-gold)]">clientes</em>
       </h2>
@@ -74,14 +74,14 @@ export default function ProductReviews({
         <div className="flex flex-col items-center justify-center p-6 rounded-xl bg-[var(--color-dark-card)] border border-white/5">
           <span
             className="text-5xl font-bold text-white mb-2"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {averageRating.toFixed(1)}
           </span>
           <RatingStars rating={averageRating} size="lg" />
           <span
             className="text-xs text-[var(--color-muted)] mt-2"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {totalReviews} reseñas
           </span>
@@ -106,7 +106,7 @@ export default function ProductReviews({
             setSubmitted(false)
           }}
           className="px-6 py-2.5 rounded-full border border-[var(--color-gold)] text-[var(--color-gold)] text-sm font-medium hover:bg-[var(--color-gold)]/10 transition-colors"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {showForm ? "Cancelar" : "Escribir reseña"}
         </button>
@@ -144,7 +144,7 @@ export default function ProductReviews({
                   ? "bg-[var(--color-gold)] text-[var(--color-bg)]"
                   : "bg-white/5 text-[var(--color-muted)] hover:bg-white/10"
               }`}
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {p}
             </button>

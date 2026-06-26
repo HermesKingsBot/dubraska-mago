@@ -81,7 +81,7 @@ export default function PaymentUploadPage() {
     <div className="max-w-lg mx-auto space-y-6">
       <div>
         <Link href={`/cuenta/pedidos/${orderNumber}`} className="text-[var(--color-muted)] text-sm hover:text-white transition-colors">← Volver al Pedido</Link>
-        <h2 className="text-2xl mt-2" style={{ fontFamily: "var(--font-instrument-serif)" }}>Subir Comprobante de Pago</h2>
+        <h2 className="text-2xl mt-2" style={{ fontFamily: "var(--font-playfair)" }}>Subir Comprobante de Pago</h2>
         <p className="text-[var(--color-muted)] text-sm mt-1">Pedido #{order.orderNumber} · Total: ${order.total.toFixed(2)}</p>
       </div>
 

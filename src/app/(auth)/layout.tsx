@@ -20,7 +20,7 @@ export default function AuthLayout({
         <div className="text-center mb-8">
           <div className="w-12 h-px bg-[var(--color-gold)] mx-auto mb-6" />
           <h1 className="text-2xl font-light tracking-[0.2em] text-[var(--color-white)]"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             DUBRASKA MAGO®
           </h1>

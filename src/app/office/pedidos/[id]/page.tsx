@@ -106,7 +106,7 @@ function OrderDetailPage(): React.JSX.Element {
             </svg>
           </button>
           <div>
-            <h1 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-instrument-serif)" }}>Pedido #{order.orderNumber}</h1>
+            <h1 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-playfair)" }}>Pedido #{order.orderNumber}</h1>
             <p className="text-sm text-[var(--color-muted)]">{fmtDate(order.createdAt)}</p>
           </div>
         </div>

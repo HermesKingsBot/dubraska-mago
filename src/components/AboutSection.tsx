@@ -275,7 +275,7 @@ export default function AboutSection() {
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: EASE }}
           className="text-center text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-8"
-          style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
         >
           Hola, soy Dubraska
         </motion.p>
@@ -286,7 +286,7 @@ export default function AboutSection() {
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8, delay: 0.1, ease: EASE }}
           className="text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-[1.1] tracking-[-2px] max-w-4xl mx-auto"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           Cada pieza cuenta una historia.{" "}
           <em className="text-[var(--color-gold)]">La tuya</em> empieza aquí.
@@ -318,7 +318,7 @@ export default function AboutSection() {
                   </div>
                   <p
                     className="text-[var(--color-gold)]/30 text-sm tracking-[3px] uppercase"
-                    style={{ fontFamily: "var(--font-instrument-serif)" }}
+                    style={{ fontFamily: "var(--font-playfair)" }}
                   >
                     Dubraska Mago
                   </p>
@@ -330,13 +330,13 @@ export default function AboutSection() {
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                 <p
                   className="text-[var(--color-gold)] text-lg tracking-wide"
-                  style={{ fontFamily: "var(--font-instrument-serif)" }}
+                  style={{ fontFamily: "var(--font-playfair)" }}
                 >
                   Dubraska Mago
                 </p>
                 <p
                   className="text-white/50 text-xs uppercase tracking-[2px] mt-1"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Fundadora & Diseñadora
                 </p>
@@ -351,7 +351,7 @@ export default function AboutSection() {
             <div
               ref={quoteRef}
               className="text-7xl text-[var(--color-gold)]/10 leading-none mb-2 select-none opacity-0"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
+              style={{ fontFamily: "var(--font-playfair)" }}
             >
               &ldquo
             </div>
@@ -359,7 +359,7 @@ export default function AboutSection() {
             <div className="space-y-6">
               <p
                 className="about-text-p text-base sm:text-lg text-[oklch(0.76_0_0)] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Todo comenzó con una idea simple: que toda mujer merece sentirse{" "}
                 <span className="text-white font-medium">especial</span> sin importar su
@@ -369,7 +369,7 @@ export default function AboutSection() {
 
               <p
                 className="about-text-p text-base sm:text-lg text-[oklch(0.76_0_0)] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Cada pieza que diseño está pensada para ti — para tu día a día, para ese
                 momento especial, para cuando quieras sentirte{" "}
@@ -379,7 +379,7 @@ export default function AboutSection() {
 
               <p
                 className="about-text-p text-base sm:text-lg text-[oklch(0.76_0_0)] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Esto no es solo bisutería. Es una{" "}
                 <span className="text-[var(--color-gold)] font-medium">extensión de tu personalidad</span>.
@@ -390,7 +390,7 @@ export default function AboutSection() {
               <div className="w-12 h-[1px] bg-[var(--color-gold)]/40" />
               <p
                 className="text-[var(--color-gold)] text-lg italic"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Con cariño, Dubraska ✦
               </p>
@@ -406,7 +406,7 @@ export default function AboutSection() {
               <a
                 href="/nosotros"
                 className="inline-flex items-center gap-3 rounded-full px-8 py-3.5 text-sm font-medium border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300 tracking-wide group"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 Conoce nuestra historia
                 <svg
@@ -442,13 +442,13 @@ export default function AboutSection() {
             <div key={stat.label} className="stat-item text-center">
               <p
                 className="text-3xl sm:text-4xl text-[var(--color-gold)] tracking-tight"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {stat.number}
               </p>
               <p
                 className="text-xs uppercase tracking-[2px] text-[var(--color-muted)] mt-3"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 400 }}
               >
                 {stat.label}
               </p>

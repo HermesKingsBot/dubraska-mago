@@ -64,7 +64,7 @@ export default function NavigationBar() {
           <a
             href="/"
             className="text-2xl md:text-3xl tracking-tight text-[var(--color-gold)] hover:text-[oklch(0.84_0.12_85)] transition-colors duration-300"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             {companyName.toUpperCase()}<sup className="text-xs">®</sup>
           </a>
@@ -75,7 +75,7 @@ export default function NavigationBar() {
                 key={item.label}
                 href={item.href}
                 className="text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 {item.label}
               </a>
@@ -107,7 +107,7 @@ export default function NavigationBar() {
             <a
               href="/colecciones"
               className="hidden sm:inline-flex rounded-full px-6 py-2.5 text-sm font-medium bg-[var(--color-gold)] text-[var(--color-bg)] cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Catálogo
             </a>
@@ -138,7 +138,7 @@ export default function NavigationBar() {
                   key={item.label}
                   href={item.href}
                   className="py-3 text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
@@ -148,14 +148,14 @@ export default function NavigationBar() {
                 <CompareLink />
                 <CartButton />
                 <WishlistLink />
-                <a href="/login" className="ml-auto text-sm text-[var(--color-gold)]" style={{ fontFamily: "var(--font-inter)" }}>
+                <a href="/login" className="ml-auto text-sm text-[var(--color-gold)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
                   Iniciar Sesión
                 </a>
               </div>
               <a
                 href="/colecciones"
                 className="mt-3 text-center rounded-full px-6 py-3 text-sm font-medium bg-[var(--color-gold)] text-[var(--color-bg)]"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
                 onClick={() => setMobileOpen(false)}
               >
                 Catálogo

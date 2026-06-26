@@ -64,7 +64,7 @@ export default function SizeGuideModal({ isOpen, onClose, category }: SizeGuideM
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <h3
                 className="text-lg text-white"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {data.label}
               </h3>
@@ -79,7 +79,7 @@ export default function SizeGuideModal({ isOpen, onClose, category }: SizeGuideM
             </div>
 
             <div className="p-6 overflow-x-auto">
-              <table className="w-full text-sm" style={{ fontFamily: "var(--font-inter)" }}>
+              <table className="w-full text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 {data.rows.map((row, i) => (
                   <tr
                     key={i}
@@ -103,7 +103,7 @@ export default function SizeGuideModal({ isOpen, onClose, category }: SizeGuideM
             </div>
 
             <div className="p-6 pt-0">
-              <p className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+              <p className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 Si no estás seguro de tu talla, mide tu dedo o muñeca con un flexómetro y compara con las medidas de la tabla.
               </p>
             </div>

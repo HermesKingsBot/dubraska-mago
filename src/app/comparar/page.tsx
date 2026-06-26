@@ -35,7 +35,7 @@ export default function ComparePage() {
   return (
     <div className="min-h-screen bg-[var(--color-bg)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16">
-        <nav className="flex items-center gap-2 text-xs text-[var(--color-muted)] mb-8" style={{ fontFamily: "var(--font-inter)" }}>
+        <nav className="flex items-center gap-2 text-xs text-[var(--color-muted)] mb-8" style={{ fontFamily: "var(--font-dm-sans)" }}>
           <a href="/" className="hover:text-white transition-colors">Inicio</a>
           <span>/</span>
           <span className="text-white">Comparar</span>
@@ -44,7 +44,7 @@ export default function ComparePage() {
         <div className="flex items-center justify-between mb-8">
           <h1
             className="text-3xl sm:text-4xl text-white"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Comparar <em className="text-[var(--color-gold)]">Productos</em>
           </h1>
@@ -52,7 +52,7 @@ export default function ComparePage() {
             <button
               onClick={clearCompare}
               className="px-4 py-2 text-xs text-[var(--color-muted)] hover:text-white border border-white/10 rounded-lg transition-colors"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Limpiar todo
             </button>
@@ -76,14 +76,14 @@ export default function ComparePage() {
               <a
                 href="/colecciones"
                 className="px-6 py-2.5 rounded-full border border-white/10 text-sm text-[var(--color-muted)] hover:text-white transition-colors"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 Agregar más
               </a>
               <button
                 onClick={clearCompare}
                 className="px-6 py-2.5 rounded-full border border-red-500/30 text-sm text-red-400 hover:bg-red-500/10 transition-colors"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 Limpiar todo
               </button>

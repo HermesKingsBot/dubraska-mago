@@ -68,7 +68,7 @@ export default function PriceRangeSlider({
             value={localMin}
             onChange={(e) => handleMinChange(e.target.value)}
             className="w-full pl-7 pr-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)]/50 transition-colors"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           />
         </div>
         <span className="text-[var(--color-muted)] text-xs">—</span>
@@ -80,7 +80,7 @@ export default function PriceRangeSlider({
             value={localMax}
             onChange={(e) => handleMaxChange(e.target.value)}
             className="w-full pl-7 pr-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)]/50 transition-colors"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           />
         </div>
       </div>

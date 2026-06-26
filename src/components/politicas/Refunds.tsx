@@ -21,7 +21,7 @@ function Refunds({ ref }: RefundsProps): React.JSX.Element {
             </div>
             <h2
               className="text-2xl sm:text-3xl md:text-4xl text-[var(--color-white)]"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
+              style={{ fontFamily: "var(--font-playfair)" }}
             >
               Reembolsos
             </h2>
@@ -31,7 +31,7 @@ function Refunds({ ref }: RefundsProps): React.JSX.Element {
             <div className="rounded-xl border border-[rgba(212,175,55,0.1)] bg-[var(--color-bg)]/60 p-6">
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Métodos de reembolso
               </h3>
@@ -40,7 +40,7 @@ function Refunds({ ref }: RefundsProps): React.JSX.Element {
                   <span
                     key={method}
                     className="inline-block rounded-full border border-[rgba(212,175,55,0.2)] bg-[var(--color-bg)] px-4 py-2 text-sm text-[#B0B0B0]"
-                    style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
+                    style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 400 }}
                   >
                     {method}
                   </span>
@@ -51,13 +51,13 @@ function Refunds({ ref }: RefundsProps): React.JSX.Element {
             <div className="rounded-xl border border-[rgba(212,175,55,0.1)] bg-[var(--color-bg)]/60 p-6">
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Tiempo de procesamiento
               </h3>
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 <span className="text-[var(--color-white)] font-medium">3-5 días hábiles</span> después de aprobar la devolución.
               </p>
@@ -66,13 +66,13 @@ function Refunds({ ref }: RefundsProps): React.JSX.Element {
             <div className="rounded-xl border border-[rgba(212,175,55,0.1)] bg-[var(--color-bg)]/60 p-6">
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 ¿Qué se reembolsa?
               </h3>
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 El reembolso incluye el precio del producto (no el envío original, a menos que el error sea nuestro).
               </p>

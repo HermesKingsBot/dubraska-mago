@@ -81,7 +81,7 @@ export default function AccountPage() {
       <div>
         <h2
           className="text-2xl mb-2"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           Hola, {user?.name || "Usuario"}
         </h2>
@@ -109,7 +109,7 @@ export default function AccountPage() {
         <div className="flex items-center justify-between mb-4">
           <h3
             className="text-lg"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Pedidos Recientes
           </h3>

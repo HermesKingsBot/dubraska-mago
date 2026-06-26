@@ -131,7 +131,7 @@ function ProductModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm overflow-y-auto py-10">
       <div className="bg-[#111] border border-[#333] rounded-xl p-6 max-w-lg w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto">
-        <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-inter)" }}>
+        <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-dm-sans)" }}>
           {product ? "Editar Producto" : "Nuevo Producto"}
         </h3>
 

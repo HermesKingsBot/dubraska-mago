@@ -18,13 +18,13 @@ export default function ReviewSuccess() {
         <div>
           <h4
             className="text-sm text-white font-medium"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             ¡Gracias por tu reseña!
           </h4>
           <p
             className="text-xs text-[var(--color-muted)]"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Tu reseña será visible después de ser aprobada por nuestro equipo.
           </p>

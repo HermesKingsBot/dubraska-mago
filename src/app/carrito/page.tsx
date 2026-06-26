@@ -21,7 +21,7 @@ export default function CarritoPage() {
     <main className="min-h-screen py-24 px-4 max-w-6xl mx-auto">
       <h1
         className="text-3xl md:text-4xl font-bold text-white mb-2"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Carrito de compras
       </h1>
@@ -33,14 +33,14 @@ export default function CarritoPage() {
           </svg>
           <p
             className="text-[var(--color-muted)] text-lg"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Tu carrito está vacío
           </p>
           <Link
             href="/colecciones"
             className="px-6 py-3 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-semibold hover:brightness-110 transition-all"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Explorar catálogo
           </Link>
@@ -58,7 +58,7 @@ export default function CarritoPage() {
               <Link
                 href="/colecciones"
                 className="inline-flex items-center gap-2 text-sm text-[var(--color-muted)] hover:text-white transition-colors mt-2 self-start"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M19 12H5M12 19l-7-7 7-7" />

@@ -29,13 +29,13 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
     <section ref={ref} className="px-6 pb-20 md:pb-28 max-w-3xl mx-auto opacity-0">
       <h2
         className="text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-4"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Escríbenos
       </h2>
       <p
         className="text-center text-[var(--color-muted)] mb-12 text-sm sm:text-base"
-        style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+        style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
       >
         Completa el formulario y te responderemos lo antes posible.
       </p>
@@ -49,11 +49,11 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
           </div>
           <h3
             className="text-2xl text-white mb-2"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             ¡Mensaje enviado!
           </h3>
-          <p className="text-[var(--color-muted)] text-sm" style={{ fontFamily: "var(--font-inter)" }}>
+          <p className="text-[var(--color-muted)] text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
             Gracias por contactarnos. Te responderemos pronto.
           </p>
         </div>
@@ -63,7 +63,7 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
             <label
               htmlFor="name"
               className="block text-sm font-medium text-white/80 mb-2"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Nombre *
             </label>
@@ -73,11 +73,11 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
               value={form.name}
               onChange={(e) => onChange("name", e.target.value)}
               className="w-full rounded-xl border border-white/10 bg-[var(--color-dark-card)] px-4 py-3 text-white text-sm outline-none transition-all duration-300 focus:border-[var(--color-gold)]/50 focus:shadow-[0_0_20px_oklch(0.72 0.16 85)] placeholder:text-white/20"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
               placeholder="Tu nombre"
             />
             {errors.name && (
-              <p className="mt-1 text-xs text-red-400" style={{ fontFamily: "var(--font-inter)" }}>
+              <p className="mt-1 text-xs text-red-400" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 {errors.name}
               </p>
             )}
@@ -88,7 +88,7 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
               <label
                 htmlFor="email"
                 className="block text-sm font-medium text-white/80 mb-2"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 Email *
               </label>
@@ -98,11 +98,11 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
                 value={form.email}
                 onChange={(e) => onChange("email", e.target.value)}
                 className="w-full rounded-xl border border-white/10 bg-[var(--color-dark-card)] px-4 py-3 text-white text-sm outline-none transition-all duration-300 focus:border-[var(--color-gold)]/50 focus:shadow-[0_0_20px_oklch(0.72 0.16 85)] placeholder:text-white/20"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
                 placeholder="tu@email.com"
               />
               {errors.email && (
-                <p className="mt-1 text-xs text-red-400" style={{ fontFamily: "var(--font-inter)" }}>
+                <p className="mt-1 text-xs text-red-400" style={{ fontFamily: "var(--font-dm-sans)" }}>
                   {errors.email}
                 </p>
               )}
@@ -111,7 +111,7 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
               <label
                 htmlFor="phone"
                 className="block text-sm font-medium text-white/80 mb-2"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 Teléfono
               </label>
@@ -121,7 +121,7 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
                 value={form.phone}
                 onChange={(e) => onChange("phone", e.target.value)}
                 className="w-full rounded-xl border border-white/10 bg-[var(--color-dark-card)] px-4 py-3 text-white text-sm outline-none transition-all duration-300 focus:border-[var(--color-gold)]/50 focus:shadow-[0_0_20px_oklch(0.72 0.16 85)] placeholder:text-white/20"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
                 placeholder="+58 412 000 0000"
               />
             </div>
@@ -131,7 +131,7 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
             <label
               htmlFor="subject"
               className="block text-sm font-medium text-white/80 mb-2"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Asunto *
             </label>
@@ -140,7 +140,7 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
               value={form.subject}
               onChange={(e) => onChange("subject", e.target.value)}
               className="w-full appearance-none rounded-xl border border-white/10 bg-[var(--color-dark-card)] px-4 py-3 text-white text-sm outline-none transition-all duration-300 focus:border-[var(--color-gold)]/50 focus:shadow-[0_0_20px_oklch(0.72 0.16 85)]"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               <option value="" disabled>
                 Selecciona un asunto
@@ -152,7 +152,7 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
               ))}
             </select>
             {errors.subject && (
-              <p className="mt-1 text-xs text-red-400" style={{ fontFamily: "var(--font-inter)" }}>
+              <p className="mt-1 text-xs text-red-400" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 {errors.subject}
               </p>
             )}
@@ -162,7 +162,7 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
             <label
               htmlFor="message"
               className="block text-sm font-medium text-white/80 mb-2"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Mensaje *
             </label>
@@ -172,11 +172,11 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
               value={form.message}
               onChange={(e) => onChange("message", e.target.value)}
               className="w-full resize-none rounded-xl border border-white/10 bg-[var(--color-dark-card)] px-4 py-3 text-white text-sm outline-none transition-all duration-300 focus:border-[var(--color-gold)]/50 focus:shadow-[0_0_20px_oklch(0.72 0.16 85)] placeholder:text-white/20"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
               placeholder="Cuéntanos en qué podemos ayudarte..."
             />
             {errors.message && (
-              <p className="mt-1 text-xs text-red-400" style={{ fontFamily: "var(--font-inter)" }}>
+              <p className="mt-1 text-xs text-red-400" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 {errors.message}
               </p>
             )}
@@ -186,7 +186,7 @@ function ContactForm({ form, submitted, errors, onChange, onSubmit, ref }: Conta
             type="submit"
             className="w-full rounded-xl px-8 py-4 text-sm font-semibold tracking-wide border-none cursor-pointer transition-all duration-300 hover:shadow-[0_0_30px_oklch(0.72 0.16 85)] hover:scale-[1.02] active:scale-[0.98]"
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-dm-sans)",
               background: "linear-gradient(135deg, var(--color-gold) 0%, #B8941F 100%)",
               color: "var(--color-bg)",
             }}

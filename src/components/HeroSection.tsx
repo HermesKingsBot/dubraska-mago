@@ -25,7 +25,7 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, ease: EASE }}
         className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl max-w-5xl font-normal leading-[1.05] tracking-[-2px] text-white"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Diseños que brillan más cuando{" "}
         <em className="text-[var(--color-gold)]">TÚ</em> los llevas puestos.
@@ -36,7 +36,7 @@ export default function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
         className="text-base sm:text-lg max-w-2xl mt-8 leading-relaxed text-[var(--color-muted)]"
-        style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+        style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
       >
         Acero inoxidable bañado en oro 18K. Piezas mínimas, atemporales y
         hechas para tu día a día. Disfruta de pagos flexibles con Cashea y
@@ -51,7 +51,7 @@ export default function HeroSection() {
         whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(212,175,55,0.4)" }}
         whileTap={{ scale: 0.98 }}
         className="rounded-full px-14 py-5 text-base font-semibold tracking-wide mt-12 border-none cursor-pointer bg-[var(--color-gold)] text-[var(--color-bg)] inline-block"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Ver Catálogo
       </motion.a>
@@ -67,7 +67,7 @@ export default function HeroSection() {
             <span
               key={badge}
               className="text-xs text-[var(--color-muted)]/60"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {badge}
             </span>

@@ -23,13 +23,13 @@ function StatsCounters({ counters, ref }: StatsCountersProps): React.JSX.Element
             <div key={stat.label} className="text-center">
               <p
                 className="text-4xl sm:text-5xl md:text-6xl text-[var(--color-gold)] tracking-tight"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {stat.value}
               </p>
               <p
                 className="text-xs uppercase tracking-[2px] text-[var(--color-muted)] mt-4"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 400 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 400 }}
               >
                 {stat.label}
               </p>

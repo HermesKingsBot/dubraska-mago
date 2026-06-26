@@ -30,7 +30,7 @@ export default function UserMenu() {
       <Link
         href="/login"
         className="hidden sm:inline-flex rounded-full px-5 py-2 text-sm font-medium border border-[var(--color-gold)]/30 text-[var(--color-gold)] hover:bg-[var(--color-gold)]/10 transition-all duration-300"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Iniciar Sesión
       </Link>
@@ -44,7 +44,7 @@ export default function UserMenu() {
       <button
         onClick={() => setOpen(!open)}
         className="flex items-center justify-center w-9 h-9 rounded-full bg-[var(--color-gold)]/15 text-[var(--color-gold)] text-sm font-semibold hover:bg-[var(--color-gold)]/25 transition-colors duration-300"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
         aria-label="Menú de usuario"
       >
         {initial}
@@ -62,7 +62,7 @@ export default function UserMenu() {
                 key={item.href}
                 href={item.href}
                 className="block px-4 py-2.5 text-sm text-[var(--color-muted)] hover:text-white hover:bg-white/5 transition-colors duration-200"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
                 onClick={() => setOpen(false)}
               >
                 {item.label}
@@ -76,7 +76,7 @@ export default function UserMenu() {
                 logout()
               }}
               className="w-full text-left px-4 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-white/5 transition-colors duration-200"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Cerrar Sesión
             </button>

@@ -44,13 +44,13 @@ function MissionValues({ ref }: MissionValuesProps): React.JSX.Element {
         <div className="text-center mb-16 sm:mb-20">
           <p
             className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
+            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
           >
             Nuestro propósito
           </p>
           <h2
             className="text-4xl sm:text-5xl md:text-6xl text-white tracking-[-2px]"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Lo que nos <em className="text-[var(--color-gold)]">mueve</em>
           </h2>
@@ -66,13 +66,13 @@ function MissionValues({ ref }: MissionValuesProps): React.JSX.Element {
               <div className="mb-5 opacity-70">{card.icon}</div>
               <h3
                 className="text-xl sm:text-2xl text-white mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 {card.title}
               </h3>
               <p
                 className="text-sm sm:text-base text-[var(--color-muted)] leading-relaxed"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 {card.desc}
               </p>

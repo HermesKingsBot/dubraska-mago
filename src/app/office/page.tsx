@@ -54,7 +54,7 @@ function OfficeLoginPage(): React.JSX.Element {
         <div className="text-center mb-8">
           <h1
             className="text-2xl font-bold text-[var(--color-gold)] tracking-wider"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             DUBRASKA MAGO®
           </h1>

@@ -15,7 +15,7 @@ function RelatedProducts({ relatedProducts, ref }: RelatedProductsProps): React.
     <div ref={ref} className="mt-20">
       <h2
         className="text-2xl sm:text-3xl text-white mb-8"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         También te puede <em className="text-[var(--color-gold)]">gustar</em>
       </h2>

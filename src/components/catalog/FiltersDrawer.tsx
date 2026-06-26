@@ -87,14 +87,14 @@ export default function FiltersDrawer({
               <div className="flex items-center gap-3">
                 <h2
                   className="text-white text-lg"
-                  style={{ fontFamily: "var(--font-instrument-serif)" }}
+                  style={{ fontFamily: "var(--font-playfair)" }}
                 >
                   Filtros
                 </h2>
                 {activeCount > 0 && (
                   <span
                     className="px-2 py-0.5 rounded-full bg-[var(--color-gold)]/20 text-[var(--color-gold)] text-xs"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     {activeCount}
                   </span>
@@ -114,7 +114,7 @@ export default function FiltersDrawer({
               <div>
                 <h3
                   className="text-white text-sm font-medium mb-4"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Categoría
                 </h3>
@@ -140,7 +140,7 @@ export default function FiltersDrawer({
                         </span>
                         <span
                           className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors flex-1"
-                          style={{ fontFamily: "var(--font-inter)" }}
+                          style={{ fontFamily: "var(--font-dm-sans)" }}
                         >
                           {cat.name}
                         </span>
@@ -148,7 +148,7 @@ export default function FiltersDrawer({
                       </label>
                     ))
                   ) : (
-                    <p className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+                    <p className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
                       Cargando categorías...
                     </p>
                   )}
@@ -158,7 +158,7 @@ export default function FiltersDrawer({
               <div>
                 <h3
                   className="text-white text-sm font-medium mb-4"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Color
                 </h3>
@@ -182,7 +182,7 @@ export default function FiltersDrawer({
                       </span>
                       <span
                         className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors flex-1"
-                        style={{ fontFamily: "var(--font-inter)" }}
+                        style={{ fontFamily: "var(--font-dm-sans)" }}
                       >
                         {col.value}
                       </span>
@@ -195,7 +195,7 @@ export default function FiltersDrawer({
               <div>
                 <h3
                   className="text-white text-sm font-medium mb-4"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Rango de precio
                 </h3>
@@ -211,7 +211,7 @@ export default function FiltersDrawer({
               <div>
                 <h3
                   className="text-white text-sm font-medium mb-4"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Especiales
                 </h3>
@@ -227,7 +227,7 @@ export default function FiltersDrawer({
                     >
                       <span
                         className="text-sm text-[var(--color-muted)] group-hover:text-white transition-colors"
-                        style={{ fontFamily: "var(--font-inter)" }}
+                        style={{ fontFamily: "var(--font-dm-sans)" }}
                       >
                         {toggle.label}
                       </span>
@@ -258,14 +258,14 @@ export default function FiltersDrawer({
                 <button
                   onClick={onClear}
                   className="flex-1 py-2.5 rounded-lg border border-white/10 text-white text-sm hover:bg-white/5 transition-colors"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Limpiar
                 </button>
                 <button
                   onClick={onClose}
                   className="flex-1 py-2.5 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:bg-[oklch(0.87_0.12_90)] transition-colors"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Aplicar
                 </button>

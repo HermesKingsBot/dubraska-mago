@@ -49,7 +49,7 @@ function AdjustmentModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div className="bg-[#111] border border-[#333] rounded-xl p-6 max-w-md w-full mx-4 shadow-2xl">
-        <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-inter)" }}>
+        <h3 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-dm-sans)" }}>
           Ajuste Manual
         </h3>
 

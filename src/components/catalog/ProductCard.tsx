@@ -77,7 +77,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
                 ? "bg-white/10 text-white border border-white/20"
                 : "bg-[var(--color-gold)]/90 text-[var(--color-bg)]"
             }`}
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {product.badge}
           </span>
@@ -86,7 +86,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         {discount && (
           <span
             className="absolute top-3 right-14 px-2 py-1 text-[10px] font-bold bg-red-500 text-white rounded"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             -{discount}%
           </span>
@@ -108,7 +108,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           />
           <span
             className="text-[10px] uppercase tracking-widest text-[var(--color-muted)]"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {product.category}
           </span>
@@ -116,14 +116,14 @@ export default function ProductCard({ product, index }: ProductCardProps) {
 
         <h3
           className="text-white text-sm font-medium mb-1 line-clamp-1"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {product.name}
         </h3>
 
         <p
           className="text-[var(--color-muted)] text-xs mb-3 line-clamp-1"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {product.material}
         </p>
@@ -131,14 +131,14 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         <div className="flex items-center gap-2 mb-4 mt-auto">
           <span
             className="text-[var(--color-gold)] text-lg font-semibold"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             ${(product.price ?? 0).toFixed(2)}
           </span>
           {product.oldPrice && (
             <span
               className="text-[var(--color-muted)] text-sm line-through"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               ${product.oldPrice.toFixed(2)}
             </span>
@@ -150,7 +150,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-[oklch(0.75_0.18_155)] text-white text-xs font-medium hover:bg-[oklch(0.72_0.17_150)] transition-colors"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           <svg
             width="14"

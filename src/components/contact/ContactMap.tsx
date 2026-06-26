@@ -51,7 +51,7 @@ export default function ContactMap() {
     L.marker([lat, lng], { icon: goldIcon })
       .addTo(map)
       .bindPopup(
-        `<div style="font-family:var(--font-inter);color:var(--color-bg);font-weight:500;">${companyName}<br/><span style="font-size:12px;color:var(--color-muted);">${address}</span></div>`
+        `<div style="font-family:var(--font-dm-sans);color:var(--color-bg);font-weight:500;">${companyName}<br/><span style="font-size:12px;color:var(--color-muted);">${address}</span></div>`
       )
       .openPopup()
 

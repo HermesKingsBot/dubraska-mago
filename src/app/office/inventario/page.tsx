@@ -99,7 +99,7 @@ function InventarioPage(): React.JSX.Element {
     <AuthGuard>
       <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <h2 className="text-xl font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
+          <h2 className="text-xl font-semibold" style={{ fontFamily: "var(--font-dm-sans)" }}>
             Inventario
           </h2>
           <div className="flex items-center gap-4">
@@ -245,7 +245,7 @@ function InventarioPage(): React.JSX.Element {
 
         {filteredAdjustments.length > 0 && (
           <div>
-            <h3 className="text-sm font-semibold mb-3" style={{ fontFamily: "var(--font-inter)" }}>
+            <h3 className="text-sm font-semibold mb-3" style={{ fontFamily: "var(--font-dm-sans)" }}>
               Historial de Movimientos ({filteredAdjustments.length})
             </h3>
             <div className="bg-[#111] border border-[#222] rounded-xl divide-y divide-[#222]">

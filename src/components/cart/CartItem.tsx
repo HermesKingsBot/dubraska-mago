@@ -49,7 +49,7 @@ export default function CartItem({ item }: CartItemProps) {
         <div className="flex items-start justify-between gap-2">
           <h3
             className="text-sm font-medium text-white truncate"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {item.product?.name || "Producto"}
           </h3>
@@ -74,7 +74,7 @@ export default function CartItem({ item }: CartItemProps) {
             </button>
             <span
               className="w-8 text-center text-sm text-white"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {item.quantity}
             </span>
@@ -88,7 +88,7 @@ export default function CartItem({ item }: CartItemProps) {
 
           <span
             className="text-[var(--color-gold)] text-sm font-semibold"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             ${lineTotal.toFixed(2)}
           </span>

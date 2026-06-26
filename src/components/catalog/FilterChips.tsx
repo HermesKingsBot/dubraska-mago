@@ -23,7 +23,7 @@ function Chip({
   return (
     <span
       className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs transition-colors ${colorClass}`}
-      style={{ fontFamily: "var(--font-inter)" }}
+      style={{ fontFamily: "var(--font-dm-sans)" }}
     >
       {label}
       <button
@@ -60,7 +60,7 @@ export default function FilterChips({
     <div className="flex flex-wrap items-center gap-2 mb-6">
       <span
         className="text-xs text-[var(--color-muted)]"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Filtros activos:
       </span>
@@ -127,7 +127,7 @@ export default function FilterChips({
         <button
           onClick={onClearAll}
           className="text-xs text-[var(--color-muted)] hover:text-white transition-colors underline underline-offset-2"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Limpiar todo
         </button>

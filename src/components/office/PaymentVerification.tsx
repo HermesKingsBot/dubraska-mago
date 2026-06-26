@@ -143,7 +143,7 @@ function PaymentVerification({ payment, orderId, onVerified }: PaymentVerificati
       {confirmAction && (
         <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
           <div className="bg-[var(--color-dark-card)] border border-[#333] rounded-xl p-6 max-w-sm w-full space-y-4">
-            <h3 className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-instrument-serif)" }}>
+            <h3 className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-playfair)" }}>
               {confirmAction === "APPROVED" ? "Aprobar Pago" : "Rechazar Pago"}
             </h3>
             <p className="text-sm text-[var(--color-muted)]">

@@ -44,14 +44,14 @@ function FAQList({
         </svg>
         <p
           className="text-[var(--color-muted)] text-base sm:text-lg"
-          style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
         >
           No encontramos resultados para &ldquo
           <span className="text-white">{searchQuery}</span>&rdquo
         </p>
         <p
           className="text-[var(--color-muted)]/60 text-sm mt-2"
-          style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
         >
           Intenta con otras palabras clave
         </p>

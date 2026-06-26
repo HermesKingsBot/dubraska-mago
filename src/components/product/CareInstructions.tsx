@@ -20,7 +20,7 @@ function CareInstructions({ product, careOpen, onToggleCare, ref }: CareInstruct
       >
         <span
           className="text-sm font-medium text-white"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Cuidados
         </span>
@@ -53,7 +53,7 @@ function CareInstructions({ product, careOpen, onToggleCare, ref }: CareInstruct
             </svg>
             <p
               className="text-sm text-[var(--color-muted)] leading-relaxed"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {product.careInstructions}
             </p>
@@ -68,7 +68,7 @@ function CareInstructions({ product, careOpen, onToggleCare, ref }: CareInstruct
               <li
                 key={i}
                 className="flex items-center gap-2 text-xs text-[var(--color-muted)]"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 <span className="w-1 h-1 rounded-full bg-[var(--color-gold)] shrink-0" />
                 {tip}

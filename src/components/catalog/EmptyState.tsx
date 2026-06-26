@@ -23,20 +23,20 @@ export default function EmptyState({ onClearFilters }: EmptyStateProps) {
       </div>
       <h3
         className="text-white text-lg mb-2"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         No encontramos resultados
       </h3>
       <p
         className="text-[var(--color-muted)] text-sm max-w-md mb-6"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Intenta ajustar los filtros o el término de búsqueda para encontrar lo que buscas.
       </p>
       <button
         onClick={onClearFilters}
         className="px-6 py-2.5 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:bg-[oklch(0.87_0.12_90)] transition-colors"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Limpiar filtros
       </button>

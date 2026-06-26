@@ -49,13 +49,13 @@ function ShippingReturns(props: ShippingReturnsProps): React.JSX.Element {
           <div>
             <h3
               className="text-sm font-medium text-white mb-1"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {item.title}
             </h3>
             <p
               className="text-xs text-[var(--color-muted)]"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {item.desc}
             </p>

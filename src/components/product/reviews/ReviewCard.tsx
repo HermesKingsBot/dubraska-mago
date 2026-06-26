@@ -26,7 +26,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
             {review.verified && (
               <span
                 className="text-[10px] px-2 py-0.5 rounded-full bg-[var(--color-gold)]/10 text-[var(--color-gold)]"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 Compra verificada
               </span>
@@ -35,7 +35,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
           {review.title && (
             <h4
               className="text-sm text-white font-medium mt-1"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {review.title}
             </h4>
@@ -43,7 +43,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
         </div>
         <span
           className="text-xs text-[var(--color-muted)]"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {date}
         </span>
@@ -51,7 +51,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
 
       <p
         className="text-sm text-[var(--color-muted)] mb-3"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         {review.comment}
       </p>
@@ -59,7 +59,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
       <div className="flex items-center justify-between">
         <span
           className="text-xs text-[var(--color-muted)]"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {review.name}
         </span>
@@ -68,7 +68,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
           className={`flex items-center gap-1.5 text-xs transition-colors ${
             helpful ? "text-[var(--color-gold)]" : "text-[var(--color-muted)] hover:text-white"
           }`}
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill={helpful ? "currentColor" : "none"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3H14zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3" />

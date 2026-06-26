@@ -15,7 +15,7 @@ function CustomersAlsoBought({ products, ref }: CustomersAlsoBoughtProps): React
     <div ref={ref} className="mt-16">
       <h2
         className="text-2xl sm:text-3xl text-white mb-4"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Los clientes también <em className="text-[var(--color-gold)]">compraron</em>
       </h2>
@@ -28,14 +28,14 @@ function CustomersAlsoBought({ products, ref }: CustomersAlsoBoughtProps): React
           </svg>
           <span
             className="text-sm text-[var(--color-gold)] font-medium"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Comprados juntos frecuentemente
           </span>
         </div>
         <p
           className="text-xs text-[var(--color-muted)]"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Compra 2 y obtén 10% de descuento en tu pedido
         </p>

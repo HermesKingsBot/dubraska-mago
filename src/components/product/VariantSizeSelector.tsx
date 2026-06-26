@@ -58,7 +58,7 @@ function VariantSizeSelector({
     <div className="mb-4">
       <span
         className="text-sm text-white block mb-2"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Talla: {selectedSize || "Selecciona"}
       </span>
@@ -78,7 +78,7 @@ function VariantSizeSelector({
                     ? "border-white/10 text-[var(--color-muted)] hover:border-white/30"
                     : "border-white/5 text-[var(--color-muted)]/40 line-through cursor-not-allowed"
               }`}
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {size}
             </button>
@@ -88,7 +88,7 @@ function VariantSizeSelector({
       {selectedVariant && selectedVariant.price && (
         <span
           className="text-sm text-[var(--color-gold)] mt-2 block"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Precio: ${selectedVariant.price.toFixed(2)}
         </span>

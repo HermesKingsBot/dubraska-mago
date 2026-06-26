@@ -13,7 +13,7 @@ export default function RatingBar({ star, count, total }: RatingBarProps) {
     <div className="flex items-center gap-3">
       <span
         className="text-xs text-[var(--color-muted)] w-3 text-right"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         {star}
       </span>
@@ -31,7 +31,7 @@ export default function RatingBar({ star, count, total }: RatingBarProps) {
       </div>
       <span
         className="text-xs text-[var(--color-muted)] w-6"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         {count}
       </span>

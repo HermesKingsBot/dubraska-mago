@@ -11,7 +11,7 @@ function ComingSoon({ title, icon }: ComingSoonProps): React.JSX.Element {
       <div className="text-6xl mb-6 opacity-50">{icon}</div>
       <h2
         className="text-2xl font-semibold mb-3"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         {title}
       </h2>

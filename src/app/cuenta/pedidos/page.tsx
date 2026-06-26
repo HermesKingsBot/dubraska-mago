@@ -81,7 +81,7 @@ export default function OrdersPage() {
       <div className="flex items-center justify-between">
         <h2
           className="text-2xl"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           Mis Pedidos
         </h2>

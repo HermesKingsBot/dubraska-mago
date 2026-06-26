@@ -44,7 +44,7 @@ export default function OfferCountdown({ oldPrice }: OfferCountdownProps) {
       />
       <span
         className="text-sm text-red-400 font-medium"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Oferta termina en:{" "}
         {timeLeft.days > 0 && `${timeLeft.days}d `}

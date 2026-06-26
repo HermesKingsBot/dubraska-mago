@@ -30,14 +30,14 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
     <form onSubmit={handleSubmit} className="p-6 rounded-xl bg-[var(--color-dark-card)] border border-white/5">
       <h3
         className="text-lg text-white mb-4"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Escribir una reseña
       </h3>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <div>
-          <label className="block text-xs text-[var(--color-muted)] mb-1.5" style={{ fontFamily: "var(--font-inter)" }}>
+          <label className="block text-xs text-[var(--color-muted)] mb-1.5" style={{ fontFamily: "var(--font-dm-sans)" }}>
             Nombre *
           </label>
           <input
@@ -46,11 +46,11 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
             onChange={(e) => setName(e.target.value)}
             required
             className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm focus:border-[var(--color-gold)] focus:outline-none transition-colors"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           />
         </div>
         <div>
-          <label className="block text-xs text-[var(--color-muted)] mb-1.5" style={{ fontFamily: "var(--font-inter)" }}>
+          <label className="block text-xs text-[var(--color-muted)] mb-1.5" style={{ fontFamily: "var(--font-dm-sans)" }}>
             Email (opcional)
           </label>
           <input
@@ -58,13 +58,13 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm focus:border-[var(--color-gold)] focus:outline-none transition-colors"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           />
         </div>
       </div>
 
       <div className="mb-4">
-        <label className="block text-xs text-[var(--color-muted)] mb-2" style={{ fontFamily: "var(--font-inter)" }}>
+        <label className="block text-xs text-[var(--color-muted)] mb-2" style={{ fontFamily: "var(--font-dm-sans)" }}>
           Calificación *
         </label>
         <div className="flex gap-1">
@@ -89,7 +89,7 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
       </div>
 
       <div className="mb-4">
-        <label className="block text-xs text-[var(--color-muted)] mb-1.5" style={{ fontFamily: "var(--font-inter)" }}>
+        <label className="block text-xs text-[var(--color-muted)] mb-1.5" style={{ fontFamily: "var(--font-dm-sans)" }}>
           Título (opcional)
         </label>
         <input
@@ -97,12 +97,12 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm focus:border-[var(--color-gold)] focus:outline-none transition-colors"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-xs text-[var(--color-muted)] mb-1.5" style={{ fontFamily: "var(--font-inter)" }}>
+        <label className="block text-xs text-[var(--color-muted)] mb-1.5" style={{ fontFamily: "var(--font-dm-sans)" }}>
           Comentario *
         </label>
         <textarea
@@ -111,7 +111,7 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
           required
           rows={4}
           className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm focus:border-[var(--color-gold)] focus:outline-none transition-colors resize-none"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         />
       </div>
 
@@ -119,7 +119,7 @@ export default function ReviewForm({ onSubmit }: ReviewFormProps) {
         type="submit"
         disabled={!name || !rating || !comment}
         className="px-6 py-2.5 rounded-full bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:scale-[1.03] transition-transform disabled:opacity-50 disabled:cursor-not-allowed"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Enviar reseña
       </button>

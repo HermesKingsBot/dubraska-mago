@@ -147,7 +147,7 @@ function VariantMatrix({
   return (
     <div className="space-y-4 p-4 rounded-xl border border-[#333] bg-[#0d0d0d]">
       <div className="flex items-center gap-2 mb-2">
-        <span className="text-lg text-white font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
+        <span className="text-lg text-white font-semibold" style={{ fontFamily: "var(--font-dm-sans)" }}>
           Variantes de Producto
         </span>
         <span className="text-xs text-[var(--color-muted)]">({variants.length} variantes)</span>
@@ -291,7 +291,7 @@ function VariantMatrix({
                       style={{ backgroundColor: variant.colorHex }}
                     />
                   )}
-                  <span className="text-sm text-white" style={{ fontFamily: "var(--font-inter)" }}>
+                  <span className="text-sm text-white" style={{ fontFamily: "var(--font-dm-sans)" }}>
                     {variant.name}
                   </span>
                   <span className="text-xs text-[var(--color-muted)]">

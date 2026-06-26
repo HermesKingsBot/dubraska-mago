@@ -64,10 +64,10 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-8 max-w-lg">
-      <h2 className="text-2xl" style={{ fontFamily: "var(--font-instrument-serif)" }}>Configuración</h2>
+      <h2 className="text-2xl" style={{ fontFamily: "var(--font-playfair)" }}>Configuración</h2>
 
       <form onSubmit={handleProfile} className="bg-[var(--color-dark-card)] border border-white/5 rounded-xl p-6 space-y-4">
-        <h3 className="text-lg" style={{ fontFamily: "var(--font-instrument-serif)" }}>Editar Perfil</h3>
+        <h3 className="text-lg" style={{ fontFamily: "var(--font-playfair)" }}>Editar Perfil</h3>
         <div>
           <label className="block text-xs text-[var(--color-muted)] mb-1">Nombre</label>
           <input type="text" value={name} onChange={e => setName(e.target.value)} required className={inputCls} />
@@ -86,7 +86,7 @@ export default function SettingsPage() {
       </form>
 
       <form onSubmit={handlePassword} className="bg-[var(--color-dark-card)] border border-white/5 rounded-xl p-6 space-y-4">
-        <h3 className="text-lg" style={{ fontFamily: "var(--font-instrument-serif)" }}>Cambiar Contraseña</h3>
+        <h3 className="text-lg" style={{ fontFamily: "var(--font-playfair)" }}>Cambiar Contraseña</h3>
         <div>
           <label className="block text-xs text-[var(--color-muted)] mb-1">Contraseña Actual</label>
           <input type="password" value={currentPassword} onChange={e => setCurrentPassword(e.target.value)} required className={inputCls} />

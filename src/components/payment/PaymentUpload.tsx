@@ -90,7 +90,7 @@ function PaymentUpload({ orderNumber, orderId, onSubmitted }: PaymentUploadProps
         <svg className="w-12 h-12 mx-auto text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <h3 className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-instrument-serif)" }}>Pago Enviado</h3>
+        <h3 className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-playfair)" }}>Pago Enviado</h3>
         <p className="text-sm text-[var(--color-muted)]">
           Tu comprobante de pago para el pedido #{orderNumber} ha sido enviado correctamente. Será verificado por nuestro equipo.
         </p>
@@ -101,7 +101,7 @@ function PaymentUpload({ orderNumber, orderId, onSubmitted }: PaymentUploadProps
   return (
     <div className="bg-[var(--color-dark-card)] border border-[#222] rounded-xl p-6 space-y-5">
       <div>
-        <h3 className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-instrument-serif)" }}>Subir Comprobante de Pago</h3>
+        <h3 className="text-lg font-semibold text-white" style={{ fontFamily: "var(--font-playfair)" }}>Subir Comprobante de Pago</h3>
         <p className="text-sm text-[var(--color-muted)]">Pedido: <span className="text-[var(--color-gold)]">#{orderNumber}</span></p>
       </div>
 

@@ -83,7 +83,7 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
     <div className="max-w-7xl mx-auto px-4 py-8 min-h-screen">
       <h1
         className="text-3xl mb-8"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Mi Cuenta
       </h1>

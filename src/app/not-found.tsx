@@ -31,7 +31,7 @@ function NotFoundPage(): React.JSX.Element {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
         className="text-7xl sm:text-8xl md:text-9xl font-normal tracking-tight text-[var(--color-gold)]"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         404
       </motion.h1>
@@ -41,7 +41,7 @@ function NotFoundPage(): React.JSX.Element {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
         className="text-xl sm:text-2xl mt-6 text-white"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Página no encontrada
       </motion.p>
@@ -51,7 +51,7 @@ function NotFoundPage(): React.JSX.Element {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
         className="text-sm sm:text-base max-w-md mt-4 leading-relaxed text-[var(--color-muted)]"
-        style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+        style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
       >
         Como una joya perdida, esta página no está en nuestra colección. La página que buscas no existe o fue movida.
       </motion.p>
@@ -76,7 +76,7 @@ function NotFoundPage(): React.JSX.Element {
           whileHover={{ scale: 1.05, boxShadow: "0 0 24px rgba(212,175,55,0.35)" }}
           whileTap={{ scale: 0.97 }}
           className="rounded-full px-10 py-4 text-sm font-semibold tracking-wide border-none cursor-pointer bg-[var(--color-gold)] text-[var(--color-bg)] inline-block"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Volver al inicio
         </motion.a>
@@ -86,7 +86,7 @@ function NotFoundPage(): React.JSX.Element {
           whileHover={{ scale: 1.05, borderColor: "rgba(212,175,55,0.5)" }}
           whileTap={{ scale: 0.97 }}
           className="rounded-full px-10 py-4 text-sm font-semibold tracking-wide border border-white/15 bg-transparent text-white hover:text-[var(--color-gold)] transition-colors duration-300 inline-block"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           Ver colección
         </motion.a>
@@ -97,7 +97,7 @@ function NotFoundPage(): React.JSX.Element {
         animate={{ opacity: 0.4 }}
         transition={{ duration: 0.9, delay: 0.8, ease: EASE }}
         className="mt-10 flex flex-wrap items-center justify-center gap-2 text-xs text-[var(--color-muted)]"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         <span>O explora:</span>
         {EXPLORE_LINKS.map((link, i) => (

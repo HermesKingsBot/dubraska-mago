@@ -47,7 +47,7 @@ function LoginForm() {
   return (
     <div className="bg-[var(--color-dark-card)] rounded-2xl p-8 border border-[var(--color-dark-accent)]">
       <h2 className="text-xl font-light text-[var(--color-white)] mb-6 text-center"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Iniciar Sesión
       </h2>

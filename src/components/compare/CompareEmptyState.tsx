@@ -17,21 +17,21 @@ export default function CompareEmptyState() {
 
       <h2
         className="text-2xl text-white mb-3"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Comparar Productos
       </h2>
 
       <p
         className="text-sm text-[var(--color-muted)] text-center max-w-md mb-2"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Selecciona 2 o 4 productos del catálogo para comparar sus características lado a lado.
       </p>
 
       <p
         className="text-xs text-[var(--color-muted)] text-center max-w-sm mb-8"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Haz clic en el ícono de comparación en cualquier producto del catálogo para agregarlo a tu lista de comparación.
       </p>
@@ -39,7 +39,7 @@ export default function CompareEmptyState() {
       <a
         href="/colecciones"
         className="px-8 py-3 rounded-full bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:scale-[1.03] transition-transform"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Explorar Catálogo
       </a>

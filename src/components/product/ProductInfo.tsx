@@ -30,14 +30,14 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
     <div ref={ref} className="flex flex-col">
       <span
         className="text-[10px] uppercase tracking-[0.2em] text-[var(--color-muted)] mb-3"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         {product.category}
       </span>
 
       <h1
         className="text-3xl sm:text-4xl text-white mb-2 leading-tight"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         {product.name}
       </h1>
@@ -45,7 +45,7 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
       <div className="flex items-center gap-3 mb-4">
         <span
           className="text-2xl sm:text-3xl text-[var(--color-gold)] font-semibold"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           ${(product.price ?? 0).toFixed(2)}
         </span>
@@ -53,13 +53,13 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
           <>
             <span
               className="text-lg text-[var(--color-muted)] line-through"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               ${product.oldPrice.toFixed(2)}
             </span>
             <span
               className="px-2 py-0.5 text-[10px] font-bold bg-red-500/20 text-red-400 rounded"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               -{discount}%
             </span>
@@ -70,7 +70,7 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
       {sizes.length > 0 && (
         <div className="mb-4">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-sm text-white" style={{ fontFamily: "var(--font-inter)" }}>
+            <span className="text-sm text-white" style={{ fontFamily: "var(--font-dm-sans)" }}>
               Talla: {selectedSize || "Selecciona"}
             </span>
             <button
@@ -90,7 +90,7 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
                     ? "border-[var(--color-gold)] bg-[var(--color-gold)]/10 text-[var(--color-gold)]"
                     : "border-white/10 text-[var(--color-muted)] hover:border-white/30"
                 }`}
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 {size}
               </button>
@@ -107,7 +107,7 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
           />
           <span
             className="text-sm text-[var(--color-muted)]"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {product.color ? product.color.charAt(0).toUpperCase() + product.color.slice(1) : "—"}
           </span>
@@ -115,14 +115,14 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
         <div className="flex items-center gap-2">
           <span
             className="text-sm text-[var(--color-muted)]"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {product.material}
           </span>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+      <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
         {product.dimensions && (
           <span>Medidas: {product.dimensions}</span>
         )}
@@ -134,7 +134,7 @@ function ProductInfo({ product, discount, selectedSize, onSizeChange, ref }: Pro
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
           </svg>
-          <span className="text-xs text-[var(--color-gold)]" style={{ fontFamily: "var(--font-inter)" }}>
+          <span className="text-xs text-[var(--color-gold)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
             Resistente al agua
           </span>
         </div>

@@ -60,17 +60,17 @@ export default function OrderDetailPage() {
     <div className="space-y-8">
       <div>
         <Link href="/cuenta/pedidos" className="text-[var(--color-muted)] text-sm hover:text-white transition-colors">← Volver a Mis Pedidos</Link>
-        <h2 className="text-2xl mt-2" style={{ fontFamily: "var(--font-instrument-serif)" }}>Pedido #{order.orderNumber}</h2>
+        <h2 className="text-2xl mt-2" style={{ fontFamily: "var(--font-playfair)" }}>Pedido #{order.orderNumber}</h2>
         <p className="text-[var(--color-muted)] text-sm mt-1">{new Date(order.createdAt).toLocaleDateString("es-VE")}</p>
       </div>
 
       <div className="bg-[var(--color-dark-card)] border border-white/5 rounded-xl p-6">
-        <h3 className="text-lg mb-4" style={{ fontFamily: "var(--font-instrument-serif)" }}>Estado del Pedido</h3>
+        <h3 className="text-lg mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Estado del Pedido</h3>
         <Timeline status={order.status} />
       </div>
 
       <div className="bg-[var(--color-dark-card)] border border-white/5 rounded-xl p-6">
-        <h3 className="text-lg mb-4" style={{ fontFamily: "var(--font-instrument-serif)" }}>Artículos</h3>
+        <h3 className="text-lg mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Artículos</h3>
         <div className="space-y-4">
           {order.items.map(item => (
             <div key={item.id} className="flex items-center gap-4">
@@ -93,7 +93,7 @@ export default function OrderDetailPage() {
       </div>
 
       <div className="bg-[var(--color-dark-card)] border border-white/5 rounded-xl p-6">
-        <h3 className="text-lg mb-4" style={{ fontFamily: "var(--font-instrument-serif)" }}>Dirección de Envío</h3>
+        <h3 className="text-lg mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Dirección de Envío</h3>
         <div className="text-sm space-y-1 text-[var(--color-muted)]">
           <p className="text-white font-medium">{order.shippingName}</p>
           <p>{order.shippingStreet}</p>
@@ -105,7 +105,7 @@ export default function OrderDetailPage() {
       </div>
 
       <div className="bg-[var(--color-dark-card)] border border-white/5 rounded-xl p-6">
-        <h3 className="text-lg mb-4" style={{ fontFamily: "var(--font-instrument-serif)" }}>Pago</h3>
+        <h3 className="text-lg mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Pago</h3>
         {order.payment ? (
           <div className="space-y-2 text-sm">
             <div className="flex justify-between"><span className="text-[var(--color-muted)]">Estado</span><span>{PAYMENT_STATUS[order.payment.status] || order.payment.status}</span></div>

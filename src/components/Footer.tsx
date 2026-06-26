@@ -93,13 +93,13 @@ export default function Footer() {
             <a
               href="/"
               className="text-2xl text-[var(--color-gold)] tracking-tight hover:text-[oklch(0.84_0.12_85)] transition-colors duration-300"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
+              style={{ fontFamily: "var(--font-playfair)" }}
             >
               {companyName.toUpperCase()}<sup className="text-[10px]">®</sup>
             </a>
             <p
               className="text-sm text-[var(--color-muted)] mt-4 leading-relaxed max-w-xs"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {slogan || "Acero inoxidable bañado en oro 18K. Piezas diseñadas para mujeres que brillan con fuerza."}
             </p>
@@ -141,7 +141,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4
               className="text-xs uppercase tracking-[1.5px] text-white font-semibold mb-5"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Tienda
             </h4>
@@ -151,7 +151,7 @@ export default function Footer() {
                   <a
                     href={link.href}
                     className="text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     {link.label}
                   </a>
@@ -163,7 +163,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4
               className="text-xs uppercase tracking-[1.5px] text-white font-semibold mb-5"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Información
             </h4>
@@ -173,7 +173,7 @@ export default function Footer() {
                   <a
                     href={link.href}
                     className="text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     {link.label}
                   </a>
@@ -185,13 +185,13 @@ export default function Footer() {
           <div className="footer-col">
             <h4
               className="text-xs uppercase tracking-[1.5px] text-white font-semibold mb-5"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               No te pierdas nada
             </h4>
             <p
               className="text-sm text-[var(--color-muted)] mb-4"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Sé la primera en conocer nuevos lanzamientos.
             </p>
@@ -203,19 +203,19 @@ export default function Footer() {
                 type="email"
                 placeholder="tu@email.com"
                 className="w-full px-4 py-2.5 rounded-lg bg-[var(--color-dark-accent)] border border-[rgba(255,255,255,0.08)] text-white text-sm placeholder:text-[oklch(0.45_0_0)] focus:border-[var(--color-gold)] focus:outline-none transition-colors duration-300"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               />
               <button
                 type="submit"
                 className="w-full py-2.5 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-semibold hover:brightness-110 transition-all duration-300"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 Suscribirme
               </button>
             </form>
             <p
               className="text-[11px] text-[oklch(0.45_0_0)] mt-2"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Puedes cancelar cuando quieras.
             </p>
@@ -225,7 +225,7 @@ export default function Footer() {
         <div className="mt-16 pt-6 border-t border-[rgba(255,255,255,0.04)] flex flex-col sm:flex-row justify-between items-center gap-4">
           <p
             className="text-[11px] text-[oklch(0.45_0_0)]"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             © 2026 {companyName}. Todos los derechos reservados.
           </p>
@@ -233,14 +233,14 @@ export default function Footer() {
             <a
               href="/terminos"
               className="text-[11px] text-[var(--color-muted)] hover:text-white transition-colors duration-300"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Términos y condiciones
             </a>
             <a
               href="/privacidad"
               className="text-[11px] text-[var(--color-muted)] hover:text-white transition-colors duration-300"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Política de privacidad
             </a>

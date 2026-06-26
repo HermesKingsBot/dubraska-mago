@@ -28,7 +28,7 @@ function PapeleraPage(): React.JSX.Element {
     <AuthGuard>
       <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <h1 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-instrument-serif)" }}>
+          <h1 className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-playfair)" }}>
             Papelera {trashCount > 0 && <span className="text-sm font-normal text-[var(--color-muted)]">({trashCount} elementos)</span>}
           </h1>
         </div>

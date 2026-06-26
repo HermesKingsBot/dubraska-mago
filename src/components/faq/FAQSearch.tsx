@@ -68,7 +68,7 @@ function FAQSearch({ searchQuery, onSearchChange, ref }: FAQSearchProps): React.
             onBlur={handleBlur}
             placeholder="Buscar pregunta..."
             className="w-full pl-12 pr-12 py-4 rounded-xl border border-[rgba(212,175,55,0.15)] bg-[oklch(0.145 0 0)] text-white text-sm sm:text-base placeholder:text-[var(--color-muted)]/50 focus:outline-none transition-colors duration-300"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           />
           {searchQuery && (
             <button

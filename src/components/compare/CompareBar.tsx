@@ -21,7 +21,7 @@ export default function CompareBar() {
           <div className="flex items-center gap-3">
             <span
               className="text-sm text-white font-medium"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Comparar ({compareCount}/4)
             </span>
@@ -46,14 +46,14 @@ export default function CompareBar() {
             <button
               onClick={clearCompare}
               className="px-3 py-1.5 text-xs text-[var(--color-muted)] hover:text-white transition-colors"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Limpiar
             </button>
             <a
               href="/comparar"
               className="px-4 py-2 rounded-full bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:scale-[1.03] transition-transform"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Comparar ({compareCount})
             </a>

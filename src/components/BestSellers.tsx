@@ -135,19 +135,19 @@ export default function BestSellers({ products }: { products: Product[] }) {
         <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
             className="bs-header text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
+            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
           >
             Lo que todas quieren
           </p>
           <h2
             className="bs-header text-4xl sm:text-5xl md:text-6xl text-white tracking-[-2px]"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Nuestras piezas favoritas
           </h2>
           <p
             className="bs-header text-base sm:text-lg text-[var(--color-muted)] mt-5 max-w-xl mx-auto"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
           >
             Las que se agotan primero. No te quedes sin la tuya.
           </p>
@@ -186,7 +186,7 @@ export default function BestSellers({ products }: { products: Product[] }) {
                           ? "bg-white text-[var(--color-bg)]"
                           : "bg-[var(--color-gold)] text-[var(--color-bg)]"
                       }`}
-                      style={{ fontFamily: "var(--font-inter)" }}
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {product.badge}
                     </span>
@@ -209,27 +209,27 @@ export default function BestSellers({ products }: { products: Product[] }) {
               <div className="mt-4 flex flex-col flex-1">
                 <h3
                   className="text-sm sm:text-base text-white font-medium leading-tight group-hover:text-[var(--color-gold)] transition-colors duration-300"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
                 >
                   {product.name}
                 </h3>
                 <p
                   className="text-xs text-[var(--color-muted)] mt-1.5 line-clamp-1"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   {product.description}
                 </p>
                 <div className="mt-2 flex items-baseline gap-2">
                   <span
                     className="text-lg text-[var(--color-gold)]"
-                    style={{ fontFamily: "var(--font-instrument-serif)" }}
+                    style={{ fontFamily: "var(--font-playfair)" }}
                   >
                     {product.price ? formatPrice(product.price) : "Consultar"}
                   </span>
                   {product.oldPrice && (
                     <span
                       className="text-xs text-[var(--color-muted)] line-through"
-                      style={{ fontFamily: "var(--font-inter)" }}
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {formatPrice(product.oldPrice)}
                     </span>
@@ -238,7 +238,7 @@ export default function BestSellers({ products }: { products: Product[] }) {
 
                 <span
                   className="mt-3 flex items-center justify-center gap-2 w-full py-2.5 rounded-lg border border-[var(--color-gold)]/60 text-[var(--color-gold)] text-xs font-medium hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Ver detalles
                 </span>
@@ -251,7 +251,7 @@ export default function BestSellers({ products }: { products: Product[] }) {
           <Link
             href="/colecciones"
             className="inline-flex items-center gap-2 text-[var(--color-gold)] text-base font-medium hover:gap-3 transition-all duration-300"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Ver todo el catálogo
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

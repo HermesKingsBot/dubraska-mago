@@ -47,7 +47,7 @@ function ProductGallery({
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
               </svg>
             </div>
-            <span className="text-xs text-[var(--color-muted)] block" style={{ fontFamily: "var(--font-inter)" }}>
+            <span className="text-xs text-[var(--color-muted)] block" style={{ fontFamily: "var(--font-dm-sans)" }}>
               {GALLERY_LABELS[selectedImage]}
             </span>
           </div>
@@ -68,7 +68,7 @@ function ProductGallery({
                 ? "bg-white/10 text-white border border-white/20"
                 : "bg-[var(--color-gold)]/90 text-[var(--color-bg)]"
             }`}
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {badge}
           </span>
@@ -76,7 +76,7 @@ function ProductGallery({
         {discount && (
           <span
             className="absolute top-4 right-4 px-3 py-1.5 text-[11px] font-bold bg-red-500 text-white rounded"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             -{discount}%
           </span>
@@ -96,7 +96,7 @@ function ProductGallery({
           >
             <div className="absolute inset-0 bg-gradient-to-br from-oklch(0.2 0.02 60) via-[var(--color-dark-card)] to-[var(--color-bg)]" />
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-[9px] text-[var(--color-muted)] text-center px-1" style={{ fontFamily: "var(--font-inter)" }}>
+              <span className="text-[9px] text-[var(--color-muted)] text-center px-1" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 {GALLERY_LABELS[i]}
               </span>
             </div>

@@ -14,7 +14,7 @@ function FAQHero({ heroLineRef, ref }: FAQHeroProps): React.JSX.Element {
       <h1
         className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-normal leading-[1] tracking-[-2px] opacity-0"
         style={{
-          fontFamily: "var(--font-instrument-serif)",
+          fontFamily: "var(--font-playfair)",
           background:
             "linear-gradient(135deg, var(--color-gold) 0%, oklch(0.92 0.08 85) 50%, var(--color-gold) 100%)",
           WebkitBackgroundClip: "text",
@@ -26,7 +26,7 @@ function FAQHero({ heroLineRef, ref }: FAQHeroProps): React.JSX.Element {
       </h1>
       <p
         className="text-base sm:text-lg md:text-xl max-w-2xl mt-8 leading-relaxed text-[var(--color-muted)] opacity-0"
-        style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+        style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
       >
         Todo lo que necesitas saber sobre nuestras piezas
       </p>

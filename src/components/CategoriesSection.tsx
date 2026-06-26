@@ -132,13 +132,13 @@ export default function CategoriesSection({ categories }: { categories: Category
         <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
             className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
+            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
           >
             Descubre
           </p>
           <h2
             className="text-4xl sm:text-5xl md:text-6xl text-white tracking-[-2px]"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Encuentra tu estilo
           </h2>
@@ -176,13 +176,13 @@ export default function CategoriesSection({ categories }: { categories: Category
                   <div>
                     <h3
                       className="text-2xl sm:text-3xl text-white group-hover:text-[var(--color-gold)] transition-colors duration-300"
-                      style={{ fontFamily: "var(--font-instrument-serif)" }}
+                      style={{ fontFamily: "var(--font-playfair)" }}
                     >
                       {cat.name}
                     </h3>
                     <p
                       className="text-xs text-[var(--color-muted)] mt-1"
-                      style={{ fontFamily: "var(--font-inter)" }}
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {cat._count.products} pieza{cat._count.products !== 1 ? "s" : ""}
                     </p>

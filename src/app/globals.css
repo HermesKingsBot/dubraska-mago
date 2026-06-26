@@ -9,6 +9,23 @@
   --color-rose: oklch(0.82 0.06 25);
   --color-dark-card: oklch(0.18 0.003 60);
   --color-dark-accent: oklch(0.21 0.003 60);
+
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-dm-sans);
+
+  --text-display-xl: clamp(3.5rem, 8vw, 7rem);
+  --text-display-lg: clamp(2.5rem, 5vw, 4.5rem);
+  --text-display-md: clamp(2rem, 4vw, 3.5rem);
+  --text-display-sm: clamp(1.5rem, 3vw, 2.5rem);
+  --text-body-lg: 1.125rem;
+  --text-body-base: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-body-xs: 0.75rem;
+  --tracking-tight: -0.04em;
+  --tracking-snug: -0.02em;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.25em;
 }
 
 * {
@@ -24,12 +41,12 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-white);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-instrument-serif), serif;
+  font-family: var(--font-playfair), serif;
 }
 
 ::-webkit-scrollbar {

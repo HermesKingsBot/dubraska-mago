@@ -61,13 +61,13 @@ function ProcessTimeline({ ref }: ProcessTimelineProps): React.JSX.Element {
         <div className="text-center mb-16 sm:mb-20">
           <p
             className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
+            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
           >
             Artesanía
           </p>
           <h2
             className="text-4xl sm:text-5xl md:text-6xl text-white tracking-[-2px]"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Nuestro <em className="text-[var(--color-gold)]">Proceso</em>
           </h2>
@@ -89,19 +89,19 @@ function ProcessTimeline({ ref }: ProcessTimelineProps): React.JSX.Element {
                 </div>
                 <p
                   className="text-xs text-[var(--color-gold)]/50 mb-2 uppercase tracking-[2px]"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
                 >
                   Paso {i + 1}
                 </p>
                 <h3
                   className="text-lg sm:text-xl text-white mb-3"
-                  style={{ fontFamily: "var(--font-instrument-serif)" }}
+                  style={{ fontFamily: "var(--font-playfair)" }}
                 >
                   {step.title}
                 </h3>
                 <p
                   className="text-sm text-[var(--color-muted)] leading-relaxed max-w-xs"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   {step.desc}
                 </p>

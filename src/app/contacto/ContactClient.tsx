@@ -202,13 +202,13 @@ export default function ContactClient() {
       <section ref={mapRef} className="px-6 pb-20 md:pb-28 max-w-6xl mx-auto opacity-0">
         <h2
           className="text-3xl sm:text-4xl md:text-5xl font-normal text-center mb-4"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           Nuestra Ubicación
         </h2>
         <p
           className="text-center text-[var(--color-muted)] mb-10 text-sm sm:text-base"
-          style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
         >
           {getSetting("address", "Mercado La Isla, Caracas — Local 251")}
         </p>

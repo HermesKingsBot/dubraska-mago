@@ -191,7 +191,7 @@ export default function SearchBar({ value, onSearch }: SearchBarProps) {
           onKeyDown={handleKeyDown}
           placeholder="Buscar joyas..."
           className="w-full pl-10 pr-10 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-[var(--color-muted)] focus:outline-none focus:border-[var(--color-gold)]/50 transition-colors"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
           aria-label="Buscar productos"
           aria-autocomplete="list"
           aria-expanded={showSuggestions}
@@ -220,7 +220,7 @@ export default function SearchBar({ value, onSearch }: SearchBarProps) {
         <div className="absolute top-full left-0 right-0 mt-2 rounded-lg border border-white/10 bg-[var(--color-bg)] shadow-xl z-30 overflow-hidden">
           {suggestions.length > 0 && (
             <div>
-              <p className="px-4 py-2 text-[10px] uppercase tracking-wider text-[var(--color-muted)] border-b border-white/5" style={{ fontFamily: "var(--font-inter)" }}>
+              <p className="px-4 py-2 text-[10px] uppercase tracking-wider text-[var(--color-muted)] border-b border-white/5" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 Sugerencias
               </p>
               {suggestions.map((s, i) => (
@@ -232,7 +232,7 @@ export default function SearchBar({ value, onSearch }: SearchBarProps) {
                       ? "bg-[var(--color-gold)]/10 text-[var(--color-gold)]"
                       : "text-[var(--color-muted)] hover:text-white hover:bg-white/5"
                   }`}
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   {s.name}
                 </button>
@@ -242,7 +242,7 @@ export default function SearchBar({ value, onSearch }: SearchBarProps) {
 
           {recentSearches.length > 0 && suggestions.length === 0 && (
             <div>
-              <p className="px-4 py-2 text-[10px] uppercase tracking-wider text-[var(--color-muted)] border-b border-white/5" style={{ fontFamily: "var(--font-inter)" }}>
+              <p className="px-4 py-2 text-[10px] uppercase tracking-wider text-[var(--color-muted)] border-b border-white/5" style={{ fontFamily: "var(--font-dm-sans)" }}>
                 Búsquedas recientes
               </p>
               {recentSearches.map((r, i) => (
@@ -254,7 +254,7 @@ export default function SearchBar({ value, onSearch }: SearchBarProps) {
                       ? "bg-[var(--color-gold)]/10 text-[var(--color-gold)]"
                       : "text-[var(--color-muted)] hover:text-white hover:bg-white/5"
                   }`}
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   <svg className="inline-block mr-2 opacity-40" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="12" r="10" />

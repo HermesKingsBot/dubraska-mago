@@ -60,7 +60,7 @@ function VariantColorSelector({
     <div className="mb-4">
       <span
         className="text-sm text-white block mb-2"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Color:{" "}
         {selectedColor
@@ -93,7 +93,7 @@ function VariantColorSelector({
               {hoveredColor === color && (
                 <span
                   className="absolute -bottom-7 left-1/2 -translate-x-1/2 px-2 py-0.5 text-[10px] bg-[#222] text-white rounded whitespace-nowrap z-10"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   {color.charAt(0).toUpperCase() + color.slice(1)}
                 </span>

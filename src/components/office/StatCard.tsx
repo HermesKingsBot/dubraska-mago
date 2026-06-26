@@ -40,7 +40,7 @@ function StatCard({ icon, value, label }: StatCardProps): React.JSX.Element {
       </div>
       <p
         className="text-3xl font-bold text-[var(--color-gold)]"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         {display}
       </p>

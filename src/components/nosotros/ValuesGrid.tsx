@@ -76,13 +76,13 @@ function ValuesGrid({ ref }: ValuesGridProps): React.JSX.Element {
         <div className="text-center mb-16 sm:mb-20">
           <p
             className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
+            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
           >
             Diferencia
           </p>
           <h2
             className="text-4xl sm:text-5xl md:text-6xl text-white tracking-[-2px]"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Lo que nos hace <em className="text-[var(--color-gold)]">únicos</em>
           </h2>
@@ -103,13 +103,13 @@ function ValuesGrid({ ref }: ValuesGridProps): React.JSX.Element {
               </div>
               <h3
                 className="text-base sm:text-lg text-white font-medium mb-2"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 600 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 600 }}
               >
                 {item.title}
               </h3>
               <p
                 className="text-sm text-[var(--color-muted)] leading-relaxed"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 {item.desc}
               </p>

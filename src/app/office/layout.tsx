@@ -1,12 +1,12 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { DM_Sans } from "next/font/google"
 import { OfficeAuthProvider } from "@/context/OfficeAuthContext"
 import OfficeLayout from "@/components/office/OfficeLayout"
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-inter",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-dm-sans",
   display: "swap",
 })
 
@@ -21,7 +21,7 @@ function OfficeRootLayout({
   children: React.ReactNode
 }): React.JSX.Element {
   return (
-    <html lang="es" className={inter.variable}>
+    <html lang="es" className={dmSans.variable}>
       <body className="bg-[var(--color-bg)] text-white antialiased">
         <OfficeAuthProvider>
           <OfficeLayout>{children}</OfficeLayout>

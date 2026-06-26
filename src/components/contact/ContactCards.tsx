@@ -90,25 +90,25 @@ function ContactCards({ ref }: ContactCardsProps): React.JSX.Element {
             </div>
             <h3
               className="text-lg font-medium text-white mb-1"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
+              style={{ fontFamily: "var(--font-playfair)" }}
             >
               {card.platform}
             </h3>
             <p
               className="text-sm text-[var(--color-gold)] mb-2"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {card.handle}
             </p>
             <p
               className="text-sm text-[var(--color-muted)] mb-4"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {card.description}
             </p>
             <span
               className="inline-flex items-center gap-1 text-xs font-medium text-white/60 transition-colors duration-300 group-hover:text-[var(--color-gold)]"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Contactar
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

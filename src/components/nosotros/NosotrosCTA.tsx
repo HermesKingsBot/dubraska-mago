@@ -73,7 +73,7 @@ function NosotrosCTA({ ref }: NosotrosCTAProps): React.JSX.Element {
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <h2
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] tracking-[-1px] mb-6"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           ¿Quieres ser parte de nuestra{" "}
           <span
@@ -90,7 +90,7 @@ function NosotrosCTA({ ref }: NosotrosCTAProps): React.JSX.Element {
         </h2>
         <p
           className="text-base sm:text-lg text-[var(--color-muted)] mb-10 max-w-xl mx-auto"
-          style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
         >
           Únete a nuestra comunidad y sé la primera en conocer nuevas colecciones,
           piezas exclusivas y ofertas especiales.
@@ -101,7 +101,7 @@ function NosotrosCTA({ ref }: NosotrosCTAProps): React.JSX.Element {
             href="/colecciones"
             className="group inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-semibold tracking-wide border-none cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] active:scale-95"
             style={{
-              fontFamily: "var(--font-inter)",
+              fontFamily: "var(--font-dm-sans)",
               background: "linear-gradient(135deg, var(--color-gold) 0%, #B8941F 100%)",
               color: "var(--color-bg)",
             }}
@@ -125,7 +125,7 @@ function NosotrosCTA({ ref }: NosotrosCTAProps): React.JSX.Element {
           <a
             href="/contacto"
             className="inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-medium tracking-wide border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300 cursor-pointer"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Contactar
           </a>
@@ -134,7 +134,7 @@ function NosotrosCTA({ ref }: NosotrosCTAProps): React.JSX.Element {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full px-10 py-4 text-sm font-medium tracking-wide border border-[var(--color-gold)] text-[var(--color-gold)] hover:bg-[var(--color-gold)] hover:text-[var(--color-bg)] transition-all duration-300 cursor-pointer"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" />

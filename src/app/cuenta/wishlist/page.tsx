@@ -29,7 +29,7 @@ export default function WishlistPage() {
     <div className="space-y-6">
       <h2
         className="text-2xl"
-        style={{ fontFamily: "var(--font-instrument-serif)" }}
+        style={{ fontFamily: "var(--font-playfair)" }}
       >
         Mi Wishlist
       </h2>

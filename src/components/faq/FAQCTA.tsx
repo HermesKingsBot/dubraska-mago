@@ -84,7 +84,7 @@ function FAQCTA({ ref }: FAQCTAProps): React.JSX.Element {
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <h2
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] tracking-[-1px] mb-6"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           ¿Tienes más{" "}
           <span
@@ -102,7 +102,7 @@ function FAQCTA({ ref }: FAQCTAProps): React.JSX.Element {
         </h2>
         <p
           className="text-base sm:text-lg text-[var(--color-muted)] mb-10 max-w-xl mx-auto"
-          style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
         >
           Escríbenos por WhatsApp y te respondemos al instante
         </p>
@@ -113,7 +113,7 @@ function FAQCTA({ ref }: FAQCTAProps): React.JSX.Element {
           rel="noopener noreferrer"
           className="group inline-flex items-center gap-3 rounded-full px-10 py-4 text-sm font-semibold tracking-wide border-none cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] active:scale-95"
           style={{
-            fontFamily: "var(--font-inter)",
+            fontFamily: "var(--font-dm-sans)",
             background:
               "linear-gradient(135deg, var(--color-gold) 0%, oklch(0.72 0.12 85) 100%)",
             color: "var(--color-bg)",

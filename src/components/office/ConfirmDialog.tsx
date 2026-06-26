@@ -24,7 +24,7 @@ function ConfirmDialog({
       <div className="bg-[#111] border border-[#333] rounded-xl p-6 max-w-sm w-full mx-4 shadow-2xl">
         <h3
           className="text-lg font-semibold mb-2"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {title}
         </h3>

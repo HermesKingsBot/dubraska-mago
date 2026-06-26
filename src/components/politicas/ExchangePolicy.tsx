@@ -24,7 +24,7 @@ function ExchangePolicy({ ref }: ExchangePolicyProps): React.JSX.Element {
             </div>
             <h2
               className="text-2xl sm:text-3xl md:text-4xl text-[var(--color-white)]"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
+              style={{ fontFamily: "var(--font-playfair)" }}
             >
               Política de Cambios
             </h2>
@@ -34,26 +34,26 @@ function ExchangePolicy({ ref }: ExchangePolicyProps): React.JSX.Element {
             <div>
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Cambio por defecto de fabricación
               </h3>
               <ul className="space-y-3">
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Si tu pieza llega con un defecto de fabricación (no por uso), <span className="text-[var(--color-white)] font-medium">te la cambiamos sin costo</span>.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Debes reportarlo dentro de las primeras <span className="text-[var(--color-white)] font-medium">48 horas</span> después de recibir el producto.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Envía fotos o video del defecto a nuestro WhatsApp.
                 </li>
@@ -63,32 +63,32 @@ function ExchangePolicy({ ref }: ExchangePolicyProps): React.JSX.Element {
             <div>
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Cambio por talla o modelo
               </h3>
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] mb-4"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Si necesitas una talla diferente o quieres cambiar por otro modelo:
               </p>
               <ul className="space-y-3">
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Tienes <span className="text-[var(--color-white)] font-medium">7 días</span> para solicitarlo.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   La pieza debe estar en condiciones originales.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   El cliente cubre el envío de retorno; <span className="text-[var(--color-white)] font-medium">nosotros cubrimos el envío de la nueva pieza</span>.
                 </li>

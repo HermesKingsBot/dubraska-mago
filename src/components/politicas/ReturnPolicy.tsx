@@ -21,7 +21,7 @@ function ReturnPolicy({ ref }: ReturnPolicyProps): React.JSX.Element {
             </div>
             <h2
               className="text-2xl sm:text-3xl md:text-4xl text-[var(--color-white)]"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
+              style={{ fontFamily: "var(--font-playfair)" }}
             >
               Política de Devoluciones
             </h2>
@@ -31,13 +31,13 @@ function ReturnPolicy({ ref }: ReturnPolicyProps): React.JSX.Element {
             <div>
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Plazo de Devolución
               </h3>
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Tienes <span className="text-[var(--color-white)] font-medium">7 días calendario</span> desde la recepción del producto para solicitar un cambio o devolución.
               </p>
@@ -46,20 +46,20 @@ function ReturnPolicy({ ref }: ReturnPolicyProps): React.JSX.Element {
             <div>
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Condiciones
               </h3>
               <ul className="space-y-3">
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   La pieza debe estar sin usar, sin marcas de uso, en su empaque original y con todas las etiquetas intactas.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   El producto debe venir con el mismo empaque de entrega (bolsa de terciopelo, caja, etc.).
                 </li>
@@ -69,26 +69,26 @@ function ReturnPolicy({ ref }: ReturnPolicyProps): React.JSX.Element {
             <div>
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 ¿Cómo solicitar una devolución?
               </h3>
               <ol className="space-y-3">
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-6 relative before:content-['1'] before:absolute before:left-0 before:top-0 before:w-5 before:h-5 before:rounded-full before:border before:border-[rgba(212,175,55,0.3)] before:bg-[var(--color-bg)] before:flex before:items-center before:justify-center before:text-[10px] before:text-[var(--color-gold)] before:font-medium"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Envía un mensaje a nuestro WhatsApp con tu número de pedido y el motivo.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-6 relative before:content-['2'] before:absolute before:left-0 before:top-0 before:w-5 before:h-5 before:rounded-full before:border before:border-[rgba(212,175,55,0.3)] before:bg-[var(--color-bg)] before:flex before:items-center before:justify-center before:text-[10px] before:text-[var(--color-gold)] before:font-medium"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Te enviaremos la dirección de envío y las instrucciones.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-6 relative before:content-['3'] before:absolute before:left-0 before:top-0 before:w-5 before:h-5 before:rounded-full before:border before:border-[rgba(212,175,55,0.3)] before:bg-[var(--color-bg)] before:flex before:items-center before:justify-center before:text-[10px] before:text-[var(--color-gold)] before:font-medium"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Una vez recibida la pieza y verificado su estado, procesamos el reembolso en 3-5 días hábiles.
                 </li>
@@ -98,20 +98,20 @@ function ReturnPolicy({ ref }: ReturnPolicyProps): React.JSX.Element {
             <div>
               <h3
                 className="text-lg sm:text-xl text-[var(--color-gold)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Costos de envío de devolución
               </h3>
               <ul className="space-y-3">
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Si la devolución es por defecto nuestro: <span className="text-[var(--color-white)] font-medium">nosotros cubrimos el envío</span>.
                 </li>
                 <li
                   className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-[var(--color-gold)]/50"
-                  style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                  style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
                 >
                   Si es por cambio de opinión: <span className="text-[var(--color-white)] font-medium">el cliente cubre el costo de envío de retorno</span>.
                 </li>

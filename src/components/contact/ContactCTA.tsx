@@ -77,7 +77,7 @@ function ContactCTA({ ref }: ContactCTAProps): React.JSX.Element {
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <h2
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.1] tracking-[-1px] mb-6"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           ¿Listo para lucir algo{" "}
           <span
@@ -94,7 +94,7 @@ function ContactCTA({ ref }: ContactCTAProps): React.JSX.Element {
         </h2>
         <p
           className="text-base sm:text-lg text-[var(--color-muted)] mb-10 max-w-xl mx-auto"
-          style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+          style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
         >
           Piezas limitadas, hechas para destacar. Escríbenos por WhatsApp y comienza tu pedido hoy.
         </p>
@@ -104,7 +104,7 @@ function ContactCTA({ ref }: ContactCTAProps): React.JSX.Element {
           rel="noopener noreferrer"
           className="group relative inline-flex items-center gap-2 rounded-full px-12 py-5 text-base font-semibold tracking-wide border-none cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_oklch(0.72 0.16 85)] active:scale-95"
           style={{
-            fontFamily: "var(--font-inter)",
+            fontFamily: "var(--font-dm-sans)",
             background: "linear-gradient(135deg, var(--color-gold) 0%, #B8941F 100%)",
             color: "var(--color-bg)",
           }}

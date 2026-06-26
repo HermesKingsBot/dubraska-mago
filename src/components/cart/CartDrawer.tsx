@@ -34,7 +34,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             <div className="flex items-center justify-between p-5 border-b border-white/5">
               <h2
                 className="text-lg font-semibold text-white"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Tu carrito ({cartItems.length})
               </h2>
@@ -57,7 +57,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   </svg>
                   <p
                     className="text-[var(--color-muted)] text-sm"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     Tu carrito está vacío
                   </p>
@@ -65,7 +65,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                     href="/colecciones"
                     onClick={onClose}
                     className="px-5 py-2 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-xs font-semibold hover:brightness-110 transition-all"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     Explorar catálogo
                   </Link>
@@ -90,20 +90,20 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       <div className="flex-1 min-w-0 flex flex-col justify-between">
                         <p
                           className="text-xs text-white truncate"
-                          style={{ fontFamily: "var(--font-inter)" }}
+                          style={{ fontFamily: "var(--font-dm-sans)" }}
                         >
                           {item.product?.name || "Producto"}
                         </p>
                         <div className="flex items-center justify-between">
                           <span
                             className="text-[10px] text-[var(--color-muted)]"
-                            style={{ fontFamily: "var(--font-inter)" }}
+                            style={{ fontFamily: "var(--font-dm-sans)" }}
                           >
                             x{item.quantity}
                           </span>
                           <span
                             className="text-xs text-[var(--color-gold)] font-semibold"
-                            style={{ fontFamily: "var(--font-inter)" }}
+                            style={{ fontFamily: "var(--font-dm-sans)" }}
                           >
                             ${(Number(item.product?.price || 0) * item.quantity).toFixed(2)}
                           </span>
@@ -118,12 +118,12 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
             {cartItems.length > 0 && (
               <div className="p-5 border-t border-white/5 flex flex-col gap-3">
                 <div className="flex justify-between text-sm">
-                  <span style={{ fontFamily: "var(--font-inter)" }} className="text-[var(--color-muted)]">
+                  <span style={{ fontFamily: "var(--font-dm-sans)" }} className="text-[var(--color-muted)]">
                     Total
                   </span>
                   <span
                     className="text-[var(--color-gold)] font-bold"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     ${cartTotal.toFixed(2)}
                   </span>
@@ -133,7 +133,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                     href="/carrito"
                     onClick={onClose}
                     className="flex-1 flex items-center justify-center py-3 rounded-lg border border-white/10 text-white text-xs font-medium hover:bg-white/5 transition-colors"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     Ver carrito
                   </Link>
@@ -141,7 +141,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                     href="/checkout"
                     onClick={onClose}
                     className="flex-1 flex items-center justify-center py-3 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-xs font-semibold hover:brightness-110 transition-all"
-                    style={{ fontFamily: "var(--font-inter)" }}
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     Checkout
                   </Link>

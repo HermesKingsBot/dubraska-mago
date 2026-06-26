@@ -35,7 +35,7 @@ function AuditStatsCards({ stats }: AuditStatsCardsProps): React.JSX.Element {
             <span className="text-xs text-[var(--color-muted)]">{card.label}</span>
             <span className="text-base">{card.icon}</span>
           </div>
-          <p className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-inter)" }}>
+          <p className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-dm-sans)" }}>
             {card.value}
           </p>
         </div>

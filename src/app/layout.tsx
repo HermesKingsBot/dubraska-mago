@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Instrument_Serif, Inter } from "next/font/google"
+import { Playfair_Display, DM_Sans } from "next/font/google"
 import "./globals.css"
 import NavigationBar from "@/components/NavigationBar"
 import Footer from "@/components/Footer"
@@ -11,17 +11,17 @@ import { CartProvider } from "@/context/CartContext"
 import { WishlistProvider } from "@/context/WishlistContext"
 import { getServerSettings } from "@/lib/server-settings"
 
-const instrumentSerif = Instrument_Serif({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-instrument-serif",
+  weight: ["400", "700"],
+  variable: "--font-playfair",
   display: "swap",
 })
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-inter",
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-dm-sans",
   display: "swap",
 })
 
@@ -122,7 +122,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={`${instrumentSerif.variable} ${inter.variable}`}>
+    <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
       <body className="bg-[var(--color-bg)] text-white antialiased">
         <AuthProvider>
           <CustomerAuthProvider>

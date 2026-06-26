@@ -29,7 +29,7 @@ function HygienePolicy({ ref }: HygienePolicyProps): React.JSX.Element {
             </div>
             <h2
               className="text-2xl sm:text-3xl md:text-4xl text-[var(--color-white)]"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
+              style={{ fontFamily: "var(--font-playfair)" }}
             >
               Higiene — Aclaración Importante
             </h2>
@@ -39,19 +39,19 @@ function HygienePolicy({ ref }: HygienePolicyProps): React.JSX.Element {
             <div>
               <h3
                 className="text-lg sm:text-xl text-[var(--color-rose)] mb-4"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Sobre cambios por higiene (Aretes, Zarcillos y Piercings)
               </h3>
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Por motivos de <span className="text-[var(--color-white)] font-medium">higiene y salud</span>, <span className="text-[var(--color-rose)] font-medium">no aceptamos devoluciones ni cambios de aretes, zarcillos, piercings o cualquier pieza que se introduzca en la oreja o cuerpo</span>.
               </p>
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9] mt-3"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Una vez abiertos o usados, estos artículos no pueden ser revendidos ni reutilizados por razones sanitarias.
               </p>
@@ -60,7 +60,7 @@ function HygienePolicy({ ref }: HygienePolicyProps): React.JSX.Element {
             <div className="rounded-xl border border-[rgba(212,175,55,0.15)] bg-[var(--color-bg)]/80 p-6">
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 <span className="text-[var(--color-gold)] font-medium">Excepción:</span> Si la pieza llega defectuosa de fábrica (cierre roto, pieza torcida, etc.), sí procede el cambio sin costo. Debe reportarse en las primeras 48 horas con fotos.
               </p>
@@ -69,13 +69,13 @@ function HygienePolicy({ ref }: HygienePolicyProps): React.JSX.Element {
             <div className="rounded-xl border border-[rgba(212,175,55,0.1)] bg-[var(--color-bg)] p-6">
               <h4
                 className="text-base sm:text-lg text-[var(--color-gold)] mb-3"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Recomendación
               </h4>
               <p
                 className="text-sm sm:text-base text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Revisa bien la pieza al recibirla. Si tienes alguna duda sobre el modelo o tamaño, contáctanos antes de usarla.
               </p>

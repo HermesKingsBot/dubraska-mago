@@ -104,7 +104,7 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="text-center">
-          <h1 className="text-2xl mb-4" style={{ fontFamily: "var(--font-instrument-serif)" }}>Tu carrito está vacío</h1>
+          <h1 className="text-2xl mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Tu carrito está vacío</h1>
           <button onClick={() => router.push("/tienda")} className="px-6 py-3 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] font-semibold text-sm hover:opacity-90">Ir a la tienda</button>
         </div>
       </div>
@@ -114,7 +114,7 @@ export default function CheckoutPage() {
   return (
     <div className="min-h-screen py-10 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl text-center mb-8" style={{ fontFamily: "var(--font-instrument-serif)" }}>Checkout</h1>
+        <h1 className="text-3xl text-center mb-8" style={{ fontFamily: "var(--font-playfair)" }}>Checkout</h1>
         <CheckoutProgress currentStep={step} />
         <AnimatePresence mode="wait">
           {step === 1 && (
@@ -127,7 +127,7 @@ export default function CheckoutPage() {
             <motion.div key="s2" {...animProps} className="space-y-6">
               {addresses.length > 0 && (
                 <div>
-                  <h2 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-instrument-serif)" }}>Direcciones guardadas</h2>
+                  <h2 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Direcciones guardadas</h2>
                   <div className="space-y-2 mb-6">
                     {addresses.map(a => (
                       <button key={a.id} type="button" onClick={() => handleSelectAddr(a.id)} className="w-full text-left p-4 rounded-lg text-sm transition-colors" style={{ backgroundColor: "var(--color-dark-card)", border: selectedAddr === a.id ? "2px solid var(--color-gold)" : "2px solid transparent" }}>
@@ -145,7 +145,7 @@ export default function CheckoutPage() {
           {step === 3 && (
             <motion.div key="s3" {...animProps} className="space-y-6">
               <div>
-                <h2 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-instrument-serif)" }}>Método de pago</h2>
+                <h2 className="text-lg font-semibold mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Método de pago</h2>
                 <PaymentMethodSelector selected={payment} onSelect={setPayment} />
               </div>
               <OrderSummary items={cartItems} subtotal={cartTotal} shippingCost={shipCost} />
@@ -164,7 +164,7 @@ export default function CheckoutPage() {
               <motion.div className="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ backgroundColor: "var(--color-gold)" }} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 200, damping: 15 }}>
                 <span className="text-3xl">✓</span>
               </motion.div>
-              <h2 className="text-2xl mb-2" style={{ fontFamily: "var(--font-instrument-serif)" }}>¡Pedido creado con éxito!</h2>
+              <h2 className="text-2xl mb-2" style={{ fontFamily: "var(--font-playfair)" }}>¡Pedido creado con éxito!</h2>
               <p className="text-[var(--color-muted)] mb-4">Número de pedido: <span className="text-[var(--color-gold)] font-mono">{orderNum}</span></p>
               <p className="text-[var(--color-muted)] text-sm mb-8">Sube tu comprobante de pago para confirmar tu pedido.</p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">

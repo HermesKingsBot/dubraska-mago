@@ -52,7 +52,7 @@ function ErrorSearch(): React.JSX.Element {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Buscar joyas, categorías..."
           className="w-full pl-12 pr-4 py-4 rounded-2xl bg-[var(--color-dark-accent)] border border-white/10 text-white text-base placeholder:text-[var(--color-muted)] focus:border-[var(--color-gold)] focus:outline-none transition-colors duration-300"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
           aria-label="Buscar productos"
         />
       </div>
@@ -61,7 +61,7 @@ function ErrorSearch(): React.JSX.Element {
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.98 }}
         className="mt-4 w-full rounded-full px-8 py-3.5 text-sm font-semibold tracking-wide border-none cursor-pointer bg-[var(--color-gold)] text-[var(--color-bg)] transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(212,175,55,0.35)]"
-        style={{ fontFamily: "var(--font-inter)" }}
+        style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         Buscar
       </motion.button>

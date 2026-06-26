@@ -250,13 +250,13 @@ export default function CatalogClient({
       <div className="mb-10">
         <h1
           className="text-3xl sm:text-4xl md:text-5xl text-white mb-3"
-          style={{ fontFamily: "var(--font-instrument-serif)" }}
+          style={{ fontFamily: "var(--font-playfair)" }}
         >
           Nuestras <em className="text-[var(--color-gold)]">Colecciones</em>
         </h1>
         <p
           className="text-[var(--color-muted)] text-sm sm:text-base"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {loading ? "Buscando..." : `${totalProducts} ${totalProducts === 1 ? "producto" : "productos"} disponibles`}
         </p>
@@ -271,7 +271,7 @@ export default function CatalogClient({
           <button
             onClick={() => setDrawerOpen(true)}
             className="relative flex items-center gap-2 px-4 py-2.5 rounded-lg border border-white/10 bg-white/5 text-white text-sm hover:border-[var(--color-gold)]/50 transition-colors"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M2 4h12M4 8h8M6 12h4" />

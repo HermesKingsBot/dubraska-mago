@@ -103,7 +103,7 @@ function ImportModal({ open, entity, onClose, onImportComplete }: ImportModalPro
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">
-          <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
+          <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-dm-sans)" }}>
             Importar {ENTITY_LABELS[entity]}
           </h3>
           <button onClick={handleClose} className="text-[var(--color-muted)] hover:text-white transition-colors">

@@ -154,7 +154,7 @@ export default function FAQItem({
         <button
           onClick={onToggle}
           className="flex-1 flex items-center justify-between gap-4 text-left cursor-pointer group"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           <span className="text-base sm:text-lg text-white group-hover:text-[var(--color-gold)] transition-colors duration-300">
             {item.question}
@@ -184,14 +184,14 @@ export default function FAQItem({
         <div ref={contentRef} className="pb-6 pl-0 sm:pl-2">
           <p
             className="text-sm sm:text-base text-[var(--color-muted)] leading-relaxed max-w-3xl"
-            style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+            style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
           >
             {item.answer}
           </p>
           <div className="flex items-center gap-4 mt-5">
             <span
               className="text-[11px] text-[var(--color-muted)]/60 uppercase tracking-wider"
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               ¿Fue útil?
             </span>
@@ -202,7 +202,7 @@ export default function FAQItem({
                   ? "bg-[rgba(212,175,55,0.15)] border-[rgba(212,175,55,0.3)] text-[var(--color-gold)]"
                   : "bg-transparent border-[rgba(255,255,255,0.06)] text-[var(--color-muted)] hover:border-[rgba(212,175,55,0.2)] hover:text-[var(--color-gold)]"
               }`}
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               <ThumbsUpIcon active={feedbackType === "up"} />
               Sí
@@ -214,7 +214,7 @@ export default function FAQItem({
                   ? "bg-[rgba(138,138,138,0.15)] border-[rgba(138,138,138,0.3)] text-[var(--color-muted)]"
                   : "bg-transparent border-[rgba(255,255,255,0.06)] text-[var(--color-muted)] hover:border-[rgba(138,138,138,0.2)]"
               }`}
-              style={{ fontFamily: "var(--font-inter)" }}
+              style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               <ThumbsDownIcon active={feedbackType === "down"} />
               No me ayudó

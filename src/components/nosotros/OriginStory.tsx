@@ -12,13 +12,13 @@ function OriginStory({ ref }: OriginStoryProps): React.JSX.Element {
           <div ref={ref} className="lg:col-span-7 flex flex-col justify-center opacity-0">
             <p
               className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-6"
-              style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
+              style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 500 }}
             >
               El origen
             </p>
             <h2
               className="text-3xl sm:text-4xl md:text-5xl text-white leading-[1.15] tracking-[-1px] mb-8"
-              style={{ fontFamily: "var(--font-instrument-serif)" }}
+              style={{ fontFamily: "var(--font-playfair)" }}
             >
               Todo empezó con una{" "}
               <em className="text-[var(--color-gold)]">visión</em>
@@ -27,7 +27,7 @@ function OriginStory({ ref }: OriginStoryProps): React.JSX.Element {
             <div className="space-y-6">
               <p
                 className="text-base sm:text-lg text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Dubraska Mago nació en Venezuela, un país donde la creatividad y la
                 resiliencia son parte de la identidad. Desde joven, Dubraska descubrió
@@ -37,7 +37,7 @@ function OriginStory({ ref }: OriginStoryProps): React.JSX.Element {
 
               <p
                 className="text-base sm:text-lg text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 La marca nació con un propósito claro: crear joyería de{" "}
                 <span className="text-white font-medium">calidad premium</span> que
@@ -47,7 +47,7 @@ function OriginStory({ ref }: OriginStoryProps): React.JSX.Element {
 
               <p
                 className="text-base sm:text-lg text-[#B0B0B0] leading-[1.9]"
-                style={{ fontFamily: "var(--font-inter)", fontWeight: 300 }}
+                style={{ fontFamily: "var(--font-dm-sans)", fontWeight: 300 }}
               >
                 Hoy, Dubraska Mago es más que una marca de joyería. Es una{" "}
                 <span className="text-[var(--color-gold)] font-medium">extensión de tu
@@ -60,7 +60,7 @@ function OriginStory({ ref }: OriginStoryProps): React.JSX.Element {
               <div className="w-12 h-[1px] bg-[var(--color-gold)]/40" />
               <p
                 className="text-[var(--color-gold)] text-lg italic"
-                style={{ fontFamily: "var(--font-instrument-serif)" }}
+                style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Con cariño, Dubraska ✦
               </p>
@@ -88,7 +88,7 @@ function OriginStoryImage(): React.JSX.Element {
           </div>
           <p
             className="text-[var(--color-gold)]/30 text-sm tracking-[3px] uppercase"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Imagen de la marca
           </p>

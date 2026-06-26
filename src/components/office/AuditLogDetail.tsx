@@ -61,7 +61,7 @@ function AuditLogDetail({ log, onClose }: AuditLogDetailProps): React.JSX.Elemen
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
       <div className="relative w-full max-w-lg bg-[#0a0a0a] border-l border-[#222] overflow-y-auto">
         <div className="sticky top-0 bg-[#0a0a0a] border-b border-[#222] px-6 py-4 flex items-center justify-between">
-          <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
+          <h3 className="text-lg font-semibold" style={{ fontFamily: "var(--font-dm-sans)" }}>
             Detalle del registro
           </h3>
           <button

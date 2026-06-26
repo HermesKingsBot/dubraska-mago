@@ -103,7 +103,7 @@ export default function AddressesPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl" style={{ fontFamily: "var(--font-instrument-serif)" }}>Direcciones</h2>
+        <h2 className="text-2xl" style={{ fontFamily: "var(--font-playfair)" }}>Direcciones</h2>
         {!showForm && (
           <button onClick={() => { setForm(EMPTY_FORM); setEditingId(null); setShowForm(true) }}
             className="bg-[var(--color-gold)] text-black px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity">
@@ -114,7 +114,7 @@ export default function AddressesPage() {
 
       {showForm && (
         <form onSubmit={handleSubmit} className="bg-[var(--color-dark-card)] border border-white/5 rounded-xl p-6 space-y-4">
-          <h3 className="text-lg" style={{ fontFamily: "var(--font-instrument-serif)" }}>
+          <h3 className="text-lg" style={{ fontFamily: "var(--font-playfair)" }}>
             {editingId ? "Editar Dirección" : "Nueva Dirección"}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

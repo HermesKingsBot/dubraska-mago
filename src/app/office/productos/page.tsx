@@ -80,7 +80,7 @@ function ProductosPage(): React.JSX.Element {
     <AuthGuard>
       <div className="max-w-6xl mx-auto space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <h2 className="text-xl font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
+          <h2 className="text-xl font-semibold" style={{ fontFamily: "var(--font-dm-sans)" }}>
             Productos ({loaded ? filtered.length : "..."})
           </h2>
           <div className="flex items-center gap-4">
@@ -163,7 +163,7 @@ function ProductosPage(): React.JSX.Element {
               <path d="m21 21-4.35-4.35" />
               <path d="M8 11h6" />
             </svg>
-            <p className="text-[var(--color-muted)] text-sm" style={{ fontFamily: "var(--font-inter)" }}>
+            <p className="text-[var(--color-muted)] text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
               No se encontraron productos con esos filtros.
             </p>
           </div>

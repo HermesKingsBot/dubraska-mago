@@ -24,7 +24,7 @@ function OfficeTopBar({ title, onToggleSidebar }: OfficeTopBarProps): React.JSX.
         </button>
         <h1
           className="text-lg font-semibold"
-          style={{ fontFamily: "var(--font-inter)" }}
+          style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {title}
         </h1>

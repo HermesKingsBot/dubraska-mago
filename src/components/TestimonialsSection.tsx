@@ -92,19 +92,19 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
         <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
             className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-4"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Nuestras clientas hablan
           </p>
           <h2
             className="text-4xl sm:text-5xl md:text-6xl text-white tracking-[-1px]"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             Clientes felices
           </h2>
           <p
             className="text-base sm:text-lg text-[var(--color-muted)] mt-4 max-w-xl mx-auto"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Historias de mujeres que brillan con sus piezas Dubraska
           </p>
@@ -128,7 +128,7 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
 
                 <p
                   className="text-sm text-[oklch(0.76_0_0)] leading-[1.8] italic"
-                  style={{ fontFamily: "var(--font-inter)" }}
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   &ldquo;{t.text}&rdquo;
                 </p>
@@ -137,7 +137,7 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
                   <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[var(--color-gold)]/20 to-[var(--color-gold)]/5 flex items-center justify-center">
                     <span
                       className="text-xs text-[var(--color-gold)]/60 font-medium"
-                      style={{ fontFamily: "var(--font-inter)" }}
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {t.name.charAt(0)}
                     </span>
@@ -145,7 +145,7 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
                   <div>
                     <p
                       className="text-sm text-white font-medium"
-                      style={{ fontFamily: "var(--font-inter)" }}
+                      style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {t.name}
                     </p>
@@ -165,7 +165,7 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
         >
           <p
             className="text-xl sm:text-2xl text-white mb-6"
-            style={{ fontFamily: "var(--font-instrument-serif)" }}
+            style={{ fontFamily: "var(--font-playfair)" }}
           >
             ¿Lista para ser nuestra próxima clienta feliz?{" "}
             <span className="text-[var(--color-gold)]">✨</span>
@@ -173,7 +173,7 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
           <Link
             href="/colecciones"
             className="inline-flex items-center gap-3 rounded-full px-10 py-4 text-base font-semibold bg-[var(--color-gold)] text-[var(--color-bg)] hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-300"
-            style={{ fontFamily: "var(--font-inter)" }}
+            style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Ver catálogo completo
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

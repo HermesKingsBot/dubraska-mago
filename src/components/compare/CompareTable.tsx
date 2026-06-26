@@ -26,7 +26,7 @@ const ROWS: Row[] = [
     label: "Nombre",
     key: "name",
     render: (p) => (
-      <span className="text-white text-sm font-medium" style={{ fontFamily: "var(--font-inter)" }}>
+      <span className="text-white text-sm font-medium" style={{ fontFamily: "var(--font-dm-sans)" }}>
         {p.name}
       </span>
     ),
@@ -35,7 +35,7 @@ const ROWS: Row[] = [
     label: "Precio",
     key: "price",
     render: (p) => (
-      <span className="text-[var(--color-gold)] text-lg font-semibold" style={{ fontFamily: "var(--font-inter)" }}>
+      <span className="text-[var(--color-gold)] text-lg font-semibold" style={{ fontFamily: "var(--font-dm-sans)" }}>
         ${(p.price ?? 0).toFixed(2)}
       </span>
     ),
@@ -44,7 +44,7 @@ const ROWS: Row[] = [
     label: "Material",
     key: "material",
     render: (p) => (
-      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
         {p.material}
       </span>
     ),
@@ -53,7 +53,7 @@ const ROWS: Row[] = [
     label: "Color",
     key: "color",
     render: (p) => (
-      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
         {p.color ? p.color.charAt(0).toUpperCase() + p.color.slice(1) : "—"}
       </span>
     ),
@@ -62,7 +62,7 @@ const ROWS: Row[] = [
     label: "Dimensiones",
     key: "dimensions",
     render: (p) => (
-      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
         {(p as any).dimensions || "—"}
       </span>
     ),
@@ -71,7 +71,7 @@ const ROWS: Row[] = [
     label: "Peso",
     key: "weight",
     render: (p) => (
-      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
         {p.weight || "—"}
       </span>
     ),
@@ -80,7 +80,7 @@ const ROWS: Row[] = [
     label: "Categoría",
     key: "category",
     render: (p) => (
-      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+      <span className="text-sm text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
         {p.category}
       </span>
     ),
@@ -89,7 +89,7 @@ const ROWS: Row[] = [
     label: "Stock",
     key: "stock",
     render: (p) => (
-      <span className={`text-sm ${p.inStock ? "text-green-400" : "text-red-400"}`} style={{ fontFamily: "var(--font-inter)" }}>
+      <span className={`text-sm ${p.inStock ? "text-green-400" : "text-red-400"}`} style={{ fontFamily: "var(--font-dm-sans)" }}>
         {p.inStock ? `Disponible (${p.stock})` : "Agotado"}
       </span>
     ),
@@ -98,7 +98,7 @@ const ROWS: Row[] = [
     label: "SKU",
     key: "sku",
     render: (p) => (
-      <span className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-inter)" }}>
+      <span className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
         {p.sku}
       </span>
     ),
@@ -127,7 +127,7 @@ export default function CompareTable({ products }: CompareTableProps) {
               <div
                 key={`label-${row.key}`}
                 className="flex items-center p-3 text-xs text-[var(--color-muted)] font-medium sticky left-0 bg-[var(--color-bg)] z-10"
-                style={{ fontFamily: "var(--font-inter)" }}
+                style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 {row.label}
               </div>

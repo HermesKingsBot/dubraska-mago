@@ -24,7 +24,7 @@ function SoftDeleteConfirmDialog({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onCancel}>
       <div className="bg-[#111] border border-[#333] rounded-xl p-6 max-w-sm w-full mx-4 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-        <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: "var(--font-inter)" }}>
+        <h3 className="text-lg font-semibold mb-2" style={{ fontFamily: "var(--font-dm-sans)" }}>
           ¿Eliminar &ldquo;{name}&rdquo;?
         </h3>
         <p className="text-sm text-[var(--color-muted)] mb-2">
