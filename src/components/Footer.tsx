@@ -1,9 +1,10 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { motion } from "motion/react"
 import { useSettingsContext } from "@/context/SettingsContext"
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -42,6 +43,7 @@ const SOCIAL_SVG: Record<string, { path: string; hoverClass: string }> = {
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null)
+  const [showTop, setShowTop] = useState(false)
   const { getSetting, getActiveSocials } = useSettingsContext()
 
   useGSAP(
@@ -59,7 +61,7 @@ export default function Footer() {
               opacity: 1,
               duration: 0.5,
               stagger: 0.08,
-              ease: "power2.out",
+              ease: "power3.out",
               scrollTrigger: {
                 trigger: footerRef.current,
                 start: "top 90%",
@@ -79,6 +81,12 @@ export default function Footer() {
     },
     { scope: footerRef }
   )
+
+  useGSAP(() => {
+    const onScroll = () => setShowTop(window.scrollY > 600)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   const companyName = getSetting("company_name", "Dubraska Mago")
   const slogan = getSetting("company_description")
@@ -108,32 +116,36 @@ export default function Footer() {
                 const svgData = SOCIAL_SVG[social.platform]
                 if (!svgData) return null
                 return (
-                  <a
+                  <motion.a
                     key={social.id}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
+                    whileHover={{ scale: 1.15, rotate: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
                     className={`w-9 h-9 rounded-full border border-[rgba(255,255,255,0.08)] flex items-center justify-center transition-all duration-300 ${svgData.hoverClass}`}
                     aria-label={social.platform}
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-muted)">
                       <path d={svgData.path} />
                     </svg>
-                  </a>
+                  </motion.a>
                 )
               })}
               {activeSocials.length === 0 && phone && (
-                <a
+                <motion.a
                   href={`https://wa.me/${phone}`}
                   target="_blank"
                   rel="noopener noreferrer"
+                  whileHover={{ scale: 1.15, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
                   className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.08)] flex items-center justify-center hover:border-[oklch(0.78_0.18_155)] hover:bg-[oklch(0.78_0.18_155)]/10 transition-all duration-300"
                   aria-label="WhatsApp"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-muted)">
                     <path d={SOCIAL_SVG.WhatsApp.path} />
                   </svg>
-                </a>
+                </motion.a>
               )}
             </div>
           </div>
@@ -150,7 +162,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300"
+                    className="group text-sm text-[var(--color-muted)] hover:text-white transition-all duration-300 inline-flex items-center hover:translate-x-1"
                     style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     {link.label}
@@ -172,7 +184,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300"
+                    className="group text-sm text-[var(--color-muted)] hover:text-white transition-all duration-300 inline-flex items-center hover:translate-x-1"
                     style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     {link.label}
@@ -202,7 +214,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="tu@email.com"
-                className="w-full px-4 py-2.5 rounded-lg bg-[var(--color-dark-accent)] border border-[rgba(255,255,255,0.08)] text-white text-sm placeholder:text-[oklch(0.45_0_0)] focus:border-[var(--color-gold)] focus:outline-none transition-colors duration-300"
+                className="w-full px-4 py-2.5 rounded-lg bg-[var(--color-dark-accent)] border border-[rgba(255,255,255,0.08)] text-white text-sm placeholder:text-[oklch(0.45_0_0)] focus:border-[var(--color-gold)] focus:outline-none focus:shadow-[0_0_0_2px_rgba(212,175,55,0.2)] transition-all duration-300"
                 style={{ fontFamily: "var(--font-dm-sans)" }}
               />
               <button
@@ -247,6 +259,30 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      <motion.button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: showTop ? 1 : 0, y: showTop ? 0 : 20 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        className="fixed bottom-6 left-6 z-50 w-10 h-10 rounded-full bg-[var(--color-gold)] text-[var(--color-bg)] flex items-center justify-center shadow-lg hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-shadow"
+        aria-label="Volver arriba"
+      >
+        <motion.svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          animate={showTop ? { y: [0, -2, 0] } : {}}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <path d="M12 19V5M5 12l7-7 7 7" />
+        </motion.svg>
+      </motion.button>
     </footer>
   )
 }

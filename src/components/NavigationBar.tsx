@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
+import { motion, AnimatePresence } from "motion/react"
 import products from "../../data/products.json"
 import { CartButton, WishlistLink } from "@/components/CartIcon"
 import UserMenu from "@/components/UserMenu"
@@ -26,6 +27,19 @@ const NAV_ITEMS = [
   { label: "Preguntas Frecuentes", href: "/preguntas-frecuentes" },
   { label: "Contacto", href: "/contacto" },
 ]
+
+function NavLink({ item }: { item: typeof NAV_ITEMS[number] }) {
+  return (
+    <a
+      href={item.href}
+      className="group relative text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300 py-1"
+      style={{ fontFamily: "var(--font-dm-sans)" }}
+    >
+      {item.label}
+      <span className="absolute bottom-0 left-0 w-0 h-px bg-[var(--color-gold)] group-hover:w-full transition-all duration-300 ease-out" />
+    </a>
+  )
+}
 
 export default function NavigationBar() {
   const [scrolled, setScrolled] = useState(false)
@@ -61,24 +75,19 @@ export default function NavigationBar() {
         }`}
       >
         <div className="flex justify-between items-center px-6 py-5 sm:px-8 sm:py-6 max-w-7xl mx-auto">
-          <a
+          <motion.a
             href="/"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400, damping: 20 }}
             className="text-2xl md:text-3xl tracking-tight text-[var(--color-gold)] hover:text-[oklch(0.84_0.12_85)] transition-colors duration-300"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
             {companyName.toUpperCase()}<sup className="text-xs">®</sup>
-          </a>
+          </motion.a>
 
           <nav className="hidden md:flex items-center gap-8">
             {NAV_ITEMS.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
-              >
-                {item.label}
-              </a>
+              <NavLink key={item.label} item={item} />
             ))}
           </nav>
 
@@ -104,13 +113,24 @@ export default function NavigationBar() {
               <UserMenu />
             </div>
 
-            <a
+            <motion.a
               href="/colecciones"
-              className="hidden sm:inline-flex rounded-full px-6 py-2.5 text-sm font-medium bg-[var(--color-gold)] text-[var(--color-bg)] cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="hidden sm:inline-flex rounded-full px-6 py-2.5 text-sm font-medium bg-[var(--color-gold)] text-[var(--color-bg)] cursor-pointer transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] overflow-hidden relative"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
-              Catálogo
-            </a>
+              <span className="relative z-10">Catálogo</span>
+              <motion.span
+                className="absolute inset-0 z-20"
+                initial={{ x: "-100%", opacity: 0 }}
+                whileHover={{ x: "100%", opacity: 0.3 }}
+                transition={{ duration: 0.6 }}
+                style={{
+                  background: "linear-gradient(90deg, transparent, white, transparent)",
+                }}
+              />
+            </motion.a>
 
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -130,39 +150,47 @@ export default function NavigationBar() {
           </div>
         </div>
 
-        {mobileOpen && (
-          <div className="md:hidden border-t border-white/5 bg-[var(--color-bg)]/98 backdrop-blur-md">
-            <nav className="flex flex-col px-6 py-4 gap-1">
-              {NAV_ITEMS.map((item) => (
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="md:hidden border-t border-white/5 bg-[var(--color-bg)]/98 backdrop-blur-md"
+            >
+              <nav className="flex flex-col px-6 py-4 gap-1">
+                {NAV_ITEMS.map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="py-3 text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300"
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+                <div className="flex items-center gap-3 py-3">
+                  <CompareLink />
+                  <CartButton />
+                  <WishlistLink />
+                  <a href="/login" className="ml-auto text-sm text-[var(--color-gold)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                    Iniciar Sesión
+                  </a>
+                </div>
                 <a
-                  key={item.label}
-                  href={item.href}
-                  className="py-3 text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300"
+                  href="/colecciones"
+                  className="mt-3 text-center rounded-full px-6 py-3 text-sm font-medium bg-[var(--color-gold)] text-[var(--color-bg)]"
                   style={{ fontFamily: "var(--font-dm-sans)" }}
                   onClick={() => setMobileOpen(false)}
                 >
-                  {item.label}
+                  Catálogo
                 </a>
-              ))}
-              <div className="flex items-center gap-3 py-3">
-                <CompareLink />
-                <CartButton />
-                <WishlistLink />
-                <a href="/login" className="ml-auto text-sm text-[var(--color-gold)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                  Iniciar Sesión
-                </a>
-              </div>
-              <a
-                href="/colecciones"
-                className="mt-3 text-center rounded-full px-6 py-3 text-sm font-medium bg-[var(--color-gold)] text-[var(--color-bg)]"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
-                onClick={() => setMobileOpen(false)}
-              >
-                Catálogo
-              </a>
-            </nav>
-          </div>
-        )}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       <SearchOverlay isOpen={searchOpen} onClose={closeSearch} />

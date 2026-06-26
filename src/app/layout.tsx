@@ -3,6 +3,9 @@ import { Playfair_Display, DM_Sans } from "next/font/google"
 import "./globals.css"
 import NavigationBar from "@/components/NavigationBar"
 import Footer from "@/components/Footer"
+import CustomCursor from "@/components/CustomCursor"
+import PageTransition from "@/components/PageTransition"
+import ToastContainer from "@/components/ToastContainer"
 import { AuthProvider } from "@/context/AuthContext"
 import { CustomerAuthProvider } from "@/context/CustomerAuthContext"
 import { SettingsProvider } from "@/context/SettingsContext"
@@ -124,21 +127,25 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
       <body className="bg-[var(--color-bg)] text-white antialiased">
+        <CustomCursor />
         <AuthProvider>
           <CustomerAuthProvider>
             <CartProvider>
               <WishlistProvider>
                 <SettingsProvider>
                   <CompareProvider>
-                    <NavigationBar />
-                    <main>{children}</main>
-                    <Footer />
+                    <PageTransition>
+                      <NavigationBar />
+                      <main>{children}</main>
+                      <Footer />
+                    </PageTransition>
                   </CompareProvider>
                 </SettingsProvider>
               </WishlistProvider>
             </CartProvider>
           </CustomerAuthProvider>
         </AuthProvider>
+        <ToastContainer />
       </body>
     </html>
   )

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useCallback } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { motion } from "motion/react"
@@ -23,6 +23,7 @@ const COLOR_MAP: Record<string, string> = {
 
 export default function ProductCard({ product, index }: ProductCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
+  const [tiltStyle, setTiltStyle] = useState({ rotateX: 0, rotateY: 0 })
 
   useGSAP(() => {
     if (!cardRef.current) return
@@ -45,6 +46,22 @@ export default function ProductCard({ product, index }: ProductCardProps) {
     )
   }, { scope: cardRef })
 
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const centerX = rect.width / 2
+    const centerY = rect.height / 2
+    const rotateX = ((y - centerY) / centerY) * -8
+    const rotateY = ((x - centerX) / centerX) * 8
+    setTiltStyle({ rotateX, rotateY })
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    setTiltStyle({ rotateX: 0, rotateY: 0 })
+  }, [])
+
   const discount = product.oldPrice && product.price
     ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100)
     : null
@@ -54,20 +71,32 @@ export default function ProductCard({ product, index }: ProductCardProps) {
   return (
     <motion.div
       ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{
+        rotateX: tiltStyle.rotateX,
+        rotateY: tiltStyle.rotateY,
+        y: 0,
+      }}
       whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="group relative flex flex-col rounded-xl overflow-hidden bg-[var(--color-bg)] border border-white/5 hover:border-[var(--color-gold)]/30 transition-colors duration-300"
+      style={{ perspective: 600, transformStyle: "preserve-3d", willChange: "transform" }}
     >
       <div className="relative aspect-square overflow-hidden bg-[var(--color-dark-card)]">
-        <img
+        <motion.img
           src={product.image}
           alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover"
+          whileHover={{ scale: 1.08 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
           loading="lazy"
         />
 
         {product.badge && (
-          <span
+          <motion.span
+            animate={{ scale: [1, 1.03, 1] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className={`absolute top-3 left-3 px-2.5 py-1 text-[10px] font-semibold tracking-wider rounded ${
               product.badge === "OFERTA"
                 ? "bg-red-500/90 text-white"
@@ -80,7 +109,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
             style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {product.badge}
-          </span>
+          </motion.span>
         )}
 
         {discount && (
@@ -98,6 +127,19 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        <motion.div
+          className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100"
+          initial={false}
+          transition={{ duration: 0.3 }}
+        >
+          <span
+            className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-white/10 backdrop-blur-sm text-white text-xs font-medium border border-white/10 hover:bg-white/20 transition-colors"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
+          >
+            Ver detalles
+          </span>
+        </motion.div>
       </div>
 
       <div className="flex flex-col flex-1 p-4">
@@ -115,7 +157,7 @@ export default function ProductCard({ product, index }: ProductCardProps) {
         </div>
 
         <h3
-          className="text-white text-sm font-medium mb-1 line-clamp-1"
+          className="text-white text-sm font-medium mb-1 line-clamp-1 group-hover:text-[var(--color-gold)] transition-colors duration-300"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           {product.name}

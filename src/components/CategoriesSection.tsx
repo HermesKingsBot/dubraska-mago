@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { motion } from "motion/react"
 import Link from "next/link"
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
@@ -163,11 +164,13 @@ export default function CategoriesSection({ categories }: { categories: Category
                 backgroundSize: "24px 24px",
               }} />
 
-              <div className="absolute inset-0 flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="transform group-hover:scale-110 transition-transform duration-500">
-                  {getIcon(cat.slug)}
-                </div>
-              </div>
+              <motion.div
+                className="absolute inset-0 flex items-center justify-center opacity-60 group-hover:opacity-100"
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                {getIcon(cat.slug)}
+              </motion.div>
 
               <div className="absolute inset-0 rounded-2xl border border-[rgba(212,175,55,0.08)] group-hover:border-[rgba(212,175,55,0.25)] transition-colors duration-500" />
 
@@ -187,12 +190,16 @@ export default function CategoriesSection({ categories }: { categories: Category
                       {cat._count.products} pieza{cat._count.products !== 1 ? "s" : ""}
                     </p>
                   </div>
-                  <div className="w-8 h-8 rounded-full border border-[rgba(212,175,55,0.2)] flex items-center justify-center group-hover:bg-[var(--color-gold)] group-hover:border-[var(--color-gold)] transition-all duration-300">
+                  <motion.div
+                    className="w-8 h-8 rounded-full border border-[rgba(212,175,55,0.2)] flex items-center justify-center group-hover:bg-[var(--color-gold)] group-hover:border-[var(--color-gold)] transition-all duration-300"
+                    whileHover={{ scale: 1.15, rotate: 10 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                  >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="2" className="group-hover:stroke-[var(--color-bg)] transition-colors duration-300">
                       <path d="M5 12h14" />
                       <path d="m12 5 7 7-7 7" />
                     </svg>
-                  </div>
+                  </motion.div>
                 </div>
               </div>
 
