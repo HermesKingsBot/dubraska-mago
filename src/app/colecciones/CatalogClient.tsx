@@ -11,7 +11,7 @@ import FiltersDrawer from "@/components/catalog/FiltersDrawer"
 import LayoutToggle from "@/components/catalog/LayoutToggle"
 import Pagination from "@/components/catalog/Pagination"
 import ProductGrid from "@/components/catalog/ProductGrid"
-import EmptyState from "@/components/catalog/EmptyState"
+import EmptyStates from "@/components/EmptyStates"
 import FilterChips from "@/components/catalog/FilterChips"
 import SortDropdown from "@/components/catalog/SortDropdown"
 import ProductSkeleton from "@/components/catalog/ProductSkeleton"
@@ -315,7 +315,7 @@ export default function CatalogClient({
           />
         </>
       ) : (
-        <EmptyState onClearFilters={clearFilters} />
+        <EmptyStates variant="empty-search" onAction={clearFilters} />
       )}
 
       <FiltersDrawer

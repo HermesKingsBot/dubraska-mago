@@ -4,13 +4,11 @@ import { useState, useRef, useCallback, useEffect, useMemo } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { Product, ProductVariant } from "@/types/product"
-import { buildWhatsAppLink } from "@/lib/catalog-utils"
+import { Product, ProductVariant, Review } from "@/types/product"
 import ProductGallery from "@/components/product/ProductGallery"
 import ProductInfo from "@/components/product/ProductInfo"
 import ProductDescription from "@/components/product/ProductDescription"
 import ProductCTA from "@/components/product/ProductCTA"
-import CareInstructions from "@/components/product/CareInstructions"
 import ShippingReturns from "@/components/product/ShippingReturns"
 import RelatedProducts from "@/components/product/RelatedProducts"
 import ProductReviews from "@/components/product/ProductReviews"
@@ -18,7 +16,9 @@ import OfferCountdown from "@/components/product/OfferCountdown"
 import CustomersAlsoBought from "@/components/product/CustomersAlsoBought"
 import VariantColorSelector from "@/components/product/VariantColorSelector"
 import VariantSizeSelector from "@/components/product/VariantSizeSelector"
+import Breadcrumbs from "@/components/Breadcrumbs"
 import { useSettingsContext } from "@/context/SettingsContext"
+import { motion } from "motion/react"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -84,18 +84,53 @@ function getDisplayStock(
   return product.inStock ?? false
 }
 
+function StockBadge({ inStock, stock }: { inStock: boolean; stock?: number }) {
+  if (!inStock) {
+    return (
+      <span
+        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider bg-red-500/20 text-red-400"
+        style={{ fontFamily: "var(--font-dm-sans)" }}
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+        Agotado
+      </span>
+    )
+  }
+  if (stock !== undefined && stock <= 5) {
+    return (
+      <motion.span
+        animate={{ opacity: [1, 0.6, 1] }}
+        transition={{ duration: 2, repeat: Infinity }}
+        className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider bg-[var(--color-gold)]/20 text-[var(--color-gold)]"
+        style={{ fontFamily: "var(--font-dm-sans)" }}
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-gold)]" />
+        ¡Últimas unidades!
+      </motion.span>
+    )
+  }
+  return (
+    <span
+      className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold tracking-wider bg-green-500/20 text-green-400"
+      style={{ fontFamily: "var(--font-dm-sans)" }}
+    >
+      <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+      En stock
+    </span>
+  )
+}
+
 export default function ProductDetailClient({
   product,
   relatedProducts,
 }: ProductDetailProps) {
   const [selectedImage, setSelectedImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
-  const [descOpen, setDescOpen] = useState(true)
-  const [careOpen, setCareOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState<"description" | "shipping" | "warranty">("description")
   const [selectedSize, setSelectedSize] = useState<string | null>(null)
   const [selectedVariantId, setSelectedVariantId] = useState<string | null>(null)
-  const [reviews, setReviews] = useState<any[]>([])
-  const [reviewSummary, setReviewSummary] = useState({
+  const [reviews] = useState<Review[]>([])
+  const [reviewSummary] = useState({
     total: 0,
     averageRating: 0,
     ratingDistribution: {} as Record<number, number>,
@@ -338,16 +373,22 @@ export default function ProductDetailClient({
     inStock: displayInStock,
   }
 
+  const breadcrumbs = [
+    { label: "Inicio", href: "/" },
+    { label: "Catálogo", href: "/colecciones" },
+    { label: product.name },
+  ]
+
+  const TABS = [
+    { key: "description" as const, label: "Descripción" },
+    { key: "shipping" as const, label: "Envío" },
+    { key: "warranty" as const, label: "Garantía" },
+  ]
+
   return (
     <div ref={containerRef} className="min-h-screen bg-[var(--color-bg)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-4">
-        <nav className="flex items-center gap-2 text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-          <a href="/" className="hover:text-white transition-colors">Inicio</a>
-          <span>/</span>
-          <a href="/colecciones" className="hover:text-white transition-colors">Catálogo</a>
-          <span>/</span>
-          <span className="text-white">{product.name}</span>
-        </nav>
+        <Breadcrumbs items={breadcrumbs} />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
@@ -370,6 +411,10 @@ export default function ProductDetailClient({
 
           <div className="flex flex-col">
             <div ref={infoRef}>
+              <div className="mb-4">
+                <StockBadge inStock={displayInStock} stock={product.stock} />
+              </div>
+
               {hasVariants && (
                 <div className="mb-4 space-y-3">
                   <VariantColorSelector
@@ -400,16 +445,76 @@ export default function ProductDetailClient({
               inStock={displayInStock}
               selectedSize={selectedSize}
             />
-            <ProductDescription
-              product={variantProduct as any}
-              descOpen={descOpen}
-              onToggleDesc={() => setDescOpen(!descOpen)}
-            />
-            <CareInstructions
-              product={variantProduct as any}
-              careOpen={careOpen}
-              onToggleCare={() => setCareOpen(!careOpen)}
-            />
+
+            <div className="mt-8 border-b border-white/10">
+              <div className="flex gap-0">
+                {TABS.map((tab) => (
+                  <button
+                    key={tab.key}
+                    onClick={() => setActiveTab(tab.key)}
+                    className="relative px-5 py-3 text-sm transition-colors"
+                    style={{
+                      fontFamily: "var(--font-dm-sans)",
+                      color:
+                        activeTab === tab.key
+                          ? "var(--color-gold)"
+                          : "var(--color-muted)",
+                    }}
+                  >
+                    {tab.label}
+                    {activeTab === tab.key && (
+                      <motion.div
+                        layoutId="tab-underline"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-[var(--color-gold)]"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-6">
+              {activeTab === "description" && (
+                <ProductDescription
+                  product={variantProduct as any}
+                  descOpen={true}
+                  onToggleDesc={() => {}}
+                />
+              )}
+              {activeTab === "shipping" && (
+                <div
+                  className="text-sm text-[var(--color-muted)] leading-relaxed"
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
+                >
+                  <p className="mb-3">
+                    Envío gratuito a todo el país en pedidos superiores a $50.
+                  </p>
+                  <p className="mb-3">
+                    Tiempo de entrega estimado: 3-7 días hábiles según la ubicación.
+                  </p>
+                  <p>
+                    Realizamos envíos internacionales. Contacta por WhatsApp para cotizar.
+                  </p>
+                </div>
+              )}
+              {activeTab === "warranty" && (
+                <div
+                  className="text-sm text-[var(--color-muted)] leading-relaxed"
+                  style={{ fontFamily: "var(--font-dm-sans)" }}
+                >
+                  <p className="mb-3">
+                    Todos nuestros productos cuentan con garantía de 30 días contra defectos de fabricación.
+                  </p>
+                  <p className="mb-3">
+                    Si el producto llega dañado o no coincide con la descripción, lo reemplazamos sin costo.
+                  </p>
+                  <p>
+                    Para reclamos, contáctanos por WhatsApp con fotos del producto.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

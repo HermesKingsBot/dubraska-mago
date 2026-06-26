@@ -1,5 +1,6 @@
 "use client"
 
+import { motion } from "motion/react"
 import { PerPageOption } from "@/types/product"
 import { PER_PAGE_OPTIONS } from "@/types/product"
 
@@ -63,7 +64,7 @@ export default function Pagination({
               const val = e.target.value === "all" ? "all" : Number(e.target.value)
               onPerPageChange(val as PerPageOption)
             }}
-            className="bg-white/5 border border-white/10 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-[var(--color-gold)]/50"
+            className="bg-white/5 border border-white/10 rounded px-2 py-1 text-xs text-white focus:outline-none focus:border-[var(--color-gold)]/50 transition-colors"
             style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             {PER_PAGE_OPTIONS.map((opt) => (
@@ -76,14 +77,15 @@ export default function Pagination({
 
         {totalPages > 1 && (
           <div className="flex items-center gap-1">
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
               onClick={() => onPageChange(page - 1)}
               disabled={page <= 1}
               className="px-2 py-1 rounded text-xs text-[var(--color-muted)] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               ← Ant
-            </button>
+            </motion.button>
             {pages.map((p, i) =>
               p === "..." ? (
                 <span
@@ -93,8 +95,10 @@ export default function Pagination({
                   …
                 </span>
               ) : (
-                <button
+                <motion.button
                   key={p}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
                   onClick={() => onPageChange(p)}
                   className={`min-w-[28px] px-2 py-1 rounded text-xs transition-colors ${
                     page === p
@@ -104,17 +108,18 @@ export default function Pagination({
                   style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   {p}
-                </button>
+                </motion.button>
               )
             )}
-            <button
+            <motion.button
+              whileTap={{ scale: 0.9 }}
               onClick={() => onPageChange(page + 1)}
               disabled={page >= totalPages}
               className="px-2 py-1 rounded text-xs text-[var(--color-muted)] hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Sig →
-            </button>
+            </motion.button>
           </div>
         )}
       </div>

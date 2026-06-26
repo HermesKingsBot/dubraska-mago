@@ -82,6 +82,7 @@ export default function FiltersDrawer({
             exit={{ x: "-100%" }}
             transition={{ type: "spring", damping: 30, stiffness: 300 }}
             className="fixed top-0 left-0 bottom-0 z-50 w-full max-w-sm bg-[var(--color-bg)] border-r border-white/10 overflow-y-auto max-md:top-auto max-md:bottom-0 max-md:left-0 max-md:right-0 max-md:max-w-full max-md:rounded-t-2xl max-md:border-r-0 max-md:border-t border-white/10"
+            style={{ willChange: "transform" }}
           >
             <div className="flex items-center justify-between p-6 border-b border-white/10">
               <div className="flex items-center gap-3">
@@ -100,14 +101,16 @@ export default function FiltersDrawer({
                   </span>
                 )}
               </div>
-              <button
+              <motion.button
                 onClick={onClose}
+                whileHover={{ rotate: 90 }}
+                transition={{ duration: 0.3 }}
                 className="p-2 rounded-lg text-[var(--color-muted)] hover:text-white hover:bg-white/5 transition-colors"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6 6 18M6 6l12 12" />
                 </svg>
-              </button>
+              </motion.button>
             </div>
 
             <div className="p-6 space-y-8">
@@ -120,9 +123,12 @@ export default function FiltersDrawer({
                 </h3>
                 <div className="space-y-2">
                   {categories.length > 0 ? (
-                    categories.map((cat) => (
-                      <label
+                    categories.map((cat, index) => (
+                      <motion.label
                         key={cat.slug}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.03 }}
                         className="flex items-center gap-3 cursor-pointer group"
                       >
                         <span
@@ -145,7 +151,7 @@ export default function FiltersDrawer({
                           {cat.name}
                         </span>
                         <span className="text-xs text-[var(--color-muted)]/60">{cat.count}</span>
-                      </label>
+                      </motion.label>
                     ))
                   ) : (
                     <p className="text-xs text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
@@ -163,9 +169,12 @@ export default function FiltersDrawer({
                   Color
                 </h3>
                 <div className="space-y-2">
-                  {availableFilters.colors.map((col) => (
-                    <label
+                  {availableFilters.colors.map((col, index) => (
+                    <motion.label
                       key={col.value}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.03 }}
                       className="flex items-center gap-3 cursor-pointer group"
                     >
                       <span
@@ -187,7 +196,7 @@ export default function FiltersDrawer({
                         {col.value}
                       </span>
                       <span className="text-xs text-[var(--color-muted)]/60">{col.count}</span>
-                    </label>
+                    </motion.label>
                   ))}
                 </div>
               </div>
@@ -220,9 +229,12 @@ export default function FiltersDrawer({
                     { key: "ofertas" as const, label: "Solo ofertas" },
                     { key: "nuevos" as const, label: "Solo nuevos" },
                     { key: "limitados" as const, label: "Solo limitados" },
-                  ].map((toggle) => (
-                    <label
+                  ].map((toggle, index) => (
+                    <motion.label
                       key={toggle.key}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
                       className="flex items-center justify-between cursor-pointer group"
                     >
                       <span
@@ -241,13 +253,13 @@ export default function FiltersDrawer({
                           filters[toggle.key] ? "bg-[var(--color-gold)]" : "bg-white/10"
                         }`}
                       >
-                        <span
-                          className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
-                            filters[toggle.key] ? "translate-x-5" : ""
-                          }`}
+                        <motion.span
+                          animate={{ x: filters[toggle.key] ? 20 : 0 }}
+                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                          className="absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white"
                         />
                       </button>
-                    </label>
+                    </motion.label>
                   ))}
                 </div>
               </div>
@@ -255,20 +267,22 @@ export default function FiltersDrawer({
 
             <div className="sticky bottom-0 p-6 border-t border-white/10 bg-[var(--color-bg)]">
               <div className="flex gap-3">
-                <button
+                <motion.button
+                  whileTap={{ scale: 0.97 }}
                   onClick={onClear}
                   className="flex-1 py-2.5 rounded-lg border border-white/10 text-white text-sm hover:bg-white/5 transition-colors"
                   style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Limpiar
-                </button>
-                <button
+                </motion.button>
+                <motion.button
+                  whileTap={{ scale: 0.97 }}
                   onClick={onClose}
-                  className="flex-1 py-2.5 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:bg-[oklch(0.87_0.12_90)] transition-colors"
+                  className="flex-1 py-2.5 rounded-lg bg-[var(--color-gold)] text-[var(--color-bg)] text-sm font-medium hover:brightness-110 transition-all"
                   style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   Aplicar
-                </button>
+                </motion.button>
               </div>
             </div>
           </motion.div>
