@@ -123,7 +123,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className={`${instrumentSerif.variable} ${inter.variable}`}>
-      <body className="bg-[var(--color-bg)] text-white antialiased w-full min-h-dvh overflow-x-hidden">
+      <body className="bg-[var(--color-bg)] text-white antialiased">
         <AuthProvider>
           <CustomerAuthProvider>
             <CartProvider>
@@ -131,7 +131,7 @@ export default function RootLayout({
                 <SettingsProvider>
                   <CompareProvider>
                     <NavigationBar />
-                    <main className="w-full">{children}</main>
+                    <main>{children}</main>
                     <Footer />
                   </CompareProvider>
                 </SettingsProvider>

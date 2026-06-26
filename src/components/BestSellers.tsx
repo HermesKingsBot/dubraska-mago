@@ -130,9 +130,9 @@ export default function BestSellers({ products }: { products: Product[] }) {
   if (!products.length) return null
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[var(--color-bg)] py-16 sm:py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-10 sm:mb-14 md:mb-18">
+    <section ref={sectionRef} className="relative w-full bg-[var(--color-bg)] py-28 sm:py-36 md:py-44">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
             className="bs-header text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-5"
             style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
@@ -155,7 +155,7 @@ export default function BestSellers({ products }: { products: Product[] }) {
 
         <div
           ref={cardsRef}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 md:gap-10"
         >
           {products.map((product) => (
             <Link

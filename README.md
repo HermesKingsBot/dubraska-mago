@@ -32,7 +32,7 @@ Dubraska Mago es una tienda online de joyería premium construida con Next.js 16
 | **Lenguaje** | TypeScript (strict mode) |
 | **Estilos** | Tailwind CSS 4 (CSS-first config) |
 | **Animaciones** | GSAP + Framer Motion |
-| **Base de Datos** | PostgreSQL 18 (Prisma ORM 6) |
+| **Base de Datos** | SQLite (Prisma ORM 6) |
 | **Autenticación** | JWT (cookie httpOnly) |
 | **Validación** | Zod |
 | **Mapas** | Leaflet + React-Leaflet |

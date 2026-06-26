@@ -268,7 +268,7 @@ export default function AboutSection() {
         className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-[1px] bg-[var(--color-gold)] origin-center"
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32">
+      <div className="relative max-w-7xl mx-auto px-6 py-24 sm:py-32 md:py-40">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -292,46 +292,40 @@ export default function AboutSection() {
           <em className="text-[var(--color-gold)]">La tuya</em> empieza aquí.
         </motion.h2>
 
-        <div className="mt-16 sm:mt-20 md:mt-28 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 items-center">
-          <div className="lg:col-span-5 relative px-0">
+        <div className="mt-24 sm:mt-28 md:mt-36 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+          <div className="lg:col-span-5 relative">
             <div
               ref={photoRef}
-              className="relative aspect-[3/4] rounded-2xl overflow-hidden"
+              className="relative aspect-[3/4] rounded-2xl overflow-hidden opacity-0"
             >
               <div className="absolute inset-0 rounded-2xl border border-[rgba(212,175,55,0.15)] group-hover:border-[rgba(212,175,55,0.35)] transition-colors duration-500 z-10" />
 
-              <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.2_0.04_80)] via-[var(--color-dark-card)] to-[oklch(0.1_0.01_60)]">
+              <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.05_0_0)] via-[var(--color-dark-card)] to-[oklch(0.05_0_0)]">
                 <Image
-                  src="/images/dubraska-placeholder.svg"
+                  src="/images/dubraska-placeholder.jpg"
                   alt="Dubraska Mago — Fundadora"
                   fill
-                  className="object-cover opacity-30"
+                  className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   priority
                 />
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <div className="w-32 h-32 rounded-full border-2 border-[var(--color-gold)]/30 flex items-center justify-center mb-6 bg-[var(--color-gold)]/5">
-                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.7" opacity="0.7">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-[oklch(0.05_0_0)]">
+                  <div className="w-24 h-24 rounded-full border border-[var(--color-gold)]/20 flex items-center justify-center mb-4">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" strokeWidth="0.8" opacity="0.4">
                       <circle cx="12" cy="8" r="4" />
                       <path d="M4 20c0-4 4-7 8-7s8 3 8 7" />
                     </svg>
                   </div>
                   <p
-                    className="text-[var(--color-gold)]/60 text-base tracking-[4px] uppercase"
+                    className="text-[var(--color-gold)]/30 text-sm tracking-[3px] uppercase"
                     style={{ fontFamily: "var(--font-instrument-serif)" }}
                   >
                     Dubraska Mago
                   </p>
-                  <p
-                    className="text-white/25 text-xs tracking-[2px] uppercase mt-2"
-                    style={{ fontFamily: "var(--font-inter)" }}
-                  >
-                    Fundadora & Diseñadora
-                  </p>
                 </div>
               </div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg)] via-transparent to-transparent opacity-70" />
 
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
                 <p
@@ -349,17 +343,17 @@ export default function AboutSection() {
               </div>
             </div>
 
-            <div className="deco-box hidden lg:block absolute -bottom-4 -right-4 w-32 h-32 border border-[rgba(212,175,55,0.06)] rounded-2xl -z-10" />
-            <div className="deco-box hidden lg:block absolute -top-4 -left-4 w-24 h-24 border border-[rgba(212,175,55,0.04)] rounded-2xl -z-10" />
+            <div className="deco-box absolute -bottom-4 -right-4 w-32 h-32 border border-[rgba(212,175,55,0.06)] rounded-2xl -z-10" />
+            <div className="deco-box absolute -top-4 -left-4 w-24 h-24 border border-[rgba(212,175,55,0.04)] rounded-2xl -z-10" />
           </div>
 
-          <div ref={textRef} className="lg:col-span-7 flex flex-col justify-center">
+          <div ref={textRef} className="lg:col-span-7 flex flex-col justify-center opacity-0">
             <div
               ref={quoteRef}
-              className="text-7xl text-[var(--color-gold)]/10 leading-none mb-2 select-none"
+              className="text-7xl text-[var(--color-gold)]/10 leading-none mb-2 select-none opacity-0"
               style={{ fontFamily: "var(--font-instrument-serif)" }}
             >
-              &ldquo;
+              &ldquo
             </div>
 
             <div className="space-y-6">
@@ -437,7 +431,7 @@ export default function AboutSection() {
 
         <div
           ref={statsRef}
-          className="mt-16 sm:mt-20 md:mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 pt-10 sm:pt-14 border-t border-[rgba(255,255,255,0.06)]"
+          className="mt-28 sm:mt-36 md:mt-44 grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 border-t border-[rgba(255,255,255,0.06)]"
         >
           {[
             { number: "500+", label: "Clientas felices" },

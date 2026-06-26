@@ -87,9 +87,9 @@ export default function TestimonialsSection({ testimonials }: { testimonials: Te
   )
 
   return (
-    <section ref={sectionRef} className="relative w-full bg-[var(--color-bg)] py-16 sm:py-24 md:py-32">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-10 sm:mb-14 md:mb-18">
+    <section ref={sectionRef} className="relative w-full bg-[var(--color-bg)] py-28 sm:py-36 md:py-44">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-20 sm:mb-24 md:mb-28">
           <p
             className="text-[11px] uppercase tracking-[3px] text-[var(--color-gold)] mb-4"
             style={{ fontFamily: "var(--font-inter)" }}
