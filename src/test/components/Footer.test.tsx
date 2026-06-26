@@ -19,6 +19,53 @@ vi.mock("gsap", () => ({
   ScrollTrigger: { register: vi.fn() },
 }))
 
+vi.mock("motion/react", () => ({
+  motion: {
+    div: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
+      <div {...filterProps(props)}>{children}</div>
+    ),
+    a: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
+      <a {...filterProps(props)}>{children}</a>
+    ),
+    button: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
+      <button {...filterProps(props)}>{children}</button>
+    ),
+    svg: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
+      <svg {...filterProps(props)}>{children}</svg>
+    ),
+  },
+  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
+}))
+
+vi.mock("@/context/SettingsContext", () => ({
+  useSettingsContext: () => ({
+    settings: { company_name: "Dubraska Mago" },
+    socialLinks: [],
+    loading: false,
+    getSetting: (key: string, fallback?: string) => {
+      if (key === "company_name") return "Dubraska Mago"
+      if (key === "company_description") return ""
+      if (key === "whatsapp") return "584120000000"
+      return fallback || ""
+    },
+    getActiveSocials: () => [
+      { id: "whatsapp", platform: "WhatsApp", url: "https://wa.me/58XXXXXXXXXX", handle: "+58 412 000 0000", active: true, order: 0 },
+      { id: "instagram", platform: "Instagram", url: "https://instagram.com/dubraskamago", handle: "@dubraska.mago", active: true, order: 1 },
+    ],
+    refresh: async () => {},
+  }),
+}))
+
+function filterProps(props: Record<string, unknown>) {
+  const filtered: Record<string, unknown> = {}
+  for (const [key, value] of Object.entries(props)) {
+    if (key !== "whileHover" && key !== "transition" && key !== "initial" && key !== "animate") {
+      filtered[key] = value
+    }
+  }
+  return filtered
+}
+
 describe("Footer", () => {
   it("renders copyright text", () => {
     render(<Footer />)
@@ -27,8 +74,8 @@ describe("Footer", () => {
 
   it("renders social links", () => {
     render(<Footer />)
-    expect(screen.getByLabelText("WhatsApp")).toHaveAttribute("href", "https://wa.me/58XXXXXXXXXX")
-    expect(screen.getByLabelText("Instagram")).toHaveAttribute("href", "https://instagram.com/dubraskamago")
+    expect(screen.getByLabelText(/visitar whatsapp/i)).toHaveAttribute("href", "https://wa.me/58XXXXXXXXXX")
+    expect(screen.getByLabelText(/visitar instagram/i)).toHaveAttribute("href", "https://instagram.com/dubraskamago")
   })
 
   it("renders Tienda section links", () => {
@@ -54,7 +101,7 @@ describe("Footer", () => {
   it("renders legal links", () => {
     render(<Footer />)
     expect(screen.getByText("Términos y condiciones")).toHaveAttribute("href", "/terminos")
-    expect(screen.getByText("Política de privacidad")).toHaveAttribute("href", "/privacidad")
+    expect(screen.getByText("Política de privacidad")).toHaveAttribute("href", "/politicas-privacidad")
   })
 
   it("renders logo in footer", () => {

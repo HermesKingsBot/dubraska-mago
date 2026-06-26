@@ -4,6 +4,14 @@ import { describe, it, expect, vi, beforeEach } from "vitest"
 import QuickViewModal from "@/components/catalog/QuickViewModal"
 import { Product } from "@/types/product"
 
+vi.mock("next/image", () => ({
+  __esModule: true,
+  default: (props: any) => {
+    const { src, alt, width, height, ...rest } = props
+    return <img src={src} alt={alt} width={width} height={height} {...rest} />
+  },
+}))
+
 vi.mock("motion/react", () => ({
   motion: {
     div: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (

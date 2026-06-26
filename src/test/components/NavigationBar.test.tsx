@@ -2,6 +2,10 @@ import { render, screen } from "@testing-library/react"
 import { describe, it, expect, vi } from "vitest"
 import NavigationBar from "@/components/NavigationBar"
 
+vi.mock("next/navigation", () => ({
+  usePathname: () => "/",
+}))
+
 vi.mock("@gsap/react", () => ({
   useGSAP: vi.fn(),
 }))
@@ -22,6 +26,37 @@ vi.mock("../../data/products.json", () => ({
   default: [
     { id: "1", name: "Collar Oro", slug: "collar-oro", category: "collares", price: 29.99, image: "/img.jpg" },
   ],
+}))
+
+vi.mock("@/components/CartIcon", () => ({
+  CartButton: () => <div data-testid="cart-button" />,
+  WishlistLink: () => <div data-testid="wishlist-link" />,
+}))
+
+vi.mock("@/components/UserMenu", () => ({
+  default: () => <div data-testid="user-menu" />,
+}))
+
+vi.mock("@/components/SearchOverlay", () => ({
+  default: () => <div data-testid="search-overlay" />,
+}))
+
+vi.mock("@/components/compare/CompareLink", () => ({
+  default: () => <div data-testid="compare-link" />,
+}))
+
+vi.mock("@/context/SettingsContext", () => ({
+  useSettingsContext: () => ({
+    settings: { company_name: "Dubraska Mago" },
+    socialLinks: [],
+    loading: false,
+    getSetting: (key: string, fallback?: string) => {
+      if (key === "company_name") return "Dubraska Mago"
+      return fallback || ""
+    },
+    getActiveSocials: () => [],
+    refresh: async () => {},
+  }),
 }))
 
 describe("NavigationBar", () => {
@@ -45,7 +80,7 @@ describe("NavigationBar", () => {
 
   it("renders mobile menu button", () => {
     render(<NavigationBar />)
-    expect(screen.getByRole("button", { name: /menú/i })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: /abrir menú/i })).toBeInTheDocument()
   })
 
   it("renders Catálogo link", () => {

@@ -1,7 +1,15 @@
 import { render, screen } from "@testing-library/react"
-import { describe, it, expect } from "vitest"
+import { describe, it, expect, vi } from "vitest"
 import ProductCard from "@/components/catalog/ProductCard"
 import { Product } from "@/types/product"
+
+vi.mock("next/image", () => ({
+  __esModule: true,
+  default: (props: Record<string, unknown>) => {
+    const { src, alt, width, height, className, ...rest } = props
+    return <img src={src as string} alt={alt as string} width={width as number} height={height as number} className={className as string} {...rest} />
+  },
+}))
 
 vi.mock("@gsap/react", () => ({
   useGSAP: vi.fn(),
@@ -18,13 +26,27 @@ vi.mock("motion/react", () => ({
     div: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
       <div {...filterProps(props)}>{children}</div>
     ),
+    a: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
+      <a {...filterProps(props)}>{children}</a>
+    ),
+    span: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
+      <span {...filterProps(props)}>{children}</span>
+    ),
   },
+}))
+
+vi.mock("@/components/wishlist/HeartButton", () => ({
+  default: () => <div data-testid="heart-button" />,
+}))
+
+vi.mock("@/components/compare/CompareButton", () => ({
+  default: () => <div data-testid="compare-button" />,
 }))
 
 function filterProps(props: Record<string, unknown>) {
   const filtered: Record<string, unknown> = {}
   for (const [key, value] of Object.entries(props)) {
-    if (key !== "whileHover" && key !== "transition") {
+    if (key !== "whileHover" && key !== "transition" && key !== "whileTap" && key !== "initial" && key !== "animate" && key !== "onLoad") {
       filtered[key] = value
     }
   }
