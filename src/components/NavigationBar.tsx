@@ -24,7 +24,7 @@ const NAV_ITEMS = [
   { label: "Inicio", href: "/" },
   { label: "Colecciones", href: "/colecciones" },
   { label: "Nosotros", href: "/nosotros" },
-  { label: "Preguntas Frecuentes", href: "/preguntas-frecuentes" },
+  { label: "Envíos", href: "/envios" },
   { label: "Contacto", href: "/contacto" },
 ]
 
