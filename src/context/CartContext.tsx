@@ -192,10 +192,6 @@ function CartProvider({
     localStorage.removeItem(CART_STORAGE_KEY)
   }
 
-  if (isLoading) {
-    return <div className="min-h-screen bg-[var(--color-bg)]" />
-  }
-
   return (
     <CartContext.Provider
       value={{ items, cartItems: items, cartCount, cartTotal, addItem, addToCart: addItem, removeItem, removeFromCart: removeItem, updateQuantity, clearCart, isLoading }}

@@ -7,6 +7,7 @@ import { AuthProvider } from "@/context/AuthContext"
 import { CustomerAuthProvider } from "@/context/CustomerAuthContext"
 import { SettingsProvider } from "@/context/SettingsContext"
 import { CompareProvider } from "@/context/CompareContext"
+import { CartProvider } from "@/context/CartContext"
 import { getServerSettings } from "@/lib/server-settings"
 
 const instrumentSerif = Instrument_Serif({
@@ -124,13 +125,15 @@ export default function RootLayout({
       <body className="bg-[var(--color-bg)] text-white antialiased">
         <AuthProvider>
           <CustomerAuthProvider>
-            <SettingsProvider>
-              <CompareProvider>
-                <NavigationBar />
-                <main>{children}</main>
-                <Footer />
-              </CompareProvider>
-            </SettingsProvider>
+            <CartProvider>
+              <SettingsProvider>
+                <CompareProvider>
+                  <NavigationBar />
+                  <main>{children}</main>
+                  <Footer />
+                </CompareProvider>
+              </SettingsProvider>
+            </CartProvider>
           </CustomerAuthProvider>
         </AuthProvider>
       </body>

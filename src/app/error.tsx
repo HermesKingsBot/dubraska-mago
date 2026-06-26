@@ -11,7 +11,7 @@ interface ErrorPageProps {
 }
 
 function ErrorPage({ error, reset }: ErrorPageProps): React.JSX.Element {
-  const isDev = process.env.NODE_ENV === "development"
+  const isDev = false
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">

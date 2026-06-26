@@ -122,10 +122,6 @@ function AuthProvider({ children }: { children: React.ReactNode }): React.JSX.El
     setUser(null)
   }
 
-  if (isLoading) {
-    return <div className="min-h-screen bg-[var(--color-bg)]" />
-  }
-
   return (
     <AuthContext.Provider
       value={{
