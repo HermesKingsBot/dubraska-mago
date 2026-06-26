@@ -45,7 +45,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24 sm:py-32 md:py-40 h-full" style={{ minHeight: "calc(100vh - 8rem)" }}>
+    <section ref={sectionRef} className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24 sm:py-32 md:py-40 h-full" style={{ minHeight: "calc(100vh - 8rem)" }} aria-label="Inicio">
       <motion.div
         className="absolute inset-0 -z-10"
         style={{ y: bgY }}
@@ -119,6 +119,7 @@ export default function HeroSection() {
         animate={{ opacity: 0.4 }}
         transition={{ duration: 1, delay: 1.2, ease: EASE }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        aria-hidden="true"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

@@ -64,3 +64,57 @@ h1, h2, h3, h4, h5, h6 {
   background: oklch(0.78 0.14 85 / 0.3);
   color: var(--color-white);
 }
+
+/* Accesibilidad: Focus visible para navegación por teclado */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Remover outline solo para clicks de mouse */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Skip link accesibilidad */
+.sr-only:focus {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 9999;
+}
+
+/* Reducir movimiento para accesibilidad (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Soporte para alto contraste del sistema */
+@media (prefers-contrast: high) {
+  a, button {
+    text-decoration: underline;
+  }
+
+  :focus-visible {
+    outline-width: 3px;
+    outline-color: #fff;
+  }
+}
+
+/* Tamaño mínimo de touch targets (WCAG 2.5.8) */
+@media (pointer: coarse) {
+  button,
+  a,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

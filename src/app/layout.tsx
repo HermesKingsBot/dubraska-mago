@@ -127,6 +127,13 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${playfair.variable} ${dmSans.variable}`}>
       <body className="bg-[var(--color-bg)] text-white antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[var(--color-gold)] focus:text-[var(--color-bg)] focus:rounded-md focus:text-sm"
+          style={{ fontFamily: "var(--font-dm-sans)" }}
+        >
+          Saltar al contenido principal
+        </a>
         <CustomCursor />
         <AuthProvider>
           <CustomerAuthProvider>
@@ -136,7 +143,9 @@ export default function RootLayout({
                   <CompareProvider>
                     <PageTransition>
                       <NavigationBar />
-                      <main>{children}</main>
+                      <main id="main-content" tabIndex={-1}>
+                        {children}
+                      </main>
                       <Footer />
                     </PageTransition>
                   </CompareProvider>

@@ -16,8 +16,9 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)")
     reducedRef.current = mq.matches
-    if (mq.matches || window.innerWidth <= 768) return
+    if (mq.matches || window.innerWidth <= 768 || !finePointer.matches) return
 
     setVisible(true)
 

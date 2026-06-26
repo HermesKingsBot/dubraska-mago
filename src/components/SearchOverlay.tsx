@@ -131,23 +131,51 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
   if (!isOpen) return null
 
   return (
-    <div ref={overlayRef} className="fixed inset-0 z-[100] bg-[var(--color-bg)] flex flex-col items-center">
+    <div
+      ref={overlayRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Buscar productos"
+      className="fixed inset-0 z-[100] bg-[var(--color-bg)] flex flex-col items-center"
+    >
       <div className="w-full max-w-2xl mx-auto px-6 pt-20">
         <div className="relative">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
-          <input ref={inputRef} type="text" value={query} onChange={(e) => setQuery(e.target.value)} onKeyDown={handleKeyDown} placeholder="Buscar productos, categorías..." className="w-full pl-12 pr-12 py-4 bg-[var(--color-dark-accent)] border border-white/10 rounded-2xl text-white text-lg placeholder:text-[var(--color-muted)] focus:border-[var(--color-gold)] focus:outline-none transition-colors duration-300" style={{ fontFamily: "var(--font-dm-sans)" }} />
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-muted)]" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Buscar productos, categorías..."
+            role="combobox"
+            aria-expanded={totalSuggestions > 0}
+            aria-controls="search-suggestions"
+            aria-activedescendant={selectedIndex >= 0 ? `suggestion-${selectedIndex}` : undefined}
+            className="w-full pl-12 pr-12 py-4 bg-[var(--color-dark-accent)] border border-white/10 rounded-2xl text-white text-lg placeholder:text-[var(--color-muted)] focus:border-[var(--color-gold)] focus:outline-none transition-colors duration-300"
+            style={{ fontFamily: "var(--font-dm-sans)" }}
+          />
           <button onClick={onClose} className="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-white/10 transition-colors" aria-label="Cerrar búsqueda">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6L6 18M6 6l12 12" /></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg>
           </button>
         </div>
 
-        <div ref={suggestionsRef} className="mt-4">
+        <div ref={suggestionsRef} id="search-suggestions" role="listbox" aria-label="Resultados de búsqueda">
           {debouncedQuery.length >= 2 && matchedCategories.length > 0 && (
             <div className="mb-4">
               <p className="text-xs uppercase tracking-wider text-[var(--color-muted)] mb-2" style={{ fontFamily: "var(--font-dm-sans)" }}>Categorías</p>
               <div className="flex flex-wrap gap-2">
                 {matchedCategories.map((cat, i) => (
-                  <a key={cat.label} data-suggestion href={cat.href} className={`px-4 py-2 rounded-full text-sm border transition-all duration-200 ${selectedIndex === matchedProducts.length + i ? "border-[var(--color-gold)] bg-[var(--color-gold)]/10 text-[var(--color-gold)]" : "border-white/10 bg-white/5 text-[var(--color-muted)] hover:border-white/20 hover:text-white"}`} style={{ fontFamily: "var(--font-dm-sans)" }}>{highlightMatch(cat.label, debouncedQuery)}</a>
+                  <a
+                    key={cat.label}
+                    id={`suggestion-${matchedProducts.length + i}`}
+                    data-suggestion
+                    role="option"
+                    aria-selected={selectedIndex === matchedProducts.length + i}
+                    href={cat.href}
+                    className={`px-4 py-2 rounded-full text-sm border transition-all duration-200 ${selectedIndex === matchedProducts.length + i ? "border-[var(--color-gold)] bg-[var(--color-gold)]/10 text-[var(--color-gold)]" : "border-white/10 bg-white/5 text-[var(--color-muted)] hover:border-white/20 hover:text-white"}`}
+                    style={{ fontFamily: "var(--font-dm-sans)" }}
+                  >{highlightMatch(cat.label, debouncedQuery)}</a>
                 ))}
               </div>
             </div>
@@ -158,8 +186,16 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               <p className="text-xs uppercase tracking-wider text-[var(--color-muted)] mb-3" style={{ fontFamily: "var(--font-dm-sans)" }}>Productos</p>
               <div className="grid grid-cols-2 gap-3">
                 {matchedProducts.map((product, i) => (
-                  <a key={product.id} data-suggestion href={`/producto/${product.slug}`} className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-200 ${selectedIndex === i ? "border-[var(--color-gold)] bg-[var(--color-gold)]/10" : "border-white/5 bg-white/[0.02] hover:border-white/15 hover:bg-white/5"}`}>
-                    <div className="w-12 h-12 rounded-lg bg-[var(--color-dark-accent)] flex items-center justify-center overflow-hidden flex-shrink-0"><span className="text-[var(--color-muted)] text-xs">{product.category.charAt(0).toUpperCase()}</span></div>
+                  <a
+                    key={product.id}
+                    id={`suggestion-${i}`}
+                    data-suggestion
+                    role="option"
+                    aria-selected={selectedIndex === i}
+                    href={`/producto/${product.slug}`}
+                    className={`flex items-center gap-3 p-3 rounded-xl border transition-all duration-200 ${selectedIndex === i ? "border-[var(--color-gold)] bg-[var(--color-gold)]/10" : "border-white/5 bg-white/[0.02] hover:border-white/15 hover:bg-white/5"}`}
+                  >
+                    <div className="w-12 h-12 rounded-lg bg-[var(--color-dark-accent)] flex items-center justify-center overflow-hidden flex-shrink-0" aria-hidden="true"><span className="text-[var(--color-muted)] text-xs">{product.category.charAt(0).toUpperCase()}</span></div>
                     <div className="min-w-0">
                       <p className="text-sm text-white truncate" style={{ fontFamily: "var(--font-dm-sans)" }}>{highlightMatch(product.name, debouncedQuery)}</p>
                       <p className="text-xs text-[var(--color-gold)]" style={{ fontFamily: "var(--font-dm-sans)" }}>${product.price.toFixed(2)}</p>
@@ -171,8 +207,8 @@ export default function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
           )}
 
           {debouncedQuery.length >= 2 && matchedProducts.length === 0 && matchedCategories.length === 0 && (
-            <div className="text-center py-12">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="mx-auto mb-4 text-[var(--color-muted)]"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
+            <div className="text-center py-12" role="status" aria-live="polite">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" className="mx-auto mb-4 text-[var(--color-muted)]" aria-hidden="true"><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>
               <p className="text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>No se encontraron resultados para &ldquo;{debouncedQuery}&rdquo;</p>
             </div>
           )}

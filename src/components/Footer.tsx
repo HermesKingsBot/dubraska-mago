@@ -111,7 +111,7 @@ export default function Footer() {
             >
               {slogan || "Acero inoxidable bañado en oro 18K. Piezas diseñadas para mujeres que brillan con fuerza."}
             </p>
-            <div className="flex gap-4 mt-6">
+            <div className="flex gap-4 mt-6" role="list" aria-label="Redes sociales">
               {activeSocials.slice(0, 2).map((social) => {
                 const svgData = SOCIAL_SVG[social.platform]
                 if (!svgData) return null
@@ -124,9 +124,9 @@ export default function Footer() {
                     whileHover={{ scale: 1.15, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
                     className={`w-9 h-9 rounded-full border border-[rgba(255,255,255,0.08)] flex items-center justify-center transition-all duration-300 ${svgData.hoverClass}`}
-                    aria-label={social.platform}
+                    aria-label={`Visitar ${social.platform} (abre en nueva pestaña)`}
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-muted)">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-muted)" aria-hidden="true">
                       <path d={svgData.path} />
                     </svg>
                   </motion.a>
@@ -140,9 +140,9 @@ export default function Footer() {
                   whileHover={{ scale: 1.15, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
                   className="w-9 h-9 rounded-full border border-[rgba(255,255,255,0.08)] flex items-center justify-center hover:border-[oklch(0.78_0.18_155)] hover:bg-[oklch(0.78_0.18_155)]/10 transition-all duration-300"
-                  aria-label="WhatsApp"
+                  aria-label="Contactar por WhatsApp (abre en nueva pestaña)"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-muted)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-muted)" aria-hidden="true">
                     <path d={SOCIAL_SVG.WhatsApp.path} />
                   </svg>
                 </motion.a>
@@ -211,9 +211,16 @@ export default function Footer() {
               onSubmit={(e) => e.preventDefault()}
               className="flex flex-col gap-2"
             >
+              <label htmlFor="newsletter-email" className="text-xs uppercase tracking-[1px] text-[var(--color-muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                Email
+              </label>
               <input
                 type="email"
+                id="newsletter-email"
+                name="email"
                 placeholder="tu@email.com"
+                autoComplete="email"
+                aria-describedby="newsletter-hint"
                 className="w-full px-4 py-2.5 rounded-lg bg-[var(--color-dark-accent)] border border-[rgba(255,255,255,0.08)] text-white text-sm placeholder:text-[oklch(0.45_0_0)] focus:border-[var(--color-gold)] focus:outline-none focus:shadow-[0_0_0_2px_rgba(212,175,55,0.2)] transition-all duration-300"
                 style={{ fontFamily: "var(--font-dm-sans)" }}
               />
@@ -225,11 +232,8 @@ export default function Footer() {
                 Suscribirme
               </button>
             </form>
-            <p
-              className="text-[11px] text-[oklch(0.45_0_0)] mt-2"
-              style={{ fontFamily: "var(--font-dm-sans)" }}
-            >
-              Puedes cancelar cuando quieras.
+            <p id="newsletter-hint" className="text-[11px] text-[oklch(0.45_0_0)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+              Sin spam. Puedes cancelar cuando quieras. Al suscribirte aceptas nuestra <a href="/politicas-privacidad" className="hover:text-white transition-colors">política de privacidad</a>.
             </p>
           </div>
         </div>

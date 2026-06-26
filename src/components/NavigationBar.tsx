@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { motion, AnimatePresence } from "motion/react"
+import { usePathname } from "next/navigation"
 import products from "../../data/products.json"
 import { CartButton, WishlistLink } from "@/components/CartIcon"
 import UserMenu from "@/components/UserMenu"
@@ -29,14 +30,21 @@ const NAV_ITEMS = [
 ]
 
 function NavLink({ item }: { item: typeof NAV_ITEMS[number] }) {
+  const pathname = usePathname()
+  const isActive = pathname === item.href || (item.href !== "/" && pathname?.startsWith(item.href))
+
   return (
     <a
       href={item.href}
+      aria-current={isActive ? "page" : undefined}
       className="group relative text-sm text-[var(--color-muted)] hover:text-white transition-colors duration-300 py-1"
       style={{ fontFamily: "var(--font-dm-sans)" }}
     >
       {item.label}
-      <span className="absolute bottom-0 left-0 w-0 h-px bg-[var(--color-gold)] group-hover:w-full transition-all duration-300 ease-out" />
+      <span
+        className="absolute bottom-0 left-0 w-0 h-px bg-[var(--color-gold)] group-hover:w-full transition-all duration-300 ease-out"
+        aria-hidden="true"
+      />
     </a>
   )
 }
@@ -95,9 +103,9 @@ export default function NavigationBar() {
             <button
               onClick={openSearch}
               className="p-2 rounded-full hover:bg-white/5 transition-colors duration-300"
-              aria-label="Buscar"
+              aria-label="Buscar productos"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-muted)] hover:text-white transition-colors">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[var(--color-muted)] hover:text-white transition-colors" aria-hidden="true">
                 <circle cx="11" cy="11" r="8" />
                 <path d="M21 21l-4.35-4.35" />
               </svg>
@@ -135,14 +143,16 @@ export default function NavigationBar() {
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="md:hidden p-2 rounded-full hover:bg-white/5 transition-colors"
-              aria-label="Menú"
+              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
             >
               {mobileOpen ? (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
               ) : (
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M3 12h18M3 6h18M3 18h18" />
                 </svg>
               )}
@@ -153,6 +163,7 @@ export default function NavigationBar() {
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
+              id="mobile-nav"
               initial={{ x: "100%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "100%", opacity: 0 }}
