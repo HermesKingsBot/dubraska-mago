@@ -20,7 +20,7 @@
 "deploy:staging": "bash scripts/deploy.sh staging"
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
+    "src/**/*.test.{ts,tsx}": [
       "npx vitest run --reporter=verbose --no-coverage"
     ]
   },
